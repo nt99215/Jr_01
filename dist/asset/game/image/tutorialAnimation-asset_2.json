@@ -1,0 +1,100 @@
+{"frames": {
+
+"tutor_4_bg":
+{
+	"frame": {"x":1,"y":1,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720}
+},
+"tutor_4_cart":
+{
+	"frame": {"x":1003,"y":1635,"w":499,"h":242},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":499,"h":242},
+	"sourceSize": {"w":499,"h":242}
+},
+"tutor_4_ppiyo_1":
+{
+	"frame": {"x":1283,"y":549,"w":430,"h":455},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":430,"h":455},
+	"sourceSize": {"w":451,"h":455}
+},
+"tutor_4_ppiyo_2":
+{
+	"frame": {"x":1283,"y":1,"w":451,"h":455},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":451,"h":455},
+	"sourceSize": {"w":451,"h":455}
+},
+"tutor_5_bg":
+{
+	"frame": {"x":1,"y":723,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720}
+},
+"tutor_5_ppiyo_1":
+{
+	"frame": {"x":1,"y":1445,"w":499,"h":463},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":499,"h":463},
+	"sourceSize": {"w":499,"h":463}
+},
+"tutor_5_ppiyo_2":
+{
+	"frame": {"x":502,"y":1445,"w":499,"h":463},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":499,"h":463},
+	"sourceSize": {"w":499,"h":463}
+},
+"tutor_text_4":
+{
+	"frame": {"x":1283,"y":458,"w":433,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":143,"y":25,"w":433,"h":89},
+	"sourceSize": {"w":715,"h":188}
+},
+"tutor_text_5":
+{
+	"frame": {"x":1283,"y":1006,"w":310,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":25,"w":310,"h":88},
+	"sourceSize": {"w":715,"h":188}
+},
+"tutor_textbox_4":
+{
+	"frame": {"x":1003,"y":1445,"w":715,"h":188},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":715,"h":188},
+	"sourceSize": {"w":715,"h":188}
+},
+"tutor_textbox_5":
+{
+	"frame": {"x":1003,"y":1445,"w":715,"h":188},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":715,"h":188},
+	"sourceSize": {"w":715,"h":188}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tutorialAnimation-asset_2.png",
+	"format": "RGBA8888",
+	"size": {"w":1735,"h":1909},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a1b74269df22396d74c41c60926d34c9:07175dbfd02108527a0524f95ba899b3:dc1e9bb4608eae436b8de1d4773a138e$"
+}
+}

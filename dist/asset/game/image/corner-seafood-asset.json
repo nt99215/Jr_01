@@ -1,0 +1,116 @@
+{"frames": {
+
+"abalone":
+{
+	"frame": {"x":1833,"y":888,"w":75,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":73},
+	"sourceSize": {"w":75,"h":73}
+},
+"area_abalone":
+{
+	"frame": {"x":1513,"y":711,"w":354,"h":175},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":354,"h":175},
+	"sourceSize": {"w":354,"h":175}
+},
+"area_crab":
+{
+	"frame": {"x":1,"y":711,"w":471,"h":375},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":471,"h":375},
+	"sourceSize": {"w":471,"h":375}
+},
+"area_mackerel":
+{
+	"frame": {"x":474,"y":711,"w":375,"h":373},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":375,"h":373},
+	"sourceSize": {"w":375,"h":373}
+},
+"area_shell":
+{
+	"frame": {"x":1217,"y":711,"w":294,"h":199},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":294,"h":199},
+	"sourceSize": {"w":294,"h":199}
+},
+"area_shrimp":
+{
+	"frame": {"x":851,"y":711,"w":364,"h":222},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":364,"h":222},
+	"sourceSize": {"w":364,"h":222}
+},
+"area_squid":
+{
+	"frame": {"x":1513,"y":888,"w":318,"h":181},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":318,"h":181},
+	"sourceSize": {"w":318,"h":181}
+},
+"corner_seafood":
+{
+	"frame": {"x":1,"y":1,"w":1942,"h":708},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1942,"h":708},
+	"sourceSize": {"w":1942,"h":708}
+},
+"crab":
+{
+	"frame": {"x":1146,"y":935,"w":148,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":114},
+	"sourceSize": {"w":148,"h":114}
+},
+"mackerel":
+{
+	"frame": {"x":1296,"y":912,"w":149,"h":63},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":149,"h":63},
+	"sourceSize": {"w":149,"h":63}
+},
+"shell":
+{
+	"frame": {"x":1053,"y":935,"w":91,"h":122},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":122},
+	"sourceSize": {"w":91,"h":122}
+},
+"shrimp":
+{
+	"frame": {"x":935,"y":935,"w":116,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":142},
+	"sourceSize": {"w":116,"h":142}
+},
+"squid":
+{
+	"frame": {"x":851,"y":935,"w":82,"h":147},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":147},
+	"sourceSize": {"w":82,"h":147}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "corner-seafood-asset.png",
+	"format": "RGBA8888",
+	"size": {"w":1944,"h":1087},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e08c7e86f6e7471b016d6733ef778bc7:07112c3e9ce77ae6db03525ca15e1262:d937ec3ea83c21adce0f0676bdc4de93$"
+}
+}
