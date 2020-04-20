@@ -65,18 +65,18 @@ export default class Categories {
     static get NECESSARY() {
         return {
             category: 'necessary',
-            displayPosition: {groupStartX: 343, groupEndX: -1445, displayBarY: 161, xPos: 38, yPos:442},
+            displayPosition: {groupStartX: 343, groupEndX: -1445, displayBarY: 171, xPos: 38, yPos:442},
             backGroundColor:0x31be8e,
             backGroundAsset: ['necessary_1', 'necessary_2'],
             assetKey: AssetKey.CORNER_NECESSARY,
             itemList: [
-                {item:'cleanser', price:'1500', xPos:1310, yPos:201},
-                {item:'shampoo', price:'1000', xPos:182, yPos:210},
-                {item:'soap', price:'500', xPos:765, yPos:230},
-                {item:'brush', price:'500', xPos:778, yPos:412},
-                {item:'paste', price:'500', xPos:192, yPos:407},
-                {item:'tissue', price:'1000', xPos:1313, yPos:405},
-                {item:'wetTissue', price:'1000', xPos:1988, yPos:213},
+                {item:'cleanser', price:'1500', xPos:1310, yPos:211},
+                {item:'shampoo', price:'1000', xPos:182, yPos:220},
+                {item:'soap', price:'500', xPos:765, yPos:240},
+                {item:'brush', price:'500', xPos:778, yPos:422},
+                {item:'paste', price:'500', xPos:192, yPos:417},
+                {item:'tissue', price:'1000', xPos:1313, yPos:415},
+                {item:'wetTissue', price:'1000', xPos:1988, yPos:223},
             ]
 
         }

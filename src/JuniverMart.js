@@ -1,7 +1,6 @@
 import SoundManager from "./manager/SoundManager";
 import SceneManager from "./manager/SceneManager";
 import SoundAssetKey from "./data/SoundAssetKey";
-import AssetKey from "./data/AssetKey";
 import GameConfig from "./data/GameConfig";
 import Controller from "./ui/Controller";
 import Intro from "./view/Intro";
@@ -31,6 +30,7 @@ export default class JuniverMart extends Phaser.Sprite{
 
         if(! this.game.device.desktop && this.game.device.fullScreen)
         this.game.input.onTap.add(ScreenManager.instance.fullScreen, this);
+
     }
 
     update() {
@@ -42,13 +42,12 @@ export default class JuniverMart extends Phaser.Sprite{
             let elapsed = this._game.time.elapsedMS / (500 / this._game.time.desiredFps);
             //if(elapsed > 2) return;
             this._objectManager._update(elapsed);
-        };
+        }
 
         if(GameConfig.GAME_FINISH)
         {
             ConfigManager.prototype.GAME_OVER();
             this._gameOver();
-            return;
         }
         // console.log("update");
     }
@@ -125,7 +124,7 @@ export default class JuniverMart extends Phaser.Sprite{
         if(this._controller)
         {
             this._controller._btnDisabled();
-            this._controller.removeAll(true)
+            this._controller.removeAll(true);
             this._controller.destroy(true);
             this._controller = null;
         }

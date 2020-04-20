@@ -15,10 +15,10 @@ export default class CornerManager extends Phaser.Group{
         this.key = null;
         this.chapter = null;
 
-        this._createChapter(GameConfig.CURRENT_CHAPTER);
+        this._createCorner(GameConfig.CURRENT_CHAPTER);
     }
 
-    _createChapter(num) {
+    _createCorner(num) {
 
         if(this.chapter !== null)
         {
@@ -31,12 +31,16 @@ export default class CornerManager extends Phaser.Group{
 
     }
 
-
+    _createPos() {
+        if(this.chapter) this.chapter = null;
+        console.log('pos');
+    }
 
 
     _update() {
 
         this._objectVisibleHandler();
+        if(this.chapter) this.chapter._update();
 
     }
 

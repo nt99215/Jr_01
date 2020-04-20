@@ -1,0 +1,57 @@
+import ShuffleRandom from "../../../util/ShuffleRandom";
+import Categories from "../../../data/Categories";
+import GameConfig from "../../../data/GameConfig";
+
+const _categoryArr= [
+    Categories.VEGETABLE,
+    Categories.SEAFOOD,
+    Categories.MEAT,
+    Categories.NECESSARY,
+    Categories.DAIRY,
+    Categories.SNACK,
+];
+
+export default class PurchaseList {
+    constructor(game) {
+        this._game = game;
+
+    }
+
+    _randomNumber(a, b) {
+        let quantity = this._game.rnd.between(a, b);
+        return quantity;
+    }
+
+    purchaseList() {
+        let arr = [];
+        let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
+        // let rN = this._randomNumber(6, 12);
+        for(let i = 0; i<_shuffleArray.length - 1; i++)
+        {
+            let array = _shuffleArray[i].itemList;
+            let category = _shuffleArray[i].category;
+            array = ShuffleRandom.prototype.arrayShuffle(array);
+            let pickNum = this._randomNumber(1, 2);
+            let item = ShuffleRandom.prototype.pickNow(array, pickNum);
+            let quantity = this._randomNumber(1, 3);
+
+           for(let j = 0; j<item.length; j++)
+           {
+               if(array[j] !== undefined && array[j] != null)
+               {
+                   array[j].quantity = quantity;
+                   array[j].category = category;
+                   GameConfig.TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
+                   arr.push(array[j]);
+               }
+           }
+        }
+
+        //TOTAL CATEGORIES
+        GameConfig.TOTAL_CATEGORIES = arr.length;
+        console.log(GameConfig.TOTAL_AMOUNT);
+        console.log('TOTAL_CATEGORIES : ', arr.length);
+        return arr;
+    }
+
+}

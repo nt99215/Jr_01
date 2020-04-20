@@ -16,6 +16,8 @@ export default class ConfigManager {
         GameConfig.CURRENT_CHAPTER = 1;
         GameConfig.GUIDE_REMOVE = false;
         GameConfig.CHAPTER_CLEAR = false;
+        GameConfig.TOTAL_AMOUNT = 0;
+        GameConfig.PURCHASE_LIST = [];
     }
 
     GAME_OVER() {

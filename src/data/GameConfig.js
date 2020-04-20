@@ -9,6 +9,11 @@ const bgmVolume = 0.2;
 // const bgmVolume = 0.001;
 let muteSoundVolume = 0.0001;
 
+let purchaseList = [];
+let purchaseItemArray = [];
+let totalCategories = 0;
+let totalAmount = 0;
+
 let introSnd = true;
 let pause = true;
 let device;
@@ -74,6 +79,18 @@ export default class GameConfig {
 
     static get TUTORIAL_DISABLED() {return tutorialDisabled ; }
     static set TUTORIAL_DISABLED(bool) {tutorialDisabled = bool;}
+
+    static get PURCHASE_LIST() { return purchaseList; }
+    static set PURCHASE_LIST(arr) { purchaseList = arr; }
+
+    static get PURCHASE_ITEM_ARRAY() { return purchaseItemArray; }
+    static set PURCHASE_ITEM_ARRAY(obj) { purchaseItemArray.push(obj); }
+
+    static get TOTAL_CATEGORIES() { return totalCategories; }
+    static set TOTAL_CATEGORIES(num) { totalCategories = num; }
+
+    static get TOTAL_AMOUNT() { return totalAmount; }
+    static set TOTAL_AMOUNT(num) { totalAmount = num; }
 
     static get POP_ENABLED() { return pop;}
     static set POP_ENABLED(bool) { pop = bool; }

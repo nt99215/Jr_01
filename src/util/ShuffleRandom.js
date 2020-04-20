@@ -76,18 +76,20 @@ export default class ShuffleRandom{
 
     arrayShuffle(a) {
         let j, x, i;
-        for (i = a.length; i; i -= 1) {
+        for (i = a.length; i; i -= 1)
+        {
             j = Math.floor(Math.random() * i);
             x = a[i - 1];
             a[i - 1] = a[j];
             a[j] = x;
         }
+        return a;
     }
 
     pickNow(arr, pick = 3){
         let numbers = [];
         let pickNumbers = pick;
-        for(let insertCur = 0; insertCur < pickNumbers ; insertCur++){
+        for(let insertCur = 0; insertCur < pickNumbers; insertCur++){
             numbers[insertCur] = Math.floor(Math.random() * arr.length);
             for(let searchCur = 0; searchCur < insertCur; searchCur ++){
                 if(numbers[insertCur] === numbers[searchCur]){

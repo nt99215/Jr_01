@@ -13,12 +13,14 @@ export default class Corner {
         this._gameGroup = gameGroup;
         this._category = category;
         this._key = this._category.assetKey;
+
         btnArr = [];
         dragObjArr = [];
         startX = 0;
         startY = 0;
         baseWidth = 0;
         this._init();
+
     }
 
     _init() {
@@ -51,6 +53,7 @@ export default class Corner {
 
         // this._gameGroup.x = -420;
         displayTween = this._game.add.tween(this._gameGroup).to({x:endX}, duration, Phaser.Easing.Quartic.None, true, 1000, 1000, true);
+        displayTween.yoyo(true, 1000);
 
     }
 
@@ -73,6 +76,8 @@ export default class Corner {
             // btn.input.enableDrag();
             // btn.events.onDragStart.add(this._startDrag, this);
             btn.events.onInputDown.add(this._itemSelect, this);
+            // btn.events.onInputDown.add(this._onDown, this);
+            // btn.events.onInputUp.add(this._onUp, this);
             btn.input.pixelPerfectOver = true;
             btn.input.pixelPerfectClick = true;
             btnArr.push(btn);
@@ -108,6 +113,7 @@ export default class Corner {
         let num = btnArr.indexOf(obj);
         let currentObj = dragObjArr[num];
         startX = this._game.input.x - this._gameGroup.x;
+        // startX = this._game.input.x;
         startY = this._game.input.y;
         for(let i = 0; i<dragObjArr.length; i++)
         {
@@ -123,6 +129,7 @@ export default class Corner {
         // currentObj.alpha = 1;
         currentObj.visible = true;
         currentObj.x = this._game.input.x - this._gameGroup.x;
+        // currentObj.x = this._game.input.x + this._game.camera.x;
         currentObj.y = this._game.input.y;
         currentObj.x -= currentObj.width/2;
         currentObj.y -= currentObj.height/2;
@@ -130,6 +137,9 @@ export default class Corner {
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
         // currentObj.events.onDragStart.add(this._startDrag, this);
+        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        // currentObj.events.onInputDown.add(this._onDown, this);
+        // currentObj.events.onInputUp.add(this._onUp, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
 
     }
@@ -137,6 +147,8 @@ export default class Corner {
     _stopDrag(obj) {
 
         console.log(parseInt(obj.x), parseInt(obj.y));
+
+        this._pushEnable(obj);
 
         if(displayTween) displayTween.resume();
 
@@ -146,17 +158,40 @@ export default class Corner {
             tw.onComplete.addOnce(()=> {
                 obj.visible = false;
             });
-
-
         }
         else this._game.add.tween(obj).to({y:minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
     }
+
+
+    _pushEnable(obj) {
+
+        let name = obj._frame.name;
+        let idx = -1;
+        for(let i = 0; i<GameConfig.PURCHASE_LIST.length; i++)
+        if (GameConfig.PURCHASE_LIST[i].item === name) idx = i;
+
+        if(idx !== -1 ) GameConfig.PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
+
+    }
+
 
     _startDrag(obj) {
 
         console.log(parseInt(obj.x), parseInt(obj.y));
 
     }
+
+
+    _dragUpdate(obj) {
+        obj.x -= this._game.camera.x;
+    }
+
+    _update() {
+        console.log("update");
+        // if(this._backGround) this._backGround.x+=4;
+        // console.log(this._game.camera.x)
+    }
+
 
     _destroy() {
 
