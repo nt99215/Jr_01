@@ -28,7 +28,8 @@ export default class AssetKey {
      */
 
     static get MAIN_DISPLAY_ASSET() {return 'main-display-asset';}
-    static get SLIDEBAR_PPIYO() {return 'slideBar-asset';}
+    static get SLIDE_BAR_PPIYO() {return 'slideBar-asset';}
+    static get PURCHASE_LIST_VIEW() {return 'purchaseListView-asset';}
     static get CORNER_VEGETABLE() {return 'corner-vegetable-asset';}
     static get CORNER_SEAFOOD() {return 'corner-seafood-asset';}
     static get CORNER_MEAT() {return 'corner-meat-asset';}

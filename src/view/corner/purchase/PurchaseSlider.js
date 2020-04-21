@@ -1,7 +1,6 @@
 import AssetKey from "../../../data/AssetKey";
 import SoundAssetKey from "../../../data/SoundAssetKey";
 import PurchaseItem from "./PurchaseItem";
-import PurchaseList from "./PurchaseList";
 import GameConfig from "../../../data/GameConfig";
 
 let dragStartPos;
@@ -11,7 +10,7 @@ export default class PurchaseSlider {
         this._game = game;
         this._gameGroup = this._game.add.group();
         this._sliderGroup = this._game.add.group();
-        this._key = AssetKey.SLIDEBAR_PPIYO;
+        this._key = AssetKey.SLIDE_BAR_PPIYO;
         this._prevBtn = null;
         this._nextBtn = null;
         this.purchaseItem = [];
@@ -24,7 +23,7 @@ export default class PurchaseSlider {
 
 
     _init() {
-        this.purchaseSlideBg = new Phaser.Image(this._game, 148, 12, AssetKey.SLIDEBAR_PPIYO, 'ui_bg');
+        this.purchaseSlideBg = new Phaser.Image(this._game, 148, 12, AssetKey.SLIDE_BAR_PPIYO, 'ui_bg');
         this._gameGroup.addChild(this.purchaseSlideBg);
 
         this.maskRect = this._game.add.graphics(0, 0);
@@ -37,14 +36,8 @@ export default class PurchaseSlider {
 
     }
 
-    _purchaseGenerate() {
-        let arr = new PurchaseList(this._game);
-        GameConfig.PURCHASE_LIST = arr.purchaseList();
-    }
-
     _listSetting() {
 
-        this._purchaseGenerate();
         let interval = 0;
         let pArr = GameConfig.PURCHASE_LIST;
 
@@ -67,18 +60,28 @@ export default class PurchaseSlider {
         // console.log(pArr);
         // console.log(this.purchaseItem);
 
+        this._dragArea(interval);
+
         this.dragRect = this._game.add.graphics(0, 0);
         this.dragRect.beginFill(0xff4400, 0);
         this.dragRect.drawRect(246, 12, interval, 131);
         this.dragRect.endFill();
         this._gameGroup.addChild(this.dragRect);
         this.dragRect.inputEnabled = true;
-        this.dragRect.input.enableDrag();
+        this.dragRect.input.enableDrag(false, false, false, 255, this.dragArea);
         this.dragRect.input.allowVerticalDrag = false;
         this.dragRect.events.onDragUpdate.add(this._drag, this);
         this.dragRect.mask = this.maskRect;
         dragStartPos = this.dragRect.x;
 
+    }
+
+    _dragArea(interval) {
+        this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
+        this.dragArea.beginFill(0x000, 0);
+        this.dragArea.drawRect(246, 12, interval * 1.5,131);
+        this.dragArea.endFill();
+        this._gameGroup.addChild(this.dragArea);
     }
 
     _listButton() {

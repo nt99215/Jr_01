@@ -3,6 +3,8 @@ import GameConfig from "../data/GameConfig";
 import SoundManager from "./SoundManager";
 import SoundAssetKey from "../data/SoundAssetKey";
 import CornerMain from "../view/corner/CornerMain";
+import PurchaseList from "../view/corner/purchase/PurchaseList";
+import PurchaseListView from "../view/corner/purchase/PurchaseListView";
 
 export default class CornerManager extends Phaser.Group{
     constructor(game, parent) {
@@ -14,8 +16,27 @@ export default class CornerManager extends Phaser.Group{
         this._parent = parent;
         this.key = null;
         this.chapter = null;
+        this.purchaseListView = null;
 
-        this._createCorner(GameConfig.CURRENT_CHAPTER);
+
+        //LIST GENERATE
+        this._purchaseGenerate();
+
+        //PURCHASE LIST VIEW
+        this._createPurchaseList();
+
+        //CORNER
+        // this._createCorner(GameConfig.CURRENT_CHAPTER);
+
+
+    }
+
+
+    _createPurchaseList() {
+
+        this.purchaseListView = new PurchaseListView(this._game, this._bgGroup);
+        this._createController();
+
     }
 
     _createCorner(num) {
@@ -46,6 +67,11 @@ export default class CornerManager extends Phaser.Group{
 
     _createController() {
         this._parent._createController();
+    }
+
+    _purchaseGenerate() {
+        let arr = new PurchaseList(this._game);
+        GameConfig.PURCHASE_LIST = arr.purchaseList();
     }
 
 

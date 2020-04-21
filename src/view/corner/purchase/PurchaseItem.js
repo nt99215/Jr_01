@@ -2,14 +2,12 @@ import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 
 let _xPos, _yPos;
-const _before = 'slideBar_';
-const _complete = 'slideBarSelected_';
 
 export default class PurchaseItem {
     constructor(game, group, asset, quantity, xPos, yPos) {
         this._game = game;
         this._gameGroup = group;
-        this._key = AssetKey.SLIDEBAR_PPIYO;
+        this._key = AssetKey.SLIDE_BAR_PPIYO;
         this._asset = asset;
         this.quantity = quantity;
         this.startX = 0;

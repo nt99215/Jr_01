@@ -10,7 +10,9 @@ const bgmVolume = 0.2;
 let muteSoundVolume = 0.0001;
 
 let purchaseList = [];
+let purchaseListEnable = true;
 let purchaseItemArray = [];
+let purchaseItemForListArray = [];
 let totalCategories = 0;
 let totalAmount = 0;
 
@@ -83,8 +85,14 @@ export default class GameConfig {
     static get PURCHASE_LIST() { return purchaseList; }
     static set PURCHASE_LIST(arr) { purchaseList = arr; }
 
+    static get PURCHASE_LIST_ENABLE() { return purchaseListEnable; }
+    static set PURCHASE_LIST_ENABLE(bool) { purchaseListEnable = bool; }
+
     static get PURCHASE_ITEM_ARRAY() { return purchaseItemArray; }
     static set PURCHASE_ITEM_ARRAY(obj) { purchaseItemArray.push(obj); }
+
+    static get PURCHASE_ITEM_FOR_LIST_ARRAY() { return purchaseItemForListArray; }
+    static set PURCHASE_ITEM_FOR_LIST_ARRAY(obj) { purchaseItemForListArray.push(obj); }
 
     static get TOTAL_CATEGORIES() { return totalCategories; }
     static set TOTAL_CATEGORIES(num) { totalCategories = num; }

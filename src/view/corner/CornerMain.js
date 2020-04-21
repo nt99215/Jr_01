@@ -7,6 +7,7 @@ import CornerButton from "../object/CornerButton";
 import Corner from "./Corner";
 import PpiyoCart from "../object/PpiyoCart";
 import PurchaseSlider from "./purchase/PurchaseSlider";
+import PurchaseList from "./purchase/PurchaseList";
 
 const _categoryArr= ['',
     Categories.VEGETABLE,
@@ -142,6 +143,8 @@ export default class CornerMain{
         this._purchaseSlide = new PurchaseSlider(this._game, _categoryArr);
 
     }
+
+
 
 
     _update() {
