@@ -14,6 +14,7 @@ let purchaseListEnable = true;
 let purchaseItemArray = [];
 let purchaseItemForListArray = [];
 let totalCategories = 0;
+let totalQuantity = 0;
 let totalAmount = 0;
 
 let introSnd = true;
@@ -96,6 +97,9 @@ export default class GameConfig {
 
     static get TOTAL_CATEGORIES() { return totalCategories; }
     static set TOTAL_CATEGORIES(num) { totalCategories = num; }
+
+    static get TOTAL_QUANTITY() { return totalQuantity; }
+    static set TOTAL_QUANTITY(num) { totalQuantity = num; }
 
     static get TOTAL_AMOUNT() { return totalAmount; }
     static set TOTAL_AMOUNT(num) { totalAmount = num; }
