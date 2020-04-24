@@ -189,13 +189,13 @@ export default class PaymentPos {
                 })
             }
 
-            else this._restroreMoney(obj);
+            else this._restoreMoney(obj);
         }
 
-        else this._restroreMoney(obj);
+        else this._restoreMoney(obj);
     }
 
-    _restroreMoney(obj) {
+    _restoreMoney(obj) {
         let tw = this._game.add.tween(obj).to({x:_startX, y: _startY}, 200, Phaser.Easing.Quartic.Out, true, 0);
         tw.onComplete.add(()=> {
             if(_remove)
@@ -214,7 +214,8 @@ export default class PaymentPos {
     _pushEnable(amount) {
 
         let total = GameConfig.TOTAL_AMOUNT.toString();
-        let remainPrice = String(total).substring(total.length, 2);
+        let len = (total.length <= 4 ) ? 1 : 2;
+        let remainPrice = String(total).substring(total.length, len);
         let resultPrice = _currentPrice + amount;
 
         let idx = String(resultPrice).length - 3;
@@ -222,7 +223,6 @@ export default class PaymentPos {
 
         if(Number(remainPrice) === 500)
             if(Number(str) > 5) return false;
-
 
         if(resultPrice > GameConfig.TOTAL_AMOUNT) return false;
         else return true;
