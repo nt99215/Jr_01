@@ -1,5 +1,4 @@
 
-let _totalPriceArr = [];
 let _currentPriceArr = [];
 let _xPosArr = [742, 702, 662, 598, 558];
 let _yPos = 60;
@@ -14,9 +13,7 @@ export default class PriceCountForPos {
 
     _count(num) {
 
-        console.log(num);
         let totalAmount = num.toString();
-
         this._paymentGroup.removeChildren(0, this._paymentGroup.length);
         for(let i = 0; i < _currentPriceArr.length; i++)  _currentPriceArr.splice(i, 1);
         for(let i  =0; i<this._paymentGroup.length; i++) this._paymentGroup[i].destroy();
@@ -31,13 +28,11 @@ export default class PriceCountForPos {
             this._paymentGroup.addChild(img);
         }
 
-
         if(num >= 1000)
         {
             let dot = new Phaser.Image(this._game, 640, 99, this._key, 'posNumber_dot');
             this._paymentGroup.addChild(dot);
         }
-
 
     }
 

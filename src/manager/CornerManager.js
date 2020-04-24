@@ -31,10 +31,10 @@ export default class CornerManager extends Phaser.Group{
         // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
-        this._createCalculatePos();
+        // this._createCalculatePos();
 
         //PAYMENT POS
-        // this._createPaymentPos();
+        this._createPaymentPos();
 
 
     }
