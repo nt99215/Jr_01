@@ -17,7 +17,10 @@ export default class ConfigManager {
         GameConfig.GUIDE_REMOVE = false;
         GameConfig.CHAPTER_CLEAR = false;
         GameConfig.TOTAL_AMOUNT = 0;
+        GameConfig.TOTAL_QUANTITY = 0;
         GameConfig.PURCHASE_LIST = [];
+        GameConfig.PURCHASE_ITEM_ARRAY_RESET = [];
+        GameConfig.PURCHASE_ITEM_FOR_LIST_ARRAY_RESET = [];
     }
 
     GAME_OVER() {

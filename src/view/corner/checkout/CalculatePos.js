@@ -40,6 +40,13 @@ export default class CalculatePos {
         this.scanner.alpha = 0;
         this.scanner.visible = false;
         this._scannerGroup.addChild(this.scanner);
+
+        this.dragArea = this._game.add.graphics(0, 200);
+        this.dragArea.beginFill(0x000, 0.5);
+        this.dragArea.drawRect(0, 0, 1280, 520);
+        this.dragArea.endFill();
+        this.dragArea.visible = false;
+        // this._gameGroup.addChild(this.dragArea);
     }
 
     _itemGenerate() {
@@ -67,7 +74,7 @@ export default class CalculatePos {
                 obj.inputEnabled =  true;
                 obj.pixelPerfectOver = true;
                 obj.pixelPerfectClick = true;
-                obj.input.enableDrag(true);
+                obj.input.enableDrag(true, true, true, 255, this.dragArea);
                 obj.events.onInputDown.add(this._onDown, this);
                 obj.events.onDragUpdate.add(this._onDrag, this);
                 obj.events.onDragStop.add(this._stopDrag, this);
@@ -128,9 +135,8 @@ export default class CalculatePos {
                 this._checkOutQuantity++;
                 if(this._checkOutQuantity >= GameConfig.TOTAL_QUANTITY)
                 {
-                    this._destroy();
                     this._parent._createPaymentPos();
-                    console.log('NEXT PHASE');
+                    this._destroy();
                 }
             })
         }

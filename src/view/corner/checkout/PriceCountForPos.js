@@ -26,6 +26,11 @@ export default class PriceCountForPos {
             let img = new Phaser.Image(this._game, _xPosArr[i], _yPos, this._key, asset);
             // console.log(_xPosArr[i])
             this._paymentGroup.addChild(img);
+            img.anchor.setTo(0, 1);
+            img.y += img.height;
+            img.scale.setTo(1, 0.2 + i/10);
+            let duration = i * 100 + 200;
+            this._game.add.tween(img.scale).to({y:1}, duration, Phaser.Easing.Quartic.Out, true, 0);
         }
 
         if(num >= 1000)

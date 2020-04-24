@@ -91,9 +91,11 @@ export default class GameConfig {
 
     static get PURCHASE_ITEM_ARRAY() { return purchaseItemArray; }
     static set PURCHASE_ITEM_ARRAY(obj) { purchaseItemArray.push(obj); }
+    static set PURCHASE_ITEM_ARRAY_RESET(arr) { purchaseItemArray = arr; }
 
     static get PURCHASE_ITEM_FOR_LIST_ARRAY() { return purchaseItemForListArray; }
     static set PURCHASE_ITEM_FOR_LIST_ARRAY(obj) { purchaseItemForListArray.push(obj); }
+    static set PURCHASE_ITEM_FOR_LIST_ARRAY_RESET(arr) { purchaseItemForListArray = arr; }
 
     static get TOTAL_CATEGORIES() { return totalCategories; }
     static set TOTAL_CATEGORIES(num) { totalCategories = num; }
