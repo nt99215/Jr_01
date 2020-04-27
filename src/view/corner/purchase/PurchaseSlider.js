@@ -114,19 +114,11 @@ export default class PurchaseSlider {
     }
 
     _onPrev() {
-        this._game.add.tween(this.dragRect).to({x:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);
-        this._prevBtn.inputEnabled = false;
-        this._prevBtn.alpha = 0.3;
-        this._nextBtn.inputEnabled = true;
-        this._nextBtn.alpha = 1;
+        this._game.add.tween(this.dragRect).to({x:0}, 300, Phaser.Easing.Quartic.Out, true);
     }
     
     _onNext() {
-        this._game.add.tween(this.dragRect).to({x:0}, 300, Phaser.Easing.Quartic.Out, true);
-        this._prevBtn.inputEnabled = true;
-        this._prevBtn.alpha = 1;
-        this._nextBtn.inputEnabled = false;
-        this._nextBtn.alpha = 0.3;
+        this._game.add.tween(this.dragRect).to({x:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -168,26 +160,26 @@ export default class PurchaseSlider {
 
         if(this.dragRect.x <= -_interval/2)
         {
-            this._prevBtn.inputEnabled = false;
-            this._prevBtn.alpha = 0.3;
-        }
-        else
-        {
-            this._prevBtn.inputEnabled = true;
-            this._prevBtn.alpha = 1;
-        }
-
-
-        if(this.dragRect.x >= 0)
-        {
             this._nextBtn.inputEnabled = false;
             this._nextBtn.alpha = 0.3;
-
         }
         else
         {
             this._nextBtn.inputEnabled = true;
             this._nextBtn.alpha = 1;
+        }
+
+
+        if(this.dragRect.x >= 0)
+        {
+            this._prevBtn.inputEnabled = false;
+            this._prevBtn.alpha = 0.3;
+
+        }
+        else
+        {
+            this._prevBtn.inputEnabled = true;
+            this._prevBtn.alpha = 1;
 
         }
     }

@@ -25,10 +25,10 @@ export default class CornerManager extends Phaser.Group{
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        // this._createPurchaseList();
+        this._createPurchaseList();
 
         //CORNER
-        this._createCorner(GameConfig.CURRENT_CHAPTER);
+        // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -54,7 +54,7 @@ export default class CornerManager extends Phaser.Group{
 
     _createPurchaseList() {
 
-        this.purchaseListView = new PurchaseListView(this._game, this._bgGroup);
+        this.purchaseListView = new PurchaseListView(this._game, this._bgGroup, this);
         this._createController();
 
     }
@@ -65,6 +65,12 @@ export default class CornerManager extends Phaser.Group{
         {
             this.chapter._destroy();
             this.chapter = null;
+        }
+
+        if(this.purchaseListView)
+        {
+            this.purchaseListView._destroy();
+            this.purchaseListView = null;
         }
 
         this.chapter = new CornerMain(this._game, this);
@@ -87,6 +93,7 @@ export default class CornerManager extends Phaser.Group{
 
         this._objectVisibleHandler();
         if(this.chapter) this.chapter._update();
+        if(this.purchaseListView) this.purchaseListView._update();
 
     }
 
