@@ -2,23 +2,25 @@ import SoundAssetKey from "../../data/SoundAssetKey";
 import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 
-let btnArr, dragObjArr, startX, startY, displayTween, baseWidth;
+let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos;
 const minimumYpos = 550;
 
 
 export default class Corner {
-    constructor(game, bgGroup, gameGroup, category) {
+    constructor(game, bgGroup, gameGroup, category, parent) {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
         this._category = category;
         this._key = this._category.assetKey;
+        this._parent = parent;
 
         btnArr = [];
         dragObjArr = [];
         startX = 0;
         startY = 0;
         baseWidth = 0;
+        centerPos = 0;
         this._init();
 
     }
@@ -86,22 +88,10 @@ export default class Corner {
         for(let obj in list)
         {
             let asset = list[obj].item;
-            // let xPos = list[obj].xPos;
-            // let yPos = list[obj].yPos;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
             this._gameGroup.addChild(dragObj);
-            // dragObj.x = xPos;
-            // dragObj.y = yPos;
-            // dragObj.tint = 0xffcc00;
-            // dragObj.alpha = 0;
             dragObj.visible = false;
-            // dragObj.inputEnabled = true;
-            // dragObj.input.enableDrag();
-            // dragObj.events.onDragStart.add(this._startDrag, this);
-            // dragObj.input.pixelPerfectOver = true;
-            // dragObj.input.pixelPerfectClick = true;
             dragObjArr.push(dragObj);
-
         }
 
     }
@@ -129,7 +119,6 @@ export default class Corner {
         // currentObj.alpha = 1;
         currentObj.visible = true;
         currentObj.x = this._game.input.x - this._gameGroup.x;
-        // currentObj.x = this._game.input.x + this._game.camera.x;
         currentObj.y = this._game.input.y;
         currentObj.x -= currentObj.width/2;
         currentObj.y -= currentObj.height/2;
@@ -146,22 +135,54 @@ export default class Corner {
 
     _stopDrag(obj) {
 
-        console.log(parseInt(obj.x), parseInt(obj.y));
-
-        this._pushEnable(obj);
-
+        // console.log(parseInt(obj.x), parseInt(obj.y));
         if(displayTween) displayTween.resume();
 
-        if(obj.y <= minimumYpos)
+        let correct;
+        if (this._overLapCheck(obj))
+        {
+            // console.log('hit~~~')
+            if(this._pushEnable(obj)) correct = true;
+            else correct = false;
+
+            this._parent._ppiyoFeedBackPopUp(correct);
+        }
+
+        this._objRestore(obj, correct);
+    }
+
+    _objRestore(obj, correct = false) {
+
+        if(correct) this._game.add.tween(obj).to({x: centerPos, y: minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
+        else
         {
             let tw = this._game.add.tween(obj).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.addOnce(()=> {
                 obj.visible = false;
             });
         }
-        else this._game.add.tween(obj).to({y:minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
+
     }
 
+    _overLapCheck(obj) {
+
+        let target;
+        if(this._parent._ppiyoCart.hitArea)
+        {
+            target = this._parent._ppiyoCart.hitArea;
+            centerPos = obj.x;
+            return overLap(obj, target);
+        }
+
+        function overLap(a, b) {
+            {
+                let boundA = a.getBounds();
+                let boundB = b.getBounds();
+                return Phaser.Rectangle.intersects(boundA, boundB);
+            }
+
+        }
+    }
 
     _pushEnable(obj) {
 
@@ -170,20 +191,37 @@ export default class Corner {
         for(let i = 0; i<GameConfig.PURCHASE_LIST.length; i++)
         if (GameConfig.PURCHASE_LIST[i].item === name) idx = i;
 
-        if(idx !== -1 ) GameConfig.PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
+        if(idx !== -1 )
+        {
+            if(GameConfig.PURCHASE_ITEM_ARRAY[idx].complete) return false;
+            else
+            {
+                GameConfig.PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
+                return true;
+            }
 
+        }
+        else return false;
     }
 
 
     _startDrag(obj) {
 
-        console.log(parseInt(obj.x), parseInt(obj.y));
+        // console.log(parseInt(obj.x), parseInt(obj.y));
 
     }
 
 
     _dragUpdate(obj) {
-        obj.x -= this._game.camera.x;
+        // console.log(parseInt(obj.x), parseInt(obj.y));
+        let target;
+        if(this._parent._ppiyoCart.hitArea)
+        {
+            target = this._parent._ppiyoCart.hitArea;
+            centerPos = target.x - target.width/2 + obj.x - obj.width/2;
+            // return overLap(obj, target);
+            // console.log(parseInt(target.x), parseInt(obj.x));
+        }
     }
 
     _update() {

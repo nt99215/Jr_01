@@ -92,7 +92,7 @@ export default class CornerMain{
         }
 
         //CORNER GENERATE
-        this._corner = new Corner(this._game, this._bgGroup, this._gameGroup, _categoryArr[num]);
+        this._corner = new Corner(this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this);
         this._backButton.visible = true;
         this._cornerPop = true;
 
@@ -103,6 +103,10 @@ export default class CornerMain{
     _ppiyoCartGenerate() {
         this._ppiyoCart = new PpiyoCart(this._game);
         this._ppiyoCart._visible(false);
+    }
+
+    _ppiyoFeedBackPopUp(correct) {
+        if(this._ppiyoCart) this._ppiyoCart.feedBackPopUp(correct);
     }
 
     _createBackButton() {
@@ -150,7 +154,7 @@ export default class CornerMain{
     _update() {
 
         if(this._shoppingComplete) return;
-        console.log(GameConfig.TOTAL_CATEGORIES);
+        if(this._purchaseSlide) this._purchaseSlide._update();
         if(GameConfig.TOTAL_CATEGORIES === 0)
         {
             this._shoppingComplete = true;

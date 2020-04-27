@@ -55,7 +55,6 @@ export default class PurchaseItem {
         if(this.complete) return;
 
         this.quantity--;
-
         for(let i = 0; i < 3; i++)
         {
             if(this.quantity !== (i+1)) this.numberImg[i].visible = false;
@@ -80,7 +79,7 @@ export default class PurchaseItem {
                 //COMPLETE
                 this.complete = true;
                 GameConfig.TOTAL_CATEGORIES --;
-                console.log(GameConfig.TOTAL_CATEGORIES);
+                // console.log(GameConfig.TOTAL_CATEGORIES);
             }
         }
 
