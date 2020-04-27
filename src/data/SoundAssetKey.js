@@ -10,6 +10,7 @@ export default class SoundAssetKey {
     static get tutorNarr_2() { return 'tutorNarr_2'; }
     static get tutorNarr_3() { return 'tutorNarr_3'; }
     static get tutorNarr_4() { return 'tutorNarr_4'; }
+    static get tutorNarr_5() { return 'tutorNarr_5'; }
 
 
     /**

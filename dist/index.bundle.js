@@ -596,6 +596,9 @@ class SoundAssetKey {
     static get tutorNarr_4() {
         return 'tutorNarr_4';
     }
+    static get tutorNarr_5() {
+        return 'tutorNarr_5';
+    }
 
     /**
      * EFFECT SOUND
@@ -1331,6 +1334,12 @@ class Intro {
             let asset = 'intro_' + _imgArray[obj].category;
             let img = new Phaser.Image(this._game, _imgArray[obj].xPos, _imgArray[obj].yPos, _imgArray[obj].key, asset);
             this._gameGroup.addChild(img);
+            img.anchor.setTo(0.5, 0.5);
+            img.x += img.width / 2;
+            img.y += img.height / 2;
+            let rN = this._game.rnd.between(100, 300);
+            this._game.add.tween(img.scale).to({ x: 0.9, y: 0.9 }, rN * 50, Phaser.Easing.Linear.None, true, 0, 1000, true);
+            this._game.add.tween(img).to({ x: img.x + rN }, rN * 100, Phaser.Easing.Linear.None, true, 0, 1000, true);
         }
 
         //TITLE
@@ -1747,6 +1756,11 @@ class TutorialView extends Phaser.Group {
             let object = new __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__["a" /* default */](this._game, this._objectArray[obj].key, asset, this._objectArray[obj].xPos, this._objectArray[obj].yPos, 1, this._objectArray[obj].totalFps, '', 0, this._objectArray[obj].fps);
             this._bgGroup.addChild(object);
             object._play();
+            console.log(object.width);
+
+            if (this._num === 5) {
+                this._game.add.tween(object).to({ x: object.x + 630 }, 6000, Phaser.Easing.Linear.None, true);
+            }
         }
 
         //IMAGE
@@ -1754,6 +1768,15 @@ class TutorialView extends Phaser.Group {
             let asset = 'tutor_' + this._num + '_' + this._imgArray[obj].category;
             let object = new Phaser.Image(this._game, this._imgArray[obj].xPos, this._imgArray[obj].yPos, this._imgArray[obj].key, asset);
             this._bgGroup.addChild(object);
+
+            if (this._num === 1) {
+                object.anchor.setTo(0.5, 0.5);
+                object.x += object.width / 2;
+                object.y += object.height / 2;
+                let rN = this._game.rnd.between(100, 300);
+                this._game.add.tween(object.scale).to({ x: 0.9, y: 0.9 }, rN * 50, Phaser.Easing.Linear.None, true, 0, 1000, true);
+                this._game.add.tween(object).to({ x: object.x + rN }, rN * 100, Phaser.Easing.Linear.None, true, 0, 1000, true);
+            }
         }
 
         //GUIDE TEXT
@@ -118809,6 +118832,7 @@ class PreloadResource {
                 const tutorNarr_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].tutorNarr_2 + extension;
                 const tutorNarr_3 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].tutorNarr_3 + extension;
                 const tutorNarr_4 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].tutorNarr_4 + extension;
+                const tutorNarr_5 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].tutorNarr_5 + extension;
 
                 const result_good = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].RESULT_GOOD + extension;
 
@@ -118849,8 +118873,8 @@ class PreloadResource {
                  * TUTOR NARRATION
                  */
                 this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].GAME_INTRO, gameIntro);
-                let tutorNarrArr = ['', tutorNarr_1, tutorNarr_2, tutorNarr_3, tutorNarr_4];
-                for (let i = 1; i <= 4; i++) this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].TUTOR_NARRATION_PREFIX + i, tutorNarrArr[i]);
+                let tutorNarrArr = ['', tutorNarr_1, tutorNarr_2, tutorNarr_3, tutorNarr_4, tutorNarr_5];
+                for (let i = 1; i <= 5; i++) this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].TUTOR_NARRATION_PREFIX + i, tutorNarrArr[i]);
 
                 /**
                  * GUIDE NARRATION

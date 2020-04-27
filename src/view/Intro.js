@@ -49,6 +49,12 @@ export default class Intro {
             let asset = 'intro_' + _imgArray[obj].category;
             let img = new Phaser.Image(this._game, _imgArray[obj].xPos, _imgArray[obj].yPos,_imgArray[obj].key, asset);
             this._gameGroup.addChild(img);
+            img.anchor.setTo(0.5, 0.5);
+            img.x += img.width/2;
+            img.y += img.height/2;
+            let rN = this._game.rnd.between(100, 300);
+            this._game.add.tween(img.scale).to({x:0.9, y:0.9}, rN * 50, Phaser.Easing.Linear.None, true,  0, 1000, true);
+            this._game.add.tween(img).to({x:img.x + rN}, rN * 100, Phaser.Easing.Linear.None, true,  0, 1000, true);
         }
 
         //TITLE

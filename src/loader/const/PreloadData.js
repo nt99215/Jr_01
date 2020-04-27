@@ -62,6 +62,7 @@ export default class PreloadResource{
         const tutorNarr_2 = 'asset/game/sound/' + SoundAssetKey.tutorNarr_2 + extension;
         const tutorNarr_3 = 'asset/game/sound/' + SoundAssetKey.tutorNarr_3 + extension;
         const tutorNarr_4 = 'asset/game/sound/' + SoundAssetKey.tutorNarr_4 + extension;
+        const tutorNarr_5 = 'asset/game/sound/' + SoundAssetKey.tutorNarr_5 + extension;
 
         const result_good = 'asset/game/sound/' + SoundAssetKey.RESULT_GOOD + extension;
 
@@ -104,8 +105,8 @@ export default class PreloadResource{
          * TUTOR NARRATION
          */
         this.game.load.audio( SoundAssetKey.GAME_INTRO, gameIntro);
-        let tutorNarrArr = ['', tutorNarr_1, tutorNarr_2, tutorNarr_3, tutorNarr_4];
-        for(let i = 1; i<=4; i++) this.game.load.audio(SoundAssetKey.TUTOR_NARRATION_PREFIX + i, tutorNarrArr[i])
+        let tutorNarrArr = ['', tutorNarr_1, tutorNarr_2, tutorNarr_3, tutorNarr_4, tutorNarr_5];
+        for(let i = 1; i<=5; i++) this.game.load.audio(SoundAssetKey.TUTOR_NARRATION_PREFIX + i, tutorNarrArr[i])
 
         /**
          * GUIDE NARRATION

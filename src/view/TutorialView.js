@@ -46,6 +46,12 @@ export default class TutorialView extends Phaser.Group{
             let object = new SeparateAnimation(this._game, this._objectArray[obj].key, asset, this._objectArray[obj].xPos, this._objectArray[obj].yPos, 1, this._objectArray[obj].totalFps, '', 0, this._objectArray[obj].fps);
             this._bgGroup.addChild(object);
             object._play();
+            console.log(object.width)
+
+            if(this._num === 5)
+            {
+                this._game.add.tween(object).to({x:object.x + 630}, 6000, Phaser.Easing.Linear.None, true);
+            }
         }
 
         //IMAGE
@@ -54,6 +60,16 @@ export default class TutorialView extends Phaser.Group{
             let asset = 'tutor_' + this._num + '_' + this._imgArray[obj].category;
             let object = new Phaser.Image(this._game, this._imgArray[obj].xPos, this._imgArray[obj].yPos, this._imgArray[obj].key, asset);
             this._bgGroup.addChild(object);
+
+            if(this._num === 1)
+            {
+                object.anchor.setTo(0.5, 0.5);
+                object.x += object.width/2;
+                object.y += object.height/2;
+                let rN = this._game.rnd.between(100, 300);
+                this._game.add.tween(object.scale).to({x:0.9, y:0.9}, rN * 50, Phaser.Easing.Linear.None, true,  0, 1000, true);
+                this._game.add.tween(object).to({x:object.x + rN}, rN * 100, Phaser.Easing.Linear.None, true,  0, 1000, true);
+            }
         }
 
         //GUIDE TEXT
