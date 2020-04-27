@@ -122,6 +122,7 @@ export default class CornerMain{
     _cornerButtonEnable(bool) {
 
         for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._visible(bool);
+        // for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._btnDisable();
 
         //COUNTER BUTTON INVISIBLE
         _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
@@ -158,6 +159,7 @@ export default class CornerMain{
         if(GameConfig.TOTAL_CATEGORIES === 0)
         {
             this._shoppingComplete = true;
+            for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
             this._removeCorner(true);
         }
     }

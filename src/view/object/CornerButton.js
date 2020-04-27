@@ -42,6 +42,12 @@ export default class CornerButton{
         this._btn.visible = bool;
     }
 
+    _btnDisable() {
+        this._btn.inputEnabled = false;
+        this._bg.tint = 0x525252;
+        this._btn.tint = 0x525252;
+    }
+
     _destroy() {
         this._bg.destroy();
         this._btn.destroy();
