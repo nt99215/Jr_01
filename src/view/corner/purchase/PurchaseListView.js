@@ -179,8 +179,8 @@ export default class PurchaseListView {
 
     _sliderMoving() {
 
-        // console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
-        let objAllpopPos = 600;
+        console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
+        let objAllpopPos = 620;
         let lastObject = this.purchaseItem[this.purchaseItem.length - 1].blit.y;
         if(lastObject <= objAllpopPos)
         {

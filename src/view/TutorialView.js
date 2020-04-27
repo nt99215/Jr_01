@@ -46,8 +46,8 @@ export default class TutorialView extends Phaser.Group{
             let object = new SeparateAnimation(this._game, this._objectArray[obj].key, asset, this._objectArray[obj].xPos, this._objectArray[obj].yPos, 1, this._objectArray[obj].totalFps, '', 0, this._objectArray[obj].fps);
             this._bgGroup.addChild(object);
             object._play();
-            console.log(object.width)
 
+            //PPIYO CART MOVING
             if(this._num === 5)
             {
                 this._game.add.tween(object).to({x:object.x + 630}, 6000, Phaser.Easing.Linear.None, true);
