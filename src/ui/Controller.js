@@ -124,6 +124,7 @@ export default class Controller extends Phaser.Group{
     _buttonSndPlay(sndKey, snd, btn) {
         // SoundManager.instance.allSoundPause();
         // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, )
+        if(!GameConfig.SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }

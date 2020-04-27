@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -223,12 +223,18 @@ class GameConfig {
     static set PURCHASE_ITEM_ARRAY(obj) {
         purchaseItemArray.push(obj);
     }
+    static set PURCHASE_ITEM_ARRAY_RESET(arr) {
+        purchaseItemArray = arr;
+    }
 
     static get PURCHASE_ITEM_FOR_LIST_ARRAY() {
         return purchaseItemForListArray;
     }
     static set PURCHASE_ITEM_FOR_LIST_ARRAY(obj) {
         purchaseItemForListArray.push(obj);
+    }
+    static set PURCHASE_ITEM_FOR_LIST_ARRAY_RESET(arr) {
+        purchaseItemForListArray = arr;
     }
 
     static get TOTAL_CATEGORIES() {
@@ -846,7 +852,7 @@ SoundManager.instance = null;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ui_effect_WaterSprayEffect__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ui_effect_WaterSprayEffect__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 
 
@@ -904,7 +910,7 @@ class SeparateAnimation extends Phaser.Sprite {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
 
 
@@ -1280,7 +1286,7 @@ class WebEnabledCheck {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object_SeparateAnimation__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_IntroEffect__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_IntroEffect__ = __webpack_require__(35);
 
 
 
@@ -1390,7 +1396,7 @@ class Intro {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_WebEnabledCheck__ = __webpack_require__(10);
@@ -1551,13 +1557,13 @@ class ResultView extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_Controller__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_Controller__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_Intro__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__manager_CornerManager__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__manager_CornerManager__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util_WebEnabledCheck__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manager_ConfigManager__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manager_ConfigManager__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loader_manager_ScreenManager__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__view_object_PauseDimmed__ = __webpack_require__(15);
 
@@ -1692,8 +1698,8 @@ class JuniverMart extends Phaser.Sprite {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_PhaseCompleteEffect__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_TutorialEndingEffect__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_PhaseCompleteEffect__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_TutorialEndingEffect__ = __webpack_require__(33);
 
 
 
@@ -1924,7 +1930,7 @@ class Categories {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 
@@ -2038,40 +2044,6 @@ class PurchaseItemForListView {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-let _xPos, _yPos;
-class CalculatePosItem {
-    constructor(game, group, key, asset, xPos, yPos) {
-        this._game = game;
-        this._gameGroup = group;
-        this._key = key;
-        this._asset = asset;
-        this.item = null;
-        this.checkOut = false;
-        _xPos = xPos;
-        _yPos = yPos;
-        this._init();
-    }
-
-    _init() {
-        this.item = new Phaser.Image(this._game, _xPos, _yPos, this._key, this._asset);
-        this._gameGroup.addChild(this.item);
-    }
-
-    _destroy() {
-        this._gameGroup.removeChildren(0, this._gameGroup.length);
-        for (let i = 0; i < this._gameGroup.length; i++) this._gameGroup[i].destroy();
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = CalculatePosItem;
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 
 
@@ -2080,13 +2052,15 @@ let _currentPriceArr = [];
 let _xPosArr = [482, 442, 402, 351, 310];
 let _yPos = [62, 216];
 let _dotPos = [101, 255];
+const maxPrice = 100000;
 class PriceCount {
-    constructor(game, group, key) {
+    constructor(game, group, posGroup, key) {
         this._game = game;
         this._gameGroup = group;
-        this._paymentGroup = this._game.add.group();
+        this._posGroup = posGroup;
         this._key = key;
         this._init();
+        this._count(0);
     }
 
     _init() {
@@ -2108,24 +2082,30 @@ class PriceCount {
 
     _count(num) {
 
-        console.log(num);
+        if (num >= maxPrice) return;
+
         let totalAmount = num.toString();
 
-        this._paymentGroup.removeChildren(0, this._paymentGroup.length);
+        this._posGroup.removeChildren(0, this._posGroup.length);
         for (let i = 0; i < _currentPriceArr.length; i++) _currentPriceArr.splice(i, 1);
-        for (let i = 0; i < this._paymentGroup.length; i++) this._paymentGroup[i].destroy();
+        for (let i = 0; i < this._posGroup.length; i++) this._posGroup[i].destroy();
 
         for (let i = 0; i < totalAmount.length; i++) {
             let num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
             _currentPriceArr.push(num);
             let asset = 'payNumber_' + num;
             let img = new Phaser.Image(this._game, _xPosArr[i], _yPos[1], this._key, asset);
-            this._paymentGroup.addChild(img);
+            this._posGroup.addChild(img);
+            img.anchor.setTo(0, 1);
+            img.y += img.height;
+            img.scale.setTo(1, 0.2 + i / 10);
+            let duration = i * 100 + 200;
+            this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
         }
 
         if (num >= 1000) {
             let dot = new Phaser.Image(this._game, 386, _dotPos[1], this._key, 'payment_dot');
-            this._paymentGroup.addChild(dot);
+            this._posGroup.addChild(dot);
         }
     }
 
@@ -2134,7 +2114,7 @@ class PriceCount {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2158,7 +2138,10 @@ class ConfigManager {
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].GUIDE_REMOVE = false;
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CHAPTER_CLEAR = false;
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_AMOUNT = 0;
+        __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_QUANTITY = 0;
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_LIST = [];
+        __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY_RESET = [];
+        __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_ITEM_FOR_LIST_ARRAY_RESET = [];
     }
 
     GAME_OVER() {
@@ -2171,7 +2154,7 @@ class ConfigManager {
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2215,17 +2198,17 @@ class LoadManager {
 LoadManager.instance = null;
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
 
 
@@ -2272,7 +2255,7 @@ window.nts = {};
 window.nts.index = new index('main_doc', 1280, 720);
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2281,9 +2264,9 @@ window.nts.index = new index('main_doc', 1280, 720);
 
 
 
-window.PIXI = __webpack_require__(25);
-window.p2 = __webpack_require__(26);
-window.Phaser = __webpack_require__(27);
+window.PIXI = __webpack_require__(24);
+window.p2 = __webpack_require__(25);
+window.Phaser = __webpack_require__(26);
 
 class Boot extends Phaser.State {
     init(...args) {
@@ -2342,7 +2325,7 @@ class Boot extends Phaser.State {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -10159,7 +10142,7 @@ PIXI.TextureUvs = function ()
 }).call(this);
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var require;var require;/**
@@ -24992,7 +24975,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -115656,10 +115639,10 @@ PIXI.canUseNewCanvasBlendModes = function ()
 * "What matters in this life is not what we do but what we do for others, the legacy we leave and the imprint we make." - Eric Meyer
 */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -115849,7 +115832,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115977,7 +115960,7 @@ class Preloader extends Phaser.State {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115988,7 +115971,7 @@ class Preloader extends Phaser.State {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__util_WebEnabledCheck__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_object_PauseDimmed__ = __webpack_require__(15);
 
 
@@ -116105,6 +116088,7 @@ class Controller extends Phaser.Group {
     _buttonSndPlay(sndKey, snd, btn) {
         // SoundManager.instance.allSoundPause();
         // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, )
+        if (!__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }
@@ -116126,7 +116110,7 @@ class Controller extends Phaser.Group {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116196,7 +116180,7 @@ class WaterSprayEffect {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116263,7 +116247,7 @@ class StarEffect {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116330,7 +116314,7 @@ class PhaseCompleteEffect {
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116405,7 +116389,7 @@ class TutorialEndingEffect {
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116657,7 +116641,7 @@ class TutorialManager extends Phaser.Group {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116699,7 +116683,7 @@ class IntroEffect {
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116707,10 +116691,10 @@ class IntroEffect {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_corner_purchase_PurchaseList__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_corner_checkout_CalculatePos__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_corner_checkout_CalculatePos__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_corner_checkout_PaymentPos__ = __webpack_require__(48);
 
 
@@ -116738,13 +116722,13 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        // this._createPurchaseList();
+        this._createPurchaseList();
 
         //CORNER
         // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
-        this._createCalculatePos();
+        // this._createCalculatePos();
 
         //PAYMENT POS
         // this._createPaymentPos();
@@ -116765,7 +116749,7 @@ class CornerManager extends Phaser.Group {
 
     _createPurchaseList() {
 
-        this.purchaseListView = new __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__["a" /* default */](this._game, this._bgGroup);
+        this.purchaseListView = new __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__["a" /* default */](this._game, this._bgGroup, this);
         this._createController();
     }
 
@@ -116776,19 +116760,29 @@ class CornerManager extends Phaser.Group {
             this.chapter = null;
         }
 
+        if (this.purchaseListView) {
+            this.purchaseListView._destroy();
+            this.purchaseListView = null;
+        }
+
         this.chapter = new __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__["a" /* default */](this._game, this);
         this.chapter._setting(this._bgGroup, this._chapterGroup, this._buttonGroup);
     }
 
     _createPos() {
-        if (this.chapter) this.chapter = null;
-        console.log('pos');
+        if (this.chapter) {
+            this.chapter._destroy();
+            this.chapter = null;
+        }
+        // console.log('pos');
+        this._createCalculatePos();
     }
 
     _update() {
 
         this._objectVisibleHandler();
         if (this.chapter) this.chapter._update();
+        if (this.purchaseListView) this.purchaseListView._update();
     }
 
     _createController() {
@@ -116849,7 +116843,7 @@ class CornerManager extends Phaser.Group {
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116858,10 +116852,10 @@ class CornerManager extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Corner__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Corner__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__purchase_PurchaseList__ = __webpack_require__(17);
 
 
@@ -116943,7 +116937,7 @@ class CornerMain {
         }
 
         //CORNER GENERATE
-        this._corner = new __WEBPACK_IMPORTED_MODULE_6__Corner__["a" /* default */](this._game, this._bgGroup, this._gameGroup, _categoryArr[num]);
+        this._corner = new __WEBPACK_IMPORTED_MODULE_6__Corner__["a" /* default */](this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this);
         this._backButton.visible = true;
         this._cornerPop = true;
 
@@ -116954,6 +116948,10 @@ class CornerMain {
     _ppiyoCartGenerate() {
         this._ppiyoCart = new __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__["a" /* default */](this._game);
         this._ppiyoCart._visible(false);
+    }
+
+    _ppiyoFeedBackPopUp(correct) {
+        if (this._ppiyoCart) this._ppiyoCart.feedBackPopUp(correct);
     }
 
     _createBackButton() {
@@ -116968,6 +116966,7 @@ class CornerMain {
     _cornerButtonEnable(bool) {
 
         for (let i = 1; i < _btnArr.length; i++) _btnArr[i]._visible(bool);
+        // for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._btnDisable();
 
         //COUNTER BUTTON INVISIBLE
         _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
@@ -116984,6 +116983,7 @@ class CornerMain {
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+        if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }
@@ -116996,9 +116996,10 @@ class CornerMain {
     _update() {
 
         if (this._shoppingComplete) return;
-        console.log(__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES);
+        if (this._purchaseSlide) this._purchaseSlide._update();
         if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES === 0) {
             this._shoppingComplete = true;
+            for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
             this._removeCorner(true);
         }
     }
@@ -117047,12 +117048,14 @@ class CornerMain {
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
+
 
 
 
@@ -117087,6 +117090,7 @@ class CornerButton {
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+        if (!__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }
@@ -117094,6 +117098,12 @@ class CornerButton {
     _visible(bool) {
         this._bg.visible = bool;
         this._btn.visible = bool;
+    }
+
+    _btnDisable() {
+        this._btn.inputEnabled = false;
+        this._bg.tint = 0x525252;
+        this._btn.tint = 0x525252;
     }
 
     _destroy() {
@@ -117107,7 +117117,7 @@ class CornerButton {
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117118,22 +117128,24 @@ class CornerButton {
 
 
 
-let btnArr, dragObjArr, startX, startY, displayTween, baseWidth;
+let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos;
 const minimumYpos = 550;
 
 class Corner {
-    constructor(game, bgGroup, gameGroup, category) {
+    constructor(game, bgGroup, gameGroup, category, parent) {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
         this._category = category;
         this._key = this._category.assetKey;
+        this._parent = parent;
 
         btnArr = [];
         dragObjArr = [];
         startX = 0;
         startY = 0;
         baseWidth = 0;
+        centerPos = 0;
         this._init();
     }
 
@@ -117194,20 +117206,9 @@ class Corner {
 
         for (let obj in list) {
             let asset = list[obj].item;
-            // let xPos = list[obj].xPos;
-            // let yPos = list[obj].yPos;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
             this._gameGroup.addChild(dragObj);
-            // dragObj.x = xPos;
-            // dragObj.y = yPos;
-            // dragObj.tint = 0xffcc00;
-            // dragObj.alpha = 0;
             dragObj.visible = false;
-            // dragObj.inputEnabled = true;
-            // dragObj.input.enableDrag();
-            // dragObj.events.onDragStart.add(this._startDrag, this);
-            // dragObj.input.pixelPerfectOver = true;
-            // dragObj.input.pixelPerfectClick = true;
             dragObjArr.push(dragObj);
         }
     }
@@ -117232,7 +117233,6 @@ class Corner {
         // currentObj.alpha = 1;
         currentObj.visible = true;
         currentObj.x = this._game.input.x - this._gameGroup.x;
-        // currentObj.x = this._game.input.x + this._game.camera.x;
         currentObj.y = this._game.input.y;
         currentObj.x -= currentObj.width / 2;
         currentObj.y -= currentObj.height / 2;
@@ -117248,18 +117248,46 @@ class Corner {
 
     _stopDrag(obj) {
 
-        console.log(parseInt(obj.x), parseInt(obj.y));
-
-        this._pushEnable(obj);
-
+        // console.log(parseInt(obj.x), parseInt(obj.y));
         if (displayTween) displayTween.resume();
 
-        if (obj.y <= minimumYpos) {
+        let correct;
+        if (this._overLapCheck(obj)) {
+            // console.log('hit~~~')
+            if (this._pushEnable(obj)) correct = true;else correct = false;
+
+            this._parent._ppiyoFeedBackPopUp(correct);
+        }
+
+        this._objRestore(obj, correct);
+    }
+
+    _objRestore(obj, correct = false) {
+
+        if (correct) this._game.add.tween(obj).to({ x: centerPos, y: minimumYpos + 200 }, 300, Phaser.Easing.Quartic.Out, true);else {
             let tw = this._game.add.tween(obj).to({ x: startX - obj.width / 2, y: startY - obj.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.addOnce(() => {
                 obj.visible = false;
             });
-        } else this._game.add.tween(obj).to({ y: minimumYpos + 200 }, 300, Phaser.Easing.Quartic.Out, true);
+        }
+    }
+
+    _overLapCheck(obj) {
+
+        let target;
+        if (this._parent._ppiyoCart.hitArea) {
+            target = this._parent._ppiyoCart.hitArea;
+            centerPos = obj.x;
+            return overLap(obj, target);
+        }
+
+        function overLap(a, b) {
+            {
+                let boundA = a.getBounds();
+                let boundB = b.getBounds();
+                return Phaser.Rectangle.intersects(boundA, boundB);
+            }
+        }
     }
 
     _pushEnable(obj) {
@@ -117268,16 +117296,29 @@ class Corner {
         let idx = -1;
         for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST.length; i++) if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST[i].item === name) idx = i;
 
-        if (idx !== -1) __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
+        if (idx !== -1) {
+            if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY[idx].complete) return false;else {
+                __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
+                return true;
+            }
+        } else return false;
     }
 
     _startDrag(obj) {
 
-        console.log(parseInt(obj.x), parseInt(obj.y));
+        // console.log(parseInt(obj.x), parseInt(obj.y));
+
     }
 
     _dragUpdate(obj) {
-        obj.x -= this._game.camera.x;
+        // console.log(parseInt(obj.x), parseInt(obj.y));
+        let target;
+        if (this._parent._ppiyoCart.hitArea) {
+            target = this._parent._ppiyoCart.hitArea;
+            centerPos = target.x - target.width / 2 + obj.x - obj.width / 2;
+            // return overLap(obj, target);
+            // console.log(parseInt(target.x), parseInt(obj.x));
+        }
     }
 
     _update() {
@@ -117303,7 +117344,7 @@ class Corner {
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117312,11 +117353,15 @@ class Corner {
 
 
 
+let _effectAssetArr;
+const _heartAsset = [{ asset: 'effect_heart_blue', xPos: 91, yPos: 408, resultXPos: 28, resultYPos: 352 }, { asset: 'effect_heart_red', xPos: 115, yPos: 413, resultXPos: 118, resultYPos: 358 }, { asset: 'effect_heart_yellow', xPos: 118, yPos: 440, resultXPos: 96, resultYPos: 416 }];
 class PpiyoCart {
     constructor(game) {
         this._game = game;
         this._gameGroup = this._game.add.group();
+        this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
 
+        _effectAssetArr = [];
         this._init();
     }
 
@@ -117327,28 +117372,77 @@ class PpiyoCart {
 
     _ppiyoCart() {
 
-        this.ppiyoHead = new __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__["a" /* default */](this._game, __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO, 'slide_ppiyo_', 86, 398, 1, 4, '', 0, 6, true);
+        this.ppiyoHead = new __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__["a" /* default */](this._game, this._key, 'slide_ppiyo_', 86, 398, 1, 4, '', 0, 6, true);
         this._gameGroup.addChild(this.ppiyoHead);
         this.ppiyoHead._play();
 
-        this.ppiyoBody = new Phaser.Image(this._game, 393, 619, __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO, 'slide_ppiyo_body_cut');
+        this.ppiyoBody = new Phaser.Image(this._game, 393, 619, this._key, 'slide_ppiyo_body_cut');
         this._gameGroup.addChild(this.ppiyoBody);
+
+        this.xMark = new Phaser.Image(this._game, 142, 493, this._key, 'xMark');
+        this._gameGroup.addChild(this.xMark);
+        this.xMark.anchor.setTo(1, 1);
+        this.xMark.scale.setTo(0.8, 0.8);
+        this.xMark.visible = false;
+
+        for (let i = 0; i < _heartAsset.length; i++) {
+            let img = new Phaser.Image(this._game, _heartAsset[i].resultXPos, _heartAsset[i].resultYPos, this._key, _heartAsset[i].asset);
+            this._gameGroup.addChild(img);
+            _effectAssetArr.push(img);
+            img.alpha = 0;
+            img.visible = false;
+        }
+
+        this.hitArea = this._game.add.graphics(433, 620);
+        this.hitArea.beginFill(0x000, 0);
+        this.hitArea.drawRect(0, 0, 290, 100);
+        this.hitArea.endFill();
+        // this.hitArea.visible = false;
+        this._gameGroup.addChild(this.hitArea);
+        // this.hitArea.inputEnabled = true;
+        // this.hitArea.input.enableDrag();
+        // this.hitArea.events.onDragUpdate.add(this._startDrag, this);
     }
 
     _visible(bool) {
-
         this._gameGroup.visible = bool;
     }
 
     _startDrag(obj) {
-
         console.log(parseInt(obj.x), parseInt(obj.y));
+    }
+
+    feedBackPopUp(correct) {
+        if (correct) {
+            for (let i = 0; i < _effectAssetArr.length; i++) {
+                _effectAssetArr[i].scale.setTo(0.2, 0.2);
+                _effectAssetArr[i].alpha = 0;
+                _effectAssetArr[i].visible = true;
+                _effectAssetArr[i].x = _heartAsset[i].xPos;
+                _effectAssetArr[i].y = _heartAsset[i].yPos;
+                let duration = this._game.rnd.between(150, 400);
+                this._game.add.tween(_effectAssetArr[i].scale).to({ x: 1, y: 1 }, duration, Phaser.Easing.Quartic.Out, true);
+                let tw = this._game.add.tween(_effectAssetArr[i]).to({ x: _heartAsset[i].resultXPos, y: _heartAsset[i].resultYPos, alpha: 1 }, duration, Phaser.Easing.Quartic.Out, true);
+                tw.onComplete.add(() => {
+                    this._game.add.tween(_effectAssetArr[i]).to({ alpha: 0 }, 200, Phaser.Easing.Quartic.Out, true);
+                });
+            }
+        } else {
+            this.xMark.scale.setTo(0.2, 0.2);
+            this.xMark.alpha = 1;
+            this.xMark.visible = true;
+            let tw = this._game.add.tween(this.xMark.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Bounce.Out, true);
+            tw.onComplete.add(() => {
+                this._game.add.tween(this.xMark).to({ alpha: 0 }, 200, Phaser.Easing.Quartic.Out, true);
+            });
+        }
     }
 
     _destroy() {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
         this.ppiyoHead._destroy();
         this.ppiyoBody.destroy();
+        this.hitArea.destroy();
     }
 
 }
@@ -117356,21 +117450,21 @@ class PpiyoCart {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
 
 
 
 
 
-let dragStartPos;
-
+let _dragStartPos, _interval, _dist;
+const _minimumPurchase = 6;
 class PurchaseSlider {
     constructor(game, categoryArray) {
         this._game = game;
@@ -117379,8 +117473,11 @@ class PurchaseSlider {
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
         this._prevBtn = null;
         this._nextBtn = null;
+        this._totalPurchase = 0;
+        this._slidingEnable = true;
         this.purchaseItem = [];
-        dragStartPos = 0;
+        _dragStartPos = 0;
+        _interval = 0;
 
         this._init();
         this._listButton();
@@ -117401,8 +117498,9 @@ class PurchaseSlider {
 
     _listSetting() {
 
-        let interval = 0;
+        // let _interval = 0;
         let pArr = __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_LIST;
+        this._totalPurchase = pArr.length;
 
         //LIST
         for (let i = 0; i < pArr.length; i++) {
@@ -117414,7 +117512,7 @@ class PurchaseSlider {
             let purchaseItem = new __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__["a" /* default */](this._game, this._sliderGroup, asset, quantity, xPos, yPos);
             // this.purchaseItem.push(purchaseItem);
             __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY = purchaseItem;
-            interval = (91 + 37) * (i + 1);
+            _interval = (91 + 37) * (i + 1);
             purchaseItem.startX = xPos;
             this._sliderGroup.mask = this.maskRect;
         }
@@ -117423,19 +117521,21 @@ class PurchaseSlider {
         // console.log(pArr);
         // console.log(this.purchaseItem);
 
-        this._dragArea(interval);
+        this._dragArea(_interval);
 
         this.dragRect = this._game.add.graphics(0, 0);
         this.dragRect.beginFill(0xff4400, 0);
-        this.dragRect.drawRect(246, 12, interval, 131);
+        this.dragRect.drawRect(246, 12, _interval, 131);
         this.dragRect.endFill();
         this._gameGroup.addChild(this.dragRect);
         this.dragRect.inputEnabled = true;
         this.dragRect.input.enableDrag(false, false, false, 255, this.dragArea);
         this.dragRect.input.allowVerticalDrag = false;
-        this.dragRect.events.onDragUpdate.add(this._drag, this);
+        // this.dragRect.events.onDragUpdate.add(this._drag, this);
         this.dragRect.mask = this.maskRect;
-        dragStartPos = this.dragRect.x;
+        _dragStartPos = this.dragRect.x;
+        _dist = this.dragRect.x - _dragStartPos;
+        // console.log('_interval ', _interval);
     }
 
     _dragArea(interval) {
@@ -117454,38 +117554,82 @@ class PurchaseSlider {
         this._nextBtn = this._gameGroup.add(this._game.make.button(1028, 40, this._key, this._onNext.bind(this), this, 'ui_next', 'ui_next', 'ui_next', 'ui_next'));
         this._clickSound = null;
         this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND, this._clickSound, this._nextBtn);
+
+        if (this._totalPurchase <= _minimumPurchase) {
+            this._prevBtn.inputEnabled = false;
+            this._prevBtn.alpha = 0.3;
+            this._nextBtn.inputEnabled = false;
+            this._nextBtn.alpha = 0.3;
+
+            //SLIDING DISABLE
+            this._slidingEnable = false;
+            this.dragRect.visible = false;
+        }
     }
 
-    _onPrev() {}
+    _onPrev() {
+        this._game.add.tween(this.dragRect).to({ x: 0 }, 300, Phaser.Easing.Quartic.Out, true);
+    }
 
-    _onNext() {}
+    _onNext() {
+        this._game.add.tween(this.dragRect).to({ x: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+    }
 
     _buttonSndPlay(sndKey, snd, btn) {
+        if (!__WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }
 
     _drag(obj) {
+        // console.log(parseInt(obj.x));
+        // _dist = obj.x - _dragStartPos;
+    }
 
-        let dist = obj.x - dragStartPos;
+    _sliderMoving() {
+
         if (this.purchaseItem.length > 0) for (let i = 0; i < this.purchaseItem.length; i++) {
-            this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + dist;
-            this.purchaseItem[i].bgComp.x = this.purchaseItem[i].startX + dist;
-            this.purchaseItem[i].item.x = this.purchaseItem[i].startX + dist;
-            this.purchaseItem[i].itemComp.x = this.purchaseItem[i].startX + dist;
-            this.purchaseItem[i].checkMark.x = this.purchaseItem[i].startX + dist;
-            // this.purchaseItem[i].number.x = this.purchaseItem[i].startX + 58 + dist;
+            this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + _dist;
+            this.purchaseItem[i].bgComp.x = this.purchaseItem[i].startX + _dist;
+            this.purchaseItem[i].item.x = this.purchaseItem[i].startX + _dist;
+            this.purchaseItem[i].itemComp.x = this.purchaseItem[i].startX + _dist;
+            this.purchaseItem[i].checkMark.x = this.purchaseItem[i].startX + _dist;
 
-            for (let j = 0; j < this.purchaseItem[i].numberImg.length; j++) {
-                this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + dist;
-            }
+            for (let j = 0; j < this.purchaseItem[i].numberImg.length; j++) this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + _dist;
         }
 
         // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
-        let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
-        let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
-        let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
+        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
+        // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
+        // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
         // console.log('minimum : ', minimum, 'maximum : ', maximum);
+
+        this._btnEnable();
+    }
+
+    _btnEnable() {
+
+        if (this.dragRect.x <= -_interval / 2) {
+            this._nextBtn.inputEnabled = false;
+            this._nextBtn.alpha = 0.3;
+        } else {
+            this._nextBtn.inputEnabled = true;
+            this._nextBtn.alpha = 1;
+        }
+
+        if (this.dragRect.x >= 0) {
+            this._prevBtn.inputEnabled = false;
+            this._prevBtn.alpha = 0.3;
+        } else {
+            this._prevBtn.inputEnabled = true;
+            this._prevBtn.alpha = 1;
+        }
+    }
+
+    _update() {
+        // console.log('slide update');
+        _dist = this.dragRect.x - _dragStartPos;
+        if (this._slidingEnable) this._sliderMoving();
     }
 
     _destroy() {
@@ -117500,7 +117644,7 @@ class PurchaseSlider {
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117561,7 +117705,6 @@ class PurchaseItem {
         if (this.complete) return;
 
         this.quantity--;
-
         for (let i = 0; i < 3; i++) {
             if (this.quantity !== i + 1) this.numberImg[i].visible = false;else this.numberImg[i].visible = true;
         }
@@ -117582,7 +117725,7 @@ class PurchaseItem {
                 //COMPLETE
                 this.complete = true;
                 __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES--;
-                console.log(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES);
+                // console.log(GameConfig.TOTAL_CATEGORIES);
             }
         }
     }
@@ -117592,7 +117735,7 @@ class PurchaseItem {
 
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117710,7 +117853,7 @@ class ShuffleRandom {
 ShuffleRandom = null;
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117718,24 +117861,35 @@ ShuffleRandom = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
 
 
 
 
 
-let dragStartPos;
 
+let _dragStartPos, _dist, _interval, _count;
+const _minimumPurchase = 5;
+const _maxCount = 100;
 class PurchaseListView {
-    constructor(game, group) {
+    constructor(game, group, parent) {
         this._game = game;
         // this._gameGroup = this._game.add.group();
         this._gameGroup = group;
         this._sliderGroup = this._game.add.group();
         this._topGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__["a" /* default */].PURCHASE_LIST_VIEW;
+        this._prevBtn = null;
+        this._nextBtn = null;
+        this._totalPurchase = 0;
+        this._slidingEnable = true;
+        this._countStart = false;
         this.purchaseItem = [];
+        this._parent = parent;
+        _interval = 0;
+        _count = 0;
         this._init();
-        this._listSetting();
+        this._listButton();
     }
 
     _init() {
@@ -117771,11 +117925,14 @@ class PurchaseListView {
         this.maskRect.drawRect(0, 0, 1280, 720);
         this.maskRect.endFill();
         this._topGroup.addChild(this.maskRect);
+
+        this._listSetting();
     }
 
     _listSetting() {
-        let interval = 0;
+        // let _interval = 0;
         let pArr = __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST;
+        this._totalPurchase = pArr.length;
 
         //LIST
         for (let i = 0; i < pArr.length; i++) {
@@ -117789,7 +117946,7 @@ class PurchaseListView {
             let dotYpos = (85 + 27) * i + dotTerm;
             let purchaseItem = new __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__["a" /* default */](this._game, this._sliderGroup, asset, quantity, xPos, yPos, dotXpos, dotYpos);
             __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_FOR_LIST_ARRAY = purchaseItem;
-            interval = (107 + 5) * (i + 1);
+            _interval = (107 + 5) * (i + 1);
             purchaseItem.startY = yPos;
             this._sliderGroup.mask = this.maskRect;
         }
@@ -117798,19 +117955,48 @@ class PurchaseListView {
         // console.log(pArr);
         // console.log(this.purchaseItem);
 
-        this._dragArea(interval);
+        this._dragArea(_interval);
 
         this.dragRect = this._game.add.graphics(0, 0);
         this.dragRect.beginFill(0xff4400, 0);
-        this.dragRect.drawRect(377, 120, 526, interval);
+        this.dragRect.drawRect(377, 120, 526, _interval);
         this.dragRect.endFill();
         this._gameGroup.addChild(this.dragRect);
         this.dragRect.inputEnabled = true;
         this.dragRect.input.enableDrag(false, false, false, 255, this.dragArea);
         this.dragRect.input.allowHorizontalDrag = false;
-        this.dragRect.events.onDragUpdate.add(this._drag, this);
+        // this.dragRect.events.onDragUpdate.add(this._drag, this);
         this.dragRect.mask = this.maskRect;
-        dragStartPos = this.dragRect.y;
+        _dragStartPos = this.dragRect.y;
+    }
+
+    _listButton() {
+
+        // this._prevBtn = this._topGroup.add(this._game.make.button(800, 135, this._key, this._onPrev.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev','guideArrowPrev'));
+        this._nextBtn = this._topGroup.add(this._game.make.button(800, 505, this._key, this._onNext.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev'));
+        this._clickSound = null;
+        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND, this._clickSound, this._nextBtn);
+
+        if (this._totalPurchase <= _minimumPurchase) {
+            // this._prevBtn.inputEnabled = false;
+            // this._prevBtn.alpha = 0.3;
+            this._nextBtn.inputEnabled = false;
+            this._nextBtn.visible = false;
+
+            //SLIDING DISABLE
+            this._slidingEnable = false;
+            this._countStart = true;
+            this.dragRect.visible = false;
+        } else {
+            //GUIDE HAND
+            this.hand = new Phaser.Image(this._game, 847, 549, this._key, 'guideHand');
+            this._topGroup.addChild(this.hand);
+            this.hand.anchor.setTo(0.5, 0.5);
+            this.hand.x += this.hand.width / 2;
+            this.hand.y += this.hand.height / 2;
+            this._game.add.tween(this.hand.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
+            // this._game.add.tween(this.hand).to({y:650}, 800, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
+        }
     }
 
     _dragArea(interval) {
@@ -117821,44 +118007,112 @@ class PurchaseListView {
         this._topGroup.addChild(this.dragArea);
     }
 
+    _buttonSndPlay(sndKey, snd, btn) {
+        if (!__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
+        snd = this._game.add.audio(sndKey);
+        btn.setDownSound(snd);
+    }
+
     _drag(obj) {
 
         // console.log('x : ', parseInt(obj.x), 'y :', parseInt(obj.y));
         // if(obj.y>0) return;
 
-        let dist = obj.y - dragStartPos;
+        // _dist = obj.y - _dragStartPos;
+        /*  if(this.purchaseItem.length > 0)
+              for (let i = 0; i < this.purchaseItem.length; i++)
+              {
+                  this.purchaseItem[i].blit.y = this.purchaseItem[i].startY + _dist + 42;
+                    for(let j = 0; j<this.purchaseItem[i].itemArr.length; j++)
+                  {
+                      this.purchaseItem[i].itemArr[j].y = this.purchaseItem[i].startY + _dist;
+                  }
+              }*/
+    }
+
+    _sliderMoving() {
+
+        // console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
+        let objAllpopPos = 600;
+        let lastObject = this.purchaseItem[this.purchaseItem.length - 1].blit.y;
+        if (lastObject <= objAllpopPos) {
+            this._countStart = true;
+            if (this.hand) this.hand.destroy();
+            if (this._nextBtn) this._nextBtn.destroy();
+        }
+
         if (this.purchaseItem.length > 0) for (let i = 0; i < this.purchaseItem.length; i++) {
-            this.purchaseItem[i].blit.y = this.purchaseItem[i].startY + dist + 42;
+            this.purchaseItem[i].blit.y = this.purchaseItem[i].startY + _dist + 42;
 
             for (let j = 0; j < this.purchaseItem[i].itemArr.length; j++) {
-                this.purchaseItem[i].itemArr[j].y = this.purchaseItem[i].startY + dist;
+                this.purchaseItem[i].itemArr[j].y = this.purchaseItem[i].startY + _dist;
+            }
+        }
+    }
+
+    _onPrev() {
+        this._game.add.tween(this.dragRect).to({ y: 0 }, 300, Phaser.Easing.Quartic.Out, true);
+    }
+
+    _onNext() {
+
+        this._nextBtn.inputEnabled = false;
+        this._nextBtn.visible = false;
+        let tw = this._game.add.tween(this.dragRect).to({ y: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+        tw.onComplete.add(() => {
+            this._countStart = true;
+        });
+
+        if (this.hand) this.hand.destroy();
+    }
+
+    _update() {
+
+        if (this._countStart) {
+            _count++;
+            if (_count >= _maxCount) {
+                this._gameStart();
+                this._destroy();
+                this._countStart = false;
+                return;
             }
         }
 
-        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
-        // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
-        // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
-        // console.log('minimum : ', minimum, 'maximum : ', maximum);
+        _dist = this.dragRect.y - _dragStartPos;
+        if (this._slidingEnable) this._sliderMoving();
+    }
+
+    _gameStart() {
+        this._parent._createCorner();
     }
 
     _destroy() {
-        this._gameGroup.removeChildren(0, this._gameGroup.length);
-        for (let i = 0; i < this._gameGroup.length; i++) this._gameGroup[i].destroy();
+        // this._gameGroup.removeChildren(0, this._gameGroup.length);
+        this._sliderGroup.removeChildren(0, this._sliderGroup.length);
+        this._topGroup.removeChildren(0, this._topGroup.length);
+        this._gameGroup.removeChild(this.bgRect);
+        this._gameGroup.removeChild(this.bgRectWhite);
+        this._gameGroup.removeChild(this.dragRect);
+        this.bgRect.destroy();
+        this.bgRectWhite.destroy();
+        // for(let i = 0; i< this._gameGroup.length; i++) this._gameGroup[i].destroy();
+        for (let i = 0; i < this._sliderGroup.length; i++) this._sliderGroup[i].destroy();
+        for (let i = 0; i < this._topGroup.length; i++) this._topGroup[i].destroy();
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = PurchaseListView;
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__purchase_PurchaseItemForListView__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CalculatePosItem__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PriceCount__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CalculatePosItem__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PriceCount__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__PriceCountForPos__ = __webpack_require__(47);
 
 
@@ -117902,6 +118156,13 @@ class CalculatePos {
         this.scanner.alpha = 0;
         this.scanner.visible = false;
         this._scannerGroup.addChild(this.scanner);
+
+        this.dragArea = this._game.add.graphics(0, 200);
+        this.dragArea.beginFill(0x000, 0.5);
+        this.dragArea.drawRect(0, 0, 1280, 520);
+        this.dragArea.endFill();
+        this.dragArea.visible = false;
+        // this._gameGroup.addChild(this.dragArea);
     }
 
     _itemGenerate() {
@@ -117927,7 +118188,7 @@ class CalculatePos {
                 obj.inputEnabled = true;
                 obj.pixelPerfectOver = true;
                 obj.pixelPerfectClick = true;
-                obj.input.enableDrag(true);
+                obj.input.enableDrag(true, true, true, 255, this.dragArea);
                 obj.events.onInputDown.add(this._onDown, this);
                 obj.events.onDragUpdate.add(this._onDrag, this);
                 obj.events.onDragStop.add(this._stopDrag, this);
@@ -117981,9 +118242,8 @@ class CalculatePos {
                 this.scanner.visible = false;
                 this._checkOutQuantity++;
                 if (this._checkOutQuantity >= __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_QUANTITY) {
-                    this._destroy();
                     this._parent._createPaymentPos();
-                    console.log('NEXT PHASE');
+                    this._destroy();
                 }
             });
         }
@@ -118007,18 +118267,47 @@ class CalculatePos {
 
 
 /***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+let _xPos, _yPos;
+class CalculatePosItem {
+    constructor(game, group, key, asset, xPos, yPos) {
+        this._game = game;
+        this._gameGroup = group;
+        this._key = key;
+        this._asset = asset;
+        this.item = null;
+        this.checkOut = false;
+        _xPos = xPos;
+        _yPos = yPos;
+        this._init();
+    }
+
+    _init() {
+        this.item = new Phaser.Image(this._game, _xPos, _yPos, this._key, this._asset);
+        this._gameGroup.addChild(this.item);
+    }
+
+    _destroy() {
+        this._gameGroup.removeChildren(0, this._gameGroup.length);
+        for (let i = 0; i < this._gameGroup.length; i++) this._gameGroup[i].destroy();
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CalculatePosItem;
+
+
+/***/ }),
 /* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 
-
-let _totalPriceArr = [];
 let _currentPriceArr = [];
-// let _xPosArr = [742, 702, 662, 638, 598];
 let _xPosArr = [742, 702, 662, 598, 558];
-//556, 598, 624, 664, 704
 let _yPos = 60;
 class PriceCountForPos {
     constructor(game, group, key) {
@@ -118031,9 +118320,7 @@ class PriceCountForPos {
 
     _count(num) {
 
-        console.log(num);
         let totalAmount = num.toString();
-
         this._paymentGroup.removeChildren(0, this._paymentGroup.length);
         for (let i = 0; i < _currentPriceArr.length; i++) _currentPriceArr.splice(i, 1);
         for (let i = 0; i < this._paymentGroup.length; i++) this._paymentGroup[i].destroy();
@@ -118043,8 +118330,13 @@ class PriceCountForPos {
             _currentPriceArr.push(num);
             let asset = 'posNumber_' + num;
             let img = new Phaser.Image(this._game, _xPosArr[i], _yPos, this._key, asset);
-            console.log(_xPosArr[i]);
+            // console.log(_xPosArr[i])
             this._paymentGroup.addChild(img);
+            img.anchor.setTo(0, 1);
+            img.y += img.height;
+            img.scale.setTo(1, 0.2 + i / 10);
+            let duration = i * 100 + 200;
+            this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
         }
 
         if (num >= 1000) {
@@ -118064,34 +118356,44 @@ class PriceCountForPos {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PriceCount__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(19);
 
 
 
 
-
-let _cashArr, _startX, _startY, _maximumX, _minimumY, _currentPrice;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
+let _movePos = { coinMinimumX: 580, coinMaximumX: 1040, coinMinimumY: 210,
+    coinResultMinX: 671, coinResultMaxX: 945, coinResultMinY: 67, coinResultMaxY: 136,
+    billMinimumX: 580, billMaximumX: 1040, billMinimumY: 185,
+    billResultMinX: 674, billResultMaxX: 766, billResultMinY: 70, billResultMaxY: 121 };
 
 class PaymentPos {
     constructor(game) {
         this._game = game;
         this._gameGroup = this._game.add.group();
-        this._itemGroup = this._game.add.group();
-        this._scannerGroup = this._game.add.group();
+        this._posGroup = this._game.add.group();
+        this._cashGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PAYMENT_POS;
-        this._checkOutQuantity = 0;
-        _cashArr = [];
+        _coinArr = [];
+        _billBaseArr = [];
+        _billArr = [];
         _startX = 0;
         _startY = 0;
-        _minimumY = 150;
         _currentPrice = 0;
+        _remove = false;
         this._init();
         this._cashGenerate();
         this._posGenerate();
     }
 
     _init() {
+
+        this.dragArea = this._game.add.graphics(0, 0);
+        this.dragArea.beginFill(0x000, 0);
+        this.dragArea.drawRect(0, 0, 1280, 720);
+        this.dragArea.endFill();
+        this.dragArea.visible = false;
+        // this._gameGroup.addChild(this.dragArea);
 
         this.bgRect = this._game.add.graphics(0, 0);
         this.bgRect.beginFill(0x8bd2e8, 1);
@@ -118127,89 +118429,153 @@ class PaymentPos {
             let coin = new Phaser.Image(this._game, xPos, 382, this._key, 'cash_100');
             coin.x = term + i * (49 + coin.width);
             coin.amount = 100;
-            this._gameGroup.addChild(coin);
-            _cashArr.push(coin);
-            coin.z = i;
+            // coin.minimumX = _movePos[0].minimumX;
+            // console.log(coin.minimumX)
+            this._cashGroup.addChild(coin);
+            _coinArr.push(coin);
         }
 
         //500
         let coin_500 = new Phaser.Image(this._game, 976, 374, this._key, 'cash_500');
         coin_500.amount = 500;
-        this._gameGroup.addChild(coin_500);
-        _cashArr.push(coin_500);
-        coin_500.z = _cashArr.length;
+        this._cashGroup.addChild(coin_500);
+        _coinArr.push(coin_500);
 
         //1000~10000
         let _amount = [1000, 5000, 10000];
         for (let i = 0; i < 3; i++) {
             let term = 118;
             let xPos = term + i * 75;
-            let asset = 'cash_' + _amount[i];
-            let coin = new Phaser.Image(this._game, xPos, 524, this._key, asset);
-            coin.x = term + i * (75 + coin.width);
-            coin.amount = _amount[i];
-            this._gameGroup.addChild(coin);
-            _cashArr.push(coin);
-            coin.z = _cashArr.length;
+            let baseAsset = 'cash_base_' + _amount[i];
+            let baseBill = new Phaser.Image(this._game, xPos, 524, this._key, baseAsset);
+            baseBill.x = term + i * (75 + baseBill.width);
+            baseBill.amount = _amount[i];
+            this._cashGroup.addChild(baseBill);
+            _billBaseArr.push(baseBill);
+
+            baseBill.inputEnabled = true;
+            baseBill.pixelPerfectOver = true;
+            baseBill.pixelPerfectClick = true;
+            baseBill.events.onInputDown.add(this._cashSelect, this);
         }
 
-        for (let i = 0; i < _cashArr.length; i++) {
-            let obj = _cashArr[i];
+        for (let i = 0; i < _coinArr.length; i++) {
+            let obj = _coinArr[i];
             obj.inputEnabled = true;
             obj.pixelPerfectOver = true;
             obj.pixelPerfectClick = true;
-            obj.input.enableDrag(true);
-            obj.events.onInputDown.add(this._onDown, this);
-            obj.events.onDragUpdate.add(this._onDrag, this);
+            obj.input.enableDrag(true, true, true, 255, this.dragArea);
+            obj.events.onInputDown.add(this._cashSelect, this);
+            obj.events.onDragUpdate.add(this._dragUpdate, this);
             obj.events.onDragStop.add(this._stopDrag, this);
+            obj.minX = _movePos.coinMinimumX;
+            obj.maxX = _movePos.coinMaximumX;
+            obj.minY = _movePos.coinMinimumY;
+            obj.resultMinX = _movePos.coinResultMinX;
+            obj.resultMaxX = _movePos.coinResultMaxX;
+            obj.resultMinY = _movePos.coinResultMinY;
+            obj.resultMaxY = _movePos.coinResultMaxY;
         }
-
-        this._itemGroup.sort('z', Phaser.Group.SORT_ASCENDING);
     }
 
     _posGenerate() {
-        this._priceCount = new __WEBPACK_IMPORTED_MODULE_3__PriceCount__["a" /* default */](this._game, this._gameGroup, this._key);
+        this._priceCount = new __WEBPACK_IMPORTED_MODULE_2__PriceCount__["a" /* default */](this._game, this._cashGroup, this._posGroup, this._key);
     }
 
-    _onDown(obj) {
+    _cashSelect(obj) {
+
         _startX = obj.x;
         _startY = obj.y;
+        _remove = false;
+
+        if (obj.amount < 1000) return;
+
+        _remove = true;
+        let asset = 'cash_' + String(obj.amount);
+        let currentObj = new Phaser.Image(this._game, obj.x, obj.y, this._key, asset);
+        this._cashGroup.addChild(currentObj);
+        currentObj.amount = obj.amount;
+        currentObj.x = this._game.input.x;
+        currentObj.y = this._game.input.y;
+        currentObj.x -= currentObj.width / 2;
+        currentObj.y -= currentObj.height / 2;
+
+        currentObj.inputEnabled = true;
+        currentObj.input.enableDrag(false, true, false, 255, this.dragArea);
+        currentObj.input.startDrag(this._game.input.activePointer);
+        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        currentObj.events.onDragStop.add(this._stopDrag, this);
+
+        currentObj.minX = _movePos.billMinimumX;
+        currentObj.maxX = _movePos.billMaximumX;
+        currentObj.minY = _movePos.billMinimumY;
+        currentObj.resultMinX = _movePos.billResultMinX;
+        currentObj.resultMaxX = _movePos.billResultMaxX;
+        currentObj.resultMinY = _movePos.billResultMinY;
+        currentObj.resultMaxY = _movePos.billResultMaxY;
     }
 
-    _onDrag(obj) {
+    _dragUpdate(obj) {
 
         obj.bringToTop();
-        console.log(parseInt(obj.x), parseInt(obj.y));
-        // if(obj.x >= 450) this._payment(obj);
+        // console.log(parseInt(obj.x), parseInt(obj.y));
     }
 
     _stopDrag(obj) {
 
-        if (obj.y >= _minimumY) {
-            // obj.x = _startX;
-            // obj.y = _startY;
-            this._game.add.tween(obj).to({ x: _startX, y: _startY }, 200, Phaser.Easing.Quartic.Out, true, 0);
-        } else {
-            // this._payment(obj);
-            _currentPrice += obj.amount;
-            this._priceCount._count(_currentPrice);
-            console.log('pass');
-        }
-        // this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
-
-        console.log('z : ', obj.z);
-        this._itemGroup.sort('z', Phaser.Group.SORT_DESCENDING);
+        if (this._pushEnable(obj.amount)) {
+            if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
+                obj.inputEnabled = false;
+                _currentPrice += obj.amount;
+                this._priceCount._count(_currentPrice);
+                let xPos = this._game.rnd.between(obj.resultMinX, obj.resultMaxX);
+                let yPos = this._game.rnd.between(obj.resultMinY, obj.resultMaxY);
+                // let angle = this._game.rnd.between(-20, 20);
+                let tw = this._game.add.tween(obj).to({ x: xPos, y: yPos, angle: 0 }, 200, Phaser.Easing.Quartic.Out, true, 0);
+                tw.onComplete.add(() => {
+                    this._payment();
+                });
+            } else this._restoreMoney(obj);
+        } else this._restoreMoney(obj);
     }
 
-    _payment(obj) {}
+    _restoreMoney(obj) {
+        let tw = this._game.add.tween(obj).to({ x: _startX, y: _startY }, 200, Phaser.Easing.Quartic.Out, true, 0);
+        tw.onComplete.add(() => {
+            if (_remove) {
+                this._cashGroup.removeChild(obj);
+                obj.destroy();
+            }
+        });
+    }
+
+    _payment() {
+
+        if (_currentPrice === __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].GAME_FINISH = true;
+    }
+
+    _pushEnable(amount) {
+
+        let total = __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT.toString();
+        let len = total.length <= 4 ? 1 : 2;
+        let remainPrice = String(total).substring(total.length, len);
+        let resultPrice = _currentPrice + amount;
+
+        let idx = String(resultPrice).length - 3;
+        let str = String(resultPrice).substr(idx, 1);
+
+        if (Number(remainPrice) === 500) if (Number(str) > 5) return false;
+
+        if (resultPrice > __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) return false;else return true;
+    }
 
     _destroy() {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
-        this._itemGroup.removeChildren(0, this._itemGroup.length);
-        this._scannerGroup.removeChildren(0, this._scannerGroup.length);
+        this._posGroup.removeChildren(0, this._posGroup.length);
+        this._cashGroup.removeChildren(0, this._cashGroup.length);
         for (let i = 0; i < this._gameGroup.length; i++) this._gameGroup[i].destroy();
-        for (let i = 0; i < this._itemGroup.length; i++) this._itemGroup[i].destroy();
-        for (let i = 0; i < this._scannerGroup.length; i++) this._scannerGroup[i].destroy();
+        for (let i = 0; i < this._posGroup.length; i++) this._posGroup[i].destroy();
+        for (let i = 0; i < this._cashGroup.length; i++) this._cashGroup[i].destroy();
     }
 
 }
@@ -118538,7 +118904,7 @@ PreloadResource.instance = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_Intro__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__const_ResourceKey__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_LoadManager__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_LoadManager__ = __webpack_require__(21);
 
 
 

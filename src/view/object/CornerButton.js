@@ -1,5 +1,6 @@
 import SoundAssetKey from "../../data/SoundAssetKey";
 import AssetKey from "../../data/AssetKey";
+import GameConfig from "../../data/GameConfig";
 
 export default class CornerButton{
     constructor(game, group, asset, x, y, parent, num) {
@@ -33,6 +34,7 @@ export default class CornerButton{
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+        if(!GameConfig.SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }

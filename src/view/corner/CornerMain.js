@@ -139,6 +139,7 @@ export default class CornerMain{
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+        if(!GameConfig.SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
     }
