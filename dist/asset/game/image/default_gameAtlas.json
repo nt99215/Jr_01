@@ -1,28 +1,20 @@
 {"frames": {
 
-"guide_circle":
+"intro_twinkle":
 {
-	"frame": {"x":1,"y":1,"w":202,"h":202},
+	"frame": {"x":1,"y":1,"w":36,"h":40},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":202,"h":202},
-	"sourceSize": {"w":202,"h":202}
-},
-"guide_hand":
-{
-	"frame": {"x":1,"y":205,"w":128,"h":106},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":5,"y":3,"w":128,"h":106},
-	"sourceSize": {"w":142,"h":113}
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":40},
+	"sourceSize": {"w":36,"h":40}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "default_gameAtlas.png",
 	"format": "RGBA8888",
-	"size": {"w":204,"h":312},
+	"size": {"w":38,"h":42},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:601d4bedba790ff42febf58f96cbf5b0:638fc9228d33ccfd9fe57258829a063a:46aaae04170241c15c18a9829cbbeb5e$"
+	"smartupdate": "$TexturePacker:SmartUpdate:62cadd4cb2a018fecaada7d086ef0e55:cc9cac68e771c1885d6f1f5753e68f23:46aaae04170241c15c18a9829cbbeb5e$"
 }
 }

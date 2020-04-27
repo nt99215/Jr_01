@@ -12,7 +12,7 @@ export default class BackGroundTouchEffect {
     effect(game, xPos, yPos, radius, type = null, soundAsset = SoundAssetKey.BASIC_TOUCH_SOUND) {
         if(! GameConfig.IN_GAME) return;
         SoundManager.instance.effectSound(soundAsset, 0.4);
-        new StarEffect(game, xPos, yPos, AssetKey.INTRO_ASSET, 'intro_twinkle', radius);
+        new StarEffect(game, xPos, yPos, AssetKey.DEFAULT_GAME_ATLAS, 'intro_twinkle', radius);
     }
 
 }

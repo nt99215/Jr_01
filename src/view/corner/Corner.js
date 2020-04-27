@@ -1,6 +1,7 @@
 import SoundAssetKey from "../../data/SoundAssetKey";
 import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
+import BackGroundTouchEffect from "../../ui/effect/BackGroundTouchEffect";
 
 let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos;
 const minimumYpos = 550;
@@ -130,6 +131,8 @@ export default class Corner {
         // currentObj.events.onInputDown.add(this._onDown, this);
         // currentObj.events.onInputUp.add(this._onUp, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
+
+        BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
     }
 

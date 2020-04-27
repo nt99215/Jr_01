@@ -855,6 +855,37 @@ SoundManager.instance = null;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
+
+
+
+
+
+
+class BackGroundTouchEffect {
+    constructor(game) {
+        BackGroundTouchEffect.instance = this;
+    }
+
+    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND) {
+        if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].IN_GAME) return;
+        __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset, 0.4);
+        new __WEBPACK_IMPORTED_MODULE_3__StarEffect__["a" /* default */](game, xPos, yPos, __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__["a" /* default */].DEFAULT_GAME_ATLAS, 'intro_twinkle', radius);
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BackGroundTouchEffect;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ui_effect_WaterSprayEffect__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 
@@ -903,37 +934,6 @@ class SeparateAnimation extends Phaser.Sprite {
 
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = SeparateAnimation;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
-
-
-
-
-
-
-class BackGroundTouchEffect {
-    constructor(game) {
-        BackGroundTouchEffect.instance = this;
-    }
-
-    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND) {
-        if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].IN_GAME) return;
-        __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset, 0.4);
-        new __WEBPACK_IMPORTED_MODULE_3__StarEffect__["a" /* default */](game, xPos, yPos, __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__["a" /* default */].INTRO_ASSET, 'intro_twinkle', radius);
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = BackGroundTouchEffect;
 
 
 /***/ }),
@@ -1286,8 +1286,8 @@ class WebEnabledCheck {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object_SeparateAnimation__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object_SeparateAnimation__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_IntroEffect__ = __webpack_require__(35);
 
@@ -1406,8 +1406,8 @@ class Intro {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_WebEnabledCheck__ = __webpack_require__(10);
 
 
@@ -1570,7 +1570,7 @@ class ResultView extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_Intro__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__manager_CornerManager__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_ResultView__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util_WebEnabledCheck__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manager_ConfigManager__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loader_manager_ScreenManager__ = __webpack_require__(6);
@@ -1705,8 +1705,8 @@ class JuniverMart extends Phaser.Sprite {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_PhaseCompleteEffect__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_TutorialEndingEffect__ = __webpack_require__(33);
 
@@ -1791,7 +1791,7 @@ class TutorialView extends Phaser.Group {
 
         // if(this._num !==4) return;
         // new TutorialEndingEffect(this._game, this.assetKey, 390, 360, this._bgGroup);
-
+        __WEBPACK_IMPORTED_MODULE_2__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
     _destroy() {
@@ -116422,7 +116422,7 @@ class TutorialEndingEffect {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_TutorialView__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SceneManager__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ui_effect_BackGroundTouchEffect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 
 
 
@@ -117147,6 +117147,8 @@ class CornerButton {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
+
 
 
 
@@ -117267,6 +117269,8 @@ class Corner {
         // currentObj.events.onInputDown.add(this._onDown, this);
         // currentObj.events.onInputUp.add(this._onUp, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
+
+        __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
     _stopDrag(obj) {
@@ -117372,7 +117376,7 @@ class Corner {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__ = __webpack_require__(5);
 
 
 
@@ -117880,7 +117884,7 @@ ShuffleRandom = null;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_SeparateAnimation__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(18);

@@ -86,6 +86,7 @@ export default class TutorialView extends Phaser.Group{
 
         // if(this._num !==4) return;
         // new TutorialEndingEffect(this._game, this.assetKey, 390, 360, this._bgGroup);
+        BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
     }
 
