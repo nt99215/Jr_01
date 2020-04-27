@@ -59,9 +59,6 @@ export default class CornerMain{
             _btnArr.push(btn);
         }
 
-        //CONTROLLER RESET
-        this._parent._createController();
-
         //CREATE BACK BUTTON
         this._createBackButton();
 
@@ -70,6 +67,9 @@ export default class CornerMain{
 
         //PURCHASE SLIDE
         this._purchaseSlidePop();
+
+        //CONTROLLER RESET
+        this._parent._createController();
 
     }
 
