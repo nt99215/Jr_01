@@ -32,6 +32,14 @@ export default class PpiyoCart{
         this.ppiyoBody = new Phaser.Image(this._game, 393, 619, this._key, 'slide_ppiyo_body_cut');
         this._gameGroup.addChild(this.ppiyoBody);
 
+        this.ppiyoCorrect = new Phaser.Image(this._game, 86, 398, this._key, 'slide_ppiyo_correct');
+        this._gameGroup.addChild(this.ppiyoCorrect);
+        this.ppiyoCorrect.visible = false;
+
+        this.ppiyoIncorrect = new Phaser.Image(this._game, 86, 398, this._key, 'slide_ppiyo_incorrect');
+        this._gameGroup.addChild(this.ppiyoIncorrect);
+        this.ppiyoIncorrect.visible = false;
+
         this.xMark = new Phaser.Image(this._game, 142, 493, this._key, 'xMark');
         this._gameGroup.addChild(this.xMark);
         this.xMark.anchor.setTo(1, 1);
@@ -71,6 +79,8 @@ export default class PpiyoCart{
     feedBackPopUp(correct) {
         if(correct)
         {
+            this.ppiyoHead.visible = false;
+            this.ppiyoCorrect.visible = true;
             for(let i =0; i<_effectAssetArr.length; i++)
             {
                 _effectAssetArr[i].scale.setTo(0.2, 0.2);
@@ -83,17 +93,24 @@ export default class PpiyoCart{
                 let tw = this._game.add.tween(_effectAssetArr[i]).to({x:_heartAsset[i].resultXPos, y:_heartAsset[i].resultYPos, alpha:1}, duration, Phaser.Easing.Quartic.Out, true);
                 tw.onComplete.add(()=> {
                     this._game.add.tween(_effectAssetArr[i]).to({alpha : 0}, 200, Phaser.Easing.Quartic.Out, true);
+                    this.ppiyoHead.visible = true;
+                    this.ppiyoCorrect.visible = false;
+
                 })
             }
         }
         else
         {
+            this.ppiyoHead.visible = false;
+            this.ppiyoIncorrect.visible = true;
             this.xMark.scale.setTo(0.2, 0.2);
             this.xMark.alpha = 1;
             this.xMark.visible = true;
             let tw = this._game.add.tween(this.xMark.scale).to({x:0.8, y:0.8}, 300, Phaser.Easing.Bounce.Out, true);
             tw.onComplete.add(()=> {
                 this._game.add.tween(this.xMark).to({alpha : 0}, 200, Phaser.Easing.Quartic.Out, true);
+                this.ppiyoHead.visible = true;
+                this.ppiyoIncorrect.visible = false;
             })
         }
 
