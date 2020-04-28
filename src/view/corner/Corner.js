@@ -126,13 +126,18 @@ export default class Corner {
         currentObj.inputEnabled = true;
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragStart.add(this._startDrag, this);
-        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        currentObj.events.onDragStart.add(this._startDrag, this);
+        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
-        // currentObj.events.onInputUp.add(this._stopDrag, this);
+        // currentObj.events.onInputUp.add(this._mouseUp, this);
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
+    }
+
+    _mouseUp(obj) {
+        obj.input.stopDrag(this._game.input.activePointer);
+        this._stopDrag(obj);
     }
 
     _stopDrag(obj) {

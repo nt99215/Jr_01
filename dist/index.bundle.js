@@ -116744,10 +116744,10 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        // this._createPurchaseList();
+        this._createPurchaseList();
 
         //CORNER
-        this._createCorner(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_CHAPTER);
+        // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -117269,12 +117269,17 @@ class Corner {
         currentObj.inputEnabled = true;
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragStart.add(this._startDrag, this);
-        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        currentObj.events.onDragStart.add(this._startDrag, this);
+        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
-        // currentObj.events.onInputUp.add(this._stopDrag, this);
+        // currentObj.events.onInputUp.add(this._mouseUp, this);
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
+    }
+
+    _mouseUp(obj) {
+        obj.input.stopDrag(this._game.input.activePointer);
+        this._stopDrag(obj);
     }
 
     _stopDrag(obj) {
