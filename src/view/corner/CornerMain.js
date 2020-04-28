@@ -159,6 +159,7 @@ export default class CornerMain{
     _update() {
 
         if(this._shoppingComplete) return;
+        if(this._corner) this._corner._update();
         if(this._purchaseSlide) this._purchaseSlide._update();
         if(GameConfig.TOTAL_CATEGORIES === 0)
         {

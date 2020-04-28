@@ -1593,6 +1593,7 @@ class JuniverMart extends Phaser.Sprite {
     constructor(game, x, y) {
         super(game, x, y);
         this._game = game;
+        this._game.input.maxPointers = 1;
 
         /**
          * Manager add
@@ -116744,10 +116745,10 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        this._createPurchaseList();
+        // this._createPurchaseList();
 
         //CORNER
-        // this._createCorner(GameConfig.CURRENT_CHAPTER);
+        this._createCorner(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -117021,6 +117022,7 @@ class CornerMain {
     _update() {
 
         if (this._shoppingComplete) return;
+        if (this._corner) this._corner._update();
         if (this._purchaseSlide) this._purchaseSlide._update();
         if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES === 0) {
             this._shoppingComplete = true;
@@ -117158,7 +117160,7 @@ class CornerButton {
 
 
 
-let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos;
+let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos, activePoint;
 const minimumYpos = 550;
 
 class Corner {
@@ -117169,6 +117171,8 @@ class Corner {
         this._category = category;
         this._key = this._category.assetKey;
         this._parent = parent;
+        this._game.input.maxPointers = 1;
+        this._currentObj = null;
 
         btnArr = [];
         dragObjArr = [];
@@ -117269,20 +117273,25 @@ class Corner {
         currentObj.inputEnabled = true;
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
-        currentObj.events.onDragStart.add(this._startDrag, this);
+        // currentObj.events.onDragStart.add(this._startDrag, this);
         // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        currentObj.events.onDragStop.add(this._stopDrag, this);
+        // currentObj.events.onDragStop.add(this._stopDrag, this);
         // currentObj.events.onInputUp.add(this._mouseUp, this);
+        this._currentObj = currentObj;
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
     _mouseUp(obj) {
-        obj.input.stopDrag(this._game.input.activePointer);
-        this._stopDrag(obj);
+        // obj.input.stopDrag(this._game.input);
+        // this._stopDrag(obj);
+
+        // console.log(obj.input.update(this._game.input.activePointer));
     }
 
     _stopDrag(obj) {
+
+        this._currentObj = null;
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
         if (displayTween) displayTween.resume();
@@ -117358,7 +117367,18 @@ class Corner {
     }
 
     _update() {
-        console.log("update");
+        // console.log("update");
+        // console.log(this._currentObj.input.activePointer);
+        if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+        if (this._currentObj) {
+            activePoint = this._currentObj.input.update(this._game.input.activePointer);
+
+            if (!activePoint) {
+                this._stopDrag(this._currentObj);
+            }
+            // console.log(activePoint);
+        }
+
         // if(this._backGround) this._backGround.x+=4;
         // console.log(this._game.camera.x)
     }

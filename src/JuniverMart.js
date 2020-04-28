@@ -17,6 +17,7 @@ export default class JuniverMart extends Phaser.Sprite{
     constructor(game, x, y) {
         super(game, x, y);
         this._game =  game;
+        this._game.input.maxPointers = 1;
 
         /**
          * Manager add
