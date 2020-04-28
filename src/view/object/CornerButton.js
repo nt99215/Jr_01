@@ -1,6 +1,7 @@
 import SoundAssetKey from "../../data/SoundAssetKey";
 import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
+import SoundManager from "../../manager/SoundManager";
 
 export default class CornerButton{
     constructor(game, group, asset, x, y, parent, num) {
@@ -24,12 +25,13 @@ export default class CornerButton{
         let base = 'btn_' + this._asset  + '_title_default';
         let over = 'btn_' + this._asset  + '_title_over';
         this._btn = this._gameGroup.add(this._game.make.button(this._xPos,this._yPos,  this._key, this._onSelect.bind(this), this, over, base, over, base));
-        this.soundOffBtnSound = null;
-        this._buttonSndPlay(SoundAssetKey.BASIC_TOUCH_SOUND, this.soundOffBtnSound, this._btn);
+        // this.soundOffBtnSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._btn);
 
     }
 
     _onSelect() {
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         this._parent._cornerGenerate(this._num);
     }
 

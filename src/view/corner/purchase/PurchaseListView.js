@@ -3,6 +3,7 @@ import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 import PurchaseItemForListView from "./PurchaseItemForListView";
 import SoundAssetKey from "../../../data/SoundAssetKey";
+import SoundManager from "../../../manager/SoundManager";
 
 let _dragStartPos, _dist, _interval, _count;
 const _minimumPurchase = 5;
@@ -114,8 +115,8 @@ export default class PurchaseListView {
 
         // this._prevBtn = this._topGroup.add(this._game.make.button(800, 135, this._key, this._onPrev.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev','guideArrowPrev'));
         this._nextBtn = this._topGroup.add(this._game.make.button(800, 505, this._key, this._onNext.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev','guideArrowPrev'));
-        this._clickSound = null;
-        this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
 
         if(this._totalPurchase <= _minimumPurchase)
         {
@@ -179,7 +180,7 @@ export default class PurchaseListView {
 
     _sliderMoving() {
 
-        console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
+        // console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
         let objAllpopPos = 620;
         let lastObject = this.purchaseItem[this.purchaseItem.length - 1].blit.y;
         if(lastObject <= objAllpopPos)
@@ -208,6 +209,7 @@ export default class PurchaseListView {
 
     _onNext() {
 
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         this._nextBtn.inputEnabled = false;
         this._nextBtn.visible = false;
         let tw = this._game.add.tween(this.dragRect).to({y:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);

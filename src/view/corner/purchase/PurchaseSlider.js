@@ -2,6 +2,7 @@ import AssetKey from "../../../data/AssetKey";
 import SoundAssetKey from "../../../data/SoundAssetKey";
 import PurchaseItem from "./PurchaseItem";
 import GameConfig from "../../../data/GameConfig";
+import SoundManager from "../../../manager/SoundManager";
 
 let _dragStartPos, _interval, _dist;
 const _minimumPurchase = 6;
@@ -92,12 +93,12 @@ export default class PurchaseSlider {
 
     _listButton() {
         this._prevBtn = this._gameGroup.add(this._game.make.button(187, 40, this._key, this._onPrev.bind(this), this, 'ui_prev', 'ui_prev', 'ui_prev','ui_prev'));
-        this._clickSound = null;
-        this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._prevBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._prevBtn);
 
         this._nextBtn = this._gameGroup.add(this._game.make.button(1028, 40, this._key, this._onNext.bind(this), this, 'ui_next', 'ui_next', 'ui_next','ui_next'));
-        this._clickSound = null;
-        this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
 
         if(this._totalPurchase <= _minimumPurchase)
         {
@@ -114,10 +115,12 @@ export default class PurchaseSlider {
     }
 
     _onPrev() {
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         this._game.add.tween(this.dragRect).to({x:0}, 300, Phaser.Easing.Quartic.Out, true);
     }
     
     _onNext() {
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         this._game.add.tween(this.dragRect).to({x:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);
     }
 

@@ -271,7 +271,6 @@ export default class TutorialManager extends Phaser.Group{
 
     _disabledBtn() {
 
-
         this.prevBtn.input.enabled = false;
         this.nextBtn.input.enabled = false;
         this.skipBtn.input.enabled = false;
@@ -279,7 +278,6 @@ export default class TutorialManager extends Phaser.Group{
 
         if(currentAudio)
         {
-
             currentAudio.onStop.removeAll();
             currentAudio.stop();
         }

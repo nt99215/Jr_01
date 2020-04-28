@@ -37,7 +37,7 @@ export default class TutorialView extends Phaser.Group{
         this._bgGroup.addChild(tutorialBg);
 
         //EFFECT
-        this._effectAnimation();
+        // this._effectAnimation();
 
         //OBJECT
         for(let obj in this._objectArray)

@@ -79,8 +79,8 @@ export default class Controller extends Phaser.Group{
         SoundManager.instance.effectSoundStop(SoundAssetKey.MAIN_BGM, GameConfig.MUTE_SOUND_VOLUME,  true, false);
         SoundManager.instance.effectSoundRemove(SoundAssetKey.GAME_INTRO);
         SceneManager.instance._destroy();
-        // SoundManager.instance.play(SoundAssetKey.BASIC_TOUCH_SOUND, false);
-        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BASIC_TOUCH_SOUND);
+        // SoundManager.instance.play(SoundAssetKey.BUTTON_SOUND, false);
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
 
         new TutorialManager(this._game, this._parent);
         GameConfig.POP_ENABLED = true;

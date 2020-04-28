@@ -113,9 +113,9 @@ export default class CornerMain{
         let base = 'btn_mainDisplay_default';
         let over = 'btn_mainDisplay_over';
         this._backButton = this._buttonGroup.add(this._game.make.button(890, 604,  this._key, this._removeCorner.bind(this), this, over, base, base));
-        this.soundOffBtnSound = null;
-        this._buttonSndPlay(SoundAssetKey.BASIC_TOUCH_SOUND, this.soundOffBtnSound, this._backButton);
-        this._backButton.visible = false;
+        // this.soundOffBtnSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._backButton);
+        // this._backButton.visible = false;
     }
 
 
@@ -133,12 +133,15 @@ export default class CornerMain{
 
     _removeCorner(counterButtonVisible = false) {
 
+        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         if(this._corner) this._corner._destroy();
         if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if(this._ppiyoCart) this._ppiyoCart._visible(false);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+
+        console.log(GameConfig.SOUND_ENABLED)
         if(!GameConfig.SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
