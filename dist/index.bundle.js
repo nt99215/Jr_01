@@ -871,7 +871,7 @@ class BackGroundTouchEffect {
         BackGroundTouchEffect.instance = this;
     }
 
-    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND) {
+    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND) {
         if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].IN_GAME) return;
         __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset, 0.4);
         new __WEBPACK_IMPORTED_MODULE_3__StarEffect__["a" /* default */](game, xPos, yPos, __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__["a" /* default */].DEFAULT_GAME_ATLAS, 'intro_twinkle', radius);
@@ -1748,7 +1748,7 @@ class TutorialView extends Phaser.Group {
         this._bgGroup.addChild(tutorialBg);
 
         //EFFECT
-        this._effectAnimation();
+        // this._effectAnimation();
 
         //OBJECT
         for (let obj in this._objectArray) {
@@ -1756,8 +1756,8 @@ class TutorialView extends Phaser.Group {
             let object = new __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__["a" /* default */](this._game, this._objectArray[obj].key, asset, this._objectArray[obj].xPos, this._objectArray[obj].yPos, 1, this._objectArray[obj].totalFps, '', 0, this._objectArray[obj].fps);
             this._bgGroup.addChild(object);
             object._play();
-            console.log(object.width);
 
+            //PPIYO CART MOVING
             if (this._num === 5) {
                 this._game.add.tween(object).to({ x: object.x + 630 }, 6000, Phaser.Easing.Linear.None, true);
             }
@@ -1975,7 +1975,7 @@ class PurchaseList {
     purchaseList() {
         let arr = [];
         let _shuffleArray = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(_categoryArr);
-        // let rN = this._randomNumber(6, 12);
+        // let rN = this._randomNumber(5, 10);
         for (let i = 0; i < _shuffleArray.length - 1; i++) {
             let array = _shuffleArray[i].itemList;
             let category = _shuffleArray[i].category;
@@ -116070,8 +116070,8 @@ class Controller extends Phaser.Group {
         __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].MAIN_BGM, __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].MUTE_SOUND_VOLUME, true, false);
         __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundRemove(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].GAME_INTRO);
         __WEBPACK_IMPORTED_MODULE_5__manager_SceneManager__["a" /* default */].instance._destroy();
-        // SoundManager.instance.play(SoundAssetKey.BASIC_TOUCH_SOUND, false);
-        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND);
+        // SoundManager.instance.play(SoundAssetKey.BUTTON_SOUND, false);
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
 
         new __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__["a" /* default */](this._game, this._parent);
         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].POP_ENABLED = true;
@@ -116641,7 +116641,6 @@ class TutorialManager extends Phaser.Group {
         this.startBtn.input.enabled = false;
 
         if (currentAudio) {
-
             currentAudio.onStop.removeAll();
             currentAudio.stop();
         }
@@ -116981,9 +116980,9 @@ class CornerMain {
         let base = 'btn_mainDisplay_default';
         let over = 'btn_mainDisplay_over';
         this._backButton = this._buttonGroup.add(this._game.make.button(890, 604, this._key, this._removeCorner.bind(this), this, over, base, base));
-        this.soundOffBtnSound = null;
-        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND, this.soundOffBtnSound, this._backButton);
-        this._backButton.visible = false;
+        // this.soundOffBtnSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._backButton);
+        // this._backButton.visible = false;
     }
 
     _cornerButtonEnable(bool) {
@@ -117000,12 +116999,15 @@ class CornerMain {
 
     _removeCorner(counterButtonVisible = false) {
 
+        __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         if (this._corner) this._corner._destroy();
         if (this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if (this._ppiyoCart) this._ppiyoCart._visible(false);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
+
+        console.log(__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].SOUND_ENABLED);
         if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].SOUND_ENABLED) return;
         snd = this._game.add.audio(sndKey);
         btn.setDownSound(snd);
@@ -117078,6 +117080,8 @@ class CornerMain {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(3);
+
 
 
 
@@ -117104,11 +117108,12 @@ class CornerButton {
         let base = 'btn_' + this._asset + '_title_default';
         let over = 'btn_' + this._asset + '_title_over';
         this._btn = this._gameGroup.add(this._game.make.button(this._xPos, this._yPos, this._key, this._onSelect.bind(this), this, over, base, over, base));
-        this.soundOffBtnSound = null;
-        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND, this.soundOffBtnSound, this._btn);
+        // this.soundOffBtnSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._btn);
     }
 
     _onSelect() {
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         this._parent._cornerGenerate(this._num);
     }
 
@@ -117485,6 +117490,8 @@ class PpiyoCart {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
+
 
 
 
@@ -117575,12 +117582,12 @@ class PurchaseSlider {
 
     _listButton() {
         this._prevBtn = this._gameGroup.add(this._game.make.button(187, 40, this._key, this._onPrev.bind(this), this, 'ui_prev', 'ui_prev', 'ui_prev', 'ui_prev'));
-        this._clickSound = null;
-        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND, this._clickSound, this._prevBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._prevBtn);
 
         this._nextBtn = this._gameGroup.add(this._game.make.button(1028, 40, this._key, this._onNext.bind(this), this, 'ui_next', 'ui_next', 'ui_next', 'ui_next'));
-        this._clickSound = null;
-        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND, this._clickSound, this._nextBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
 
         if (this._totalPurchase <= _minimumPurchase) {
             this._prevBtn.inputEnabled = false;
@@ -117595,10 +117602,12 @@ class PurchaseSlider {
     }
 
     _onPrev() {
+        __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         this._game.add.tween(this.dragRect).to({ x: 0 }, 300, Phaser.Easing.Quartic.Out, true);
     }
 
     _onNext() {
+        __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         this._game.add.tween(this.dragRect).to({ x: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
     }
 
@@ -117889,6 +117898,8 @@ ShuffleRandom = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(3);
+
 
 
 
@@ -118001,8 +118012,8 @@ class PurchaseListView {
 
         // this._prevBtn = this._topGroup.add(this._game.make.button(800, 135, this._key, this._onPrev.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev','guideArrowPrev'));
         this._nextBtn = this._topGroup.add(this._game.make.button(800, 505, this._key, this._onNext.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev'));
-        this._clickSound = null;
-        this._buttonSndPlay(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND, this._clickSound, this._nextBtn);
+        // this._clickSound = null;
+        // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
 
         if (this._totalPurchase <= _minimumPurchase) {
             // this._prevBtn.inputEnabled = false;
@@ -118060,7 +118071,7 @@ class PurchaseListView {
     _sliderMoving() {
 
         // console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
-        let objAllpopPos = 600;
+        let objAllpopPos = 620;
         let lastObject = this.purchaseItem[this.purchaseItem.length - 1].blit.y;
         if (lastObject <= objAllpopPos) {
             this._countStart = true;
@@ -118083,6 +118094,7 @@ class PurchaseListView {
 
     _onNext() {
 
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         this._nextBtn.inputEnabled = false;
         this._nextBtn.visible = false;
         let tw = this._game.add.tween(this.dragRect).to({ y: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
