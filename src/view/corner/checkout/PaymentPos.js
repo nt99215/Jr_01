@@ -2,7 +2,7 @@ import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 import PriceCount from "./PriceCount";
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove, activePoint;
 let _movePos = {coinMinimumX:580, coinMaximumX:1040, coinMinimumY: 210,
     coinResultMinX:671, coinResultMaxX:945, coinResultMinY:67, coinResultMaxY:136,
     billMinimumX:580, billMaximumX:1040, billMinimumY: 185,
@@ -16,6 +16,7 @@ export default class PaymentPos {
         this._posGroup = this._game.add.group();
         this._cashGroup = this._game.add.group();
         this._key = AssetKey.PAYMENT_POS;
+        this._currentObj = null;
         _coinArr = [];
         _billBaseArr = [];
         _billArr = [];
@@ -151,10 +152,11 @@ export default class PaymentPos {
         currentObj.y -= currentObj.height/2;
 
         currentObj.inputEnabled = true;
-        currentObj.input.enableDrag(false, true, false, 255, this.dragArea);
+        currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
         currentObj.input.startDrag(this._game.input.activePointer);
-        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        currentObj.events.onDragStop.add(this._stopDrag, this);
+        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        // currentObj.events.onDragStop.add(this._stopDrag, this);
+        this._currentObj = currentObj;
 
         currentObj.minX = _movePos.billMinimumX;
         currentObj.maxX = _movePos.billMaximumX;
@@ -172,6 +174,8 @@ export default class PaymentPos {
     }
 
     _stopDrag(obj) {
+
+        this._currentObj = null;
 
         if(this._pushEnable(obj.amount))
         {
@@ -226,6 +230,22 @@ export default class PaymentPos {
 
         if(resultPrice > GameConfig.TOTAL_AMOUNT) return false;
         else return true;
+    }
+
+    _update() {
+        // console.log(this._currentObj.input.activePointer);
+        if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+        if(this._currentObj)
+        {
+            activePoint = this._currentObj.input.update(this._game.input.activePointer);
+
+            if(! activePoint)
+            {
+                this._stopDrag(this._currentObj);
+            }
+            // console.log(activePoint);
+        }
+
     }
 
     _destroy() {

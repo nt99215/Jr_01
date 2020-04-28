@@ -116745,10 +116745,10 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        // this._createPurchaseList();
+        this._createPurchaseList();
 
         //CORNER
-        this._createCorner(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_CHAPTER);
+        // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -116850,6 +116850,12 @@ class CornerManager extends Phaser.Group {
                 if (!__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT.visible) __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT.visible = true;
             }
         }
+    }
+
+    _update() {
+        if (this._paymentPos) this._paymentPos._update();
+        if (this.purchaseListView) this.purchaseListView._update();
+        if (this.chapter) this.chapter._update();
     }
 
     _destroy() {
@@ -117273,20 +117279,9 @@ class Corner {
         currentObj.inputEnabled = true;
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragStart.add(this._startDrag, this);
-        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        // currentObj.events.onDragStop.add(this._stopDrag, this);
-        // currentObj.events.onInputUp.add(this._mouseUp, this);
         this._currentObj = currentObj;
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
-    }
-
-    _mouseUp(obj) {
-        // obj.input.stopDrag(this._game.input);
-        // this._stopDrag(obj);
-
-        // console.log(obj.input.update(this._game.input.activePointer));
     }
 
     _stopDrag(obj) {
@@ -117367,7 +117362,6 @@ class Corner {
     }
 
     _update() {
-        // console.log("update");
         // console.log(this._currentObj.input.activePointer);
         if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if (this._currentObj) {
@@ -117378,9 +117372,6 @@ class Corner {
             }
             // console.log(activePoint);
         }
-
-        // if(this._backGround) this._backGround.x+=4;
-        // console.log(this._game.camera.x)
     }
 
     _destroy() {
@@ -118424,7 +118415,7 @@ class PriceCountForPos {
 
 
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove, activePoint;
 let _movePos = { coinMinimumX: 580, coinMaximumX: 1040, coinMinimumY: 210,
     coinResultMinX: 671, coinResultMaxX: 945, coinResultMinY: 67, coinResultMaxY: 136,
     billMinimumX: 580, billMaximumX: 1040, billMinimumY: 185,
@@ -118437,6 +118428,7 @@ class PaymentPos {
         this._posGroup = this._game.add.group();
         this._cashGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PAYMENT_POS;
+        this._currentObj = null;
         _coinArr = [];
         _billBaseArr = [];
         _billArr = [];
@@ -118564,10 +118556,11 @@ class PaymentPos {
         currentObj.y -= currentObj.height / 2;
 
         currentObj.inputEnabled = true;
-        currentObj.input.enableDrag(false, true, false, 255, this.dragArea);
+        currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
         currentObj.input.startDrag(this._game.input.activePointer);
-        currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        currentObj.events.onDragStop.add(this._stopDrag, this);
+        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+        // currentObj.events.onDragStop.add(this._stopDrag, this);
+        this._currentObj = currentObj;
 
         currentObj.minX = _movePos.billMinimumX;
         currentObj.maxX = _movePos.billMaximumX;
@@ -118585,6 +118578,8 @@ class PaymentPos {
     }
 
     _stopDrag(obj) {
+
+        this._currentObj = null;
 
         if (this._pushEnable(obj.amount)) {
             if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
@@ -118630,6 +118625,19 @@ class PaymentPos {
         if (Number(remainPrice) === 500) if (Number(str) > 5) return false;
 
         if (resultPrice > __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) return false;else return true;
+    }
+
+    _update() {
+        // console.log(this._currentObj.input.activePointer);
+        if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+        if (this._currentObj) {
+            activePoint = this._currentObj.input.update(this._game.input.activePointer);
+
+            if (!activePoint) {
+                this._stopDrag(this._currentObj);
+            }
+            // console.log(activePoint);
+        }
     }
 
     _destroy() {

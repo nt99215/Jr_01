@@ -128,22 +128,12 @@ export default class Corner {
         currentObj.inputEnabled = true;
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragStart.add(this._startDrag, this);
-        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        // currentObj.events.onDragStop.add(this._stopDrag, this);
-        // currentObj.events.onInputUp.add(this._mouseUp, this);
         this._currentObj = currentObj;
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
     }
 
-    _mouseUp(obj) {
-        // obj.input.stopDrag(this._game.input);
-        // this._stopDrag(obj);
-
-        // console.log(obj.input.update(this._game.input.activePointer));
-    }
 
     _stopDrag(obj) {
 
@@ -239,7 +229,6 @@ export default class Corner {
     }
 
     _update() {
-        // console.log("update");
         // console.log(this._currentObj.input.activePointer);
         if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if(this._currentObj)
@@ -253,8 +242,6 @@ export default class Corner {
             // console.log(activePoint);
         }
 
-        // if(this._backGround) this._backGround.x+=4;
-        // console.log(this._game.camera.x)
     }
 
 
