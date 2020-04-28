@@ -112,7 +112,7 @@ export default class Corner {
             {
                 // dragObjArr[i].alpha = 0;
                 dragObjArr[i].visible = false;
-                dragObjArr[i].inputEnabled = false;
+                // dragObjArr[i].inputEnabled = false;
             }
 
         }
@@ -128,9 +128,8 @@ export default class Corner {
         currentObj.input.startDrag(this._game.input.activePointer);
         // currentObj.events.onDragStart.add(this._startDrag, this);
         currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        // currentObj.events.onInputDown.add(this._onDown, this);
-        // currentObj.events.onInputUp.add(this._onUp, this);
         currentObj.events.onDragStop.add(this._stopDrag, this);
+        // currentObj.events.onInputUp.add(this._stopDrag, this);
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
