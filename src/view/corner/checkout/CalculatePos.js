@@ -105,17 +105,14 @@ export default class CalculatePos {
             obj.inputEnabled = false;
             let xPos = this._game.rnd.between(900, 1100);
             this._game.add.tween(obj).to({x:xPos}, 500, Phaser.Easing.Quartic.Out, true, 0);
-            this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+            //요청에 의한 스캔이후 항목 정렬 제거
+            // this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
             return;
         }
 
         if(obj.y <= _minimumY) obj.y = _startY;
         if(obj.x <= _maximumX) obj.x = _startX;
-        else
-        {
-            // this._checkOut(obj);
-            console.log('pass');
-        }
+
         this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
     }
 

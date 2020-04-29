@@ -109,6 +109,7 @@ let currentGuideSound = null;
 let cheatOn = false;
 
 let helpBtn = null;
+let backBtn = null;
 const appUrl = 'https://jr.msdl.naver.com/jrapp?cmd=close&type=webview&version=1';
 const appEnabledString = 'app';
 const webEnabledString = 'web';
@@ -285,6 +286,13 @@ class GameConfig {
     }
     static set HELP_BUTTON(obj) {
         helpBtn = obj;
+    }
+
+    static get BACK_BUTTON() {
+        return backBtn;
+    }
+    static set BACK_BUTTON(obj) {
+        backBtn = obj;
     }
 
     static get GUIDE_REPEAT_TIME() {
@@ -1660,9 +1668,9 @@ class JuniverMart extends Phaser.Sprite {
         __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].CURRENT_SCENE = this._objectManager;
     }
 
-    _createController() {
+    _createController(backButtonEnable) {
         if (this._controller) this._controller._destroy();
-        this._controller = new __WEBPACK_IMPORTED_MODULE_4__ui_Controller__["a" /* default */](this._game);
+        this._controller = new __WEBPACK_IMPORTED_MODULE_4__ui_Controller__["a" /* default */](this._game, this, backButtonEnable);
         __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].MAIN_CONTROLLER = this._controller;
     }
 
@@ -1975,7 +1983,8 @@ class PurchaseList {
 
     purchaseList() {
         let arr = [];
-        let _shuffleArray = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(_categoryArr);
+        // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
+        let _shuffleArray = _categoryArr;
         // let rN = this._randomNumber(5, 10);
         for (let i = 0; i < _shuffleArray.length - 1; i++) {
             let array = _shuffleArray[i].itemList;
@@ -116008,7 +116017,7 @@ class Preloader extends Phaser.State {
 
 
 class Controller extends Phaser.Group {
-    constructor(game, parent = null) {
+    constructor(game, parent = null, backButtonEnable = true) {
         super(game);
 
         this.assetKey = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].BTN_ASSET;
@@ -116016,6 +116025,7 @@ class Controller extends Phaser.Group {
         this._gameGroup = this._game.add.group();
         // this._dispatcher = dispatcher;
         this._parent = parent;
+        this._backButtonEnable = backButtonEnable;
 
         this._btnInit();
         this._webCheck();
@@ -116036,7 +116046,7 @@ class Controller extends Phaser.Group {
         this.backBtn = this._gameGroup.add(this._game.make.button(24, 24, this.assetKey, this.onBack.bind(this), this, __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].BTN_BACK_DEFAULT, __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].BTN_BACK_DEFAULT, __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].BTN_BACK_OVER));
         this.backBtnSound = null;
         // this._buttonSndPlay(SoundAssetKey.SND_PREV, this.backBtnSound, this.backBtn);
-
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].BACK_BUTTON = this.backBtn;
 
         /**
          * Sound btn
@@ -116123,6 +116133,10 @@ class Controller extends Phaser.Group {
 
     _btnEnabled() {
         this._gameGroup.visible = true;
+    }
+
+    _backButtonDisable() {
+        if (this.backBtn) this.backBtn.visible = this._backButtonEnable;
     }
 
     _destroy() {
@@ -116808,8 +116822,8 @@ class CornerManager extends Phaser.Group {
         if (this.purchaseListView) this.purchaseListView._update();
     }
 
-    _createController() {
-        this._parent._createController();
+    _createController(backButtonEnable = true) {
+        this._parent._createController(backButtonEnable);
     }
 
     _purchaseGenerate() {
@@ -116972,6 +116986,8 @@ class CornerMain {
 
         this._ppiyoCartGenerate();
         if (this._ppiyoCart) this._ppiyoCart._visible(true);
+
+        if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON) __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON.visible = false;
     }
 
     _ppiyoCartGenerate() {
@@ -117010,6 +117026,7 @@ class CornerMain {
         if (this._corner) this._corner._destroy();
         if (this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if (this._ppiyoCart) this._ppiyoCart._visible(false);
+        if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON) __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON.visible = true;
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -117025,6 +117042,24 @@ class CornerMain {
         this._purchaseSlide = new __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__["a" /* default */](this._game, _categoryArr);
     }
 
+    _guideHandPop() {
+
+        this.hand = new Phaser.Image(this._game, 1146, 453, this._key, 'guideHand');
+        this._buttonGroup.addChild(this.hand);
+        this.hand.anchor.setTo(0.5, 0.5);
+        this.hand.x += this.hand.width / 2;
+        this.hand.y += this.hand.height / 2;
+        this._game.add.tween(this.hand.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
+        this.hand.inputEnabled = true;
+        this.hand.input.enableDrag();
+        this.hand.events.onDragUpdate.add(this._stopDrag, this);
+    }
+
+    _stopDrag(obj) {
+
+        console.log(parseInt(obj.x), parseInt(obj.y));
+    }
+
     _update() {
 
         if (this._shoppingComplete) return;
@@ -117034,6 +117069,8 @@ class CornerMain {
             this._shoppingComplete = true;
             for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
             this._removeCorner(true);
+            //GUIDE  HAND POP UP
+            this._guideHandPop();
         }
     }
 
@@ -118286,15 +118323,14 @@ class CalculatePos {
             obj.inputEnabled = false;
             let xPos = this._game.rnd.between(900, 1100);
             this._game.add.tween(obj).to({ x: xPos }, 500, Phaser.Easing.Quartic.Out, true, 0);
-            this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+            //요청에 의한 스캔이후 항목 정렬 제거
+            // this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
             return;
         }
 
         if (obj.y <= _minimumY) obj.y = _startY;
-        if (obj.x <= _maximumX) obj.x = _startX;else {
-            // this._checkOut(obj);
-            console.log('pass');
-        }
+        if (obj.x <= _maximumX) obj.x = _startX;
+
         this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
     }
 

@@ -156,6 +156,25 @@ export default class CornerMain{
 
     }
 
+    _guideHandPop() {
+
+        this.hand = new Phaser.Image(this._game, 1146, 453, this._key, 'guideHand');
+        this._buttonGroup.addChild(this.hand);
+        this.hand.anchor.setTo(0.5, 0.5);
+        this.hand.x += this.hand.width/2;
+        this.hand.y += this.hand.height/2;
+        this._game.add.tween(this.hand.scale).to({x:0.8, y:0.8}, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
+        this.hand.inputEnabled = true;
+        this.hand.input.enableDrag();
+        this.hand.events.onDragUpdate.add(this._stopDrag, this);
+
+    }
+
+    _stopDrag(obj) {
+
+        console.log(parseInt(obj.x), parseInt(obj.y));
+    }
+
     _update() {
 
         if(this._shoppingComplete) return;
@@ -166,6 +185,8 @@ export default class CornerMain{
             this._shoppingComplete = true;
             for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
             this._removeCorner(true);
+            //GUIDE  HAND POP UP
+            this._guideHandPop();
         }
     }
 
