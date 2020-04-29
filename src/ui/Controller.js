@@ -10,7 +10,7 @@ import PauseDimmed from "../view/object/PauseDimmed";
 
 
 export default class Controller extends Phaser.Group{
-    constructor(game, parent = null) {
+    constructor(game, parent = null, backButtonEnable = true) {
         super(game);
 
         this.assetKey = AssetKey.BTN_ASSET;
@@ -18,6 +18,7 @@ export default class Controller extends Phaser.Group{
         this._gameGroup = this._game.add.group();
         // this._dispatcher = dispatcher;
         this._parent = parent;
+        this._backButtonEnable = backButtonEnable;
 
         this._btnInit();
         this._webCheck();
@@ -40,6 +41,7 @@ export default class Controller extends Phaser.Group{
         this.backBtn = this._gameGroup.add(this._game.make.button(24,24,  this.assetKey, this.onBack.bind(this), this, AssetKey.BTN_BACK_DEFAULT, AssetKey.BTN_BACK_DEFAULT, AssetKey.BTN_BACK_OVER));
         this.backBtnSound = null;
         // this._buttonSndPlay(SoundAssetKey.SND_PREV, this.backBtnSound, this.backBtn);
+        GameConfig.BACK_BUTTON = this.backBtn;
 
 
 
@@ -137,6 +139,11 @@ export default class Controller extends Phaser.Group{
     _btnEnabled() {
         this._gameGroup.visible = true;
     }
+
+    _backButtonDisable() {
+        if(this.backBtn) this.backBtn.visible = this._backButtonEnable;
+    }
+
 
     _destroy() {
         this._gameGroup.removeChildren(0, this._gameGroup.length);

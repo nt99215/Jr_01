@@ -98,6 +98,8 @@ export default class CornerMain{
 
         this._ppiyoCartGenerate();
         if(this._ppiyoCart) this._ppiyoCart._visible(true);
+
+        if(GameConfig.BACK_BUTTON) GameConfig.BACK_BUTTON.visible = false;
     }
 
     _ppiyoCartGenerate() {
@@ -137,6 +139,7 @@ export default class CornerMain{
         if(this._corner) this._corner._destroy();
         if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if(this._ppiyoCart) this._ppiyoCart._visible(false);
+        if(GameConfig.BACK_BUTTON) GameConfig.BACK_BUTTON.visible = true;
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -152,9 +155,6 @@ export default class CornerMain{
         this._purchaseSlide = new PurchaseSlider(this._game, _categoryArr);
 
     }
-
-
-
 
     _update() {
 

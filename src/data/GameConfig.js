@@ -39,6 +39,7 @@ let currentGuideSound = null;
 let cheatOn = false;
 
 let helpBtn = null;
+let backBtn = null;
 const appUrl = 'https://jr.msdl.naver.com/jrapp?cmd=close&type=webview&version=1';
 const appEnabledString = 'app';
 const webEnabledString = 'web';
@@ -118,6 +119,9 @@ export default class GameConfig {
 
     static get HELP_BUTTON() { return helpBtn; }
     static set HELP_BUTTON(obj) { helpBtn = obj; }
+
+    static get BACK_BUTTON() { return backBtn; }
+    static set BACK_BUTTON(obj) { backBtn = obj; }
 
     static get GUIDE_REPEAT_TIME() { return guideRepeatTime; }
     static get GUIDE_ENABLED() { return guideEnable; }

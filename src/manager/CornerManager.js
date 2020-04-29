@@ -97,8 +97,8 @@ export default class CornerManager extends Phaser.Group{
 
     }
 
-    _createController() {
-        this._parent._createController();
+    _createController(backButtonEnable = true) {
+        this._parent._createController(backButtonEnable);
     }
 
     _purchaseGenerate() {

@@ -93,9 +93,9 @@ export default class JuniverMart extends Phaser.Sprite{
 
     }
 
-    _createController() {
+    _createController(backButtonEnable) {
         if(this._controller) this._controller._destroy();
-        this._controller = new Controller(this._game);
+        this._controller = new Controller(this._game, this, backButtonEnable);
         GameConfig.MAIN_CONTROLLER = this._controller;
     }
 
