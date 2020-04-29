@@ -17,6 +17,7 @@ export default class PaymentPos {
         this._cashGroup = this._game.add.group();
         this._key = AssetKey.PAYMENT_POS;
         this._currentObj = null;
+        this._coin100 = false;
         _coinArr = [];
         _billBaseArr = [];
         _billArr = [];
@@ -222,11 +223,20 @@ export default class PaymentPos {
         let remainPrice = String(total).substring(total.length, len);
         let resultPrice = _currentPrice + amount;
 
+        // console.log('remainPrice : ', remainPrice, ' - ', 'resultPrice : ', resultPrice,  ' - ', 'amount : ', amount);
+
         let idx = String(resultPrice).length - 3;
         let str = String(resultPrice).substr(idx, 1);
 
+        // console.log(typeof str, str)
         if(Number(remainPrice) === 500)
+        {
+            if(str === '1') this._coin100 = true;
+            if(this._coin100) if(amount === 500) return false;
+            if(! this._coin100) if(amount === 500) return true;
             if(Number(str) > 5) return false;
+        }
+
 
         if(resultPrice > GameConfig.TOTAL_AMOUNT) return false;
         else return true;
