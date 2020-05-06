@@ -94,7 +94,7 @@ export default class CalculatePos {
     _onDrag(obj) {
 
         obj.bringToTop();
-        // console.log(parseInt(obj.x), parseInt(obj.y));
+        console.log(parseInt(obj.x), parseInt(obj.y));
         if(obj.x >= 450) this._checkOut(obj);
     }
 
@@ -103,8 +103,12 @@ export default class CalculatePos {
         if(obj.checkOut)
         {
             obj.inputEnabled = false;
-            let xPos = this._game.rnd.between(900, 1100);
-            this._game.add.tween(obj).to({x:xPos}, 500, Phaser.Easing.Quartic.Out, true, 0);
+            // let xPos = this._game.rnd.between(900, 1100);
+            let xPos = this._xPosValue(obj.y);
+            console.log(obj.y);
+            console.log(xPos);
+            let rX = this._game.rnd.between(xPos, 1100);
+            this._game.add.tween(obj).to({x:rX}, 500, Phaser.Easing.Quartic.Out, true, 0);
             //요청에 의한 스캔이후 항목 정렬 제거
             // this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
             return;
@@ -115,6 +119,18 @@ export default class CalculatePos {
 
         this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
     }
+
+    _xPosValue(yPos) {
+
+        let xPos = 0;
+        if(yPos >= 550) xPos = 950;
+        else if(yPos < 550 && yPos >= 450) xPos = 900;
+        else if(yPos < 450 && yPos >= 350) xPos = 850;
+        else if(yPos < 350 && yPos > 250) xPos = 800;
+        else if(yPos <= 250) xPos = 780;
+        return xPos;
+    }
+
 
     _checkOut(obj) {
 
