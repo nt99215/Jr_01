@@ -92,7 +92,7 @@ export default class CalculatePos {
     _onDrag(obj) {
 
         obj.bringToTop();
-        console.log(parseInt(obj.x), parseInt(obj.y));
+        // console.log(parseInt(obj.x), parseInt(obj.y));
         if(obj.x >= 450) this._checkOut(obj);
     }
 

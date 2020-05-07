@@ -1,7 +1,7 @@
 import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 
-const _yPos = [580, 670, 760];
+const _yPos = [600, 670, 760];
 const _minimumX = 390;
 const _maximumX = 580;
 let _objectArr, _count;
@@ -24,27 +24,31 @@ export default class FilledObject {
 
         _count++;
         let asset = 'filled_' + GameConfig.CURRENT_FILL_OBJECT;
-        let xPos = this._game.rnd.between(400, 580);
-        let yPos = this._yPosition(_count);
-        let img = new Phaser.Image(this._game, xPos, yPos, this._key, asset);
+        let xPos = this._xPosition();
+        let img = new Phaser.Image(this._game, xPos, 720, this._key, asset);
+        img.y = this._yPosition(img);
         this._gameGroup.addChild(img);
         _objectArr.push(img);
 
-        console.log('count : ', _count);
-        img.inputEnabled = true;
-        img.input.enableDrag();
-        img.events.onDragUpdate.add(this._startDrag, this);
+        // console.log('count : ', _count);
+        // img.inputEnabled = true;
+        // img.input.enableDrag();
+        // img.events.onDragUpdate.add(this._startDrag, this);
     }
 
-    _yPosition(){
+    _xPosition() {
+        let xPos = this._game.rnd.between(400, 580);
+        if(_count <= 8) xPos = this._game.rnd.between(430, 550);
+        return xPos;
+    }
+
+    _yPosition(obj){
 
         let rN = this._game.rnd.between(-5, 5);
+        let term = 100 - obj.height;
         let yPos = _yPos[1];
-        if(_count > 8 && _count <= 16) yPos = _yPos[0];
-        else if(_count > 16) yPos = _yPos[0];
-
+        if(_count > 8) yPos = _yPos[0] + term;
         return yPos + rN;
-
     }
 
     objectVisible(visible) {
