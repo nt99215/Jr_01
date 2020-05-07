@@ -27,7 +27,7 @@ export default class PurchaseList {
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
         // let rN = this._randomNumber(5, 10);
-        for(let i = 0; i<_shuffleArray.length - 1; i++)
+        for(let i = 0; i<_shuffleArray.length; i++)
         {
             let array = _shuffleArray[i].itemList;
             let category = _shuffleArray[i].category;

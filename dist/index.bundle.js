@@ -1994,7 +1994,7 @@ class PurchaseList {
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
         // let rN = this._randomNumber(5, 10);
-        for (let i = 0; i < _shuffleArray.length - 1; i++) {
+        for (let i = 0; i < _shuffleArray.length; i++) {
             let array = _shuffleArray[i].itemList;
             let category = _shuffleArray[i].category;
             array = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(array);
@@ -118344,10 +118344,8 @@ class CalculatePos {
 
         if (obj.checkOut) {
             obj.inputEnabled = false;
-            // let xPos = this._game.rnd.between(900, 1100);
             let xPos = this._xPosValue(obj.y);
-            console.log(obj.y);
-            console.log(xPos);
+            // console.log(obj.y, xPos));
             let rX = this._game.rnd.between(xPos, 1100);
             this._game.add.tween(obj).to({ x: rX }, 500, Phaser.Easing.Quartic.Out, true, 0);
             //요청에 의한 스캔이후 항목 정렬 제거

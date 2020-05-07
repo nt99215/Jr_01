@@ -101,10 +101,8 @@ export default class CalculatePos {
         if(obj.checkOut)
         {
             obj.inputEnabled = false;
-            // let xPos = this._game.rnd.between(900, 1100);
             let xPos = this._xPosValue(obj.y);
-            console.log(obj.y);
-            console.log(xPos);
+            // console.log(obj.y, xPos));
             let rX = this._game.rnd.between(xPos, 1100);
             this._game.add.tween(obj).to({x:rX}, 500, Phaser.Easing.Quartic.Out, true, 0);
             //요청에 의한 스캔이후 항목 정렬 제거
