@@ -10,6 +10,8 @@ export default class Categories {
             backGroundColor:0x82d3e6,
             backGroundAsset: ['vegetable'],
             assetKey: AssetKey.CORNER_VEGETABLE,
+            displayBoardHead: true,
+            totalDisplayBoard: 5,
             itemList: [
                 {item:'apple', price:'1000', xPos:1111, yPos:211},
                 {item:'carrot', price:'500', xPos:487, yPos:177},
@@ -31,6 +33,8 @@ export default class Categories {
             backGroundColor:0x67cb59,
             backGroundAsset: ['seafood'],
             assetKey: AssetKey.CORNER_SEAFOOD,
+            displayBoardHead: false,
+            totalDisplayBoard: 8,
             itemList: [
                 {item:'abalone', price:'1500', xPos:1147, yPos:409},
                 {item:'crab', price:'1000', xPos:1413, yPos:208},
@@ -38,6 +42,17 @@ export default class Categories {
                 {item:'shell', price:'1000', xPos:816, yPos:183},
                 {item:'shrimp', price:'1000', xPos:781, yPos:361},
                 {item:'squid', price:'1000', xPos:1120, yPos:207},
+            ],
+            rollingButtonList:[
+                [],
+                ['mackerel'],
+                ['shell', 'shrimp'],
+                ['squid', 'abalone'],
+                ['crab'],
+                ['mackerel'],
+                ['shell', 'shrimp'],
+                ['squid', 'abalone'],
+                ['crab'],
             ]
 
         }
@@ -50,6 +65,8 @@ export default class Categories {
             backGroundColor:0xe88baa,
             backGroundAsset: ['meat'],
             assetKey: AssetKey.CORNER_MEAT,
+            displayBoardHead: false,
+            totalDisplayBoard: 6,
             itemList: [
                 {item:'drumstick', price:'1500', xPos:1391, yPos:198},
                 {item:'chicken', price:'2000', xPos:1361, yPos:396},
@@ -69,6 +86,8 @@ export default class Categories {
             backGroundColor:0x31be8e,
             backGroundAsset: ['necessary_1', 'necessary_2'],
             assetKey: AssetKey.CORNER_NECESSARY,
+            displayBoardHead: false,
+            totalDisplayBoard: 4,
             itemList: [
                 {item:'cleanser', price:'1500', xPos:1310, yPos:211},
                 {item:'shampoo', price:'1000', xPos:182, yPos:220},
@@ -89,6 +108,8 @@ export default class Categories {
             backGroundColor:0xf49e4b,
             backGroundAsset: ['dairy_1', 'dairy_2'],
             assetKey: AssetKey.CORNER_DAIRY,
+            displayBoardHead: false,
+            totalDisplayBoard: 4,
             itemList: [
                 {item:'bananaMilk', price:'500', xPos:1309, yPos:214},
                 {item:'cheese', price:'1000', xPos:1848, yPos:227},
@@ -109,6 +130,8 @@ export default class Categories {
             backGroundColor:0xd58fe9,
             backGroundAsset: ['snack'],
             assetKey: AssetKey.CORNER_SNACK,
+            displayBoardHead: true,
+            totalDisplayBoard: 8,
             itemList: [
                 {item:'candy', price:'1000', xPos:51, yPos:235},
                 {item:'chocolate', price:'1000', xPos:325, yPos:239},

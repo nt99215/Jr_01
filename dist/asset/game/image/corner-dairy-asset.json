@@ -2,7 +2,7 @@
 
 "area_bananaMilk":
 {
-	"frame": {"x":1320,"y":1,"w":358,"h":349},
+	"frame": {"x":1112,"y":552,"w":358,"h":349},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":358,"h":349},
@@ -10,7 +10,7 @@
 },
 "area_cheese":
 {
-	"frame": {"x":1143,"y":799,"w":482,"h":131},
+	"frame": {"x":925,"y":1103,"w":482,"h":131},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":482,"h":131},
@@ -18,7 +18,7 @@
 },
 "area_chocolateMilk":
 {
-	"frame": {"x":1320,"y":352,"w":319,"h":152},
+	"frame": {"x":1112,"y":903,"w":319,"h":152},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":319,"h":152},
@@ -26,7 +26,7 @@
 },
 "area_egg":
 {
-	"frame": {"x":1143,"y":932,"w":397,"h":162},
+	"frame": {"x":1,"y":1103,"w":397,"h":162},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":397,"h":162},
@@ -34,7 +34,7 @@
 },
 "area_milk":
 {
-	"frame": {"x":1320,"y":352,"w":319,"h":152},
+	"frame": {"x":1112,"y":903,"w":319,"h":152},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":319,"h":152},
@@ -42,7 +42,7 @@
 },
 "area_strawberryMilk":
 {
-	"frame": {"x":1320,"y":352,"w":319,"h":152},
+	"frame": {"x":1112,"y":903,"w":319,"h":152},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":319,"h":152},
@@ -50,7 +50,7 @@
 },
 "area_yogurt":
 {
-	"frame": {"x":1143,"y":640,"w":523,"h":157},
+	"frame": {"x":400,"y":1103,"w":523,"h":157},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":523,"h":157},
@@ -58,7 +58,7 @@
 },
 "bananaMilk":
 {
-	"frame": {"x":1448,"y":506,"w":78,"h":118},
+	"frame": {"x":1474,"y":1,"w":78,"h":118},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":118},
@@ -66,7 +66,7 @@
 },
 "cheese":
 {
-	"frame": {"x":1542,"y":932,"w":110,"h":99},
+	"frame": {"x":1409,"y":1154,"w":110,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":99},
@@ -74,31 +74,55 @@
 },
 "chocolateMilk":
 {
-	"frame": {"x":1528,"y":506,"w":76,"h":115},
+	"frame": {"x":1474,"y":121,"w":76,"h":115},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":115},
 	"sourceSize": {"w":76,"h":115}
 },
-"corner_dairy_1":
+"corner_dairy_0":
 {
-	"frame": {"x":1,"y":640,"w":1140,"h":637},
+	"frame": {"x":1324,"y":1,"w":148,"h":549},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1140,"h":637},
-	"sourceSize": {"w":1140,"h":637}
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":549},
+	"sourceSize": {"w":148,"h":549}
+},
+"corner_dairy_1":
+{
+	"frame": {"x":606,"y":552,"w":504,"h":549},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":504,"h":549},
+	"sourceSize": {"w":504,"h":549}
 },
 "corner_dairy_2":
 {
-	"frame": {"x":1,"y":1,"w":1317,"h":637},
+	"frame": {"x":1,"y":552,"w":603,"h":549},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1317,"h":637},
-	"sourceSize": {"w":1317,"h":637}
+	"spriteSourceSize": {"x":0,"y":0,"w":603,"h":549},
+	"sourceSize": {"w":603,"h":549}
+},
+"corner_dairy_3":
+{
+	"frame": {"x":748,"y":1,"w":574,"h":549},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":574,"h":549},
+	"sourceSize": {"w":574,"h":549}
+},
+"corner_dairy_4":
+{
+	"frame": {"x":1,"y":1,"w":745,"h":549},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":745,"h":549},
+	"sourceSize": {"w":745,"h":549}
 },
 "egg":
 {
-	"frame": {"x":1320,"y":506,"w":126,"h":121},
+	"frame": {"x":1433,"y":903,"w":126,"h":121},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":121},
@@ -106,7 +130,7 @@
 },
 "milk":
 {
-	"frame": {"x":1542,"y":1033,"w":76,"h":115},
+	"frame": {"x":1474,"y":238,"w":76,"h":115},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":115},
@@ -114,7 +138,7 @@
 },
 "strawberryMilk":
 {
-	"frame": {"x":1143,"y":1150,"w":76,"h":115},
+	"frame": {"x":1474,"y":355,"w":76,"h":115},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":115},
@@ -122,7 +146,7 @@
 },
 "yogurt":
 {
-	"frame": {"x":1221,"y":1150,"w":168,"h":95},
+	"frame": {"x":1409,"y":1057,"w":168,"h":95},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":168,"h":95},
@@ -133,8 +157,8 @@
 	"version": "1.0",
 	"image": "corner-dairy-asset.png",
 	"format": "RGBA8888",
-	"size": {"w":1679,"h":1278},
+	"size": {"w":1578,"h":1266},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:3bdc154ff01f257080d5095349f14452:43ad429bb616ac51956dcb45c9524fc5:b786f01334fa3e2b288fc55a31c71a8d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:ba70207e8839742c32976ebf9af43319:a211311520b71ee6e200d117bb069a91:b786f01334fa3e2b288fc55a31c71a8d$"
 }
 }

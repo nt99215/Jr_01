@@ -2,7 +2,7 @@
 
 "abalone":
 {
-	"frame": {"x":1833,"y":888,"w":75,"h":73},
+	"frame": {"x":244,"y":792,"w":75,"h":73},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":73},
@@ -10,63 +10,127 @@
 },
 "area_abalone":
 {
-	"frame": {"x":1513,"y":711,"w":354,"h":175},
+	"frame": {"x":702,"y":747,"w":349,"h":175},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":354,"h":175},
-	"sourceSize": {"w":354,"h":175}
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":261,"w":349,"h":175},
+	"sourceSize": {"w":367,"h":570}
 },
 "area_crab":
 {
-	"frame": {"x":1,"y":711,"w":471,"h":375},
+	"frame": {"x":1406,"y":545,"w":345,"h":368},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":471,"h":375},
-	"sourceSize": {"w":471,"h":375}
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":65,"w":345,"h":368},
+	"sourceSize": {"w":363,"h":570}
 },
 "area_mackerel":
 {
-	"frame": {"x":474,"y":711,"w":375,"h":373},
+	"frame": {"x":1053,"y":545,"w":351,"h":378},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":375,"h":373},
-	"sourceSize": {"w":375,"h":373}
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":57,"w":351,"h":378},
+	"sourceSize": {"w":368,"h":570}
 },
 "area_shell":
 {
-	"frame": {"x":1217,"y":711,"w":294,"h":199},
+	"frame": {"x":352,"y":573,"w":348,"h":201},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":294,"h":199},
-	"sourceSize": {"w":294,"h":199}
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":32,"w":348,"h":201},
+	"sourceSize": {"w":366,"h":570}
 },
 "area_shrimp":
 {
-	"frame": {"x":851,"y":711,"w":364,"h":222},
+	"frame": {"x":1,"y":573,"w":349,"h":217},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":364,"h":222},
-	"sourceSize": {"w":364,"h":222}
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":218,"w":349,"h":217},
+	"sourceSize": {"w":366,"h":570}
 },
 "area_squid":
 {
-	"frame": {"x":1513,"y":888,"w":318,"h":181},
+	"frame": {"x":702,"y":566,"w":349,"h":179},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":318,"h":181},
-	"sourceSize": {"w":318,"h":181}
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":55,"w":349,"h":179},
+	"sourceSize": {"w":367,"h":570}
 },
-"corner_seafood":
+"corner_seafood_0":
 {
-	"frame": {"x":1,"y":1,"w":1942,"h":708},
+	"frame": {"x":738,"y":1,"w":399,"h":542},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":399,"h":542},
+	"sourceSize": {"w":399,"h":570}
+},
+"corner_seafood_1":
+{
+	"frame": {"x":1139,"y":1,"w":368,"h":542},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":368,"h":542},
+	"sourceSize": {"w":368,"h":570}
+},
+"corner_seafood_2":
+{
+	"frame": {"x":370,"y":1,"w":366,"h":563},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":366,"h":563},
+	"sourceSize": {"w":366,"h":570}
+},
+"corner_seafood_3":
+{
+	"frame": {"x":1,"y":1,"w":367,"h":570},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1942,"h":708},
-	"sourceSize": {"w":1942,"h":708}
+	"spriteSourceSize": {"x":0,"y":0,"w":367,"h":570},
+	"sourceSize": {"w":367,"h":570}
+},
+"corner_seafood_4":
+{
+	"frame": {"x":1509,"y":1,"w":363,"h":542},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":363,"h":542},
+	"sourceSize": {"w":363,"h":570}
+},
+"corner_seafood_5":
+{
+	"frame": {"x":1139,"y":1,"w":368,"h":542},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":368,"h":542},
+	"sourceSize": {"w":368,"h":570}
+},
+"corner_seafood_6":
+{
+	"frame": {"x":370,"y":1,"w":366,"h":563},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":366,"h":563},
+	"sourceSize": {"w":366,"h":570}
+},
+"corner_seafood_7":
+{
+	"frame": {"x":1,"y":1,"w":367,"h":570},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":367,"h":570},
+	"sourceSize": {"w":367,"h":570}
+},
+"corner_seafood_8":
+{
+	"frame": {"x":1509,"y":1,"w":363,"h":542},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":363,"h":542},
+	"sourceSize": {"w":363,"h":570}
 },
 "crab":
 {
-	"frame": {"x":1146,"y":935,"w":148,"h":114},
+	"frame": {"x":94,"y":792,"w":148,"h":114},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":114},
@@ -74,7 +138,7 @@
 },
 "mackerel":
 {
-	"frame": {"x":1296,"y":912,"w":149,"h":63},
+	"frame": {"x":321,"y":792,"w":149,"h":63},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":149,"h":63},
@@ -82,7 +146,7 @@
 },
 "shell":
 {
-	"frame": {"x":1053,"y":935,"w":91,"h":122},
+	"frame": {"x":1,"y":792,"w":91,"h":122},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":122},
@@ -90,7 +154,7 @@
 },
 "shrimp":
 {
-	"frame": {"x":935,"y":935,"w":116,"h":142},
+	"frame": {"x":556,"y":776,"w":116,"h":142},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":142},
@@ -98,7 +162,7 @@
 },
 "squid":
 {
-	"frame": {"x":851,"y":935,"w":82,"h":147},
+	"frame": {"x":472,"y":776,"w":82,"h":147},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":147},
@@ -109,8 +173,8 @@
 	"version": "1.0",
 	"image": "corner-seafood-asset.png",
 	"format": "RGBA8888",
-	"size": {"w":1944,"h":1087},
+	"size": {"w":1873,"h":924},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:e08c7e86f6e7471b016d6733ef778bc7:07112c3e9ce77ae6db03525ca15e1262:d937ec3ea83c21adce0f0676bdc4de93$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c8cf84d9e4a64f8391f1b5dfe6deec53:69faca080e1812a05b4332c9307f45fc:d937ec3ea83c21adce0f0676bdc4de93$"
 }
 }

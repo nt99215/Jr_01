@@ -2,7 +2,7 @@
 
 "area_candy":
 {
-	"frame": {"x":622,"y":699,"w":299,"h":270},
+	"frame": {"x":622,"y":1,"w":299,"h":270},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":299,"h":270},
@@ -10,7 +10,7 @@
 },
 "area_chocolate":
 {
-	"frame": {"x":923,"y":699,"w":315,"h":263},
+	"frame": {"x":516,"y":1382,"w":315,"h":263},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":315,"h":263},
@@ -18,7 +18,7 @@
 },
 "area_iceCream":
 {
-	"frame": {"x":1,"y":699,"w":619,"h":270},
+	"frame": {"x":1,"y":1,"w":619,"h":270},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":619,"h":270},
@@ -26,7 +26,7 @@
 },
 "area_jelly":
 {
-	"frame": {"x":1240,"y":699,"w":306,"h":256},
+	"frame": {"x":405,"y":1647,"w":306,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":306,"h":256},
@@ -34,7 +34,7 @@
 },
 "candy":
 {
-	"frame": {"x":1574,"y":420,"w":109,"h":178},
+	"frame": {"x":405,"y":1364,"w":109,"h":178},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":178},
@@ -42,23 +42,87 @@
 },
 "chocolate":
 {
-	"frame": {"x":1574,"y":238,"w":113,"h":180},
+	"frame": {"x":380,"y":1182,"w":113,"h":180},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":180},
 	"sourceSize": {"w":113,"h":180}
 },
-"corner_snack":
+"corner_snack_0":
 {
-	"frame": {"x":1,"y":1,"w":1571,"h":696},
+	"frame": {"x":1,"y":1382,"w":402,"h":559},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1571,"h":696},
-	"sourceSize": {"w":1571,"h":696}
+	"spriteSourceSize": {"x":0,"y":0,"w":402,"h":559},
+	"sourceSize": {"w":402,"h":559}
+},
+"corner_snack_1":
+{
+	"frame": {"x":541,"y":273,"w":384,"h":546},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":13,"w":384,"h":546},
+	"sourceSize": {"w":384,"h":559}
+},
+"corner_snack_2":
+{
+	"frame": {"x":1,"y":273,"w":538,"h":552},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":538,"h":552},
+	"sourceSize": {"w":538,"h":559}
+},
+"corner_snack_3":
+{
+	"frame": {"x":1,"y":827,"w":377,"h":548},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":11,"w":377,"h":548},
+	"sourceSize": {"w":377,"h":559}
+},
+"corner_snack_4":
+{
+	"frame": {"x":541,"y":821,"w":380,"h":559},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":380,"h":559},
+	"sourceSize": {"w":380,"h":559}
+},
+"corner_snack_5":
+{
+	"frame": {"x":541,"y":273,"w":384,"h":546},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":13,"w":384,"h":546},
+	"sourceSize": {"w":384,"h":559}
+},
+"corner_snack_6":
+{
+	"frame": {"x":1,"y":273,"w":538,"h":552},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":538,"h":552},
+	"sourceSize": {"w":538,"h":559}
+},
+"corner_snack_7":
+{
+	"frame": {"x":1,"y":827,"w":377,"h":548},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":11,"w":377,"h":548},
+	"sourceSize": {"w":377,"h":559}
+},
+"corner_snack_8":
+{
+	"frame": {"x":541,"y":821,"w":380,"h":559},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":380,"h":559},
+	"sourceSize": {"w":380,"h":559}
 },
 "iceCream":
 {
-	"frame": {"x":1574,"y":1,"w":113,"h":235},
+	"frame": {"x":405,"y":945,"w":113,"h":235},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":235},
@@ -66,7 +130,7 @@
 },
 "jelly":
 {
-	"frame": {"x":1548,"y":699,"w":141,"h":116},
+	"frame": {"x":380,"y":827,"w":141,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":141,"h":116},
@@ -77,8 +141,8 @@
 	"version": "1.0",
 	"image": "corner-snack-asset.png",
 	"format": "RGBA8888",
-	"size": {"w":1690,"h":970},
+	"size": {"w":926,"h":1942},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:edc0302cae84d07ea91c832565e6be49:00fe398cf3b86b53107c82f5654794aa:a45ee787760861415eeb7a2cedec2b85$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d26c681013e0a53e70ab703edbcb62e1:54fac29fb71c5216596737415823d34e:a45ee787760861415eeb7a2cedec2b85$"
 }
 }

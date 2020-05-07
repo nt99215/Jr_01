@@ -2,7 +2,7 @@
 
 "area_bacon":
 {
-	"frame": {"x":1268,"y":639,"w":335,"h":141},
+	"frame": {"x":1268,"y":551,"w":335,"h":141},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":141},
@@ -10,7 +10,7 @@
 },
 "area_boiledPork":
 {
-	"frame": {"x":718,"y":639,"w":354,"h":148},
+	"frame": {"x":718,"y":551,"w":354,"h":148},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":354,"h":148},
@@ -18,7 +18,7 @@
 },
 "area_chicken":
 {
-	"frame": {"x":303,"y":639,"w":413,"h":162},
+	"frame": {"x":303,"y":551,"w":413,"h":162},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":413,"h":162},
@@ -26,7 +26,7 @@
 },
 "area_drumstick":
 {
-	"frame": {"x":1,"y":639,"w":300,"h":173},
+	"frame": {"x":1,"y":551,"w":300,"h":173},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":173},
@@ -34,7 +34,7 @@
 },
 "area_sirloin":
 {
-	"frame": {"x":1268,"y":639,"w":335,"h":141},
+	"frame": {"x":1268,"y":551,"w":335,"h":141},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":141},
@@ -42,7 +42,7 @@
 },
 "area_tenderloin":
 {
-	"frame": {"x":1268,"y":639,"w":335,"h":141},
+	"frame": {"x":1268,"y":551,"w":335,"h":141},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":141},
@@ -50,7 +50,7 @@
 },
 "bacon":
 {
-	"frame": {"x":1611,"y":777,"w":183,"h":132},
+	"frame": {"x":1785,"y":551,"w":183,"h":132},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":183,"h":132},
@@ -58,7 +58,7 @@
 },
 "boiledPork":
 {
-	"frame": {"x":1074,"y":639,"w":192,"h":143},
+	"frame": {"x":1074,"y":551,"w":192,"h":143},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":143},
@@ -66,23 +66,71 @@
 },
 "chicken":
 {
-	"frame": {"x":1440,"y":782,"w":169,"h":129},
+	"frame": {"x":1823,"y":133,"w":169,"h":129},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":169,"h":129},
 	"sourceSize": {"w":169,"h":129}
 },
-"corner_meat":
+"corner_meat_0":
 {
-	"frame": {"x":1,"y":1,"w":1874,"h":636},
+	"frame": {"x":1690,"y":1,"w":131,"h":548},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1874,"h":636},
-	"sourceSize": {"w":1874,"h":636}
+	"spriteSourceSize": {"x":0,"y":0,"w":131,"h":548},
+	"sourceSize": {"w":131,"h":548}
+},
+"corner_meat_1":
+{
+	"frame": {"x":1143,"y":1,"w":545,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":545,"h":548},
+	"sourceSize": {"w":545,"h":548}
+},
+"corner_meat_2":
+{
+	"frame": {"x":592,"y":1,"w":549,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":549,"h":548},
+	"sourceSize": {"w":549,"h":548}
+},
+"corner_meat_3":
+{
+	"frame": {"x":1,"y":1,"w":589,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":589,"h":548},
+	"sourceSize": {"w":589,"h":548}
+},
+"corner_meat_4":
+{
+	"frame": {"x":1143,"y":1,"w":545,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":545,"h":548},
+	"sourceSize": {"w":545,"h":548}
+},
+"corner_meat_5":
+{
+	"frame": {"x":592,"y":1,"w":549,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":549,"h":548},
+	"sourceSize": {"w":549,"h":548}
+},
+"corner_meat_6":
+{
+	"frame": {"x":1,"y":1,"w":589,"h":548},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":589,"h":548},
+	"sourceSize": {"w":589,"h":548}
 },
 "drumstick":
 {
-	"frame": {"x":1074,"y":784,"w":111,"h":124},
+	"frame": {"x":1823,"y":264,"w":111,"h":124},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":124},
@@ -90,7 +138,7 @@
 },
 "sirloin":
 {
-	"frame": {"x":1605,"y":639,"w":178,"h":136},
+	"frame": {"x":1605,"y":551,"w":178,"h":136},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":178,"h":136},
@@ -98,7 +146,7 @@
 },
 "tenderloin":
 {
-	"frame": {"x":1268,"y":782,"w":170,"h":130},
+	"frame": {"x":1823,"y":1,"w":170,"h":130},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":130},
@@ -109,8 +157,8 @@
 	"version": "1.0",
 	"image": "corner-meat-asset.png",
 	"format": "RGBA8888",
-	"size": {"w":1876,"h":913},
+	"size": {"w":1994,"h":725},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c7ea380bdf9beca925434f32c357e647:076721742bba1774607f3b25950f99e6:439ada2ebdc2a44f11d065a33ebcfeb9$"
+	"smartupdate": "$TexturePacker:SmartUpdate:50f6135373f5e9cd5fb08afef99b5ce6:b3d1c23c152b097252c5c3f29f55f19c:439ada2ebdc2a44f11d065a33ebcfeb9$"
 }
 }

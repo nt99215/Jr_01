@@ -2,9 +2,11 @@ import SoundAssetKey from "../../data/SoundAssetKey";
 import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 import BackGroundTouchEffect from "../../ui/effect/BackGroundTouchEffect";
+import RollingBoard from "./RollingBoard";
 
-let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos, activePoint;
+let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
 const minimumYpos = 550;
+const speed = 3;
 
 
 export default class Corner {
@@ -17,7 +19,11 @@ export default class Corner {
         this._parent = parent;
         this._game.input.maxPointers = 1;
         this._currentObj = null;
+        this._headRemove = false;
+        this._totalWidth = 0;
+        this._pickUp = false;
 
+        boardArr = [];
         btnArr = [];
         dragObjArr = [];
         startX = 0;
@@ -30,21 +36,36 @@ export default class Corner {
 
     _init() {
 
+        //BACKGROUND
         this._backGround = this._game.add.graphics(0, 0);
         this._backGround.beginFill(this._category.backGroundColor, 1);
         this._backGround.drawRect(0, 0, 1280, 720);
         this._backGround.endFill();
         this._bgGroup.addChild(this._backGround);
 
-        for(let i = 0; i<this._category.backGroundAsset.length; i++)
-        {
-            let asset = 'corner_' + this._category.backGroundAsset[i];
-            let yPos = this._category.displayPosition.displayBarY;
-            let base = new Phaser.Image(this._game, 0 + baseWidth, yPos, this._key, asset);
-            baseWidth +=base.width;
-            this._gameGroup.addChild(base);
-        }
+        let headArr = this._category.rollingButtonList[0];
+        console.log(headArr);
+        let head = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr);
+        boardArr.push(head);
+        head._board.x = 294;
+        head._board.y = 720 - head._board.height;
 
+       for(let i = 1; i <= this._category.totalDisplayBoard; i++)
+       {
+           let arr = this._category.rollingButtonList[i];
+           console.log(arr);
+           let board = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+           boardArr.push(board);
+           boardArr[i]._board.y = 720 - boardArr[i]._board.height;
+           boardArr[1]._board.x = head._board.x + head._board.width;
+           this._totalWidth += boardArr[i]._board.width;
+
+           if(i >= 2) boardArr[i]._board.x = boardArr[i - 1]._board.x + boardArr[i - 1]._board.width;
+
+           boardArr[i].btnPosReset();
+       }
+
+        // this._totalWidth -= speed;
 
         this._categoryButtonGenerate();
         this._moving();
@@ -52,13 +73,32 @@ export default class Corner {
     }
 
     _moving() {
-        this._gameGroup.x = this._category.displayPosition.groupStartX;
-        let endX = this._category.displayPosition.groupEndX;
-        let duration = Math.abs(endX) * 10;
 
-        // this._gameGroup.x = -420;
-        displayTween = this._game.add.tween(this._gameGroup).to({x:endX}, duration, Phaser.Easing.Quartic.None, true, 1000, 1000, true);
-        displayTween.yoyo(true, 1000);
+        for(let i = 0 ; i < boardArr.length; i++)
+        {
+            boardArr[i]._board.x -= speed;
+
+
+            if(boardArr[i]._board.x < - (boardArr[i]._board.width))
+            {
+                if(i === 0 && ! this._headRemove)
+                {
+                    // boardArr[0]._destroy();
+                    // boardArr.splice(0, 1);
+                    this._headRemove = true;
+                }
+                else boardArr[i]._board.x += this._totalWidth;
+
+                boardArr[i]._board.visible = false;
+            }
+
+            if(boardArr[i]._board.x < this._game.world.width)
+            {
+                if(i !== 0) boardArr[i]._board.visible = true;
+            }
+
+            boardArr[i].btnPosReset();
+        }
 
     }
 
@@ -93,15 +133,13 @@ export default class Corner {
             let asset = list[obj].item;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
             this._gameGroup.addChild(dragObj);
-            dragObj.visible = false;
+            // dragObj.visible = false;
             dragObjArr.push(dragObj);
         }
 
     }
 
     _itemSelect(obj) {
-
-        if(displayTween) displayTween.pause();
 
         let num = btnArr.indexOf(obj);
         let currentObj = dragObjArr[num];
@@ -129,6 +167,7 @@ export default class Corner {
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
         this._currentObj = currentObj;
+        this._pickUp = true;
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
@@ -137,10 +176,10 @@ export default class Corner {
 
     _stopDrag(obj) {
 
+        this._pickUp = false;
         this._currentObj = null;
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
-        if(displayTween) displayTween.resume();
 
         let correct;
         if (this._overLapCheck(obj))
@@ -230,6 +269,8 @@ export default class Corner {
     }
 
     _update() {
+
+        if(! this._pickUp) this._moving();
         // console.log(this._currentObj.input.activePointer);
         if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if(this._currentObj)
@@ -252,10 +293,11 @@ export default class Corner {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
         for(let i = 0; i<btnArr.length; i++) btnArr[i].destroy();
         for(let i = 0; i<dragObjArr.length; i++) dragObjArr[i].destroy();
-        if(displayTween) displayTween.stop();
+        for(let i = 0; i<boardArr.length; i++) boardArr[i]._destroy();
         this._gameGroup.x = 0;
         btnArr = [];
         dragObjArr = [];
+        boardArr = [];
 
     }
 

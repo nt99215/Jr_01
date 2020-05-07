@@ -25,7 +25,7 @@ export default class FilledObject {
         _count++;
         let asset = 'filled_' + GameConfig.CURRENT_FILL_OBJECT;
         let xPos = this._xPosition();
-        let img = new Phaser.Image(this._game, xPos, 720, this._key, asset);
+        let img = new Phaser.Image(this._game, xPos, this._game.world.height, this._key, asset);
         img.y = this._yPosition(img);
         this._gameGroup.addChild(img);
         _objectArr.push(img);
