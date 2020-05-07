@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,6 +79,7 @@ const bgmVolume = 0.2;
 // const bgmVolume = 0.001;
 let muteSoundVolume = 0.0001;
 
+let currentFillObject = null;
 let purchaseList = [];
 let purchaseListEnable = true;
 let purchaseItemArray = [];
@@ -202,6 +203,13 @@ class GameConfig {
     }
     static set TUTORIAL_DISABLED(bool) {
         tutorialDisabled = bool;
+    }
+
+    static get CURRENT_FILL_OBJECT() {
+        return currentFillObject;
+    }
+    static set CURRENT_FILL_OBJECT(obj) {
+        currentFillObject = obj;
     }
 
     static get PURCHASE_LIST() {
@@ -866,7 +874,7 @@ SoundManager.instance = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
 
 
@@ -894,7 +902,7 @@ class BackGroundTouchEffect {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ui_effect_WaterSprayEffect__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ui_effect_WaterSprayEffect__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 
 
@@ -1297,7 +1305,7 @@ class WebEnabledCheck {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_IntroEffect__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_IntroEffect__ = __webpack_require__(33);
 
 
 
@@ -1412,8 +1420,8 @@ class Intro {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_WebEnabledCheck__ = __webpack_require__(10);
@@ -1574,13 +1582,13 @@ class ResultView extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_Controller__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_Controller__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_Intro__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__manager_CornerManager__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__manager_CornerManager__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util_WebEnabledCheck__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manager_ConfigManager__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manager_ConfigManager__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loader_manager_ScreenManager__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__view_object_PauseDimmed__ = __webpack_require__(15);
 
@@ -1716,8 +1724,8 @@ class JuniverMart extends Phaser.Sprite {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_PhaseCompleteEffect__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_TutorialEndingEffect__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_PhaseCompleteEffect__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_TutorialEndingEffect__ = __webpack_require__(31);
 
 
 
@@ -1962,7 +1970,7 @@ class Categories {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 
@@ -2023,134 +2031,6 @@ class PurchaseList {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-
-
-
-let _xPos, _yPos, _dotXpos, _dotYpos;
-
-class PurchaseItemForListView {
-    constructor(game, group, asset, quantity, xPos, yPos, dotXpos, dotYpos) {
-        this._game = game;
-        this._gameGroup = group;
-        this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PURCHASE_LIST_VIEW;
-        this._asset = asset;
-        this.quantity = quantity;
-        this.startY = 0;
-        this.complete = false;
-        this.itemArr = [];
-        _xPos = xPos;
-        _yPos = yPos;
-        _dotXpos = dotXpos;
-        _dotYpos = dotYpos;
-        this._init();
-    }
-
-    _init() {
-
-        this.blit = new Phaser.Image(this._game, _dotXpos, _dotYpos, this._key, 'purchaseListDot');
-        this._gameGroup.addChild(this.blit);
-
-        for (let i = 0; i < this.quantity; i++) {
-            let asset = 'purchase_' + this._asset;
-            let x = _xPos + (127 + 4) * i;
-            let item = new Phaser.Image(this._game, x, _yPos, this._key, asset);
-            this._gameGroup.addChild(item);
-            this.itemArr.push(item);
-
-            /*  let dragRect = this._game.add.graphics(0, 0);
-              dragRect.beginFill(0xff4400, 0.4);
-              dragRect.drawRect(x, _yPos, item.width, item.height);
-              dragRect.endFill();
-              this._gameGroup.addChild(dragRect);
-              this.itemArr.push(dragRect);*/
-        }
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = PurchaseItemForListView;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-
-
-let _totalPriceArr = [];
-let _currentPriceArr = [];
-let _xPosArr = [482, 442, 402, 351, 310];
-let _yPos = [62, 216];
-let _dotPos = [101, 255];
-const maxPrice = 100000;
-class PriceCount {
-    constructor(game, group, posGroup, key) {
-        this._game = game;
-        this._gameGroup = group;
-        this._posGroup = posGroup;
-        this._key = key;
-        this._init();
-        this._count(0);
-    }
-
-    _init() {
-
-        // let totalAmount = Number(GameConfig.TOTAL_AMOUNT - 10000).toString();
-        let totalAmount = __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_AMOUNT.toString();
-
-        for (let i = 0; i < totalAmount.length; i++) {
-            let num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
-            _totalPriceArr.push(num);
-            let asset = 'posNumber_' + num;
-            let img = new Phaser.Image(this._game, _xPosArr[i], _yPos[0], this._key, asset);
-            this._gameGroup.addChild(img);
-        }
-
-        let dot = new Phaser.Image(this._game, 386, _dotPos[0], this._key, 'posNumber_dot');
-        this._gameGroup.addChild(dot);
-    }
-
-    _count(num) {
-
-        if (num >= maxPrice) return;
-
-        let totalAmount = num.toString();
-
-        this._posGroup.removeChildren(0, this._posGroup.length);
-        for (let i = 0; i < _currentPriceArr.length; i++) _currentPriceArr.splice(i, 1);
-        for (let i = 0; i < this._posGroup.length; i++) this._posGroup[i].destroy();
-
-        for (let i = 0; i < totalAmount.length; i++) {
-            let num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
-            _currentPriceArr.push(num);
-            let asset = 'payNumber_' + num;
-            let img = new Phaser.Image(this._game, _xPosArr[i], _yPos[1], this._key, asset);
-            this._posGroup.addChild(img);
-            img.anchor.setTo(0, 1);
-            img.y += img.height;
-            img.scale.setTo(1, 0.2 + i / 10);
-            let duration = i * 100 + 200;
-            this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
-        }
-
-        if (num >= 1000) {
-            let dot = new Phaser.Image(this._game, 386, _dotPos[1], this._key, 'payment_dot');
-            this._posGroup.addChild(dot);
-        }
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = PriceCount;
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 
 
@@ -2187,7 +2067,7 @@ class ConfigManager {
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2231,17 +2111,17 @@ class LoadManager {
 LoadManager.instance = null;
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
 
 
@@ -2288,7 +2168,7 @@ window.nts = {};
 window.nts.index = new index('main_doc', 1280, 720);
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2297,9 +2177,9 @@ window.nts.index = new index('main_doc', 1280, 720);
 
 
 
-window.PIXI = __webpack_require__(24);
-window.p2 = __webpack_require__(25);
-window.Phaser = __webpack_require__(26);
+window.PIXI = __webpack_require__(22);
+window.p2 = __webpack_require__(23);
+window.Phaser = __webpack_require__(24);
 
 class Boot extends Phaser.State {
     init(...args) {
@@ -2358,7 +2238,7 @@ class Boot extends Phaser.State {
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -10175,7 +10055,7 @@ PIXI.TextureUvs = function ()
 }).call(this);
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var require;var require;/**
@@ -25008,7 +24888,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -115672,10 +115552,10 @@ PIXI.canUseNewCanvasBlendModes = function ()
 * "What matters in this life is not what we do but what we do for others, the legacy we leave and the imprint we make." - Eric Meyer
 */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -115865,14 +115745,14 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__const_ResourceKey__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__const_GameInfo__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JuniverMart__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__const_PreloadData__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__const_PreloadData__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_Intro__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_GameConfig__ = __webpack_require__(0);
@@ -115993,7 +115873,7 @@ class Preloader extends Phaser.State {
 
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116004,7 +115884,7 @@ class Preloader extends Phaser.State {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__util_WebEnabledCheck__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_object_PauseDimmed__ = __webpack_require__(15);
 
 
@@ -116148,7 +116028,7 @@ class Controller extends Phaser.Group {
 
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116218,7 +116098,7 @@ class WaterSprayEffect {
 
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116285,7 +116165,7 @@ class StarEffect {
 
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116352,7 +116232,7 @@ class PhaseCompleteEffect {
 
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116427,7 +116307,7 @@ class TutorialEndingEffect {
 
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116678,7 +116558,7 @@ class TutorialManager extends Phaser.Group {
 
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116720,7 +116600,7 @@ class IntroEffect {
 
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116728,9 +116608,9 @@ class IntroEffect {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_corner_purchase_PurchaseList__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_corner_checkout_CalculatePos__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_corner_checkout_PaymentPos__ = __webpack_require__(48);
 
@@ -116886,7 +116766,7 @@ class CornerManager extends Phaser.Group {
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116895,10 +116775,10 @@ class CornerManager extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Corner__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Corner__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__purchase_PurchaseList__ = __webpack_require__(17);
 
 
@@ -116991,11 +116871,13 @@ class CornerMain {
     }
 
     _ppiyoCartGenerate() {
-        this._ppiyoCart = new __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__["a" /* default */](this._game);
+
+        if (!this._ppiyoCart) this._ppiyoCart = new __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__["a" /* default */](this._game);
         this._ppiyoCart._visible(false);
     }
 
     _ppiyoFeedBackPopUp(correct) {
+
         if (this._ppiyoCart) this._ppiyoCart.feedBackPopUp(correct);
     }
 
@@ -117118,7 +117000,7 @@ class CornerMain {
 
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117190,7 +117072,7 @@ class CornerButton {
 
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117371,6 +117253,7 @@ class Corner {
 
         let name = obj._frame.name;
         let idx = -1;
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_FILL_OBJECT = name;
         for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST.length; i++) if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST[i].item === name) idx = i;
 
         if (idx !== -1) {
@@ -117428,12 +117311,14 @@ class Corner {
 
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__FilledObject__ = __webpack_require__(39);
+
 
 
 
@@ -117442,8 +117327,10 @@ const _heartAsset = [{ asset: 'effect_heart_blue', xPos: 91, yPos: 408, resultXP
 class PpiyoCart {
     constructor(game) {
         this._game = game;
+        this._filledGroup = this._game.add.group();
         this._gameGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
+        this._fillObject = null;
 
         _effectAssetArr = [];
         this._init();
@@ -117452,6 +117339,7 @@ class PpiyoCart {
     _init() {
 
         this._ppiyoCart();
+        this._fillObject = new __WEBPACK_IMPORTED_MODULE_2__FilledObject__["a" /* default */](this._game, this._filledGroup);
     }
 
     _ppiyoCart() {
@@ -117497,7 +117385,10 @@ class PpiyoCart {
     }
 
     _visible(bool) {
+
         this._gameGroup.visible = bool;
+        this._filledGroup.visible = bool;
+        // if(this._fillObject) this._fillObject.objectVisible(bool);
     }
 
     _startDrag(obj) {
@@ -117523,6 +117414,9 @@ class PpiyoCart {
                     this.ppiyoCorrect.visible = false;
                 });
             }
+
+            //FILLED OBJECT
+            this._objectFill();
         } else {
             this.ppiyoHead.visible = false;
             this.ppiyoIncorrect.visible = true;
@@ -117538,6 +117432,11 @@ class PpiyoCart {
         }
     }
 
+    _objectFill() {
+
+        if (this._fillObject) this._fillObject.filledObject();
+    }
+
     _destroy() {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
         this.ppiyoHead._destroy();
@@ -117550,13 +117449,81 @@ class PpiyoCart {
 
 
 /***/ }),
-/* 41 */
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
+
+
+
+const _yPos = [580, 670, 760];
+const _minimumX = 390;
+const _maximumX = 580;
+let _objectArr, _count;
+class FilledObject {
+    constructor(game, group) {
+        this._game = game;
+        this._gameGroup = group;
+        this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
+        _objectArr = [];
+        _count = 0;
+        this._init();
+    }
+
+    _init() {}
+
+    filledObject() {
+
+        _count++;
+        let asset = 'filled_' + __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_FILL_OBJECT;
+        let xPos = this._game.rnd.between(400, 580);
+        let yPos = this._yPosition(_count);
+        let img = new Phaser.Image(this._game, xPos, yPos, this._key, asset);
+        this._gameGroup.addChild(img);
+        _objectArr.push(img);
+
+        console.log('count : ', _count);
+        img.inputEnabled = true;
+        img.input.enableDrag();
+        img.events.onDragUpdate.add(this._startDrag, this);
+    }
+
+    _yPosition() {
+
+        let rN = this._game.rnd.between(-5, 5);
+        let yPos = _yPos[1];
+        if (_count > 8 && _count <= 16) yPos = _yPos[0];else if (_count > 16) yPos = _yPos[0];
+
+        return yPos + rN;
+    }
+
+    objectVisible(visible) {
+
+        for (let i = 0; i < _objectArr.length; i++) _objectArr[i].visible = visible;
+    }
+
+    _startDrag(obj) {
+        console.log(parseInt(obj.x), parseInt(obj.y));
+    }
+
+    _destroy() {
+        this._gameGroup.removeChildren(0, this._gameGroup.length);
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = FilledObject;
+
+
+/***/ }),
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
 
@@ -117748,7 +117715,7 @@ class PurchaseSlider {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117839,7 +117806,7 @@ class PurchaseItem {
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117957,14 +117924,14 @@ class ShuffleRandom {
 ShuffleRandom = null;
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(3);
 
@@ -118211,18 +118178,68 @@ class PurchaseListView {
 
 
 /***/ }),
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
+
+
+
+let _xPos, _yPos, _dotXpos, _dotYpos;
+
+class PurchaseItemForListView {
+    constructor(game, group, asset, quantity, xPos, yPos, dotXpos, dotYpos) {
+        this._game = game;
+        this._gameGroup = group;
+        this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PURCHASE_LIST_VIEW;
+        this._asset = asset;
+        this.quantity = quantity;
+        this.startY = 0;
+        this.complete = false;
+        this.itemArr = [];
+        _xPos = xPos;
+        _yPos = yPos;
+        _dotXpos = dotXpos;
+        _dotYpos = dotYpos;
+        this._init();
+    }
+
+    _init() {
+
+        this.blit = new Phaser.Image(this._game, _dotXpos, _dotYpos, this._key, 'purchaseListDot');
+        this._gameGroup.addChild(this.blit);
+
+        for (let i = 0; i < this.quantity; i++) {
+            let asset = 'purchase_' + this._asset;
+            let x = _xPos + (127 + 4) * i;
+            let item = new Phaser.Image(this._game, x, _yPos, this._key, asset);
+            this._gameGroup.addChild(item);
+            this.itemArr.push(item);
+
+            /*  let dragRect = this._game.add.graphics(0, 0);
+              dragRect.beginFill(0xff4400, 0.4);
+              dragRect.drawRect(x, _yPos, item.width, item.height);
+              dragRect.endFill();
+              this._gameGroup.addChild(dragRect);
+              this.itemArr.push(dragRect);*/
+        }
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = PurchaseItemForListView;
+
+
+/***/ }),
 /* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__purchase_PurchaseItemForListView__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CalculatePosItem__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PriceCount__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__PriceCountForPos__ = __webpack_require__(47);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PriceCountForPos__ = __webpack_require__(47);
 
 
 
@@ -118288,7 +118305,7 @@ class CalculatePos {
                 xPos += j * this._game.rnd.between(maximum / 2, maximum);
                 // console.log(xPos);
                 yPos += j * this._game.rnd.between(-15, 15);
-                let purchaseItem = new __WEBPACK_IMPORTED_MODULE_3__CalculatePosItem__["a" /* default */](this._game, this._itemGroup, this._key, asset, xPos, yPos);
+                let purchaseItem = new __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__["a" /* default */](this._game, this._itemGroup, this._key, asset, xPos, yPos);
                 _itemArr.push(purchaseItem);
                 let obj = purchaseItem.item;
                 obj.price = price;
@@ -118367,7 +118384,7 @@ class CalculatePos {
     }
 
     _posGenerate() {
-        this._priceCount = new __WEBPACK_IMPORTED_MODULE_5__PriceCountForPos__["a" /* default */](this._game, this._gameGroup, this._key);
+        this._priceCount = new __WEBPACK_IMPORTED_MODULE_3__PriceCountForPos__["a" /* default */](this._game, this._gameGroup, this._key);
     }
 
     _destroy() {
@@ -118473,7 +118490,7 @@ class PriceCountForPos {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(49);
 
 
 
@@ -118730,6 +118747,80 @@ class PaymentPos {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
+
+
+let _totalPriceArr = [];
+let _currentPriceArr = [];
+let _xPosArr = [482, 442, 402, 351, 310];
+let _yPos = [62, 216];
+let _dotPos = [101, 255];
+const maxPrice = 100000;
+class PriceCount {
+    constructor(game, group, posGroup, key) {
+        this._game = game;
+        this._gameGroup = group;
+        this._posGroup = posGroup;
+        this._key = key;
+        this._init();
+        this._count(0);
+    }
+
+    _init() {
+
+        // let totalAmount = Number(GameConfig.TOTAL_AMOUNT - 10000).toString();
+        let totalAmount = __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_AMOUNT.toString();
+
+        for (let i = 0; i < totalAmount.length; i++) {
+            let num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
+            _totalPriceArr.push(num);
+            let asset = 'posNumber_' + num;
+            let img = new Phaser.Image(this._game, _xPosArr[i], _yPos[0], this._key, asset);
+            this._gameGroup.addChild(img);
+        }
+
+        let dot = new Phaser.Image(this._game, 386, _dotPos[0], this._key, 'posNumber_dot');
+        this._gameGroup.addChild(dot);
+    }
+
+    _count(num) {
+
+        if (num >= maxPrice) return;
+
+        let totalAmount = num.toString();
+
+        this._posGroup.removeChildren(0, this._posGroup.length);
+        for (let i = 0; i < _currentPriceArr.length; i++) _currentPriceArr.splice(i, 1);
+        for (let i = 0; i < this._posGroup.length; i++) this._posGroup[i].destroy();
+
+        for (let i = 0; i < totalAmount.length; i++) {
+            let num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
+            _currentPriceArr.push(num);
+            let asset = 'payNumber_' + num;
+            let img = new Phaser.Image(this._game, _xPosArr[i], _yPos[1], this._key, asset);
+            this._posGroup.addChild(img);
+            img.anchor.setTo(0, 1);
+            img.y += img.height;
+            img.scale.setTo(1, 0.2 + i / 10);
+            let duration = i * 100 + 200;
+            this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
+        }
+
+        if (num >= 1000) {
+            let dot = new Phaser.Image(this._game, 386, _dotPos[1], this._key, 'payment_dot');
+            this._posGroup.addChild(dot);
+        }
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = PriceCount;
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /**
  * Created by NAVER on 2017-09-02.
@@ -118889,7 +118980,7 @@ class BackgroundEffect extends Phaser.Group {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119039,7 +119130,7 @@ class PreloadResource {
 PreloadResource.instance = null;
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119048,7 +119139,7 @@ PreloadResource.instance = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_Intro__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__const_ResourceKey__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_LoadManager__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_LoadManager__ = __webpack_require__(19);
 
 
 

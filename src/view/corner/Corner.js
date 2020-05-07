@@ -192,6 +192,7 @@ export default class Corner {
 
         let name = obj._frame.name;
         let idx = -1;
+        GameConfig.CURRENT_FILL_OBJECT = name;
         for(let i = 0; i<GameConfig.PURCHASE_LIST.length; i++)
         if (GameConfig.PURCHASE_LIST[i].item === name) idx = i;
 

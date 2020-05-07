@@ -1,8 +1,6 @@
 import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
-import PurchaseItemForListView from "../purchase/PurchaseItemForListView";
 import CalculatePosItem from "./CalculatePosItem";
-import PriceCount from "./PriceCount";
 import PriceCountForPos from "./PriceCountForPos";
 
 let _itemArr, _startX, _startY, _maximumX, _minimumY, _currentPrice;

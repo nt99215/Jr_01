@@ -9,6 +9,7 @@ const bgmVolume = 0.2;
 // const bgmVolume = 0.001;
 let muteSoundVolume = 0.0001;
 
+let currentFillObject = null;
 let purchaseList = [];
 let purchaseListEnable = true;
 let purchaseItemArray = [];
@@ -83,6 +84,9 @@ export default class GameConfig {
 
     static get TUTORIAL_DISABLED() {return tutorialDisabled ; }
     static set TUTORIAL_DISABLED(bool) {tutorialDisabled = bool;}
+
+    static get CURRENT_FILL_OBJECT() { return currentFillObject; }
+    static set CURRENT_FILL_OBJECT(obj) { currentFillObject = obj; }
 
     static get PURCHASE_LIST() { return purchaseList; }
     static set PURCHASE_LIST(arr) { purchaseList = arr; }

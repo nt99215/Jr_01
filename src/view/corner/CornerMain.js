@@ -103,11 +103,13 @@ export default class CornerMain{
     }
 
     _ppiyoCartGenerate() {
-        this._ppiyoCart = new PpiyoCart(this._game);
+
+        if(! this._ppiyoCart) this._ppiyoCart = new PpiyoCart(this._game);
         this._ppiyoCart._visible(false);
     }
 
     _ppiyoFeedBackPopUp(correct) {
+
         if(this._ppiyoCart) this._ppiyoCart.feedBackPopUp(correct);
     }
 

@@ -1,5 +1,6 @@
 import AssetKey from "../../data/AssetKey";
 import SeparateAnimation from "./SeparateAnimation";
+import FilledObject from "./FilledObject";
 
 let _effectAssetArr;
 const _heartAsset = [
@@ -10,8 +11,10 @@ const _heartAsset = [
 export default class PpiyoCart{
     constructor(game) {
         this._game = game;
+        this._filledGroup = this._game.add.group();
         this._gameGroup = this._game.add.group();
         this._key = AssetKey.SLIDE_BAR_PPIYO;
+        this._fillObject = null;
 
         _effectAssetArr = [];
         this._init();
@@ -20,6 +23,7 @@ export default class PpiyoCart{
     _init() {
 
         this._ppiyoCart();
+        this._fillObject =  new FilledObject(this._game, this._filledGroup);
     }
 
 
@@ -69,7 +73,10 @@ export default class PpiyoCart{
     }
 
     _visible(bool) {
+
         this._gameGroup.visible = bool;
+        this._filledGroup.visible = bool;
+        // if(this._fillObject) this._fillObject.objectVisible(bool);
     }
 
     _startDrag(obj) {
@@ -98,6 +105,9 @@ export default class PpiyoCart{
 
                 })
             }
+
+            //FILLED OBJECT
+            this._objectFill();
         }
         else
         {
@@ -114,6 +124,11 @@ export default class PpiyoCart{
             })
         }
 
+    }
+
+    _objectFill() {
+
+        if(this._fillObject) this._fillObject.filledObject();
     }
 
     _destroy() {
