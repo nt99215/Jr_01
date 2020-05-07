@@ -20,13 +20,13 @@ export default class RollingBoard {
 
         if(this._arr === null) return;
 
-       /* for(let i = 0; i < this._arr.length; i++)
+        for(let i = 0; i < this._arr.length; i++)
         {
             let asset = 'area_' + this._arr[i];
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
-        }*/
+        }
 
     }
 

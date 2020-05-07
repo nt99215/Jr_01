@@ -21,6 +21,14 @@ export default class Categories {
                 {item:'strawberry', price:'2000', xPos:1404, yPos:241},
                 {item:'sweetPotato', price:'500', xPos:404, yPos:392},
                 {item:'welshonion', price:'1000', xPos:776, yPos:139},
+            ],
+            rollingButtonList:[
+                ['radish_head', 'onion_head'],
+                ['carrot', 'sweetPotato'],
+                ['welshonion'],
+                ['apple', 'grape'],
+                ['strawberry'],
+                ['radish', 'onion'],
             ]
 
         }
@@ -74,6 +82,15 @@ export default class Categories {
                 {item:'sirloin', price:'3000', xPos:829, yPos:415},
                 {item:'bacon', price:'1500', xPos:283, yPos:216},
                 {item:'boiledPork', price:'1500', xPos:267, yPos:412},
+            ],
+            rollingButtonList:[
+                [],
+                ['bacon', 'boiledPork'],
+                ['tenderloin', 'sirloin'],
+                ['drumstick', 'chicken'],
+                ['bacon', 'boiledPork'],
+                ['tenderloin', 'sirloin'],
+                ['drumstick', 'chicken'],
             ]
 
         }
@@ -96,6 +113,13 @@ export default class Categories {
                 {item:'paste', price:'500', xPos:192, yPos:417},
                 {item:'tissue', price:'1000', xPos:1313, yPos:415},
                 {item:'wetTissue', price:'1000', xPos:1988, yPos:223},
+            ],
+            rollingButtonList:[
+                [],
+                ['shampoo', 'paste'],
+                ['soap', 'brush'],
+                ['cleanser', 'tissue'],
+                ['wetTissue'],
             ]
 
         }
@@ -118,6 +142,13 @@ export default class Categories {
                 {item:'milk', price:'1000', xPos:259, yPos:208},
                 {item:'strawberryMilk', price:'500', xPos:768, yPos:415},
                 {item:'yogurt', price:'1000', xPos:1863, yPos:409},
+            ],
+            rollingButtonList:[
+                [],
+                ['milk', 'chocolateMilk'],
+                ['egg', 'strawberryMilk'],
+                ['bananaMilk'],
+                ['cheese', 'yogurt'],
             ]
 
         }
@@ -137,6 +168,17 @@ export default class Categories {
                 {item:'chocolate', price:'1000', xPos:325, yPos:239},
                 {item:'iceCream', price:'1000', xPos:623, yPos:238},
                 {item:'jelly', price:'1000', xPos:1220, yPos:249},
+            ],
+            rollingButtonList:[
+                ['candy_head'],
+                ['chocolate'],
+                ['iceCream'],
+                ['jelly'],
+                ['candy'],
+                ['chocolate'],
+                ['iceCream'],
+                ['jelly'],
+                ['candy'],
             ]
 
         }
