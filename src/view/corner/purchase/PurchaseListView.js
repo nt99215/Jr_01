@@ -23,6 +23,7 @@ export default class PurchaseListView {
         this._countStart = false;
         this.purchaseItem = [];
         this._parent = parent;
+        this._ppiyoFaceChange = false;
         _interval = 0;
         _count = 0;
         this._init();
@@ -227,6 +228,7 @@ export default class PurchaseListView {
 
         if(this._countStart)
         {
+            this._ppiyoChange();
             _count++;
             if(_count>=_maxCount)
             {
@@ -239,6 +241,16 @@ export default class PurchaseListView {
 
         _dist = this.dragRect.y - _dragStartPos;
         if(this._slidingEnable) this._sliderMoving();
+
+    }
+
+    _ppiyoChange() {
+        if(this._ppiyoFaceChange) return;
+
+        this._ppiyoFaceChange = true;
+        // if(this.ppiyo) this.ppiyo._destroy();
+        // this.ppiyo = new SeparateAnimation(this._game, this._key, 'purchase_ppiyo_complete_', 848, 332, 1, 2, '', 0, 4, true);
+        this.ppiyo._frameChange('purchase_ppiyo_complete_', 1, 2, '', 0, 6, true);
 
     }
 

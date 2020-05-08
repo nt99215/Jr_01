@@ -6,7 +6,7 @@ import RollingBoard from "./RollingBoard";
 
 let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
 const minimumYpos = 550;
-const speed = 5;
+const speed = 3;
 
 
 export default class Corner {
