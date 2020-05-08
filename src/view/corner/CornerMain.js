@@ -138,7 +138,11 @@ export default class CornerMain{
     _removeCorner(counterButtonVisible = false) {
 
         SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
-        if(this._corner) this._corner._destroy();
+        if(this._corner)
+        {
+            this._corner._destroy();
+            this._corner = null;
+        }
         if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if(this._ppiyoCart) this._ppiyoCart._visible(false);
         if(GameConfig.BACK_BUTTON) GameConfig.BACK_BUTTON.visible = true;

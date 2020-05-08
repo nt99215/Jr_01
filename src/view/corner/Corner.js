@@ -6,7 +6,7 @@ import RollingBoard from "./RollingBoard";
 
 let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
 const minimumYpos = 550;
-const speed = 3;
+const speed = 5;
 
 
 export default class Corner {
@@ -44,8 +44,7 @@ export default class Corner {
         this._bgGroup.addChild(this._backGround);
 
         let headArr = this._category.rollingButtonList[0];
-        console.log(headArr);
-        let head = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr);
+        let head = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
         boardArr.push(head);
         head._board.x = 294;
         head._board.y = 720 - head._board.height;
@@ -53,7 +52,6 @@ export default class Corner {
        for(let i = 1; i <= this._category.totalDisplayBoard; i++)
        {
            let arr = this._category.rollingButtonList[i];
-           console.log(arr);
            let board = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
            boardArr.push(board);
            boardArr[i]._board.y = 720 - boardArr[i]._board.height;
@@ -74,6 +72,7 @@ export default class Corner {
 
     _moving() {
 
+        // console.log(this._key);
         for(let i = 0 ; i < boardArr.length; i++)
         {
             boardArr[i]._board.x -= speed;
@@ -105,43 +104,44 @@ export default class Corner {
     _categoryButtonGenerate() {
 
         let list = this._category.itemList;
-
-        for(let obj in list)
-        {
-            let asset = 'area_' + list[obj].item;
-            let xPos = list[obj].xPos;
-            let yPos = list[obj].yPos;
-            let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
-            this._gameGroup.addChild(btn);
-            btn.x = xPos;
-            btn.y = yPos;
-            btn.tint = 0xffcc00;
-            btn.alpha = 0;
-            btn.inputEnabled = true;
-            // btn.input.enableDrag();
-            // btn.events.onDragStart.add(this._startDrag, this);
-            btn.events.onInputDown.add(this._itemSelect, this);
-            // btn.events.onInputDown.add(this._onDown, this);
-            // btn.events.onInputUp.add(this._onUp, this);
-            btn.input.pixelPerfectOver = true;
-            btn.input.pixelPerfectClick = true;
-            btnArr.push(btn);
-        }
-
         for(let obj in list)
         {
             let asset = list[obj].item;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
+            dragObj.item = asset;
             this._gameGroup.addChild(dragObj);
-            // dragObj.visible = false;
+            dragObj.visible = false;
             dragObjArr.push(dragObj);
+        }
+
+       // console.log(boardArr)
+        for(let i = 0; i < boardArr.length; i++)
+        {
+            for(let j = 0; j < boardArr[i]._categoryButton.length; j++)
+            {
+                let btn = boardArr[i]._categoryButton[j];
+                btn.inputEnabled = true;
+                btn.events.onInputDown.add(this._itemSelect, this);
+                btn.input.pixelPerfectOver = true;
+                btn.input.pixelPerfectClick = true;
+
+            }
         }
 
     }
 
+    _indexCheck(obj) {
+
+        let name = obj.categoryName;
+        let num = 0;
+        for(let i = 0; i < dragObjArr.length; i++)
+            if(dragObjArr[i].item === name) num = i;
+        return num;
+    }
+
     _itemSelect(obj) {
 
-        let num = btnArr.indexOf(obj);
+        let num = this._indexCheck(obj);
         let currentObj = dragObjArr[num];
         startX = this._game.input.x - this._gameGroup.x;
         // startX = this._game.input.x;
@@ -154,7 +154,6 @@ export default class Corner {
                 dragObjArr[i].visible = false;
                 // dragObjArr[i].inputEnabled = false;
             }
-
         }
 
         // currentObj.alpha = 1;

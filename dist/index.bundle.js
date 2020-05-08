@@ -1420,7 +1420,7 @@ class Intro {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
@@ -1886,7 +1886,10 @@ class Categories {
             backGroundColor: 0x82d3e6,
             backGroundAsset: ['vegetable'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_VEGETABLE,
-            itemList: [{ item: 'apple', price: '1000', xPos: 1111, yPos: 211 }, { item: 'carrot', price: '500', xPos: 487, yPos: 177 }, { item: 'grape', price: '1500', xPos: 1133, yPos: 393 }, { item: 'onion', price: '500', xPos: 68, yPos: 393 }, { item: 'radish', price: '500', xPos: 175, yPos: 149 }, { item: 'strawberry', price: '2000', xPos: 1404, yPos: 241 }, { item: 'sweetPotato', price: '500', xPos: 404, yPos: 392 }, { item: 'welshonion', price: '1000', xPos: 776, yPos: 139 }]
+            displayBoardHead: true,
+            totalDisplayBoard: 5,
+            itemList: [{ item: 'apple', price: '1000', xPos: 1111, yPos: 211 }, { item: 'carrot', price: '500', xPos: 487, yPos: 177 }, { item: 'grape', price: '1500', xPos: 1133, yPos: 393 }, { item: 'onion', price: '500', xPos: 68, yPos: 393 }, { item: 'radish', price: '500', xPos: 175, yPos: 149 }, { item: 'strawberry', price: '2000', xPos: 1404, yPos: 241 }, { item: 'sweetPotato', price: '500', xPos: 404, yPos: 392 }, { item: 'welshonion', price: '1000', xPos: 776, yPos: 139 }],
+            rollingButtonList: [['radish', 'onion'], ['carrot', 'sweetPotato'], ['welshonion'], ['apple', 'grape'], ['strawberry'], ['radish', 'onion']]
 
         };
     }
@@ -1898,7 +1901,10 @@ class Categories {
             backGroundColor: 0x67cb59,
             backGroundAsset: ['seafood'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_SEAFOOD,
-            itemList: [{ item: 'abalone', price: '1500', xPos: 1147, yPos: 409 }, { item: 'crab', price: '1000', xPos: 1413, yPos: 208 }, { item: 'mackerel', price: '1000', xPos: 426, yPos: 213 }, { item: 'shell', price: '1000', xPos: 816, yPos: 183 }, { item: 'shrimp', price: '1000', xPos: 781, yPos: 361 }, { item: 'squid', price: '1000', xPos: 1120, yPos: 207 }]
+            displayBoardHead: false,
+            totalDisplayBoard: 8,
+            itemList: [{ item: 'abalone', price: '1500', xPos: 1147, yPos: 409 }, { item: 'crab', price: '1000', xPos: 1413, yPos: 208 }, { item: 'mackerel', price: '1000', xPos: 426, yPos: 213 }, { item: 'shell', price: '1000', xPos: 816, yPos: 183 }, { item: 'shrimp', price: '1000', xPos: 781, yPos: 361 }, { item: 'squid', price: '1000', xPos: 1120, yPos: 207 }],
+            rollingButtonList: [[], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab'], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab']]
 
         };
     }
@@ -1910,7 +1916,10 @@ class Categories {
             backGroundColor: 0xe88baa,
             backGroundAsset: ['meat'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_MEAT,
-            itemList: [{ item: 'drumstick', price: '1500', xPos: 1391, yPos: 198 }, { item: 'chicken', price: '2000', xPos: 1361, yPos: 396 }, { item: 'tenderloin', price: '3000', xPos: 831, yPos: 217 }, { item: 'sirloin', price: '3000', xPos: 829, yPos: 415 }, { item: 'bacon', price: '1500', xPos: 283, yPos: 216 }, { item: 'boiledPork', price: '1500', xPos: 267, yPos: 412 }]
+            displayBoardHead: false,
+            totalDisplayBoard: 6,
+            itemList: [{ item: 'drumstick', price: '1500', xPos: 1391, yPos: 198 }, { item: 'chicken', price: '2000', xPos: 1361, yPos: 396 }, { item: 'tenderloin', price: '3000', xPos: 831, yPos: 217 }, { item: 'sirloin', price: '3000', xPos: 829, yPos: 415 }, { item: 'bacon', price: '1500', xPos: 283, yPos: 216 }, { item: 'boiledPork', price: '1500', xPos: 267, yPos: 412 }],
+            rollingButtonList: [[], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken'], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken']]
 
         };
     }
@@ -1922,7 +1931,10 @@ class Categories {
             backGroundColor: 0x31be8e,
             backGroundAsset: ['necessary_1', 'necessary_2'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_NECESSARY,
-            itemList: [{ item: 'cleanser', price: '1500', xPos: 1310, yPos: 211 }, { item: 'shampoo', price: '1000', xPos: 182, yPos: 220 }, { item: 'soap', price: '500', xPos: 765, yPos: 240 }, { item: 'brush', price: '500', xPos: 778, yPos: 422 }, { item: 'paste', price: '500', xPos: 192, yPos: 417 }, { item: 'tissue', price: '1000', xPos: 1313, yPos: 415 }, { item: 'wetTissue', price: '1000', xPos: 1988, yPos: 223 }]
+            displayBoardHead: false,
+            totalDisplayBoard: 4,
+            itemList: [{ item: 'cleanser', price: '1500', xPos: 1310, yPos: 211 }, { item: 'shampoo', price: '1000', xPos: 182, yPos: 220 }, { item: 'soap', price: '500', xPos: 765, yPos: 240 }, { item: 'brush', price: '500', xPos: 778, yPos: 422 }, { item: 'paste', price: '500', xPos: 192, yPos: 417 }, { item: 'tissue', price: '1000', xPos: 1313, yPos: 415 }, { item: 'wetTissue', price: '1000', xPos: 1988, yPos: 223 }],
+            rollingButtonList: [[], ['shampoo', 'paste'], ['soap', 'brush'], ['cleanser', 'tissue'], ['wetTissue']]
 
         };
     }
@@ -1934,7 +1946,10 @@ class Categories {
             backGroundColor: 0xf49e4b,
             backGroundAsset: ['dairy_1', 'dairy_2'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_DAIRY,
-            itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409 }]
+            displayBoardHead: false,
+            totalDisplayBoard: 4,
+            itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409 }],
+            rollingButtonList: [[], ['milk', 'chocolateMilk'], ['egg', 'strawberryMilk'], ['bananaMilk'], ['cheese', 'yogurt']]
 
         };
     }
@@ -1946,7 +1961,10 @@ class Categories {
             backGroundColor: 0xd58fe9,
             backGroundAsset: ['snack'],
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_SNACK,
-            itemList: [{ item: 'candy', price: '1000', xPos: 51, yPos: 235 }, { item: 'chocolate', price: '1000', xPos: 325, yPos: 239 }, { item: 'iceCream', price: '1000', xPos: 623, yPos: 238 }, { item: 'jelly', price: '1000', xPos: 1220, yPos: 249 }]
+            displayBoardHead: true,
+            totalDisplayBoard: 8,
+            itemList: [{ item: 'candy', price: '1000', xPos: 51, yPos: 235 }, { item: 'chocolate', price: '1000', xPos: 325, yPos: 239 }, { item: 'iceCream', price: '1000', xPos: 623, yPos: 238 }, { item: 'jelly', price: '1000', xPos: 1220, yPos: 249 }],
+            rollingButtonList: [['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy']]
 
         };
     }
@@ -1970,7 +1988,7 @@ class Categories {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 
@@ -1991,24 +2009,28 @@ class PurchaseList {
 
     purchaseList() {
         let arr = [];
+        //item shuffle method - 요청으로 제거됨
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
-        // let rN = this._randomNumber(5, 10);
+        let rN = this._randomNumber(0, _shuffleArray.length - 1);
         for (let i = 0; i < _shuffleArray.length; i++) {
-            let array = _shuffleArray[i].itemList;
-            let category = _shuffleArray[i].category;
-            array = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(array);
-            let pickNum = this._randomNumber(1, 2);
-            let item = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.pickNow(array, pickNum);
-            let quantity = this._randomNumber(1, 3);
+            //카테고리 랜덤 제거
+            if (rN !== i) {
+                let array = _shuffleArray[i].itemList;
+                let category = _shuffleArray[i].category;
+                array = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(array);
+                let pickNum = this._randomNumber(1, 2);
+                let item = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.pickNow(array, pickNum);
+                let quantity = this._randomNumber(1, 3);
 
-            for (let j = 0; j < item.length; j++) {
-                if (array[j] !== undefined && array[j] != null) {
-                    array[j].quantity = quantity;
-                    array[j].category = category;
-                    __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
-                    __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_QUANTITY += array[j].quantity;
-                    arr.push(array[j]);
+                for (let j = 0; j < item.length; j++) {
+                    if (array[j] !== undefined && array[j] != null) {
+                        array[j].quantity = quantity;
+                        array[j].category = category;
+                        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
+                        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_QUANTITY += array[j].quantity;
+                        arr.push(array[j]);
+                    }
                 }
             }
         }
@@ -2118,7 +2140,7 @@ LoadManager.instance = null;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(19);
@@ -115752,7 +115774,7 @@ process.umask = function() { return 0; };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__const_ResourceKey__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__const_GameInfo__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JuniverMart__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__const_PreloadData__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__const_PreloadData__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_Intro__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_ResultView__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_GameConfig__ = __webpack_require__(0);
@@ -116610,9 +116632,9 @@ class IntroEffect {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_corner_purchase_PurchaseList__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_corner_checkout_CalculatePos__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_corner_checkout_PaymentPos__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_corner_checkout_CalculatePos__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_corner_checkout_PaymentPos__ = __webpack_require__(49);
 
 
 
@@ -116777,8 +116799,8 @@ class CornerManager extends Phaser.Group {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Corner__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__object_PpiyoCart__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__purchase_PurchaseSlider__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__purchase_PurchaseList__ = __webpack_require__(17);
 
 
@@ -116905,7 +116927,10 @@ class CornerMain {
     _removeCorner(counterButtonVisible = false) {
 
         __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
-        if (this._corner) this._corner._destroy();
+        if (this._corner) {
+            this._corner._destroy();
+            this._corner = null;
+        }
         if (this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if (this._ppiyoCart) this._ppiyoCart._visible(false);
         if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON) __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON.visible = true;
@@ -117080,13 +117105,16 @@ class CornerButton {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__RollingBoard__ = __webpack_require__(38);
 
 
 
 
 
-let btnArr, dragObjArr, startX, startY, displayTween, baseWidth, centerPos, activePoint;
+
+let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
 const minimumYpos = 550;
+const speed = 5;
 
 class Corner {
     constructor(game, bgGroup, gameGroup, category, parent) {
@@ -117098,7 +117126,11 @@ class Corner {
         this._parent = parent;
         this._game.input.maxPointers = 1;
         this._currentObj = null;
+        this._headRemove = false;
+        this._totalWidth = 0;
+        this._pickUp = false;
 
+        boardArr = [];
         btnArr = [];
         dragObjArr = [];
         startX = 0;
@@ -117110,73 +117142,97 @@ class Corner {
 
     _init() {
 
+        //BACKGROUND
         this._backGround = this._game.add.graphics(0, 0);
         this._backGround.beginFill(this._category.backGroundColor, 1);
         this._backGround.drawRect(0, 0, 1280, 720);
         this._backGround.endFill();
         this._bgGroup.addChild(this._backGround);
 
-        for (let i = 0; i < this._category.backGroundAsset.length; i++) {
-            let asset = 'corner_' + this._category.backGroundAsset[i];
-            let yPos = this._category.displayPosition.displayBarY;
-            let base = new Phaser.Image(this._game, 0 + baseWidth, yPos, this._key, asset);
-            baseWidth += base.width;
-            this._gameGroup.addChild(base);
+        let headArr = this._category.rollingButtonList[0];
+        let head = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
+        boardArr.push(head);
+        head._board.x = 294;
+        head._board.y = 720 - head._board.height;
+
+        for (let i = 1; i <= this._category.totalDisplayBoard; i++) {
+            let arr = this._category.rollingButtonList[i];
+            let board = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+            boardArr.push(board);
+            boardArr[i]._board.y = 720 - boardArr[i]._board.height;
+            boardArr[1]._board.x = head._board.x + head._board.width;
+            this._totalWidth += boardArr[i]._board.width;
+
+            if (i >= 2) boardArr[i]._board.x = boardArr[i - 1]._board.x + boardArr[i - 1]._board.width;
+
+            boardArr[i].btnPosReset();
         }
+
+        // this._totalWidth -= speed;
 
         this._categoryButtonGenerate();
         this._moving();
     }
 
     _moving() {
-        this._gameGroup.x = this._category.displayPosition.groupStartX;
-        let endX = this._category.displayPosition.groupEndX;
-        let duration = Math.abs(endX) * 10;
 
-        // this._gameGroup.x = -420;
-        displayTween = this._game.add.tween(this._gameGroup).to({ x: endX }, duration, Phaser.Easing.Quartic.None, true, 1000, 1000, true);
-        displayTween.yoyo(true, 1000);
+        // console.log(this._key);
+        for (let i = 0; i < boardArr.length; i++) {
+            boardArr[i]._board.x -= speed;
+
+            if (boardArr[i]._board.x < -boardArr[i]._board.width) {
+                if (i === 0 && !this._headRemove) {
+                    // boardArr[0]._destroy();
+                    // boardArr.splice(0, 1);
+                    this._headRemove = true;
+                } else boardArr[i]._board.x += this._totalWidth;
+
+                boardArr[i]._board.visible = false;
+            }
+
+            if (boardArr[i]._board.x < this._game.world.width) {
+                if (i !== 0) boardArr[i]._board.visible = true;
+            }
+
+            boardArr[i].btnPosReset();
+        }
     }
 
     _categoryButtonGenerate() {
 
         let list = this._category.itemList;
-
-        for (let obj in list) {
-            let asset = 'area_' + list[obj].item;
-            let xPos = list[obj].xPos;
-            let yPos = list[obj].yPos;
-            let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
-            this._gameGroup.addChild(btn);
-            btn.x = xPos;
-            btn.y = yPos;
-            btn.tint = 0xffcc00;
-            btn.alpha = 0;
-            btn.inputEnabled = true;
-            // btn.input.enableDrag();
-            // btn.events.onDragStart.add(this._startDrag, this);
-            btn.events.onInputDown.add(this._itemSelect, this);
-            // btn.events.onInputDown.add(this._onDown, this);
-            // btn.events.onInputUp.add(this._onUp, this);
-            btn.input.pixelPerfectOver = true;
-            btn.input.pixelPerfectClick = true;
-            btnArr.push(btn);
-        }
-
         for (let obj in list) {
             let asset = list[obj].item;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
+            dragObj.item = asset;
             this._gameGroup.addChild(dragObj);
             dragObj.visible = false;
             dragObjArr.push(dragObj);
         }
+
+        // console.log(boardArr)
+        for (let i = 0; i < boardArr.length; i++) {
+            for (let j = 0; j < boardArr[i]._categoryButton.length; j++) {
+                let btn = boardArr[i]._categoryButton[j];
+                btn.inputEnabled = true;
+                btn.events.onInputDown.add(this._itemSelect, this);
+                btn.input.pixelPerfectOver = true;
+                btn.input.pixelPerfectClick = true;
+            }
+        }
+    }
+
+    _indexCheck(obj) {
+
+        let name = obj.categoryName;
+        let num = 0;
+        for (let i = 0; i < dragObjArr.length; i++) if (dragObjArr[i].item === name) num = i;
+        return num;
     }
 
     _itemSelect(obj) {
 
-        if (displayTween) displayTween.pause();
-
-        let num = btnArr.indexOf(obj);
+        let num = this._indexCheck(obj);
         let currentObj = dragObjArr[num];
         startX = this._game.input.x - this._gameGroup.x;
         // startX = this._game.input.x;
@@ -117199,16 +117255,17 @@ class Corner {
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
         this._currentObj = currentObj;
+        this._pickUp = true;
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
     _stopDrag(obj) {
 
+        this._pickUp = false;
         this._currentObj = null;
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
-        if (displayTween) displayTween.resume();
 
         let correct;
         if (this._overLapCheck(obj)) {
@@ -117282,6 +117339,8 @@ class Corner {
     }
 
     _update() {
+
+        if (!this._pickUp) this._moving();
         // console.log(this._currentObj.input.activePointer);
         if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if (this._currentObj) {
@@ -117300,10 +117359,11 @@ class Corner {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
         for (let i = 0; i < btnArr.length; i++) btnArr[i].destroy();
         for (let i = 0; i < dragObjArr.length; i++) dragObjArr[i].destroy();
-        if (displayTween) displayTween.stop();
+        for (let i = 0; i < boardArr.length; i++) boardArr[i]._destroy();
         this._gameGroup.x = 0;
         btnArr = [];
         dragObjArr = [];
+        boardArr = [];
     }
 
 }
@@ -117315,9 +117375,69 @@ class Corner {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class RollingBoard {
+    constructor(game, group, key, asset, num, arr = null, suffix = '') {
+        this._game = game;
+        this._gameGroup = group;
+        this._key = key;
+        this._category = asset;
+        this._num = num;
+        this._suffix = suffix;
+        this._board = null;
+        this._categoryButton = [];
+        this._arr = arr;
+        this._init();
+    }
+
+    _init() {
+
+        let assetName = 'corner_' + this._category + '_' + this._num;
+        this._board = new Phaser.Image(this._game, 0, 0, this._key, assetName);
+        this._gameGroup.addChild(this._board);
+
+        if (this._arr === null) return;
+
+        for (let i = 0; i < this._arr.length; i++) {
+            let asset = 'area_' + this._arr[i] + this._suffix;
+            let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
+            btn.categoryName = this._arr[i];
+            // btn.categoryNumber = i;
+            btn.alpha = 0;
+            this._categoryButton.push(btn);
+            this._gameGroup.addChild(btn);
+        }
+    }
+
+    btnPosReset() {
+        for (let i = 0; i < this._categoryButton.length; i++) {
+            this._categoryButton[i].x = this._board.x;
+            this._categoryButton[i].y = this._board.y;
+            this._categoryButton[i].visible = this._board.visible;
+        }
+    }
+
+    _destroy() {
+        // this._gameGroup.removeChildren(0, this._gameGroup.length);
+        if (this._board) this._board.destroy();
+        for (let i = 0; i < this._categoryButton.length; i++) {
+            this._gameGroup.removeChild(this._categoryButton[i]);
+            this._categoryButton[i].destroy();
+        }
+        this._categoryButton = [];
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = RollingBoard;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SeparateAnimation__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__FilledObject__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__FilledObject__ = __webpack_require__(40);
 
 
 
@@ -117449,7 +117569,7 @@ class PpiyoCart {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117479,7 +117599,7 @@ class FilledObject {
         _count++;
         let asset = 'filled_' + __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_FILL_OBJECT;
         let xPos = this._xPosition();
-        let img = new Phaser.Image(this._game, xPos, 720, this._key, asset);
+        let img = new Phaser.Image(this._game, xPos, this._game.world.height, this._key, asset);
         img.y = this._yPosition(img);
         this._gameGroup.addChild(img);
         _objectArr.push(img);
@@ -117523,13 +117643,13 @@ class FilledObject {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
 
@@ -117721,7 +117841,7 @@ class PurchaseSlider {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117812,7 +117932,7 @@ class PurchaseItem {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117930,14 +118050,14 @@ class ShuffleRandom {
 ShuffleRandom = null;
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(3);
 
@@ -118184,7 +118304,7 @@ class PurchaseListView {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118238,14 +118358,14 @@ class PurchaseItemForListView {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PriceCountForPos__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PriceCountForPos__ = __webpack_require__(48);
 
 
 
@@ -118405,7 +118525,7 @@ class CalculatePos {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118439,7 +118559,7 @@ class CalculatePosItem {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118488,13 +118608,13 @@ class PriceCountForPos {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(50);
 
 
 
@@ -118747,7 +118867,7 @@ class PaymentPos {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118821,7 +118941,7 @@ class PriceCount {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118984,7 +119104,7 @@ class BackgroundEffect extends Phaser.Group {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119134,7 +119254,7 @@ class PreloadResource {
 PreloadResource.instance = null;
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

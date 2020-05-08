@@ -1,10 +1,11 @@
 export default class RollingBoard {
-    constructor(game, group, key, asset, num, arr = null) {
+    constructor(game, group, key, asset, num, arr = null, suffix = '') {
         this._game = game;
         this._gameGroup = group;
         this._key = key;
         this._category = asset;
         this._num = num;
+        this._suffix = suffix;
         this._board = null;
         this._categoryButton = [];
         this._arr = arr;
@@ -22,8 +23,11 @@ export default class RollingBoard {
 
         for(let i = 0; i < this._arr.length; i++)
         {
-            let asset = 'area_' + this._arr[i];
+            let asset = 'area_' + this._arr[i] + this._suffix;
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
+            btn.categoryName = this._arr[i];
+            // btn.categoryNumber = i;
+            btn.alpha = 0;
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
         }

@@ -23,7 +23,7 @@ export default class Categories {
                 {item:'welshonion', price:'1000', xPos:776, yPos:139},
             ],
             rollingButtonList:[
-                ['radish_head', 'onion_head'],
+                ['radish', 'onion'],
                 ['carrot', 'sweetPotato'],
                 ['welshonion'],
                 ['apple', 'grape'],
@@ -170,7 +170,7 @@ export default class Categories {
                 {item:'jelly', price:'1000', xPos:1220, yPos:249},
             ],
             rollingButtonList:[
-                ['candy_head'],
+                ['candy'],
                 ['chocolate'],
                 ['iceCream'],
                 ['jelly'],
