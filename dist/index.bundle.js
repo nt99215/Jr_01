@@ -118288,9 +118288,14 @@ class PurchaseListView {
         if (this._ppiyoFaceChange) return;
 
         this._ppiyoFaceChange = true;
-        // if(this.ppiyo) this.ppiyo._destroy();
-        // this.ppiyo = new SeparateAnimation(this._game, this._key, 'purchase_ppiyo_complete_', 848, 332, 1, 2, '', 0, 4, true);
-        this.ppiyo._frameChange('purchase_ppiyo_complete_', 1, 2, '', 0, 6, true);
+        if (this.ppiyo) {
+            this._topGroup.removeChild(this.ppiyo);
+            this.ppiyo._destroy();
+        }
+        this.ppiyo = new __WEBPACK_IMPORTED_MODULE_0__object_SeparateAnimation__["a" /* default */](this._game, this._key, 'purchase_ppiyo_complete_', 848, 332, 1, 2, '', 0, 4, true);
+        this._topGroup.addChild(this.ppiyo);
+        this.ppiyo._play();
+        // this.ppiyo._frameChange('purchase_ppiyo_complete_', 1, 2, '', 0, 6, true);
     }
 
     _gameStart() {
