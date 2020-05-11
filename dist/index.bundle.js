@@ -117578,15 +117578,17 @@ class PpiyoCart {
 
 
 
-const _yPos = [600, 670, 760];
-const _minimumX = 390;
-const _maximumX = 580;
+const _xPos = [410, 480, 550, 620];
+const _yPos = [610, 690];
+const _bottomMax = _xPos.length;
 let _objectArr, _count;
+const _maxCount = 4;
 class FilledObject {
     constructor(game, group) {
         this._game = game;
         this._gameGroup = group;
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
+        this._takeDown = false;
         _objectArr = [];
         _count = 0;
         this._init();
@@ -117596,11 +117598,15 @@ class FilledObject {
 
     filledObject() {
 
-        _count++;
+        if (_count >= 4) {
+            this._objectTakeDown();
+            _count = 0;
+        }
         let asset = 'filled_' + __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_FILL_OBJECT;
-        let xPos = this._xPosition();
+        let xPos = _xPos[_count];
         let img = new Phaser.Image(this._game, xPos, this._game.world.height, this._key, asset);
-        img.y = this._yPosition(img);
+        img.y = _yPos[0];
+        img.scale.setTo(1.3, 1.3);
         this._gameGroup.addChild(img);
         _objectArr.push(img);
 
@@ -117608,6 +117614,15 @@ class FilledObject {
         // img.inputEnabled = true;
         // img.input.enableDrag();
         // img.events.onDragUpdate.add(this._startDrag, this);
+
+        _count++;
+    }
+
+    _objectTakeDown() {
+        for (let i = 0; i < _objectArr.length; i++) {
+            let obj = _objectArr[i];
+            this._game.add.tween(obj).to({ y: _yPos[1] }, 300, Phaser.Easing.Quartic.Out, true);
+        }
     }
 
     _xPosition() {
@@ -117621,7 +117636,7 @@ class FilledObject {
         let rN = this._game.rnd.between(-5, 5);
         let term = 100 - obj.height;
         let yPos = _yPos[1];
-        if (_count > 8) yPos = _yPos[0] + term;
+        if (_count > _bottomMax) yPos = _yPos[0] + term;
         return yPos + rN;
     }
 
