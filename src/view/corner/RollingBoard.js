@@ -1,8 +1,9 @@
 export default class RollingBoard {
-    constructor(game, group, key, asset, num, arr = null, suffix = '') {
+    constructor(game, bgGroup, group, key, asset, num, arr = null, suffix = '') {
         this._game = game;
+        this._bgGroup = bgGroup;
         this._gameGroup = group;
-        this._categoryGroup = this._game.add.group();
+        // this._categoryGroup = this._game.add.group();
         this._key = key;
         this._category = asset;
         this._num = num;
@@ -19,7 +20,7 @@ export default class RollingBoard {
 
         let assetName = 'corner_' + this._category + '_' + this._num;
         this._board = new Phaser.Image(this._game, 0, 0, this._key, assetName);
-        this._gameGroup.addChild(this._board);
+        this._bgGroup.addChild(this._board);
 
         if(this._arr === null) return;
 
@@ -28,8 +29,6 @@ export default class RollingBoard {
             let asset = 'area_' + this._arr[i] + this._suffix;
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
             btn.categoryName = this._arr[i];
-            // console.log(btn.categoryName);
-            // btn.categoryNumber = i;
             btn.alpha = 0;
 
             let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
@@ -40,7 +39,7 @@ export default class RollingBoard {
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
             this._categoryImage.push(categoryImage);
-            this._categoryGroup.addChild(categoryImage);
+            this._gameGroup.addChild(categoryImage);
         }
 
     }
@@ -63,7 +62,13 @@ export default class RollingBoard {
             this._gameGroup.removeChild(this._categoryButton[i]);
             this._categoryButton[i].destroy();
         }
-        this._categoryButton = [];
+
+        for(let i = 0; i < this._categoryImage.length; i++)
+        {
+            this._gameGroup.removeChild(this._categoryImage[i]);
+            this._categoryImage[i].destroy();
+        }
+        this._categoryImage = [];
     }
 
 }

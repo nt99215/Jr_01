@@ -9,7 +9,7 @@ const _heartAsset = [
     {asset:'effect_heart_yellow', xPos:118, yPos:440, resultXPos:96, resultYPos:416}
 ];
 export default class PpiyoCart{
-    constructor(game) {
+    constructor(game,group) {
         this._game = game;
         this._filledGroup = this._game.add.group();
         this._gameGroup = this._game.add.group();

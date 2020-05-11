@@ -44,7 +44,7 @@ export default class Corner {
         this._bgGroup.addChild(this._backGround);
 
         let headArr = this._category.rollingButtonList[0];
-        let head = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
+        let head = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
         boardArr.push(head);
         head._board.x = 294;
         head._board.y = 720 - head._board.height;
@@ -52,7 +52,7 @@ export default class Corner {
        for(let i = 1; i <= this._category.totalDisplayBoard; i++)
        {
            let arr = this._category.rollingButtonList[i];
-           let board = new RollingBoard(this._game, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+           let board = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
            boardArr.push(board);
            boardArr[i]._board.y = 720 - boardArr[i]._board.height;
            boardArr[1]._board.x = head._board.x + head._board.width;
@@ -144,43 +144,13 @@ export default class Corner {
 
     _itemSelect(obj) {
 
-       /* let num = this._indexCheck(obj);
-        let currentObj = dragObjArr[num];
-        startX = this._game.input.x - this._gameGroup.x;
-        // startX = this._game.input.x;
-        startY = this._game.input.y;
-        for(let i = 0; i<dragObjArr.length; i++)
-        {
-            if(i !== num)
-            {
-                // dragObjArr[i].alpha = 0;
-                dragObjArr[i].visible = false;
-                // dragObjArr[i].inputEnabled = false;
-            }
-        }
-
-        // currentObj.alpha = 1;
-        currentObj.visible = true;
-        currentObj.x = this._game.input.x - this._gameGroup.x;
-        currentObj.y = this._game.input.y;
-        currentObj.x -= currentObj.width/2;
-        currentObj.y -= currentObj.height/2;
-        currentObj.inputEnabled = true;
-        currentObj.input.enableDrag();
-        currentObj.input.startDrag(this._game.input.activePointer);
-        this._currentObj = currentObj;
-        this._pickUp = true;*/
-
         this._pickUp = true;
         if(! obj.img.visible) obj.img.visible = true;
         if(obj.img.alpha < 1) obj.img.alpha = 1;
         obj.bringToTop();
 
         startX = this._game.input.x - this._gameGroup.x;
-        // startX = this._game.input.x;
         startY = this._game.input.y;
-
-        // console.log(startX, startY);
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
@@ -189,13 +159,16 @@ export default class Corner {
 
     _objRestore(obj, correct = false) {
 
-        if(correct) this._game.add.tween(obj.img).to({x: centerPos, y: minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
+        if(correct)
+        {
+            this._game.add.tween(obj.img).to({x: centerPos, y: minimumYpos + 200, alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
+        }
         else
         {
             let tw = this._game.add.tween(obj.img).to({x: startX - obj.img.width, y: startY - obj.img.height/2}, 300, Phaser.Easing.Quartic.Out, true);
             // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
             // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
-            tw.onComplete.addOnce(()=> {
+            tw.onComplete.add(()=> {
                 obj.img.visible = false;
             });
         }
@@ -290,8 +263,7 @@ export default class Corner {
     _update() {
 
         if(! this._pickUp) this._moving();
-        // console.log(this._currentObj.input.activePointer);
-        if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+      /*  if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if(this._currentObj)
         {
             activePoint = this._currentObj.input.update(this._game.input.activePointer);
@@ -300,9 +272,8 @@ export default class Corner {
             {
                 this._stopDrag(this._currentObj);
             }
-            // console.log(activePoint);
         }
-
+*/
     }
 
 

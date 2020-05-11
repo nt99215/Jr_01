@@ -117150,14 +117150,14 @@ class Corner {
         this._bgGroup.addChild(this._backGround);
 
         let headArr = this._category.rollingButtonList[0];
-        let head = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
+        let head = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
         boardArr.push(head);
         head._board.x = 294;
         head._board.y = 720 - head._board.height;
 
         for (let i = 1; i <= this._category.totalDisplayBoard; i++) {
             let arr = this._category.rollingButtonList[i];
-            let board = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+            let board = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
             boardArr.push(board);
             boardArr[i]._board.y = 720 - boardArr[i]._board.height;
             boardArr[1]._board.x = head._board.x + head._board.width;
@@ -117235,53 +117235,26 @@ class Corner {
 
     _itemSelect(obj) {
 
-        /* let num = this._indexCheck(obj);
-         let currentObj = dragObjArr[num];
-         startX = this._game.input.x - this._gameGroup.x;
-         // startX = this._game.input.x;
-         startY = this._game.input.y;
-         for(let i = 0; i<dragObjArr.length; i++)
-         {
-             if(i !== num)
-             {
-                 // dragObjArr[i].alpha = 0;
-                 dragObjArr[i].visible = false;
-                 // dragObjArr[i].inputEnabled = false;
-             }
-         }
-           // currentObj.alpha = 1;
-         currentObj.visible = true;
-         currentObj.x = this._game.input.x - this._gameGroup.x;
-         currentObj.y = this._game.input.y;
-         currentObj.x -= currentObj.width/2;
-         currentObj.y -= currentObj.height/2;
-         currentObj.inputEnabled = true;
-         currentObj.input.enableDrag();
-         currentObj.input.startDrag(this._game.input.activePointer);
-         this._currentObj = currentObj;
-         this._pickUp = true;*/
-
         this._pickUp = true;
         if (!obj.img.visible) obj.img.visible = true;
         if (obj.img.alpha < 1) obj.img.alpha = 1;
         obj.bringToTop();
 
         startX = this._game.input.x - this._gameGroup.x;
-        // startX = this._game.input.x;
         startY = this._game.input.y;
-
-        // console.log(startX, startY);
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
     _objRestore(obj, correct = false) {
 
-        if (correct) this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200 }, 300, Phaser.Easing.Quartic.Out, true);else {
+        if (correct) {
+            this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200, alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true);
+        } else {
             let tw = this._game.add.tween(obj.img).to({ x: startX - obj.img.width, y: startY - obj.img.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
             // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
             // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
-            tw.onComplete.addOnce(() => {
+            tw.onComplete.add(() => {
                 obj.img.visible = false;
             });
         }
@@ -117361,16 +117334,16 @@ class Corner {
     _update() {
 
         if (!this._pickUp) this._moving();
-        // console.log(this._currentObj.input.activePointer);
-        if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
-        if (this._currentObj) {
-            activePoint = this._currentObj.input.update(this._game.input.activePointer);
-
-            if (!activePoint) {
-                this._stopDrag(this._currentObj);
-            }
-            // console.log(activePoint);
-        }
+        /*  if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+          if(this._currentObj)
+          {
+              activePoint = this._currentObj.input.update(this._game.input.activePointer);
+                if(! activePoint)
+              {
+                  this._stopDrag(this._currentObj);
+              }
+          }
+        */
     }
 
     _destroy() {
@@ -117396,10 +117369,11 @@ class Corner {
 
 "use strict";
 class RollingBoard {
-    constructor(game, group, key, asset, num, arr = null, suffix = '') {
+    constructor(game, bgGroup, group, key, asset, num, arr = null, suffix = '') {
         this._game = game;
+        this._bgGroup = bgGroup;
         this._gameGroup = group;
-        this._categoryGroup = this._game.add.group();
+        // this._categoryGroup = this._game.add.group();
         this._key = key;
         this._category = asset;
         this._num = num;
@@ -117415,7 +117389,7 @@ class RollingBoard {
 
         let assetName = 'corner_' + this._category + '_' + this._num;
         this._board = new Phaser.Image(this._game, 0, 0, this._key, assetName);
-        this._gameGroup.addChild(this._board);
+        this._bgGroup.addChild(this._board);
 
         if (this._arr === null) return;
 
@@ -117423,8 +117397,6 @@ class RollingBoard {
             let asset = 'area_' + this._arr[i] + this._suffix;
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
             btn.categoryName = this._arr[i];
-            // console.log(btn.categoryName);
-            // btn.categoryNumber = i;
             btn.alpha = 0;
 
             let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
@@ -117435,7 +117407,7 @@ class RollingBoard {
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
             this._categoryImage.push(categoryImage);
-            this._categoryGroup.addChild(categoryImage);
+            this._gameGroup.addChild(categoryImage);
         }
     }
 
@@ -117455,7 +117427,12 @@ class RollingBoard {
             this._gameGroup.removeChild(this._categoryButton[i]);
             this._categoryButton[i].destroy();
         }
-        this._categoryButton = [];
+
+        for (let i = 0; i < this._categoryImage.length; i++) {
+            this._gameGroup.removeChild(this._categoryImage[i]);
+            this._categoryImage[i].destroy();
+        }
+        this._categoryImage = [];
     }
 
 }
@@ -117477,7 +117454,7 @@ class RollingBoard {
 let _effectAssetArr;
 const _heartAsset = [{ asset: 'effect_heart_blue', xPos: 91, yPos: 408, resultXPos: 28, resultYPos: 352 }, { asset: 'effect_heart_red', xPos: 115, yPos: 413, resultXPos: 118, resultYPos: 358 }, { asset: 'effect_heart_yellow', xPos: 118, yPos: 440, resultXPos: 96, resultYPos: 416 }];
 class PpiyoCart {
-    constructor(game) {
+    constructor(game, group) {
         this._game = game;
         this._filledGroup = this._game.add.group();
         this._gameGroup = this._game.add.group();
