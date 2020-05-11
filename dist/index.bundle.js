@@ -117215,6 +117215,9 @@ class Corner {
             for (let j = 0; j < boardArr[i]._categoryButton.length; j++) {
                 let btn = boardArr[i]._categoryButton[j];
                 btn.inputEnabled = true;
+                btn.input.enableDrag();
+                btn.events.onDragUpdate.add(this._startDrag, this);
+                btn.events.onDragStop.add(this._stopDrag, this);
                 btn.events.onInputDown.add(this._itemSelect, this);
                 btn.input.pixelPerfectOver = true;
                 btn.input.pixelPerfectClick = true;
@@ -117232,58 +117235,54 @@ class Corner {
 
     _itemSelect(obj) {
 
-        let num = this._indexCheck(obj);
-        let currentObj = dragObjArr[num];
+        /* let num = this._indexCheck(obj);
+         let currentObj = dragObjArr[num];
+         startX = this._game.input.x - this._gameGroup.x;
+         // startX = this._game.input.x;
+         startY = this._game.input.y;
+         for(let i = 0; i<dragObjArr.length; i++)
+         {
+             if(i !== num)
+             {
+                 // dragObjArr[i].alpha = 0;
+                 dragObjArr[i].visible = false;
+                 // dragObjArr[i].inputEnabled = false;
+             }
+         }
+           // currentObj.alpha = 1;
+         currentObj.visible = true;
+         currentObj.x = this._game.input.x - this._gameGroup.x;
+         currentObj.y = this._game.input.y;
+         currentObj.x -= currentObj.width/2;
+         currentObj.y -= currentObj.height/2;
+         currentObj.inputEnabled = true;
+         currentObj.input.enableDrag();
+         currentObj.input.startDrag(this._game.input.activePointer);
+         this._currentObj = currentObj;
+         this._pickUp = true;*/
+
+        this._pickUp = true;
+        if (!obj.img.visible) obj.img.visible = true;
+        if (obj.img.alpha < 1) obj.img.alpha = 1;
+        obj.bringToTop();
+
         startX = this._game.input.x - this._gameGroup.x;
         // startX = this._game.input.x;
         startY = this._game.input.y;
-        for (let i = 0; i < dragObjArr.length; i++) {
-            if (i !== num) {
-                // dragObjArr[i].alpha = 0;
-                dragObjArr[i].visible = false;
-                // dragObjArr[i].inputEnabled = false;
-            }
-        }
 
-        // currentObj.alpha = 1;
-        currentObj.visible = true;
-        currentObj.x = this._game.input.x - this._gameGroup.x;
-        currentObj.y = this._game.input.y;
-        currentObj.x -= currentObj.width / 2;
-        currentObj.y -= currentObj.height / 2;
-        currentObj.inputEnabled = true;
-        currentObj.input.enableDrag();
-        currentObj.input.startDrag(this._game.input.activePointer);
-        this._currentObj = currentObj;
-        this._pickUp = true;
+        // console.log(startX, startY);
 
         __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__["a" /* default */].instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
     }
 
-    _stopDrag(obj) {
-
-        this._pickUp = false;
-        this._currentObj = null;
-
-        // console.log(parseInt(obj.x), parseInt(obj.y));
-
-        let correct;
-        if (this._overLapCheck(obj)) {
-            // console.log('hit~~~')
-            if (this._pushEnable(obj)) correct = true;else correct = false;
-
-            this._parent._ppiyoFeedBackPopUp(correct);
-        }
-
-        this._objRestore(obj, correct);
-    }
-
     _objRestore(obj, correct = false) {
 
-        if (correct) this._game.add.tween(obj).to({ x: centerPos, y: minimumYpos + 200 }, 300, Phaser.Easing.Quartic.Out, true);else {
-            let tw = this._game.add.tween(obj).to({ x: startX - obj.width / 2, y: startY - obj.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+        if (correct) this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200 }, 300, Phaser.Easing.Quartic.Out, true);else {
+            let tw = this._game.add.tween(obj.img).to({ x: startX - obj.img.width, y: startY - obj.img.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+            // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
+            // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.addOnce(() => {
-                obj.visible = false;
+                obj.img.visible = false;
             });
         }
     }
@@ -117324,7 +117323,28 @@ class Corner {
     _startDrag(obj) {
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
+        obj.img.x = this._game.input.x;
+        obj.img.y = this._game.input.y;
+        obj.img.x -= obj.img.width / 2;
+        obj.img.y -= obj.img.height / 2;
+    }
 
+    _stopDrag(obj) {
+
+        this._pickUp = false;
+        this._currentObj = null;
+
+        // console.log(parseInt(obj.x), parseInt(obj.y));
+
+        let correct;
+        if (this._overLapCheck(obj.img)) {
+            // console.log('hit~~~')
+            if (this._pushEnable(obj.img)) correct = true;else correct = false;
+
+            this._parent._ppiyoFeedBackPopUp(correct);
+        }
+
+        this._objRestore(obj, correct);
     }
 
     _dragUpdate(obj) {
@@ -117379,12 +117399,14 @@ class RollingBoard {
     constructor(game, group, key, asset, num, arr = null, suffix = '') {
         this._game = game;
         this._gameGroup = group;
+        this._categoryGroup = this._game.add.group();
         this._key = key;
         this._category = asset;
         this._num = num;
         this._suffix = suffix;
         this._board = null;
         this._categoryButton = [];
+        this._categoryImage = [];
         this._arr = arr;
         this._init();
     }
@@ -117401,10 +117423,19 @@ class RollingBoard {
             let asset = 'area_' + this._arr[i] + this._suffix;
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
             btn.categoryName = this._arr[i];
+            // console.log(btn.categoryName);
             // btn.categoryNumber = i;
             btn.alpha = 0;
+
+            let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
+            categoryImage.visible = false;
+
+            btn.img = categoryImage;
+
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
+            this._categoryImage.push(categoryImage);
+            this._categoryGroup.addChild(categoryImage);
         }
     }
 
@@ -117413,6 +117444,7 @@ class RollingBoard {
             this._categoryButton[i].x = this._board.x;
             this._categoryButton[i].y = this._board.y;
             this._categoryButton[i].visible = this._board.visible;
+            // this._categoryImage[i].visible = this._board.visible;
         }
     }
 
@@ -117598,7 +117630,7 @@ class FilledObject {
 
     filledObject() {
 
-        if (_count >= 4) {
+        if (_count >= _maxCount) {
             this._objectTakeDown();
             _count = 0;
         }

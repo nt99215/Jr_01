@@ -25,7 +25,7 @@ export default class FilledObject {
     filledObject() {
 
 
-        if(_count >= 4)
+        if(_count >= _maxCount)
         {
             this._objectTakeDown();
             _count = 0;

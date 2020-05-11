@@ -2,12 +2,14 @@ export default class RollingBoard {
     constructor(game, group, key, asset, num, arr = null, suffix = '') {
         this._game = game;
         this._gameGroup = group;
+        this._categoryGroup = this._game.add.group();
         this._key = key;
         this._category = asset;
         this._num = num;
         this._suffix = suffix;
         this._board = null;
         this._categoryButton = [];
+        this._categoryImage = [];
         this._arr = arr;
         this._init();
 
@@ -26,10 +28,19 @@ export default class RollingBoard {
             let asset = 'area_' + this._arr[i] + this._suffix;
             let btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
             btn.categoryName = this._arr[i];
+            // console.log(btn.categoryName);
             // btn.categoryNumber = i;
             btn.alpha = 0;
+
+            let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
+            categoryImage.visible = false;
+
+            btn.img = categoryImage;
+
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
+            this._categoryImage.push(categoryImage);
+            this._categoryGroup.addChild(categoryImage);
         }
 
     }
@@ -40,6 +51,7 @@ export default class RollingBoard {
             this._categoryButton[i].x = this._board.x;
             this._categoryButton[i].y = this._board.y;
             this._categoryButton[i].visible = this._board.visible;
+            // this._categoryImage[i].visible = this._board.visible;
         }
     }
 

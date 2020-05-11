@@ -121,6 +121,9 @@ export default class Corner {
             {
                 let btn = boardArr[i]._categoryButton[j];
                 btn.inputEnabled = true;
+                btn.input.enableDrag();
+                btn.events.onDragUpdate.add(this._startDrag, this);
+                btn.events.onDragStop.add(this._stopDrag, this);
                 btn.events.onInputDown.add(this._itemSelect, this);
                 btn.input.pixelPerfectOver = true;
                 btn.input.pixelPerfectClick = true;
@@ -141,7 +144,7 @@ export default class Corner {
 
     _itemSelect(obj) {
 
-        let num = this._indexCheck(obj);
+       /* let num = this._indexCheck(obj);
         let currentObj = dragObjArr[num];
         startX = this._game.input.x - this._gameGroup.x;
         // startX = this._game.input.x;
@@ -166,41 +169,34 @@ export default class Corner {
         currentObj.input.enableDrag();
         currentObj.input.startDrag(this._game.input.activePointer);
         this._currentObj = currentObj;
+        this._pickUp = true;*/
+
         this._pickUp = true;
+        if(! obj.img.visible) obj.img.visible = true;
+        if(obj.img.alpha < 1) obj.img.alpha = 1;
+        obj.bringToTop();
+
+        startX = this._game.input.x - this._gameGroup.x;
+        // startX = this._game.input.x;
+        startY = this._game.input.y;
+
+        // console.log(startX, startY);
 
         BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
 
     }
 
 
-    _stopDrag(obj) {
-
-        this._pickUp = false;
-        this._currentObj = null;
-
-        // console.log(parseInt(obj.x), parseInt(obj.y));
-
-        let correct;
-        if (this._overLapCheck(obj))
-        {
-            // console.log('hit~~~')
-            if(this._pushEnable(obj)) correct = true;
-            else correct = false;
-
-            this._parent._ppiyoFeedBackPopUp(correct);
-        }
-
-        this._objRestore(obj, correct);
-    }
-
     _objRestore(obj, correct = false) {
 
-        if(correct) this._game.add.tween(obj).to({x: centerPos, y: minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
+        if(correct) this._game.add.tween(obj.img).to({x: centerPos, y: minimumYpos + 200}, 300, Phaser.Easing.Quartic.Out, true);
         else
         {
-            let tw = this._game.add.tween(obj).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
+            let tw = this._game.add.tween(obj.img).to({x: startX - obj.img.width, y: startY - obj.img.height/2}, 300, Phaser.Easing.Quartic.Out, true);
+            // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
+            // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.addOnce(()=> {
-                obj.visible = false;
+                obj.img.visible = false;
             });
         }
 
@@ -251,7 +247,31 @@ export default class Corner {
     _startDrag(obj) {
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
+        obj.img.x = this._game.input.x;
+        obj.img.y = this._game.input.y;
+        obj.img.x -= obj.img.width/2;
+        obj.img.y -= obj.img.height/2;
 
+    }
+
+    _stopDrag(obj) {
+
+        this._pickUp = false;
+        this._currentObj = null;
+
+        // console.log(parseInt(obj.x), parseInt(obj.y));
+
+        let correct;
+        if (this._overLapCheck(obj.img))
+        {
+            // console.log('hit~~~')
+            if(this._pushEnable(obj.img)) correct = true;
+            else correct = false;
+
+            this._parent._ppiyoFeedBackPopUp(correct);
+        }
+
+        this._objRestore(obj, correct);
     }
 
 
