@@ -118743,6 +118743,7 @@ class PaymentPos {
 
         //1000~10000
         let _amount = [1000, 5000, 10000];
+        let _billQuantity = [40, 10, 5];
         for (let i = 0; i < 3; i++) {
             let term = 118;
             let xPos = term + i * 75;
@@ -118753,10 +118754,34 @@ class PaymentPos {
             this._cashGroup.addChild(baseBill);
             _billBaseArr.push(baseBill);
 
-            baseBill.inputEnabled = true;
-            baseBill.pixelPerfectOver = true;
-            baseBill.pixelPerfectClick = true;
-            baseBill.events.onInputDown.add(this._cashSelect, this);
+            // baseBill.inputEnabled =  true;
+            // baseBill.pixelPerfectOver = true;
+            // baseBill.pixelPerfectClick = true;
+            // baseBill.events.onInputDown.add(this._cashSelect, this);
+
+            for (let j = 0; j < _billQuantity[i]; j++) {
+                let asset = 'cash_' + _amount[i];
+                let bill = new Phaser.Image(this._game, xPos, 524, this._key, asset);
+                bill.x = term + i * (75 + bill.width);
+                bill.amount = _amount[i];
+                this._cashGroup.addChild(bill);
+                _billBaseArr.push(bill);
+
+                bill.inputEnabled = true;
+                bill.pixelPerfectOver = true;
+                bill.pixelPerfectClick = true;
+                bill.input.enableDrag(true, true, true, 255, this.dragArea);
+                bill.events.onInputDown.add(this._cashSelect, this);
+                bill.events.onDragUpdate.add(this._dragUpdate, this);
+                bill.events.onDragStop.add(this._stopDrag, this);
+                bill.minX = _movePos.billMinimumX;
+                bill.maxX = _movePos.billMaximumX;
+                bill.minY = _movePos.billMinimumY;
+                bill.resultMinX = _movePos.billResultMinX;
+                bill.resultMaxX = _movePos.billResultMaxX;
+                bill.resultMinY = _movePos.billResultMinY;
+                bill.resultMaxY = _movePos.billResultMaxY;
+            }
         }
 
         for (let i = 0; i < _coinArr.length; i++) {
@@ -118790,30 +118815,28 @@ class PaymentPos {
 
         if (obj.amount < 1000) return;
 
-        _remove = true;
-        let asset = 'cash_' + String(obj.amount);
-        let currentObj = new Phaser.Image(this._game, obj.x, obj.y, this._key, asset);
-        this._cashGroup.addChild(currentObj);
-        currentObj.amount = obj.amount;
-        currentObj.x = this._game.input.x;
-        currentObj.y = this._game.input.y;
-        currentObj.x -= currentObj.width / 2;
-        currentObj.y -= currentObj.height / 2;
-
-        currentObj.inputEnabled = true;
-        currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
-        currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        // currentObj.events.onDragStop.add(this._stopDrag, this);
-        this._currentObj = currentObj;
-
-        currentObj.minX = _movePos.billMinimumX;
-        currentObj.maxX = _movePos.billMaximumX;
-        currentObj.minY = _movePos.billMinimumY;
-        currentObj.resultMinX = _movePos.billResultMinX;
-        currentObj.resultMaxX = _movePos.billResultMaxX;
-        currentObj.resultMinY = _movePos.billResultMinY;
-        currentObj.resultMaxY = _movePos.billResultMaxY;
+        /*   _remove = true;
+           let asset = 'cash_' + String(obj.amount);
+           let currentObj = new Phaser.Image(this._game, obj.x, obj.y, this._key, asset);
+           this._cashGroup.addChild(currentObj);
+           currentObj.amount = obj.amount;
+           currentObj.x = this._game.input.x;
+           currentObj.y = this._game.input.y;
+           currentObj.x -= currentObj.width/2;
+           currentObj.y -= currentObj.height/2;
+             currentObj.inputEnabled = true;
+           currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
+           currentObj.input.startDrag(this._game.input.activePointer);
+           // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
+           // currentObj.events.onDragStop.add(this._stopDrag, this);
+           this._currentObj = currentObj;
+             currentObj.minX = _movePos.billMinimumX;
+           currentObj.maxX = _movePos.billMaximumX;
+           currentObj.minY = _movePos.billMinimumY;
+           currentObj.resultMinX = _movePos.billResultMinX;
+           currentObj.resultMaxX = _movePos.billResultMaxX;
+           currentObj.resultMinY = _movePos.billResultMinY;
+           currentObj.resultMaxY = _movePos.billResultMaxY;*/
     }
 
     _dragUpdate(obj) {
