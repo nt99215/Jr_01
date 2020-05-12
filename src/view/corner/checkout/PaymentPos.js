@@ -271,8 +271,7 @@ export default class PaymentPos {
     }
 
     _update() {
-        // console.log(this._currentObj.input.activePointer);
-        if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
+     /*   if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
         if(this._currentObj)
         {
             activePoint = this._currentObj.input.update(this._game.input.activePointer);
@@ -282,7 +281,7 @@ export default class PaymentPos {
                 this._stopDrag(this._currentObj);
             }
             // console.log(activePoint);
-        }
+        }*/
 
     }
 
