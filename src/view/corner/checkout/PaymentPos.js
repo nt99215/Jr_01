@@ -2,7 +2,7 @@ import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 import PriceCount from "./PriceCount";
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove, activePoint;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
 let _movePos = {coinMinimumX:580, coinMaximumX:1040, coinMinimumY: 210,
     coinResultMinX:671, coinResultMaxX:945, coinResultMinY:67, coinResultMaxY:136,
     billMinimumX:580, billMaximumX:1040, billMinimumY: 185,
@@ -16,7 +16,6 @@ export default class PaymentPos {
         this._posGroup = this._game.add.group();
         this._cashGroup = this._game.add.group();
         this._key = AssetKey.PAYMENT_POS;
-        this._currentObj = null;
         this._coin100 = false;
         _coinArr = [];
         _billBaseArr = [];
@@ -130,11 +129,7 @@ export default class PaymentPos {
                 bill.resultMinY = _movePos.billResultMinY;
                 bill.resultMaxY = _movePos.billResultMaxY;
             }
-
-
-
         }
-
 
         for(let i = 0; i < _coinArr.length; i++)
         {
@@ -170,31 +165,7 @@ export default class PaymentPos {
 
         if(obj.amount<1000) return;
 
-     /*   _remove = true;
-        let asset = 'cash_' + String(obj.amount);
-        let currentObj = new Phaser.Image(this._game, obj.x, obj.y, this._key, asset);
-        this._cashGroup.addChild(currentObj);
-        currentObj.amount = obj.amount;
-        currentObj.x = this._game.input.x;
-        currentObj.y = this._game.input.y;
-        currentObj.x -= currentObj.width/2;
-        currentObj.y -= currentObj.height/2;
-
-        currentObj.inputEnabled = true;
-        currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
-        currentObj.input.startDrag(this._game.input.activePointer);
-        // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-        // currentObj.events.onDragStop.add(this._stopDrag, this);
-        this._currentObj = currentObj;
-
-        currentObj.minX = _movePos.billMinimumX;
-        currentObj.maxX = _movePos.billMaximumX;
-        currentObj.minY = _movePos.billMinimumY;
-        currentObj.resultMinX = _movePos.billResultMinX;
-        currentObj.resultMaxX = _movePos.billResultMaxX;
-        currentObj.resultMinY = _movePos.billResultMinY;
-        currentObj.resultMaxY = _movePos.billResultMaxY;*/
-    }
+       }
 
     _dragUpdate(obj) {
 
@@ -203,8 +174,6 @@ export default class PaymentPos {
     }
 
     _stopDrag(obj) {
-
-        this._currentObj = null;
 
         if(this._pushEnable(obj.amount))
         {
@@ -265,24 +234,8 @@ export default class PaymentPos {
             if(Number(str) > 5) return false;
         }
 
-
         if(resultPrice > GameConfig.TOTAL_AMOUNT) return false;
         else return true;
-    }
-
-    _update() {
-     /*   if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
-        if(this._currentObj)
-        {
-            activePoint = this._currentObj.input.update(this._game.input.activePointer);
-
-            if(! activePoint)
-            {
-                this._stopDrag(this._currentObj);
-            }
-            // console.log(activePoint);
-        }*/
-
     }
 
     _destroy() {

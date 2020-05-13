@@ -4,7 +4,7 @@ import GameConfig from "../../data/GameConfig";
 import BackGroundTouchEffect from "../../ui/effect/BackGroundTouchEffect";
 import RollingBoard from "./RollingBoard";
 
-let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
+let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos;
 const minimumYpos = 550;
 const speed = 3;
 
@@ -18,7 +18,6 @@ export default class Corner {
         this._key = this._category.assetKey;
         this._parent = parent;
         this._game.input.maxPointers = 1;
-        this._currentObj = null;
         this._headRemove = false;
         this._totalWidth = 0;
         this._pickUp = false;
@@ -62,8 +61,6 @@ export default class Corner {
 
            boardArr[i].btnPosReset();
        }
-
-        // this._totalWidth -= speed;
 
         this._categoryButtonGenerate();
         this._moving();
@@ -159,15 +156,10 @@ export default class Corner {
 
     _objRestore(obj, correct = false) {
 
-        if(correct)
-        {
-            this._game.add.tween(obj.img).to({x: centerPos, y: minimumYpos + 200, alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
-        }
+        if(correct) this._game.add.tween(obj.img).to({x: centerPos, y: minimumYpos + 200, alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
         else
         {
             let tw = this._game.add.tween(obj.img).to({x: startX - obj.img.width, y: startY - obj.img.height/2}, 300, Phaser.Easing.Quartic.Out, true);
-            // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
-            // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.add(()=> {
                 obj.img.visible = false;
             });
@@ -229,10 +221,8 @@ export default class Corner {
 
     _stopDrag(obj) {
 
-        this._pickUp = false;
-        this._currentObj = null;
-
         // console.log(parseInt(obj.x), parseInt(obj.y));
+        this._pickUp = false;
 
         let correct;
         if (this._overLapCheck(obj.img))
@@ -243,7 +233,6 @@ export default class Corner {
 
             this._parent._ppiyoFeedBackPopUp(correct);
         }
-
         this._objRestore(obj, correct);
     }
 
@@ -263,17 +252,6 @@ export default class Corner {
     _update() {
 
         if(! this._pickUp) this._moving();
-      /*  if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
-        if(this._currentObj)
-        {
-            activePoint = this._currentObj.input.update(this._game.input.activePointer);
-
-            if(! activePoint)
-            {
-                this._stopDrag(this._currentObj);
-            }
-        }
-*/
     }
 
 

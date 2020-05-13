@@ -116661,10 +116661,10 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        this._createPurchaseList();
+        // this._createPurchaseList();
 
         //CORNER
-        // this._createCorner(GameConfig.CURRENT_CHAPTER);
+        this._createCorner(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -116769,7 +116769,7 @@ class CornerManager extends Phaser.Group {
     }
 
     _update() {
-        if (this._paymentPos) this._paymentPos._update();
+        // if(this._paymentPos) this._paymentPos._update();
         if (this.purchaseListView) this.purchaseListView._update();
         if (this.chapter) this.chapter._update();
     }
@@ -117112,7 +117112,7 @@ class CornerButton {
 
 
 
-let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos, activePoint;
+let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos;
 const minimumYpos = 550;
 const speed = 3;
 
@@ -117125,7 +117125,6 @@ class Corner {
         this._key = this._category.assetKey;
         this._parent = parent;
         this._game.input.maxPointers = 1;
-        this._currentObj = null;
         this._headRemove = false;
         this._totalWidth = 0;
         this._pickUp = false;
@@ -117167,8 +117166,6 @@ class Corner {
 
             boardArr[i].btnPosReset();
         }
-
-        // this._totalWidth -= speed;
 
         this._categoryButtonGenerate();
         this._moving();
@@ -117248,12 +117245,8 @@ class Corner {
 
     _objRestore(obj, correct = false) {
 
-        if (correct) {
-            this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200, alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true);
-        } else {
+        if (correct) this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200, alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true);else {
             let tw = this._game.add.tween(obj.img).to({ x: startX - obj.img.width, y: startY - obj.img.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
-            // let tw = this._game.add.tween(obj.img).to({x: startX - obj.width/2, y: startY - obj.height/2}, 300, Phaser.Easing.Quartic.Out, true);
-            // let tw = this._game.add.tween(obj.img).to({alpha: 0}, 300, Phaser.Easing.Quartic.Out, true);
             tw.onComplete.add(() => {
                 obj.img.visible = false;
             });
@@ -117304,10 +117297,8 @@ class Corner {
 
     _stopDrag(obj) {
 
-        this._pickUp = false;
-        this._currentObj = null;
-
         // console.log(parseInt(obj.x), parseInt(obj.y));
+        this._pickUp = false;
 
         let correct;
         if (this._overLapCheck(obj.img)) {
@@ -117316,7 +117307,6 @@ class Corner {
 
             this._parent._ppiyoFeedBackPopUp(correct);
         }
-
         this._objRestore(obj, correct);
     }
 
@@ -117334,16 +117324,6 @@ class Corner {
     _update() {
 
         if (!this._pickUp) this._moving();
-        /*  if(!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
-          if(this._currentObj)
-          {
-              activePoint = this._currentObj.input.update(this._game.input.activePointer);
-                if(! activePoint)
-              {
-                  this._stopDrag(this._currentObj);
-              }
-          }
-        */
     }
 
     _destroy() {
@@ -117592,7 +117572,7 @@ const _yPos = [610, 690];
 const _bottomMax = _xPos.length;
 let _objectArr, _count;
 const _maxCount = 4;
-class FilledObject {
+class FilledObjectBack {
     constructor(game, group) {
         this._game = game;
         this._gameGroup = group;
@@ -117663,7 +117643,7 @@ class FilledObject {
     }
 
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = FilledObject;
+/* harmony export (immutable) */ __webpack_exports__["a"] = FilledObjectBack;
 
 
 /***/ }),
@@ -118659,7 +118639,7 @@ class PriceCountForPos {
 
 
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove, activePoint;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
 let _movePos = { coinMinimumX: 580, coinMaximumX: 1040, coinMinimumY: 210,
     coinResultMinX: 671, coinResultMaxX: 945, coinResultMinY: 67, coinResultMaxY: 136,
     billMinimumX: 580, billMaximumX: 1040, billMinimumY: 185,
@@ -118672,7 +118652,6 @@ class PaymentPos {
         this._posGroup = this._game.add.group();
         this._cashGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PAYMENT_POS;
-        this._currentObj = null;
         this._coin100 = false;
         _coinArr = [];
         _billBaseArr = [];
@@ -118814,29 +118793,6 @@ class PaymentPos {
         _remove = false;
 
         if (obj.amount < 1000) return;
-
-        /*   _remove = true;
-           let asset = 'cash_' + String(obj.amount);
-           let currentObj = new Phaser.Image(this._game, obj.x, obj.y, this._key, asset);
-           this._cashGroup.addChild(currentObj);
-           currentObj.amount = obj.amount;
-           currentObj.x = this._game.input.x;
-           currentObj.y = this._game.input.y;
-           currentObj.x -= currentObj.width/2;
-           currentObj.y -= currentObj.height/2;
-             currentObj.inputEnabled = true;
-           currentObj.input.enableDrag(false, true, false, 0, this.dragArea);
-           currentObj.input.startDrag(this._game.input.activePointer);
-           // currentObj.events.onDragUpdate.add(this._dragUpdate, this);
-           // currentObj.events.onDragStop.add(this._stopDrag, this);
-           this._currentObj = currentObj;
-             currentObj.minX = _movePos.billMinimumX;
-           currentObj.maxX = _movePos.billMaximumX;
-           currentObj.minY = _movePos.billMinimumY;
-           currentObj.resultMinX = _movePos.billResultMinX;
-           currentObj.resultMaxX = _movePos.billResultMaxX;
-           currentObj.resultMinY = _movePos.billResultMinY;
-           currentObj.resultMaxY = _movePos.billResultMaxY;*/
     }
 
     _dragUpdate(obj) {
@@ -118846,8 +118802,6 @@ class PaymentPos {
     }
 
     _stopDrag(obj) {
-
-        this._currentObj = null;
 
         if (this._pushEnable(obj.amount)) {
             if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
@@ -118901,19 +118855,6 @@ class PaymentPos {
         }
 
         if (resultPrice > __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) return false;else return true;
-    }
-
-    _update() {
-        // console.log(this._currentObj.input.activePointer);
-        if (!this._currentObj || this._currentObj === null || this._currentObj === undefined) return;
-        if (this._currentObj) {
-            activePoint = this._currentObj.input.update(this._game.input.activePointer);
-
-            if (!activePoint) {
-                this._stopDrag(this._currentObj);
-            }
-            // console.log(activePoint);
-        }
     }
 
     _destroy() {
