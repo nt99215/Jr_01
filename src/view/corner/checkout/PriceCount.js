@@ -1,4 +1,6 @@
 import GameConfig from "../../../data/GameConfig";
+import SoundManager from "../../../manager/SoundManager";
+import SoundAssetKey from "../../../data/SoundAssetKey";
 
 let _totalPriceArr = [];
 let _currentPriceArr = [];
@@ -37,7 +39,6 @@ export default class PriceCount {
     _count(num) {
 
         if(num >= maxPrice) return;
-
         let totalAmount = num.toString();
 
         this._posGroup.removeChildren(0, this._posGroup.length);

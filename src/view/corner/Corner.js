@@ -3,6 +3,7 @@ import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 import BackGroundTouchEffect from "../../ui/effect/BackGroundTouchEffect";
 import RollingBoard from "./RollingBoard";
+import SoundManager from "../../manager/SoundManager";
 
 let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos;
 const minimumYpos = 550;
@@ -30,7 +31,15 @@ export default class Corner {
         baseWidth = 0;
         centerPos = 0;
         this._init();
+        this._sndPlay();
 
+    }
+
+    _sndPlay() {
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_3);
+        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_3;
     }
 
     _init() {

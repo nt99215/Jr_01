@@ -35,10 +35,19 @@ export default class CornerMain{
         this._purchaseSlide = null;
         this._shoppingComplete = false;
         _btnArr = [null];
+        this._sndPlay();
 
     }
 
+    _sndPlay() {
+        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_2);
+        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_2;
+    }
+
     _setting(bgGroup, gameGroup, buttonGroup) {
+
+        // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
         this._buttonGroup = buttonGroup;
@@ -63,7 +72,7 @@ export default class CornerMain{
         this._createBackButton();
 
         //CORNER  BUTTON INIT
-        this._cornerButtonEnable(true);
+        this._cornerButtonEnable(true, 100);
 
         //PURCHASE SLIDE
         this._purchaseSlidePop();
@@ -79,7 +88,7 @@ export default class CornerMain{
         if(GameConfig.SOUND_ENABLED) SoundManager.instance.effectSoundStop(SoundAssetKey.MAIN_BGM, GameConfig.BGM_VOLUME,  true, false);
 
 
-        this._cornerButtonEnable(false);
+        this._cornerButtonEnable(false, num);
         this._removeCorner();
 
         //COUNTER ENABLED
@@ -123,10 +132,20 @@ export default class CornerMain{
     }
 
 
-    _cornerButtonEnable(bool) {
+    _cornerButtonEnable(bool, num = 0, selected = false) {
 
         for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._visible(bool);
-        // for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._btnDisable();
+        for(let i = 1; i<_btnArr.length; i++)
+        {
+            if(selected)
+            {
+                if(i !== num) _btnArr[i]._btnDisable();
+            }
+            else
+            {
+                _btnArr[i]._btnEnable();
+            }
+        }
 
         //COUNTER BUTTON INVISIBLE
         _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
@@ -137,11 +156,17 @@ export default class CornerMain{
 
     _removeCorner(counterButtonVisible = false) {
 
-        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         if(this._corner)
         {
+            SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0.8, false, true);
+            let sndKeyArr = [SoundAssetKey.BTNSND_REMOVECORNER_1, SoundAssetKey.BTNSND_REMOVECORNER_2];
+            let snd = sndKeyArr[this._game.rnd.between(0, 1)];
+            SoundManager.instance.effectSound(snd);
+            GameConfig.CURRENT_BUTTON_SOUND = snd;
+
             this._corner._destroy();
             this._corner = null;
+
         }
         if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
         if(this._ppiyoCart) this._ppiyoCart._visible(false);
@@ -193,6 +218,12 @@ export default class CornerMain{
             this._removeCorner(true);
             //GUIDE  HAND POP UP
             this._guideHandPop();
+        }
+
+        if(this._cornerPop) return;
+        for(let i =0; i<_btnArr.length; i++)
+        {
+            if(_btnArr[i]) _btnArr[i]._update();
         }
     }
 

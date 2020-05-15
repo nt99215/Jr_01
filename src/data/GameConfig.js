@@ -5,9 +5,10 @@ const displaySlidingSpeed = 7000;
 let guideEnable = true;
 let chapterClear = false;
 
-const bgmVolume = 0.2;
-// const bgmVolume = 0.001;
-let muteSoundVolume = 0.0001;
+// let bgmVolume = 0.2;
+let bgmVolume = 0.001;
+const reduceBgmVolume = 0.001;
+const muteSoundVolume = 0.0001;
 
 let currentFillObject = null;
 let purchaseList = [];
@@ -36,6 +37,7 @@ let updateObject = null;
 
 let guideRemove = false;
 let currentGuideSound = null;
+let currentButtonSound = null;
 
 let cheatOn = false;
 
@@ -117,7 +119,10 @@ export default class GameConfig {
     static get GAME_FINISH() { return finish; }
     static set GAME_FINISH(bool) { finish = bool; }
 
+    static get REDUCE_BGM_VOLUME() { return reduceBgmVolume; }
+
     static get BGM_VOLUME() { return bgmVolume; }
+    static set BGM_VOLUME(num) { bgmVolume = num; }
 
     static get MUTE_SOUND_VOLUME() { return muteSoundVolume; }
 
@@ -139,6 +144,9 @@ export default class GameConfig {
 
     static get CURRENT_GUIDE_SOUND() { return currentGuideSound; }
     static set CURRENT_GUIDE_SOUND(obj) { currentGuideSound = obj; }
+
+    static get CURRENT_BUTTON_SOUND() { return currentButtonSound; }
+    static set CURRENT_BUTTON_SOUND(obj) { currentButtonSound = obj; }
 
     static get DISPLAY_SLIDING_SPEED() { return displaySlidingSpeed; }
 

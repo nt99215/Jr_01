@@ -82,6 +82,37 @@ export default class PreloadResource{
         const sndSkip = 'asset/game/sound/' + SoundAssetKey.SND_SKIP + extension;
         const chapterCompleteEffect = 'asset/game/sound/' + SoundAssetKey.CHAPTER_COMPLETE_EFFECT + extension;
         const sfx_retry = 'asset/game/sound/' + SoundAssetKey.RESTART_SOUND + extension;
+        const beep = 'asset/game/sound/' + SoundAssetKey.BEEP + extension;
+        const cash_snd_100 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_100 + extension;
+        const cash_snd_500 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_500 + extension;
+        const cash_snd_1000 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_1000 + extension;
+        const cash_snd_5000 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_5000 + extension;
+        const cash_snd_10000 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_10000 + extension;
+        const cash_snd_again = 'asset/game/sound/' + SoundAssetKey.CASH_SND_AGAIN + extension;
+        const cash_snd_over_1 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_OVER_1 + extension;
+        const cash_snd_over_2 = 'asset/game/sound/' + SoundAssetKey.CASH_SND_OVER_2 + extension;
+        const cash_snd_shortage = 'asset/game/sound/' + SoundAssetKey.CASH_SND_SHORTAGE + extension;
+        const cash_snd_complete = 'asset/game/sound/' + SoundAssetKey.CASH_SND_COMPLETE + extension;
+
+        /**
+         * MISC BUTTON SOUND
+         */
+        const btnSnd_removeCorner_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_REMOVECORNER_1 + extension;
+        const btnSnd_removeCorner_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_REMOVECORNER_2 + extension;
+        const btnSnd_corner_counter_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_COUNTER_1 + extension;
+        const btnSnd_corner_counter_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_COUNTER_2 + extension;
+        const btnSnd_corner_dairy_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_DAIRY_1 + extension;
+        const btnSnd_corner_dairy_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_DAIRY_2 + extension;
+        const btnSnd_corner_meat_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_MEAT_1 + extension;
+        const btnSnd_corner_meat_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_MEAT_2 + extension;
+        const btnSnd_corner_necessary_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_NECESSARY_1 + extension;
+        const btnSnd_corner_necessary_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_NECESSARY_2 + extension;
+        const btnSnd_corner_seafood_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_SEAFOOD_1 + extension;
+        const btnSnd_corner_seafood_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_SEAFOOD_2 + extension;
+        const btnSnd_corner_snack_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_SNACK_1 + extension;
+        const btnSnd_corner_snack_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_SNACK_2 + extension;
+        const btnSnd_corner_vegetable_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_VEGETABLE_1 + extension;
+        const btnSnd_corner_vegetable_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_VEGETABLE_2 + extension;
 
 
         /**
@@ -91,6 +122,7 @@ export default class PreloadResource{
         const guideNarr_2 = 'asset/game/sound/' + SoundAssetKey.guideNarr_2 + extension;
         const guideNarr_3 = 'asset/game/sound/' + SoundAssetKey.guideNarr_3 + extension;
         const guideNarr_4 = 'asset/game/sound/' + SoundAssetKey.guideNarr_4 + extension;
+        const guideNarr_5 = 'asset/game/sound/' + SoundAssetKey.guideNarr_5 + extension;
 
         /**
          *CHAPTER COMPLETE SOUND
@@ -111,8 +143,8 @@ export default class PreloadResource{
         /**
          * GUIDE NARRATION
          */
-        let guideNarrArr = ['', guideNarr_1, guideNarr_2, guideNarr_3, guideNarr_4];
-        for(let i = 1; i<=4; i++) this.game.load.audio(SoundAssetKey.GUIDE_SOUND_PREFIX + i, guideNarrArr[i])
+        let guideNarrArr = ['', guideNarr_1, guideNarr_2, guideNarr_3, guideNarr_4, guideNarr_5];
+        for(let i = 1; i<=5; i++) this.game.load.audio(SoundAssetKey.GUIDE_SOUND_PREFIX + i, guideNarrArr[i])
 
         /**
          * CHAPTER COMPLETE SOUND
@@ -143,6 +175,35 @@ export default class PreloadResource{
 
         this.game.load.audio( SoundAssetKey.CHAPTER_COMPLETE_EFFECT, chapterCompleteEffect);
         this.game.load.audio( SoundAssetKey.RESTART_SOUND, sfx_retry);
+
+        this.game.load.audio( SoundAssetKey.BTNSND_REMOVECORNER_1, btnSnd_removeCorner_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_REMOVECORNER_2, btnSnd_removeCorner_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_COUNTER_1, btnSnd_corner_counter_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_COUNTER_2, btnSnd_corner_counter_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_DAIRY_1, btnSnd_corner_dairy_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_DAIRY_2, btnSnd_corner_dairy_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_MEAT_1, btnSnd_corner_meat_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_MEAT_2, btnSnd_corner_meat_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_NECESSARY_1, btnSnd_corner_necessary_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_NECESSARY_2, btnSnd_corner_necessary_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_SEAFOOD_1, btnSnd_corner_seafood_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_SEAFOOD_2, btnSnd_corner_seafood_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_SNACK_1, btnSnd_corner_snack_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_SNACK_2, btnSnd_corner_snack_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_VEGETABLE_1, btnSnd_corner_vegetable_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_VEGETABLE_2, btnSnd_corner_vegetable_2);
+
+        this.game.load.audio( SoundAssetKey.BEEP, beep);
+        this.game.load.audio( SoundAssetKey.CASH_SND_100, cash_snd_100);
+        this.game.load.audio( SoundAssetKey.CASH_SND_500, cash_snd_500);
+        this.game.load.audio( SoundAssetKey.CASH_SND_1000, cash_snd_1000);
+        this.game.load.audio( SoundAssetKey.CASH_SND_5000, cash_snd_5000);
+        this.game.load.audio( SoundAssetKey.CASH_SND_10000, cash_snd_10000);
+        this.game.load.audio( SoundAssetKey.CASH_SND_AGAIN, cash_snd_again);
+        this.game.load.audio( SoundAssetKey.CASH_SND_OVER_1, cash_snd_over_1);
+        this.game.load.audio( SoundAssetKey.CASH_SND_OVER_2, cash_snd_over_2);
+        this.game.load.audio( SoundAssetKey.CASH_SND_SHORTAGE, cash_snd_shortage);
+        this.game.load.audio( SoundAssetKey.CASH_SND_COMPLETE, cash_snd_complete);
 
 
     }

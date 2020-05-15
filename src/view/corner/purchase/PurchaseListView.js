@@ -5,9 +5,10 @@ import PurchaseItemForListView from "./PurchaseItemForListView";
 import SoundAssetKey from "../../../data/SoundAssetKey";
 import SoundManager from "../../../manager/SoundManager";
 
-let _dragStartPos, _dist, _interval, _count;
+let _dragStartPos, _dist, _interval, _count, _soundCount;
 const _minimumPurchase = 5;
-const _maxCount = 100;
+const _soundCountMax = 200;
+const _waitingCount = 100;
 export default class PurchaseListView {
     constructor(game, group, parent) {
         this._game = game;
@@ -25,10 +26,17 @@ export default class PurchaseListView {
         this._parent = parent;
         this._ppiyoFaceChange = false;
         _interval = 0;
+        _soundCount = 0;
         _count = 0;
         this._init();
         this._listButton();
+        this._sndPlay();
 
+    }
+
+    _sndPlay() {
+        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_1);
+        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_1;
     }
 
     _init() {
@@ -224,13 +232,12 @@ export default class PurchaseListView {
     }
 
     _update() {
-
-
+        _soundCount++;
         if(this._countStart)
         {
             this._ppiyoChange();
             _count++;
-            if(_count>=_maxCount)
+            if(_count>=_waitingCount && _soundCount>=_soundCountMax)
             {
                 this._gameStart();
                 this._destroy();

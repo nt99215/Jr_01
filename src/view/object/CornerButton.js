@@ -3,6 +3,7 @@ import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 import SoundManager from "../../manager/SoundManager";
 
+const _delay = [0, 60, 80];
 export default class CornerButton{
     constructor(game, group, asset, x, y, parent, num) {
         this._game = game;
@@ -14,6 +15,9 @@ export default class CornerButton{
         this._yPos = y;
         this._parent = parent;
         this._num = num;
+        this._count = 0;
+        this._selected = false;
+        this._delayTime = null;
         this._init();
     }
 
@@ -30,9 +34,25 @@ export default class CornerButton{
 
     }
 
+    _sndPlay() {
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0.8, false, true);
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0.8, false, true);
+        let sndAsset = 'btnSnd_corner_' + this._asset + '_';
+        let rN = this._game.rnd.between(1, 2);
+        let snd = sndAsset + rN;
+        SoundManager.instance.effectSound(snd);
+        GameConfig.CURRENT_BUTTON_SOUND = snd;
+
+        this._delayTime = _delay[rN];
+    }
+
     _onSelect() {
-        SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
-        this._parent._cornerGenerate(this._num);
+        // SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
+        this._btn.inputEnabled = false;
+        this._sndPlay();
+        this._selected = true;
+        this._parent._cornerButtonEnable(true, this._num, true);
+
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -50,6 +70,40 @@ export default class CornerButton{
         this._btn.inputEnabled = false;
         this._bg.tint = 0x525252;
         this._btn.tint = 0x525252;
+    }
+
+    _btnEnable() {
+        this._btn.inputEnabled = true;
+        this._bg.tint = 0xffffff;
+        this._btn.tint = 0xffffff;
+    }
+
+    _update() {
+
+
+        if(this._selected)
+        {
+            this._count++;
+        }
+        else return;
+
+        if(GameConfig.SOUND_ENABLED)
+        {
+            if(this._count > this._delayTime)
+            {
+                this._selected = false;
+                this._parent._cornerGenerate(this._num);
+                this._count = 0;
+            }
+        }
+        else
+        {
+            this._selected = false;
+            this._parent._cornerGenerate(this._num);
+            this._count = 0;
+        }
+
+        // console.log(this._asset)
     }
 
     _destroy() {

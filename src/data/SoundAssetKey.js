@@ -24,6 +24,17 @@ export default class SoundAssetKey {
     static get RESTART_SOUND() { return 'sfx_retry'; }
 
     static get CHAPTER_COMPLETE_EFFECT() { return 'completeEffect'; }
+    static get BEEP() { return 'beep'; }
+    static get CASH_SND_100() { return 'cash_snd_100'; }
+    static get CASH_SND_500() { return 'cash_snd_500'; }
+    static get CASH_SND_1000() { return 'cash_snd_1000'; }
+    static get CASH_SND_5000() { return 'cash_snd_5000'; }
+    static get CASH_SND_10000() { return 'cash_snd_10000'; }
+    static get CASH_SND_AGAIN() { return 'cash_snd_again'; }
+    static get CASH_SND_OVER_1() { return 'cash_snd_over_1'; }
+    static get CASH_SND_OVER_2() { return 'cash_snd_over_2'; }
+    static get CASH_SND_SHORTAGE() { return 'cash_snd_shortage'; }
+    static get CASH_SND_COMPLETE() { return 'cash_snd_complete'; }
 
 
     /**
@@ -34,6 +45,7 @@ export default class SoundAssetKey {
     static get guideNarr_2() { return 'guideNarr_2'; }
     static get guideNarr_3() { return 'guideNarr_3'; }
     static get guideNarr_4() { return 'guideNarr_4'; }
+    static get guideNarr_5() { return 'guideNarr_5'; }
 
     /**
      * CHAPTER COMPLETE SOUND
@@ -54,6 +66,32 @@ export default class SoundAssetKey {
     static get SND_NEXT() { return 'sndNext'; }
     static get SND_PREV() { return 'sndPrev'; }
     static get SND_SKIP() { return 'sndSkip'; }
+
+    static get BTNSND_REMOVECORNER_1() { return 'btnSnd_removeCorner_1'; }
+    static get BTNSND_REMOVECORNER_2() { return 'btnSnd_removeCorner_2'; }
+
+    static get BTNSND_CORNER_COUNTER_1() { return 'btnSnd_corner_counter_1'; }
+    static get BTNSND_CORNER_COUNTER_2() { return 'btnSnd_corner_counter_2'; }
+
+    static get BTNSND_CORNER_DAIRY_1() { return 'btnSnd_corner_dairy_1'; }
+    static get BTNSND_CORNER_DAIRY_2() { return 'btnSnd_corner_dairy_2'; }
+
+    static get BTNSND_CORNER_MEAT_1() { return 'btnSnd_corner_meat_1'; }
+    static get BTNSND_CORNER_MEAT_2() { return 'btnSnd_corner_meat_2'; }
+
+    static get BTNSND_CORNER_NECESSARY_1() { return 'btnSnd_corner_necessary_1'; }
+    static get BTNSND_CORNER_NECESSARY_2() { return 'btnSnd_corner_necessary_2'; }
+
+    static get BTNSND_CORNER_SEAFOOD_1() { return 'btnSnd_corner_seafood_1'; }
+    static get BTNSND_CORNER_SEAFOOD_2() { return 'btnSnd_corner_seafood_2'; }
+
+    static get BTNSND_CORNER_SNACK_1() { return 'btnSnd_corner_snack_1'; }
+    static get BTNSND_CORNER_SNACK_2() { return 'btnSnd_corner_snack_2'; }
+
+    static get BTNSND_CORNER_VEGETABLE_1() { return 'btnSnd_corner_vegetable_1'; }
+    static get BTNSND_CORNER_VEGETABLE_2() { return 'btnSnd_corner_vegetable_2'; }
+
+
 
     /**
      * RESULT PAGE

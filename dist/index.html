@@ -47,6 +47,7 @@
     document.addEventListener("touchstart", function(e){
         startX = e.touches[0].pageX;
         startY = e.touches[0].pageY;
+        console.log('touchstart');
 
         e.preventDefault();
     }, false);
@@ -54,6 +55,7 @@
     document.addEventListener("touchend", function(e){
         endX = e.touches[0].pageX;
         endY = e.touches[0].pageY;
+        console.log('touchend');
 
         e.preventDefault();
     }, false);

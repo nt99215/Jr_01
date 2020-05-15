@@ -1,13 +1,18 @@
 import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 import PriceCount from "./PriceCount";
+import SoundManager from "../../../manager/SoundManager";
+import SoundAssetKey from "../../../data/SoundAssetKey";
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove,  _count, _completeCount;
 let _movePos = {coinMinimumX:580, coinMaximumX:1040, coinMinimumY: 210,
     coinResultMinX:671, coinResultMaxX:945, coinResultMinY:67, coinResultMaxY:136,
     billMinimumX:580, billMaximumX:1040, billMinimumY: 185,
     billResultMinX:674, billResultMaxX:766, billResultMinY:70, billResultMaxY:121};
-
+const _coinSoundAsset = [SoundAssetKey.CASH_SND_100, SoundAssetKey.CASH_SND_500];
+const _billSoundAsset = [SoundAssetKey.CASH_SND_1000, SoundAssetKey.CASH_SND_5000, SoundAssetKey.CASH_SND_10000];
+const _intervalComplete = 30;
+const _intervalCount = 300;
 
 export default class PaymentPos {
     constructor(game) {
@@ -17,16 +22,32 @@ export default class PaymentPos {
         this._cashGroup = this._game.add.group();
         this._key = AssetKey.PAYMENT_POS;
         this._coin100 = false;
+        this._checkOut = false;
+        this._complete = false;
         _coinArr = [];
         _billBaseArr = [];
         _billArr = [];
         _startX = 0;
         _startY = 0;
         _currentPrice = 0;
+        _count = 0;
+        _completeCount = 0;
         _remove = false;
+
         this._init();
         this._cashGenerate();
         this._posGenerate();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+
+        // GameConfig.BGM_VOLUME = GameConfig.REDUCE_BGM_VOLUME;
+        // SoundManager.instance.bgmSoundStart();
+
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_5);
+        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_5;
     }
 
     _init() {
@@ -74,6 +95,7 @@ export default class PaymentPos {
             let coin = new Phaser.Image(this._game, xPos, 382, this._key, 'cash_100');
             coin.x = term + (i * (49 + coin.width));
             coin.amount = 100;
+            coin.soundAsset = _coinSoundAsset[0];
             // coin.minimumX = _movePos[0].minimumX;
             // console.log(coin.minimumX)
             this._cashGroup.addChild(coin);
@@ -83,6 +105,7 @@ export default class PaymentPos {
         //500
         let coin_500 = new Phaser.Image(this._game, 976, 374, this._key, 'cash_500');
         coin_500.amount = 500;
+        coin_500.soundAsset = _coinSoundAsset[1];
         this._cashGroup.addChild(coin_500);
         _coinArr.push(coin_500);
 
@@ -111,6 +134,7 @@ export default class PaymentPos {
                 let bill = new Phaser.Image(this._game, xPos, 524, this._key, asset);
                 bill.x = term + (i * (75 + bill.width));
                 bill.amount = _amount[i];
+                bill.soundAsset = _billSoundAsset[i];
                 this._cashGroup.addChild(bill);
                 _billBaseArr.push(bill);
 
@@ -159,6 +183,12 @@ export default class PaymentPos {
 
     _cashSelect(obj) {
 
+        // console.log(obj.soundAsset);
+        this._checkOut = true;
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+        SoundManager.instance.effectSound(obj.soundAsset, 0.8);
+        GameConfig.CURRENT_BUTTON_SOUND = obj.soundAsset;
         _startX = obj.x;
         _startY = obj.y;
         _remove = false;
@@ -174,6 +204,9 @@ export default class PaymentPos {
     }
 
     _stopDrag(obj) {
+
+        this._checkOut = false;
+        _count = 0;
 
         if(this._pushEnable(obj.amount))
         {
@@ -194,7 +227,21 @@ export default class PaymentPos {
             else this._restoreMoney(obj);
         }
 
-        else this._restoreMoney(obj);
+        else
+        {
+            if(obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY)
+            {
+                SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+                SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+                let soundAsset = 'cash_snd_over_' + this._game.rnd.between(1,2);
+                SoundManager.instance.effectSound(soundAsset, 0.8);
+                GameConfig.CURRENT_GUIDE_SOUND = soundAsset;
+            }
+
+            this._restoreMoney(obj);
+        }
+
+
     }
 
     _restoreMoney(obj) {
@@ -210,7 +257,15 @@ export default class PaymentPos {
 
     _payment() {
 
-        if(_currentPrice === GameConfig.TOTAL_AMOUNT) GameConfig.GAME_FINISH = true;
+        if(_currentPrice === GameConfig.TOTAL_AMOUNT)
+        {
+            SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+            SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+            SoundManager.instance.effectSound(SoundAssetKey.CASH_SND_COMPLETE, 0.8);
+            this._complete = true;
+            for(let i = 0; i < _coinArr.length; i++) _coinArr[i].inputEnabled = false;
+            for(let i = 0; i < _billBaseArr.length; i++) _billBaseArr[i].inputEnabled = false;
+        }
     }
 
     _pushEnable(amount) {
@@ -236,6 +291,32 @@ export default class PaymentPos {
 
         if(resultPrice > GameConfig.TOTAL_AMOUNT) return false;
         else return true;
+    }
+
+    _update() {
+        if(this._complete)
+        {
+            _completeCount++;
+            if(_completeCount >= _intervalComplete)
+            {
+                this._complete = false;
+                GameConfig.GAME_FINISH = true;
+            }
+        }
+
+        if(! this._checkOut)
+        {
+            _count++;
+            if(_count >= _intervalCount)
+            {
+                // this._checkOut = true;
+                _count = 0;
+                SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+                SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+                SoundManager.instance.effectSound(SoundAssetKey.CASH_SND_SHORTAGE, 0.8);
+                GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.CASH_SND_SHORTAGE;
+            }
+        }
     }
 
     _destroy() {

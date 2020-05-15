@@ -2,6 +2,8 @@ import AssetKey from "../../../data/AssetKey";
 import GameConfig from "../../../data/GameConfig";
 import CalculatePosItem from "./CalculatePosItem";
 import PriceCountForPos from "./PriceCountForPos";
+import SoundManager from "../../../manager/SoundManager";
+import SoundAssetKey from "../../../data/SoundAssetKey";
 
 let _itemArr, _startX, _startY, _maximumX, _minimumY, _currentPrice;
 export default class CalculatePos {
@@ -21,6 +23,15 @@ export default class CalculatePos {
         this._init();
         this._itemGenerate();
         this._posGenerate();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+
+
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_4);
+        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_4;
     }
 
     _init() {
@@ -134,6 +145,7 @@ export default class CalculatePos {
         if(this.scanner)
         {
             _currentPrice += Number(obj.price);
+            SoundManager.instance.effectSound(SoundAssetKey.BEEP, 0.3);
             obj.checkOut = true;
             this.scanner.visible = true;
             let tw = this._game.add.tween(this.scanner).to({alpha:1}, 50, Phaser.Easing.Quartic.Out, true, 0, 1, true);
