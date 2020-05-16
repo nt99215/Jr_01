@@ -117110,15 +117110,20 @@ class CornerManager extends Phaser.Group {
 
     _objectVisibleHandler() {
         //OBJECT CHECK
-        if (__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].GAME_FOCUS) {
-            if (__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT) {
-                if (__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT) __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT.visible = false;
-            }
-        } else {
-            if (__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT) {
-                if (!__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT.visible) __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].UPDATE_OBJECT.visible = true;
-            }
-        }
+        /* if(GameConfig.GAME_FOCUS)
+         {
+             if(GameConfig.UPDATE_OBJECT)
+             {
+                 if(GameConfig.UPDATE_OBJECT) GameConfig.UPDATE_OBJECT.visible = false;
+             }
+             }
+         else
+         {
+             if(GameConfig.UPDATE_OBJECT)
+             {
+                 if(! GameConfig.UPDATE_OBJECT.visible) GameConfig.UPDATE_OBJECT.visible = true;
+             }
+           }*/
     }
 
     _destroy() {

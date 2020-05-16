@@ -135,7 +135,7 @@ export default class CornerManager extends Phaser.Group{
 
     _objectVisibleHandler() {
         //OBJECT CHECK
-        if(GameConfig.GAME_FOCUS)
+       /* if(GameConfig.GAME_FOCUS)
         {
             if(GameConfig.UPDATE_OBJECT)
             {
@@ -151,7 +151,7 @@ export default class CornerManager extends Phaser.Group{
                 if(! GameConfig.UPDATE_OBJECT.visible) GameConfig.UPDATE_OBJECT.visible = true;
             }
 
-        }
+        }*/
     }
 
     _destroy() {
