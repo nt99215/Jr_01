@@ -3,6 +3,7 @@ import GameConfig from "../../../data/GameConfig";
 import PriceCount from "./PriceCount";
 import SoundManager from "../../../manager/SoundManager";
 import SoundAssetKey from "../../../data/SoundAssetKey";
+import PauseDimmed from "../../../view/object/PauseDimmed";
 
 let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove,  _count, _completeCount;
 let _movePos = {coinMinimumX:580, coinMaximumX:1040, coinMinimumY: 210,
@@ -38,6 +39,10 @@ export default class PaymentPos {
         this._cashGenerate();
         this._posGenerate();
         this._sndPlay();
+
+        PauseDimmed.instance._destroy();
+        PauseDimmed.instance._init(this._game.add.group());
+
     }
 
     _sndPlay() {

@@ -4,6 +4,7 @@ import CalculatePosItem from "./CalculatePosItem";
 import PriceCountForPos from "./PriceCountForPos";
 import SoundManager from "../../../manager/SoundManager";
 import SoundAssetKey from "../../../data/SoundAssetKey";
+import PauseDimmed from "../../object/PauseDimmed";
 
 let _itemArr, _startX, _startY, _maximumX, _minimumY, _currentPrice;
 export default class CalculatePos {
@@ -24,6 +25,9 @@ export default class CalculatePos {
         this._itemGenerate();
         this._posGenerate();
         this._sndPlay();
+
+        PauseDimmed.instance._destroy();
+        PauseDimmed.instance._init(this._game.add.group());
     }
 
     _sndPlay() {

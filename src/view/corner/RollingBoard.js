@@ -1,3 +1,5 @@
+import PauseDimmed from "../object/PauseDimmed";
+
 export default class RollingBoard {
     constructor(game, bgGroup, group, key, asset, num, arr = null, effectArr = null, suffix = '') {
         this._game = game;
@@ -14,6 +16,9 @@ export default class RollingBoard {
         this._arr = arr;
         this._sndEffectQuantity = effectArr;
         this._init();
+
+        PauseDimmed.instance._destroy();
+        PauseDimmed.instance._init(this._game.add.group());
     }
 
     _init() {
