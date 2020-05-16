@@ -2388,10 +2388,10 @@ class PurchaseList {
 
         //TOTAL CATEGORIES
         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES = arr.length;
-        console.log(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_AMOUNT);
-        console.log('TOTAL_CATEGORIES : ', __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES);
-        console.log('TOTAL_QUANTITY : ', __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_QUANTITY);
-        console.log(arr);
+        // console.log(GameConfig.TOTAL_AMOUNT);
+        // console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
+        // console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
+        // console.log(arr);
         return arr;
     }
 

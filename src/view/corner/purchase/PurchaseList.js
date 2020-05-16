@@ -58,10 +58,10 @@ export default class PurchaseList {
 
         //TOTAL CATEGORIES
         GameConfig.TOTAL_CATEGORIES = arr.length;
-        console.log(GameConfig.TOTAL_AMOUNT);
-        console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
-        console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
-        console.log(arr);
+        // console.log(GameConfig.TOTAL_AMOUNT);
+        // console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
+        // console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
+        // console.log(arr);
         return arr;
     }
 
