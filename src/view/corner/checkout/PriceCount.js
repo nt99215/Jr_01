@@ -1,7 +1,6 @@
 import GameConfig from "../../../data/GameConfig";
 import SoundManager from "../../../manager/SoundManager";
 import SoundAssetKey from "../../../data/SoundAssetKey";
-import PauseDimmed from "../../object/PauseDimmed";
 
 let _totalPriceArr = [];
 let _currentPriceArr = [];
@@ -18,8 +17,6 @@ export default class PriceCount {
         this._init();
         this._count(0);
 
-        PauseDimmed.instance._destroy();
-        PauseDimmed.instance._init(this._game.add.group());
     }
 
     _init() {

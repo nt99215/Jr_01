@@ -6,8 +6,6 @@ import SoundAssetKey from "../data/SoundAssetKey";
 import SceneManager from "../manager/SceneManager";
 import WebEnabledCheck from "../util/WebEnabledCheck";
 import TutorialManager from "../manager/TutorialManager";
-import PauseDimmed from "../view/object/PauseDimmed";
-
 
 export default class Controller extends Phaser.Group{
     constructor(game, parent = null, backButtonEnable = true) {
@@ -22,8 +20,6 @@ export default class Controller extends Phaser.Group{
 
         this._btnInit();
         this._webCheck();
-        PauseDimmed.instance._destroy();
-        PauseDimmed.instance._init(this._game.add.group());
 
     }
     _webCheck() {

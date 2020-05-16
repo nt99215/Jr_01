@@ -1,4 +1,3 @@
-import PauseDimmed from "../../object/PauseDimmed";
 
 let _currentPriceArr = [];
 let _xPosArr = [742, 702, 662, 598, 558];
@@ -11,8 +10,6 @@ export default class PriceCountForPos {
         this._key = key;
         this._count(0);
 
-        PauseDimmed.instance._destroy();
-        PauseDimmed.instance._init(this._game.add.group());
     }
 
     _count(num) {

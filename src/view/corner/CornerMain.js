@@ -8,7 +8,6 @@ import Corner from "./Corner";
 import PpiyoCart from "../object/PpiyoCart";
 import PurchaseSlider from "./purchase/PurchaseSlider";
 import PurchaseList from "./purchase/PurchaseList";
-import PauseDimmed from "../object/PauseDimmed";
 
 const _categoryArr= ['',
     Categories.VEGETABLE,
@@ -38,9 +37,6 @@ export default class CornerMain{
         this._shoppingComplete = false;
         _btnArr = [null];
         this._sndPlay();
-
-        PauseDimmed.instance._destroy();
-        PauseDimmed.instance._init(this._game.add.group());
 
     }
 

@@ -4,7 +4,6 @@ import GameConfig from "../../data/GameConfig";
 import BackGroundTouchEffect from "../../ui/effect/BackGroundTouchEffect";
 import RollingBoard from "./RollingBoard";
 import SoundManager from "../../manager/SoundManager";
-import PauseDimmed from "../object/PauseDimmed";
 
 let boardArr, btnArr, dragObjArr, startX, startY, baseWidth, centerPos;
 const minimumYpos = 550;
@@ -33,9 +32,6 @@ export default class Corner {
         centerPos = 0;
         this._init();
         this._sndPlay();
-
-        PauseDimmed.instance._destroy();
-        PauseDimmed.instance._init(this._game.add.group());
 
     }
 

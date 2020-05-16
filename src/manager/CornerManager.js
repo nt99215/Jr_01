@@ -91,7 +91,6 @@ export default class CornerManager extends Phaser.Group{
 
     _update() {
 
-        this._objectVisibleHandler();
         if(this.chapter) this.chapter._update();
         if(this._paymentPos) this._paymentPos._update();
         if(this.purchaseListView) this.purchaseListView._update();
@@ -131,27 +130,6 @@ export default class CornerManager extends Phaser.Group{
         this.chapter._objectReplay();
 
 
-    }
-
-    _objectVisibleHandler() {
-        //OBJECT CHECK
-       /* if(GameConfig.GAME_FOCUS)
-        {
-            if(GameConfig.UPDATE_OBJECT)
-            {
-                if(GameConfig.UPDATE_OBJECT) GameConfig.UPDATE_OBJECT.visible = false;
-            }
-
-
-        }
-        else
-        {
-            if(GameConfig.UPDATE_OBJECT)
-            {
-                if(! GameConfig.UPDATE_OBJECT.visible) GameConfig.UPDATE_OBJECT.visible = true;
-            }
-
-        }*/
     }
 
     _destroy() {

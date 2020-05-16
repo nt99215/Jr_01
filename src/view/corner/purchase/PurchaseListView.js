@@ -7,7 +7,7 @@ import SoundManager from "../../../manager/SoundManager";
 
 let _dragStartPos, _dist, _interval, _count, _soundCount;
 const _minimumPurchase = 5;
-const _soundCountMax = 200;
+const _soundCountMax = 250;
 const _waitingCount = 100;
 export default class PurchaseListView {
     constructor(game, group, parent) {
