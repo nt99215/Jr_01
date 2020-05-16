@@ -101,6 +101,8 @@ export default class PreloadResource{
         const btnSnd_removeCorner_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_REMOVECORNER_2 + extension;
         const btnSnd_corner_counter_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_COUNTER_1 + extension;
         const btnSnd_corner_counter_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_COUNTER_2 + extension;
+        const btnSnd_corner_notYet_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_NOTYET_1 + extension;
+        const btnSnd_corner_notYet_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_NOTYET_2 + extension;
         const btnSnd_corner_dairy_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_DAIRY_1 + extension;
         const btnSnd_corner_dairy_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_DAIRY_2 + extension;
         const btnSnd_corner_meat_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_MEAT_1 + extension;
@@ -113,6 +115,85 @@ export default class PreloadResource{
         const btnSnd_corner_snack_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_SNACK_2 + extension;
         const btnSnd_corner_vegetable_1 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_VEGETABLE_1 + extension;
         const btnSnd_corner_vegetable_2 = 'asset/game/sound/' + SoundAssetKey.BTNSND_CORNER_VEGETABLE_2 + extension;
+
+
+        /**
+         * OBJECT SOUND
+         */
+        const objSnd_dairy_bananaMilk_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_BANANAMILK_1 + extension;
+        const objSnd_dairy_cheese_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_CHEESE_1 + extension;
+        const objSnd_dairy_chocolateMilk_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_CHOCOLATEMILK_1 + extension;
+        const objSnd_dairy_chocolateMilk_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_CHOCOLATEMILK_2 + extension;
+        const objSnd_dairy_egg_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_EGG_1 + extension;
+        const objSnd_dairy_milk_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_MILK_1 + extension;
+        const objSnd_dairy_milk_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_MILK_2 + extension;
+        const objSnd_dairy_strawberryMilk_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_STRAWBERRYMILK_1 + extension;
+        const objSnd_dairy_strawberryMilk_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_STRAWBERRYMILK_2 + extension;
+        const objSnd_dairy_yogurt_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_YOGURT_1 + extension;
+        const objSnd_dairy_yogurt_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_DAIRY_YOGURT_2 + extension;
+
+        const objSnd_meat_bacon_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_BACON_1 + extension;
+        const objSnd_meat_boiledPork_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_BOILEDPORK_1 + extension;
+        const objSnd_meat_boiledPork_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_BOILEDPORK_2 + extension;
+        const objSnd_meat_chicken_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_CHICKEN_1 + extension;
+        const objSnd_meat_chicken_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_CHICKEN_2 + extension;
+        const objSnd_meat_drumstick_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_DRUMSTICK_1 + extension;
+        const objSnd_meat_drumstick_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_DRUMSTICK_2 + extension;
+        const objSnd_meat_sirloin_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_SIRLOIN_1 + extension;
+        const objSnd_meat_sirloin_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_SIRLOIN_2 + extension;
+        const objSnd_meat_tenderloin_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_TENDERLOIN_1 + extension;
+        const objSnd_meat_tenderloin_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_MEAT_TENDERLOIN_2 + extension;
+
+        const objSnd_necessary_brush_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_BRUSH_1 + extension;
+        const objSnd_necessary_cleanser_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_CLEANSER_1 + extension;
+        const objSnd_necessary_paste_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_PASTE_1 + extension;
+        const objSnd_necessary_shampoo_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_SHAMPOO_1 + extension;
+        const objSnd_necessary_shampoo_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_SHAMPOO_2 + extension;
+        const objSnd_necessary_soap_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_SOAP_1 + extension;
+        const objSnd_necessary_tissue_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_TISSUE_1 + extension;
+        const objSnd_necessary_wetTissue_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_WETTISSUE_1 + extension;
+        const objSnd_necessary_wetTissue_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_NECESSARY_WETTISSUE_2 + extension;
+
+        const objSnd_seafood_abalone_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_ABALONE_1 + extension;
+        const objSnd_seafood_crab_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_CRAB_1 + extension;
+        const objSnd_seafood_mackerel_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_MACKEREL_1 + extension;
+        const objSnd_seafood_mackerel_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_MACKEREL_2 + extension;
+        const objSnd_seafood_shell_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_SHELL_1 + extension;
+        const objSnd_seafood_shell_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_SHELL_2 + extension;
+        const objSnd_seafood_shrimp_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_SHRIMP_1 + extension;
+        const objSnd_seafood_squid_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_SQUID_1 + extension;
+        const objSnd_seafood_squid_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SEAFOOD_SQUID_2 + extension;
+
+        const objSnd_snack_candy_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_CANDY_1 + extension;
+        const objSnd_snack_candy_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_CANDY_2 + extension;
+        const objSnd_snack_chocolate_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_CHOCOLATE_1 + extension;
+        const objSnd_snack_chocolate_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_CHOCOLATE_2 + extension;
+        const objSnd_snack_iceCream_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_ICECREAM_1 + extension;
+        const objSnd_snack_iceCream_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_ICECREAM_2 + extension;
+        const objSnd_snack_jelly_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_SNACK_JELLY_1 + extension;
+
+        const objSnd_vegetable_apple_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_APPLE_1 + extension;
+        const objSnd_vegetable_apple_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_APPLE_2 + extension;
+        const objSnd_vegetable_carrot_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_CARROT_1 + extension;
+        const objSnd_vegetable_carrot_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_CARROT_2 + extension;
+        const objSnd_vegetable_grape_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_GRAPE_1 + extension;
+        const objSnd_vegetable_grape_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_GRAPE_2 + extension;
+        const objSnd_vegetable_onion_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_ONION_1 + extension;
+        const objSnd_vegetable_onion_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_ONION_2 + extension;
+        const objSnd_vegetable_radish_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_RADISH_1 + extension;
+        const objSnd_vegetable_radish_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_RADISH_2 + extension;
+        const objSnd_vegetable_strawberry_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_STRAWBERRY_1 + extension;
+        const objSnd_vegetable_strawberry_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_STRAWBERRY_2 + extension;
+        const objSnd_vegetable_sweetPotato_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_1 + extension;
+        const objSnd_vegetable_sweetPotato_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_2 + extension;
+        const objSnd_vegetable_sweetPotato_3 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_3 + extension;
+        const objSnd_vegetable_welshonion_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_1 + extension;
+        const objSnd_vegetable_welshonion_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_2 + extension;
+        const objSnd_vegetable_welshonion_3 = 'asset/game/sound/' + SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_3 + extension;
+
+        const objSnd_wrong_1 = 'asset/game/sound/' + SoundAssetKey.OBJSND_WRONG_1 + extension;
+        const objSnd_wrong_2 = 'asset/game/sound/' + SoundAssetKey.OBJSND_WRONG_2 + extension;
+
 
 
         /**
@@ -180,6 +261,8 @@ export default class PreloadResource{
         this.game.load.audio( SoundAssetKey.BTNSND_REMOVECORNER_2, btnSnd_removeCorner_2);
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_COUNTER_1, btnSnd_corner_counter_1);
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_COUNTER_2, btnSnd_corner_counter_2);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_NOTYET_1, btnSnd_corner_notYet_1);
+        this.game.load.audio( SoundAssetKey.BTNSND_CORNER_NOTYET_2, btnSnd_corner_notYet_2);
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_DAIRY_1, btnSnd_corner_dairy_1);
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_DAIRY_2, btnSnd_corner_dairy_2);
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_MEAT_1, btnSnd_corner_meat_1);
@@ -194,6 +277,7 @@ export default class PreloadResource{
         this.game.load.audio( SoundAssetKey.BTNSND_CORNER_VEGETABLE_2, btnSnd_corner_vegetable_2);
 
         this.game.load.audio( SoundAssetKey.BEEP, beep);
+
         this.game.load.audio( SoundAssetKey.CASH_SND_100, cash_snd_100);
         this.game.load.audio( SoundAssetKey.CASH_SND_500, cash_snd_500);
         this.game.load.audio( SoundAssetKey.CASH_SND_1000, cash_snd_1000);
@@ -204,6 +288,86 @@ export default class PreloadResource{
         this.game.load.audio( SoundAssetKey.CASH_SND_OVER_2, cash_snd_over_2);
         this.game.load.audio( SoundAssetKey.CASH_SND_SHORTAGE, cash_snd_shortage);
         this.game.load.audio( SoundAssetKey.CASH_SND_COMPLETE, cash_snd_complete);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_BANANAMILK_1, objSnd_dairy_bananaMilk_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_CHEESE_1, objSnd_dairy_cheese_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_CHOCOLATEMILK_1, objSnd_dairy_chocolateMilk_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_CHOCOLATEMILK_2, objSnd_dairy_chocolateMilk_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_EGG_1, objSnd_dairy_egg_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_MILK_1, objSnd_dairy_milk_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_MILK_2, objSnd_dairy_milk_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_STRAWBERRYMILK_1, objSnd_dairy_strawberryMilk_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_STRAWBERRYMILK_2, objSnd_dairy_strawberryMilk_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_YOGURT_1, objSnd_dairy_yogurt_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_DAIRY_YOGURT_2, objSnd_dairy_yogurt_2);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_BACON_1, objSnd_meat_bacon_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_BOILEDPORK_1, objSnd_meat_boiledPork_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_BOILEDPORK_2, objSnd_meat_boiledPork_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_CHICKEN_1, objSnd_meat_chicken_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_CHICKEN_2, objSnd_meat_chicken_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_DRUMSTICK_1, objSnd_meat_drumstick_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_DRUMSTICK_2, objSnd_meat_drumstick_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_SIRLOIN_1, objSnd_meat_sirloin_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_SIRLOIN_2, objSnd_meat_sirloin_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_TENDERLOIN_1, objSnd_meat_tenderloin_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_MEAT_TENDERLOIN_2, objSnd_meat_tenderloin_2);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_BRUSH_1, objSnd_necessary_brush_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_CLEANSER_1, objSnd_necessary_cleanser_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_PASTE_1, objSnd_necessary_paste_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_SHAMPOO_1, objSnd_necessary_shampoo_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_SHAMPOO_2, objSnd_necessary_shampoo_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_SOAP_1, objSnd_necessary_soap_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_TISSUE_1, objSnd_necessary_tissue_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_WETTISSUE_1, objSnd_necessary_wetTissue_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_NECESSARY_WETTISSUE_2, objSnd_necessary_wetTissue_2);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_ABALONE_1, objSnd_seafood_abalone_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_CRAB_1, objSnd_seafood_crab_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_MACKEREL_1, objSnd_seafood_mackerel_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_MACKEREL_2, objSnd_seafood_mackerel_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_SHELL_1, objSnd_seafood_shell_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_SHELL_2, objSnd_seafood_shell_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_SHRIMP_1, objSnd_seafood_shrimp_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_SQUID_1, objSnd_seafood_squid_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SEAFOOD_SQUID_2, objSnd_seafood_squid_2);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_CANDY_1, objSnd_snack_candy_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_CANDY_2, objSnd_snack_candy_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_CHOCOLATE_1, objSnd_snack_chocolate_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_CHOCOLATE_2, objSnd_snack_chocolate_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_ICECREAM_1, objSnd_snack_iceCream_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_ICECREAM_2, objSnd_snack_iceCream_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_SNACK_JELLY_1, objSnd_snack_jelly_1);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_APPLE_1, objSnd_vegetable_apple_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_APPLE_2, objSnd_vegetable_apple_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_CARROT_1, objSnd_vegetable_carrot_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_CARROT_2, objSnd_vegetable_carrot_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_GRAPE_2, objSnd_vegetable_grape_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_ONION_1, objSnd_vegetable_onion_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_ONION_2, objSnd_vegetable_onion_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_RADISH_1, objSnd_vegetable_radish_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_RADISH_2, objSnd_vegetable_radish_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_STRAWBERRY_1, objSnd_vegetable_strawberry_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_STRAWBERRY_2, objSnd_vegetable_strawberry_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_1, objSnd_vegetable_sweetPotato_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_2, objSnd_vegetable_sweetPotato_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_SWEETPOTATO_3, objSnd_vegetable_sweetPotato_3);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_1, objSnd_vegetable_welshonion_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_2, objSnd_vegetable_welshonion_2);
+        this.game.load.audio( SoundAssetKey.OBJSND_VEGETABLE_WELSHONION_3, objSnd_vegetable_welshonion_3);
+
+        this.game.load.audio( SoundAssetKey.OBJSND_WRONG_1, objSnd_wrong_1);
+        this.game.load.audio( SoundAssetKey.OBJSND_WRONG_2, objSnd_wrong_2);
+
+
+
+
+
 
 
     }

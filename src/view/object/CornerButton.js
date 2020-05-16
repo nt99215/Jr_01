@@ -3,9 +3,20 @@ import AssetKey from "../../data/AssetKey";
 import GameConfig from "../../data/GameConfig";
 import SoundManager from "../../manager/SoundManager";
 
-const _delay = [0, 60, 80];
+
+const _delay = [
+    [],
+    [100, 143, 'VEGETABLE'],
+    [100, 150, 'SEAFOOD'],
+    [90, 135, 'MEAT'],
+    [140, 180, 'NECESSARY'],
+    [110, 150, 'DAIRY'],
+    [110, 170, 'SNACK'],
+    [360, 270, 'NOTYET'],
+    [75, 117, 'COUNTER'],
+];
 export default class CornerButton{
-    constructor(game, group, asset, x, y, parent, num) {
+    constructor(game, group, asset, x, y, parent, num, counterDummy = false) {
         this._game = game;
         this._gameGroup = group;
         this._key = AssetKey.MAIN_DISPLAY_ASSET;
@@ -18,7 +29,9 @@ export default class CornerButton{
         this._count = 0;
         this._selected = false;
         this._delayTime = null;
+        this._counterDummy = counterDummy;
         this._init();
+
     }
 
     _init() {
@@ -42,14 +55,14 @@ export default class CornerButton{
         let snd = sndAsset + rN;
         SoundManager.instance.effectSound(snd);
         GameConfig.CURRENT_BUTTON_SOUND = snd;
-
-        this._delayTime = _delay[rN];
+        this._delayTime = parseInt(_delay[this._num][rN - 1] * 0.6);
     }
 
     _onSelect() {
         // SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
-        this._btn.inputEnabled = false;
         this._sndPlay();
+        if(this._counterDummy) return;
+        this._btn.inputEnabled = false;
         this._selected = true;
         this._parent._cornerButtonEnable(true, this._num, true);
 
@@ -68,23 +81,23 @@ export default class CornerButton{
 
     _btnDisable() {
         this._btn.inputEnabled = false;
+        if(this._counterDummy) return;
         this._bg.tint = 0x525252;
         this._btn.tint = 0x525252;
     }
 
     _btnEnable() {
         this._btn.inputEnabled = true;
+        if(this._counterDummy) return;
         this._bg.tint = 0xffffff;
         this._btn.tint = 0xffffff;
     }
 
     _update() {
 
+        if(this._counterDummy) return;
 
-        if(this._selected)
-        {
-            this._count++;
-        }
+        if(this._selected) this._count++;
         else return;
 
         if(GameConfig.SOUND_ENABLED)

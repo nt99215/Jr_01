@@ -52,7 +52,8 @@ export default class Corner {
         this._bgGroup.addChild(this._backGround);
 
         let headArr = this._category.rollingButtonList[0];
-        let head = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
+        let headEffectArr = this._category.effectQuantity[0];
+        let head = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, headEffectArr, '_head');
         boardArr.push(head);
         head._board.x = 294;
         head._board.y = 720 - head._board.height;
@@ -60,7 +61,8 @@ export default class Corner {
        for(let i = 1; i <= this._category.totalDisplayBoard; i++)
        {
            let arr = this._category.rollingButtonList[i];
-           let board = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+           let effectArr = this._category.effectQuantity[i];
+           let board = new RollingBoard(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr, effectArr);
            boardArr.push(board);
            boardArr[i]._board.y = 720 - boardArr[i]._board.height;
            boardArr[1]._board.x = head._board.x + head._board.width;
@@ -115,6 +117,10 @@ export default class Corner {
             let asset = list[obj].item;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
             dragObj.item = asset;
+
+            let quantity = list[obj].effectQuantity;
+            dragObj.effectQuantity = quantity;
+
             this._gameGroup.addChild(dragObj);
             dragObj.visible = false;
             dragObjArr.push(dragObj);
@@ -232,7 +238,6 @@ export default class Corner {
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
         this._pickUp = false;
-
         let correct;
         if (this._overLapCheck(obj.img))
         {
@@ -241,7 +246,13 @@ export default class Corner {
             else correct = false;
 
             this._parent._ppiyoFeedBackPopUp(correct);
+
+            let soundAsset;
+            if(correct) soundAsset = obj.sndPrefix + this._game.rnd.between(1, obj.sndEffectQuantity);
+            else soundAsset = 'objSnd_wrong_' + this._game.rnd.between(1, 2);
+            this._effectSndPlay(soundAsset)
         }
+
         this._objRestore(obj, correct);
     }
 
@@ -256,6 +267,13 @@ export default class Corner {
             // return overLap(obj, target);
             // console.log(parseInt(target.x), parseInt(obj.x));
         }
+    }
+
+    _effectSndPlay(soundAsset) {
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+        SoundManager.instance.effectSound(soundAsset);
+        GameConfig.CURRENT_GUIDE_SOUND = soundAsset;
     }
 
     _update() {

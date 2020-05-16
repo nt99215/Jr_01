@@ -13,14 +13,14 @@ export default class Categories {
             displayBoardHead: true,
             totalDisplayBoard: 5,
             itemList: [
-                {item:'apple', price:'1000', xPos:1111, yPos:211},
-                {item:'carrot', price:'500', xPos:487, yPos:177},
-                {item:'grape', price:'1500', xPos:1133, yPos:393},
-                {item:'onion', price:'500', xPos:68, yPos:393},
-                {item:'radish', price:'500', xPos:175, yPos:149},
-                {item:'strawberry', price:'2000', xPos:1404, yPos:241},
-                {item:'sweetPotato', price:'500', xPos:404, yPos:392},
-                {item:'welshonion', price:'1000', xPos:776, yPos:139},
+                {item:'apple', price:'1000', xPos:1111, yPos:211, effectQuantity:2},
+                {item:'carrot', price:'500', xPos:487, yPos:177, effectQuantity:2},
+                {item:'grape', price:'1500', xPos:1133, yPos:393, effectQuantity:2},
+                {item:'onion', price:'500', xPos:68, yPos:393, effectQuantity:2},
+                {item:'radish', price:'500', xPos:175, yPos:149, effectQuantity:2},
+                {item:'strawberry', price:'2000', xPos:1404, yPos:241, effectQuantity:2},
+                {item:'sweetPotato', price:'500', xPos:404, yPos:392, effectQuantity:3},
+                {item:'welshonion', price:'1000', xPos:776, yPos:139, effectQuantity:2},
             ],
             rollingButtonList:[
                 ['radish', 'onion'],
@@ -29,6 +29,14 @@ export default class Categories {
                 ['apple', 'grape'],
                 ['strawberry'],
                 ['radish', 'onion'],
+            ],
+            effectQuantity:[
+                [2, 2],
+                [2, 3],
+                [2, 2],
+                [2, 2],
+                [2, 2],
+                [2, 2],
             ]
 
         }
@@ -44,12 +52,12 @@ export default class Categories {
             displayBoardHead: false,
             totalDisplayBoard: 8,
             itemList: [
-                {item:'abalone', price:'1500', xPos:1147, yPos:409},
-                {item:'crab', price:'1000', xPos:1413, yPos:208},
-                {item:'mackerel', price:'1000', xPos:426, yPos:213},
-                {item:'shell', price:'1000', xPos:816, yPos:183},
-                {item:'shrimp', price:'1000', xPos:781, yPos:361},
-                {item:'squid', price:'1000', xPos:1120, yPos:207},
+                {item:'abalone', price:'1500', xPos:1147, yPos:409, effectQuantity:1},
+                {item:'crab', price:'1000', xPos:1413, yPos:208, effectQuantity:1},
+                {item:'mackerel', price:'1000', xPos:426, yPos:213, effectQuantity:2},
+                {item:'shell', price:'1000', xPos:816, yPos:183, effectQuantity:2},
+                {item:'shrimp', price:'1000', xPos:781, yPos:361, effectQuantity:1},
+                {item:'squid', price:'1000', xPos:1120, yPos:207, effectQuantity:2},
             ],
             rollingButtonList:[
                 [],
@@ -61,6 +69,17 @@ export default class Categories {
                 ['shell', 'shrimp'],
                 ['squid', 'abalone'],
                 ['crab'],
+            ],
+            effectQuantity:[
+                [],
+                [2],
+                [2, 1],
+                [2, 1],
+                [1],
+                [2],
+                [2, 1],
+                [2, 1],
+                [1],
             ]
 
         }
@@ -76,12 +95,12 @@ export default class Categories {
             displayBoardHead: false,
             totalDisplayBoard: 6,
             itemList: [
-                {item:'drumstick', price:'1500', xPos:1391, yPos:198},
-                {item:'chicken', price:'2000', xPos:1361, yPos:396},
-                {item:'tenderloin', price:'3000', xPos:831, yPos:217},
-                {item:'sirloin', price:'3000', xPos:829, yPos:415},
-                {item:'bacon', price:'1500', xPos:283, yPos:216},
-                {item:'boiledPork', price:'1500', xPos:267, yPos:412},
+                {item:'drumstick', price:'1500', xPos:1391, yPos:198, effectQuantity:2},
+                {item:'chicken', price:'2000', xPos:1361, yPos:396, effectQuantity:2},
+                {item:'tenderloin', price:'3000', xPos:831, yPos:217, effectQuantity:2},
+                {item:'sirloin', price:'3000', xPos:829, yPos:415, effectQuantity:2},
+                {item:'bacon', price:'1500', xPos:283, yPos:216, effectQuantity:1},
+                {item:'boiledPork', price:'1500', xPos:267, yPos:412, effectQuantity:2},
             ],
             rollingButtonList:[
                 [],
@@ -91,6 +110,15 @@ export default class Categories {
                 ['bacon', 'boiledPork'],
                 ['tenderloin', 'sirloin'],
                 ['drumstick', 'chicken'],
+            ],
+            effectQuantity:[
+                [],
+                [1, 2],
+                [2, 2],
+                [2, 2],
+                [1, 2],
+                [2, 2],
+                [2, 2],
             ]
 
         }
@@ -106,13 +134,13 @@ export default class Categories {
             displayBoardHead: false,
             totalDisplayBoard: 4,
             itemList: [
-                {item:'cleanser', price:'1500', xPos:1310, yPos:211},
-                {item:'shampoo', price:'1000', xPos:182, yPos:220},
-                {item:'soap', price:'500', xPos:765, yPos:240},
-                {item:'brush', price:'500', xPos:778, yPos:422},
-                {item:'paste', price:'500', xPos:192, yPos:417},
-                {item:'tissue', price:'1000', xPos:1313, yPos:415},
-                {item:'wetTissue', price:'1000', xPos:1988, yPos:223},
+                {item:'cleanser', price:'1500', xPos:1310, yPos:211, effectQuantity:1},
+                {item:'shampoo', price:'1000', xPos:182, yPos:220, effectQuantity:2},
+                {item:'soap', price:'500', xPos:765, yPos:240, effectQuantity:1},
+                {item:'brush', price:'500', xPos:778, yPos:422, effectQuantity:1},
+                {item:'paste', price:'500', xPos:192, yPos:417, effectQuantity:1},
+                {item:'tissue', price:'1000', xPos:1313, yPos:415, effectQuantity:1},
+                {item:'wetTissue', price:'1000', xPos:1988, yPos:223, effectQuantity:2},
             ],
             rollingButtonList:[
                 [],
@@ -120,6 +148,13 @@ export default class Categories {
                 ['soap', 'brush'],
                 ['cleanser', 'tissue'],
                 ['wetTissue'],
+            ],
+            effectQuantity:[
+                [],
+                [2, 1],
+                [1, 1],
+                [1, 1],
+                [2],
             ]
 
         }
@@ -135,13 +170,13 @@ export default class Categories {
             displayBoardHead: false,
             totalDisplayBoard: 4,
             itemList: [
-                {item:'bananaMilk', price:'500', xPos:1309, yPos:214},
-                {item:'cheese', price:'1000', xPos:1848, yPos:227},
-                {item:'chocolateMilk', price:'500', xPos:244, yPos:415},
-                {item:'egg', price:'1500', xPos:742, yPos:201},
-                {item:'milk', price:'1000', xPos:259, yPos:208},
-                {item:'strawberryMilk', price:'500', xPos:768, yPos:415},
-                {item:'yogurt', price:'1000', xPos:1863, yPos:409},
+                {item:'bananaMilk', price:'500', xPos:1309, yPos:214, effectQuantity:1},
+                {item:'cheese', price:'1000', xPos:1848, yPos:227, effectQuantity:1},
+                {item:'chocolateMilk', price:'500', xPos:244, yPos:415, effectQuantity:2},
+                {item:'egg', price:'1500', xPos:742, yPos:201, effectQuantity:2},
+                {item:'milk', price:'1000', xPos:259, yPos:208, effectQuantity:2},
+                {item:'strawberryMilk', price:'500', xPos:768, yPos:415, effectQuantity:2},
+                {item:'yogurt', price:'1000', xPos:1863, yPos:409, effectQuantity:2},
             ],
             rollingButtonList:[
                 [],
@@ -149,6 +184,13 @@ export default class Categories {
                 ['egg', 'strawberryMilk'],
                 ['bananaMilk'],
                 ['cheese', 'yogurt'],
+            ],
+            effectQuantity:[
+                [],
+                [2, 2],
+                [2, 3],
+                [1],
+                [1, 2],
             ]
 
         }
@@ -164,10 +206,10 @@ export default class Categories {
             displayBoardHead: true,
             totalDisplayBoard: 8,
             itemList: [
-                {item:'candy', price:'1000', xPos:51, yPos:235},
-                {item:'chocolate', price:'1000', xPos:325, yPos:239},
-                {item:'iceCream', price:'1000', xPos:623, yPos:238},
-                {item:'jelly', price:'1000', xPos:1220, yPos:249},
+                {item:'candy', price:'1000', xPos:51, yPos:235, effectQuantity:2},
+                {item:'chocolate', price:'1000', xPos:325, yPos:239, effectQuantity:2},
+                {item:'iceCream', price:'1000', xPos:623, yPos:238, effectQuantity:2},
+                {item:'jelly', price:'1000', xPos:1220, yPos:249, effectQuantity:1},
             ],
             rollingButtonList:[
                 ['candy'],
@@ -179,7 +221,28 @@ export default class Categories {
                 ['iceCream'],
                 ['jelly'],
                 ['candy'],
+            ],
+            effectQuantity:[
+                [2],
+                [2],
+                [2],
+                [1],
+                [2],
+                [2],
+                [2],
+                [1],
+                [2],
             ]
+
+        }
+    }
+
+    static get NOTYET() {
+        return {
+            category: 'notYet',
+            displayPosition: {xPos: 1033, yPos:185},
+            backGroundColor:0x8bd3e7,
+            assetKey: AssetKey.CORNER_NOTYET,
 
         }
     }
@@ -193,7 +256,6 @@ export default class Categories {
 
         }
     }
-
 
 
 }

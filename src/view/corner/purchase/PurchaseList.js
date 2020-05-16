@@ -28,7 +28,8 @@ export default class PurchaseList {
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
         let rN = this._randomNumber(0, _shuffleArray.length - 1);
-        for(let i = 0; i<_shuffleArray.length; i++)
+        // for(let i = 0; i<_shuffleArray.length; i++)
+        for(let i = 0; i<1; i++)
         {
             //카테고리 랜덤 제거
             if(rN !== i)

@@ -1,5 +1,5 @@
 export default class RollingBoard {
-    constructor(game, bgGroup, group, key, asset, num, arr = null, suffix = '') {
+    constructor(game, bgGroup, group, key, asset, num, arr = null, effectArr = null, suffix = '') {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = group;
@@ -12,8 +12,8 @@ export default class RollingBoard {
         this._categoryButton = [];
         this._categoryImage = [];
         this._arr = arr;
+        this._sndEffectQuantity = effectArr;
         this._init();
-
     }
 
     _init() {
@@ -31,10 +31,14 @@ export default class RollingBoard {
             btn.categoryName = this._arr[i];
             btn.alpha = 0;
 
+
             let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
             categoryImage.visible = false;
 
+            let sndPrefix = 'objSnd_' + this._category + '_' + btn.categoryName + '_';
+            btn.sndPrefix = sndPrefix;
             btn.img = categoryImage;
+            btn.sndEffectQuantity = this._sndEffectQuantity[i];
 
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);

@@ -39,6 +39,7 @@ export default class AssetKey {
     static get CORNER_DAIRY() {return 'corner-dairy-asset';}
     static get CORNER_SNACK() {return 'corner-snack-asset';}
     static get CORNER_COUNTER() {return 'corner-counter-asset';}
+    static get CORNER_NOTYET() {return 'corner-counter-asset';}
 
 
 

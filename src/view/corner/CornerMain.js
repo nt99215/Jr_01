@@ -16,6 +16,7 @@ const _categoryArr= ['',
     Categories.NECESSARY,
     Categories.DAIRY,
     Categories.SNACK,
+    Categories.NOTYET,
     Categories.COUNTER,
 ];
 let _btnArr;
@@ -64,7 +65,8 @@ export default class CornerMain{
             let xPos = _categoryArr[i].displayPosition.xPos;
             let yPos = _categoryArr[i].displayPosition.yPos;
 
-            let btn = new CornerButton(this._game, this._buttonGroup, asset, xPos, yPos, this, i);
+            let dummy = asset === 'notYet';
+            let btn = new CornerButton(this._game, this._buttonGroup, asset, xPos, yPos, this, i, dummy);
             _btnArr.push(btn);
         }
 
@@ -72,7 +74,7 @@ export default class CornerMain{
         this._createBackButton();
 
         //CORNER  BUTTON INIT
-        this._cornerButtonEnable(true, 100);
+        this._cornerButtonEnable(true);
 
         //PURCHASE SLIDE
         this._purchaseSlidePop();
@@ -195,9 +197,9 @@ export default class CornerMain{
         this.hand.x += this.hand.width/2;
         this.hand.y += this.hand.height/2;
         this._game.add.tween(this.hand.scale).to({x:0.8, y:0.8}, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
-        this.hand.inputEnabled = true;
-        this.hand.input.enableDrag();
-        this.hand.events.onDragUpdate.add(this._stopDrag, this);
+        // this.hand.inputEnabled = true;
+        // this.hand.input.enableDrag();
+        // this.hand.events.onDragUpdate.add(this._stopDrag, this);
 
     }
 
@@ -208,16 +210,24 @@ export default class CornerMain{
 
     _update() {
 
-        if(this._shoppingComplete) return;
+
         if(this._corner) this._corner._update();
         if(this._purchaseSlide) this._purchaseSlide._update();
         if(GameConfig.TOTAL_CATEGORIES === 0)
         {
-            this._shoppingComplete = true;
-            for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+            //COUNTER BUTTON INVISIBLE
+            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
+            _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
+            _btnArr[_btnArr.length - 1]._update();
+
+
+            if(this._shoppingComplete) return;
             this._removeCorner(true);
+            for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+
             //GUIDE  HAND POP UP
             this._guideHandPop();
+            this._shoppingComplete = true;
         }
 
         if(this._cornerPop) return;
@@ -225,6 +235,7 @@ export default class CornerMain{
         {
             if(_btnArr[i]) _btnArr[i]._update();
         }
+
     }
 
     _objectPause() {
