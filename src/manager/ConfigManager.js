@@ -21,6 +21,7 @@ export default class ConfigManager {
         GameConfig.PURCHASE_LIST = [];
         GameConfig.PURCHASE_ITEM_ARRAY_RESET = [];
         GameConfig.PURCHASE_ITEM_FOR_LIST_ARRAY_RESET = [];
+        GameConfig.BGM_VOLUME = GameConfig.DEFAULT_BGM_VOLUME;
     }
 
     GAME_OVER() {

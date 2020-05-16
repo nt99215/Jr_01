@@ -42,8 +42,11 @@ export default class PaymentPos {
 
     _sndPlay() {
 
-        // GameConfig.BGM_VOLUME = GameConfig.REDUCE_BGM_VOLUME;
+
+        GameConfig.BGM_VOLUME = GameConfig.REDUCE_BGM_VOLUME;
         // SoundManager.instance.bgmSoundStart();
+
+        if(GameConfig.SOUND_ENABLED) SoundManager.instance.effectSoundStop(SoundAssetKey.MAIN_BGM, GameConfig.REDUCE_BGM_VOLUME,  true, false);
 
         SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
         SoundManager.instance.effectSound(SoundAssetKey.guideNarr_5);

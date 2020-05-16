@@ -5,9 +5,10 @@ const displaySlidingSpeed = 7000;
 let guideEnable = true;
 let chapterClear = false;
 
-// let bgmVolume = 0.2;
-let bgmVolume = 0.001;
-const reduceBgmVolume = 0.001;
+const defaultBgmVolume = 0.3;
+let bgmVolume = 0.3;
+// let bgmVolume = 0.001;
+const reduceBgmVolume = 0.1;
 const muteSoundVolume = 0.0001;
 
 let currentFillObject = null;
@@ -119,6 +120,7 @@ export default class GameConfig {
     static get GAME_FINISH() { return finish; }
     static set GAME_FINISH(bool) { finish = bool; }
 
+    static get DEFAULT_BGM_VOLUME() { return defaultBgmVolume; }
     static get REDUCE_BGM_VOLUME() { return reduceBgmVolume; }
 
     static get BGM_VOLUME() { return bgmVolume; }

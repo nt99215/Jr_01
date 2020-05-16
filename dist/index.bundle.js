@@ -75,9 +75,11 @@ const displaySlidingSpeed = 7000;
 let guideEnable = true;
 let chapterClear = false;
 
-const bgmVolume = 0.2;
-// const bgmVolume = 0.001;
-let muteSoundVolume = 0.0001;
+const defaultBgmVolume = 0.3;
+let bgmVolume = 0.3;
+// let bgmVolume = 0.001;
+const reduceBgmVolume = 0.1;
+const muteSoundVolume = 0.0001;
 
 let currentFillObject = null;
 let purchaseList = [];
@@ -106,6 +108,7 @@ let updateObject = null;
 
 let guideRemove = false;
 let currentGuideSound = null;
+let currentButtonSound = null;
 
 let cheatOn = false;
 
@@ -281,8 +284,18 @@ class GameConfig {
         finish = bool;
     }
 
+    static get DEFAULT_BGM_VOLUME() {
+        return defaultBgmVolume;
+    }
+    static get REDUCE_BGM_VOLUME() {
+        return reduceBgmVolume;
+    }
+
     static get BGM_VOLUME() {
         return bgmVolume;
+    }
+    static set BGM_VOLUME(num) {
+        bgmVolume = num;
     }
 
     static get MUTE_SOUND_VOLUME() {
@@ -332,6 +345,13 @@ class GameConfig {
     }
     static set CURRENT_GUIDE_SOUND(obj) {
         currentGuideSound = obj;
+    }
+
+    static get CURRENT_BUTTON_SOUND() {
+        return currentButtonSound;
+    }
+    static set CURRENT_BUTTON_SOUND(obj) {
+        currentButtonSound = obj;
     }
 
     static get DISPLAY_SLIDING_SPEED() {
@@ -443,6 +463,9 @@ class AssetKey {
         return 'corner-snack-asset';
     }
     static get CORNER_COUNTER() {
+        return 'corner-counter-asset';
+    }
+    static get CORNER_NOTYET() {
         return 'corner-counter-asset';
     }
 
@@ -588,137 +611,8 @@ class AssetKey {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class SoundAssetKey {
-
-    /**
-     * NARRATION
-     */
-    static get GAME_INTRO() {
-        return 'gameIntro';
-    }
-
-    static get TUTOR_NARRATION_PREFIX() {
-        return 'tutorNarr_';
-    }
-    static get tutorNarr_1() {
-        return 'tutorNarr_1';
-    }
-    static get tutorNarr_2() {
-        return 'tutorNarr_2';
-    }
-    static get tutorNarr_3() {
-        return 'tutorNarr_3';
-    }
-    static get tutorNarr_4() {
-        return 'tutorNarr_4';
-    }
-    static get tutorNarr_5() {
-        return 'tutorNarr_5';
-    }
-
-    /**
-     * EFFECT SOUND
-     */
-    static get MAIN_BGM() {
-        return 'mainBgm';
-    }
-    static get BASIC_TOUCH_SOUND() {
-        return 'basicTouchSnd';
-    }
-    static get BUTTON_SOUND() {
-        return 'btnSnd';
-    }
-
-    static get START_SOUND() {
-        return 'sfx_start';
-    }
-    static get RESTART_SOUND() {
-        return 'sfx_retry';
-    }
-
-    static get CHAPTER_COMPLETE_EFFECT() {
-        return 'completeEffect';
-    }
-
-    /**
-     * GUIDE SOUND
-     */
-    static get GUIDE_SOUND_PREFIX() {
-        return 'guideNarr_';
-    }
-    static get guideNarr_1() {
-        return 'guideNarr_1';
-    }
-    static get guideNarr_2() {
-        return 'guideNarr_2';
-    }
-    static get guideNarr_3() {
-        return 'guideNarr_3';
-    }
-    static get guideNarr_4() {
-        return 'guideNarr_4';
-    }
-
-    /**
-     * CHAPTER COMPLETE SOUND
-     */
-    static get CHAPTER_COMPLETE_PREFIX() {
-        return 'chapterComplete_';
-    }
-    static get chapterComplete_1() {
-        return 'chapterComplete_1';
-    }
-    static get chapterComplete_2() {
-        return 'chapterComplete_2';
-    }
-    static get chapterComplete_3() {
-        return 'chapterComplete_3';
-    }
-    static get chapterComplete_4() {
-        return 'chapterComplete_4';
-    }
-
-    /**
-     * BUTTON SOUND
-     */
-    static get SND_CLOSE() {
-        return 'sndClose';
-    }
-    static get SND_OFF() {
-        return 'sndOff';
-    }
-    static get SND_ON() {
-        return 'sndOn';
-    }
-    static get SND_NEXT() {
-        return 'sndNext';
-    }
-    static get SND_PREV() {
-        return 'sndPrev';
-    }
-    static get SND_SKIP() {
-        return 'sndSkip';
-    }
-
-    /**
-     * RESULT PAGE
-     */
-
-    static get RESULT_GOOD() {
-        return 'result_good';
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = SoundAssetKey;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(3);
 /**
  * Created by naver on 2020. 02. 27.
  */
@@ -867,13 +761,452 @@ class SoundManager {
 SoundManager.instance = null;
 
 /***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class SoundAssetKey {
+
+    /**
+     * NARRATION
+     */
+    static get GAME_INTRO() {
+        return 'gameIntro';
+    }
+
+    static get TUTOR_NARRATION_PREFIX() {
+        return 'tutorNarr_';
+    }
+    static get tutorNarr_1() {
+        return 'tutorNarr_1';
+    }
+    static get tutorNarr_2() {
+        return 'tutorNarr_2';
+    }
+    static get tutorNarr_3() {
+        return 'tutorNarr_3';
+    }
+    static get tutorNarr_4() {
+        return 'tutorNarr_4';
+    }
+    static get tutorNarr_5() {
+        return 'tutorNarr_5';
+    }
+
+    /**
+     * EFFECT SOUND
+     */
+    static get MAIN_BGM() {
+        return 'mainBgm';
+    }
+    static get BASIC_TOUCH_SOUND() {
+        return 'basicTouchSnd';
+    }
+    static get BUTTON_SOUND() {
+        return 'btnSnd';
+    }
+
+    static get START_SOUND() {
+        return 'sfx_start';
+    }
+    static get RESTART_SOUND() {
+        return 'sfx_retry';
+    }
+
+    static get CHAPTER_COMPLETE_EFFECT() {
+        return 'completeEffect';
+    }
+    static get BEEP() {
+        return 'beep';
+    }
+    static get CASH_SND_100() {
+        return 'cash_snd_100';
+    }
+    static get CASH_SND_500() {
+        return 'cash_snd_500';
+    }
+    static get CASH_SND_1000() {
+        return 'cash_snd_1000';
+    }
+    static get CASH_SND_5000() {
+        return 'cash_snd_5000';
+    }
+    static get CASH_SND_10000() {
+        return 'cash_snd_10000';
+    }
+    static get CASH_SND_AGAIN() {
+        return 'cash_snd_again';
+    }
+    static get CASH_SND_OVER_1() {
+        return 'cash_snd_over_1';
+    }
+    static get CASH_SND_OVER_2() {
+        return 'cash_snd_over_2';
+    }
+    static get CASH_SND_SHORTAGE() {
+        return 'cash_snd_shortage';
+    }
+    static get CASH_SND_COMPLETE() {
+        return 'cash_snd_complete';
+    }
+
+    /**
+     * GUIDE SOUND
+     */
+    static get GUIDE_SOUND_PREFIX() {
+        return 'guideNarr_';
+    }
+    static get guideNarr_1() {
+        return 'guideNarr_1';
+    }
+    static get guideNarr_2() {
+        return 'guideNarr_2';
+    }
+    static get guideNarr_3() {
+        return 'guideNarr_3';
+    }
+    static get guideNarr_4() {
+        return 'guideNarr_4';
+    }
+    static get guideNarr_5() {
+        return 'guideNarr_5';
+    }
+
+    /**
+     * CHAPTER COMPLETE SOUND
+     */
+    static get CHAPTER_COMPLETE_PREFIX() {
+        return 'chapterComplete_';
+    }
+    static get chapterComplete_1() {
+        return 'chapterComplete_1';
+    }
+    static get chapterComplete_2() {
+        return 'chapterComplete_2';
+    }
+    static get chapterComplete_3() {
+        return 'chapterComplete_3';
+    }
+    static get chapterComplete_4() {
+        return 'chapterComplete_4';
+    }
+
+    /**
+     * BUTTON SOUND
+     */
+    static get SND_CLOSE() {
+        return 'sndClose';
+    }
+    static get SND_OFF() {
+        return 'sndOff';
+    }
+    static get SND_ON() {
+        return 'sndOn';
+    }
+    static get SND_NEXT() {
+        return 'sndNext';
+    }
+    static get SND_PREV() {
+        return 'sndPrev';
+    }
+    static get SND_SKIP() {
+        return 'sndSkip';
+    }
+
+    static get BTNSND_REMOVECORNER_1() {
+        return 'btnSnd_removeCorner_1';
+    }
+    static get BTNSND_REMOVECORNER_2() {
+        return 'btnSnd_removeCorner_2';
+    }
+
+    static get BTNSND_CORNER_COUNTER_1() {
+        return 'btnSnd_corner_counter_1';
+    }
+    static get BTNSND_CORNER_COUNTER_2() {
+        return 'btnSnd_corner_counter_2';
+    }
+
+    static get BTNSND_CORNER_NOTYET_1() {
+        return 'btnSnd_corner_notYet_1';
+    }
+    static get BTNSND_CORNER_NOTYET_2() {
+        return 'btnSnd_corner_notYet_2';
+    }
+
+    static get BTNSND_CORNER_DAIRY_1() {
+        return 'btnSnd_corner_dairy_1';
+    }
+    static get BTNSND_CORNER_DAIRY_2() {
+        return 'btnSnd_corner_dairy_2';
+    }
+
+    static get BTNSND_CORNER_MEAT_1() {
+        return 'btnSnd_corner_meat_1';
+    }
+    static get BTNSND_CORNER_MEAT_2() {
+        return 'btnSnd_corner_meat_2';
+    }
+
+    static get BTNSND_CORNER_NECESSARY_1() {
+        return 'btnSnd_corner_necessary_1';
+    }
+    static get BTNSND_CORNER_NECESSARY_2() {
+        return 'btnSnd_corner_necessary_2';
+    }
+
+    static get BTNSND_CORNER_SEAFOOD_1() {
+        return 'btnSnd_corner_seafood_1';
+    }
+    static get BTNSND_CORNER_SEAFOOD_2() {
+        return 'btnSnd_corner_seafood_2';
+    }
+
+    static get BTNSND_CORNER_SNACK_1() {
+        return 'btnSnd_corner_snack_1';
+    }
+    static get BTNSND_CORNER_SNACK_2() {
+        return 'btnSnd_corner_snack_2';
+    }
+
+    static get BTNSND_CORNER_VEGETABLE_1() {
+        return 'btnSnd_corner_vegetable_1';
+    }
+    static get BTNSND_CORNER_VEGETABLE_2() {
+        return 'btnSnd_corner_vegetable_2';
+    }
+
+    /**
+     * OBJECT SOUND
+     */
+    static get OBJSND_DAIRY_BANANAMILK_1() {
+        return 'objSnd_dairy_bananaMilk_1';
+    }
+    static get OBJSND_DAIRY_CHEESE_1() {
+        return 'objSnd_dairy_cheese_1';
+    }
+    static get OBJSND_DAIRY_CHOCOLATEMILK_1() {
+        return 'objSnd_dairy_chocolateMilk_1';
+    }
+    static get OBJSND_DAIRY_CHOCOLATEMILK_2() {
+        return 'objSnd_dairy_chocolateMilk_2';
+    }
+    static get OBJSND_DAIRY_EGG_1() {
+        return 'objSnd_dairy_egg_1';
+    }
+    static get OBJSND_DAIRY_MILK_1() {
+        return 'objSnd_dairy_milk_1';
+    }
+    static get OBJSND_DAIRY_MILK_2() {
+        return 'objSnd_dairy_milk_2';
+    }
+    static get OBJSND_DAIRY_STRAWBERRYMILK_1() {
+        return 'objSnd_dairy_strawberryMilk_1';
+    }
+    static get OBJSND_DAIRY_STRAWBERRYMILK_2() {
+        return 'objSnd_dairy_strawberryMilk_2';
+    }
+    static get OBJSND_DAIRY_YOGURT_1() {
+        return 'objSnd_dairy_yogurt_1';
+    }
+    static get OBJSND_DAIRY_YOGURT_2() {
+        return 'objSnd_dairy_yogurt_2';
+    }
+
+    static get OBJSND_MEAT_BACON_1() {
+        return 'objSnd_meat_bacon_1';
+    }
+    static get OBJSND_MEAT_BOILEDPORK_1() {
+        return 'objSnd_meat_boiledPork_1';
+    }
+    static get OBJSND_MEAT_BOILEDPORK_2() {
+        return 'objSnd_meat_boiledPork_2';
+    }
+    static get OBJSND_MEAT_CHICKEN_1() {
+        return 'objSnd_meat_chicken_1';
+    }
+    static get OBJSND_MEAT_CHICKEN_2() {
+        return 'objSnd_meat_chicken_2';
+    }
+    static get OBJSND_MEAT_DRUMSTICK_1() {
+        return 'objSnd_meat_drumstick_1';
+    }
+    static get OBJSND_MEAT_DRUMSTICK_2() {
+        return 'objSnd_meat_drumstick_2';
+    }
+    static get OBJSND_MEAT_SIRLOIN_1() {
+        return 'objSnd_meat_sirloin_1';
+    }
+    static get OBJSND_MEAT_SIRLOIN_2() {
+        return 'objSnd_meat_sirloin_2';
+    }
+    static get OBJSND_MEAT_TENDERLOIN_1() {
+        return 'objSnd_meat_tenderloin_1';
+    }
+    static get OBJSND_MEAT_TENDERLOIN_2() {
+        return 'objSnd_meat_tenderloin_2';
+    }
+
+    static get OBJSND_NECESSARY_BRUSH_1() {
+        return 'objSnd_necessary_brush_1';
+    }
+    static get OBJSND_NECESSARY_CLEANSER_1() {
+        return 'objSnd_necessary_cleanser_1';
+    }
+    static get OBJSND_NECESSARY_PASTE_1() {
+        return 'objSnd_necessary_paste_1';
+    }
+    static get OBJSND_NECESSARY_SHAMPOO_1() {
+        return 'objSnd_necessary_shampoo_1';
+    }
+    static get OBJSND_NECESSARY_SHAMPOO_2() {
+        return 'objSnd_necessary_shampoo_2';
+    }
+    static get OBJSND_NECESSARY_SOAP_1() {
+        return 'objSnd_necessary_soap_1';
+    }
+    static get OBJSND_NECESSARY_TISSUE_1() {
+        return 'objSnd_necessary_tissue_1';
+    }
+    static get OBJSND_NECESSARY_WETTISSUE_1() {
+        return 'objSnd_necessary_wetTissue_1';
+    }
+    static get OBJSND_NECESSARY_WETTISSUE_2() {
+        return 'objSnd_necessary_wetTissue_2';
+    }
+
+    static get OBJSND_SEAFOOD_ABALONE_1() {
+        return 'objSnd_seafood_abalone_1';
+    }
+    static get OBJSND_SEAFOOD_CRAB_1() {
+        return 'objSnd_seafood_crab_1';
+    }
+    static get OBJSND_SEAFOOD_MACKEREL_1() {
+        return 'objSnd_seafood_mackerel_1';
+    }
+    static get OBJSND_SEAFOOD_MACKEREL_2() {
+        return 'objSnd_seafood_mackerel_2';
+    }
+    static get OBJSND_SEAFOOD_SHELL_1() {
+        return 'objSnd_seafood_shell_1';
+    }
+    static get OBJSND_SEAFOOD_SHELL_2() {
+        return 'objSnd_seafood_shell_2';
+    }
+    static get OBJSND_SEAFOOD_SHRIMP_1() {
+        return 'objSnd_seafood_shrimp_1';
+    }
+    static get OBJSND_SEAFOOD_SQUID_1() {
+        return 'objSnd_seafood_squid_1';
+    }
+    static get OBJSND_SEAFOOD_SQUID_2() {
+        return 'objSnd_seafood_squid_2';
+    }
+
+    static get OBJSND_SNACK_CANDY_1() {
+        return 'objSnd_snack_candy_1';
+    }
+    static get OBJSND_SNACK_CANDY_2() {
+        return 'objSnd_snack_candy_2';
+    }
+    static get OBJSND_SNACK_CHOCOLATE_1() {
+        return 'objSnd_snack_chocolate_1';
+    }
+    static get OBJSND_SNACK_CHOCOLATE_2() {
+        return 'objSnd_snack_chocolate_2';
+    }
+    static get OBJSND_SNACK_ICECREAM_1() {
+        return 'objSnd_snack_iceCream_1';
+    }
+    static get OBJSND_SNACK_ICECREAM_2() {
+        return 'objSnd_snack_iceCream_2';
+    }
+    static get OBJSND_SNACK_JELLY_1() {
+        return 'objSnd_snack_jelly_1';
+    }
+
+    static get OBJSND_VEGETABLE_APPLE_1() {
+        return 'objSnd_vegetable_apple_1';
+    }
+    static get OBJSND_VEGETABLE_APPLE_2() {
+        return 'objSnd_vegetable_apple_2';
+    }
+    static get OBJSND_VEGETABLE_CARROT_1() {
+        return 'objSnd_vegetable_carrot_1';
+    }
+    static get OBJSND_VEGETABLE_CARROT_2() {
+        return 'objSnd_vegetable_carrot_2';
+    }
+    static get OBJSND_VEGETABLE_GRAPE_1() {
+        return 'objSnd_vegetable_grape_1';
+    }
+    static get OBJSND_VEGETABLE_GRAPE_2() {
+        return 'objSnd_vegetable_grape_2';
+    }
+    static get OBJSND_VEGETABLE_ONION_1() {
+        return 'objSnd_vegetable_onion_1';
+    }
+    static get OBJSND_VEGETABLE_ONION_2() {
+        return 'objSnd_vegetable_onion_2';
+    }
+    static get OBJSND_VEGETABLE_RADISH_1() {
+        return 'objSnd_vegetable_radish_1';
+    }
+    static get OBJSND_VEGETABLE_RADISH_2() {
+        return 'objSnd_vegetable_radish_2';
+    }
+    static get OBJSND_VEGETABLE_STRAWBERRY_1() {
+        return 'objSnd_vegetable_strawberry_1';
+    }
+    static get OBJSND_VEGETABLE_STRAWBERRY_2() {
+        return 'objSnd_vegetable_strawberry_2';
+    }
+    static get OBJSND_VEGETABLE_SWEETPOTATO_1() {
+        return 'objSnd_vegetable_sweetPotato_1';
+    }
+    static get OBJSND_VEGETABLE_SWEETPOTATO_2() {
+        return 'objSnd_vegetable_sweetPotato_2';
+    }
+    static get OBJSND_VEGETABLE_SWEETPOTATO_3() {
+        return 'objSnd_vegetable_sweetPotato_3';
+    }
+    static get OBJSND_VEGETABLE_WELSHONION_1() {
+        return 'objSnd_vegetable_welshonion_1';
+    }
+    static get OBJSND_VEGETABLE_WELSHONION_2() {
+        return 'objSnd_vegetable_welshonion_2';
+    }
+    static get OBJSND_VEGETABLE_WELSHONION_3() {
+        return 'objSnd_vegetable_welshonion_3';
+    }
+
+    static get OBJSND_WRONG_1() {
+        return 'objSnd_wrong_1';
+    }
+    static get OBJSND_WRONG_2() {
+        return 'objSnd_wrong_2';
+    }
+
+    /**
+     * RESULT PAGE
+     */
+
+    static get RESULT_GOOD() {
+        return 'result_good';
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = SoundAssetKey;
+
+
+/***/ }),
 /* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StarEffect__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
 
@@ -887,7 +1220,7 @@ class BackGroundTouchEffect {
         BackGroundTouchEffect.instance = this;
     }
 
-    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND) {
+    effect(game, xPos, yPos, radius, type = null, soundAsset = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BASIC_TOUCH_SOUND) {
         if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].IN_GAME) return;
         __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset, 0.4);
         new __WEBPACK_IMPORTED_MODULE_3__StarEffect__["a" /* default */](game, xPos, yPos, __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__["a" /* default */].DEFAULT_GAME_ATLAS, 'intro_twinkle', radius);
@@ -1212,9 +1545,9 @@ class GameInfo {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SoundManager__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
 
 
 
@@ -1300,8 +1633,8 @@ class WebEnabledCheck {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object_SeparateAnimation__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
@@ -1418,8 +1751,8 @@ class Intro {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_effect_BackgroundEffect_js__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_ConfigManager__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__object_SeparateAnimation__ = __webpack_require__(5);
@@ -1578,9 +1911,9 @@ class ResultView extends Phaser.Group {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__manager_SoundManager__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SceneManager__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_Controller__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_Intro__ = __webpack_require__(11);
@@ -1828,7 +2161,7 @@ class TutorialView extends Phaser.Group {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(2);
 
 
 
@@ -1888,8 +2221,9 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_VEGETABLE,
             displayBoardHead: true,
             totalDisplayBoard: 5,
-            itemList: [{ item: 'apple', price: '1000', xPos: 1111, yPos: 211 }, { item: 'carrot', price: '500', xPos: 487, yPos: 177 }, { item: 'grape', price: '1500', xPos: 1133, yPos: 393 }, { item: 'onion', price: '500', xPos: 68, yPos: 393 }, { item: 'radish', price: '500', xPos: 175, yPos: 149 }, { item: 'strawberry', price: '2000', xPos: 1404, yPos: 241 }, { item: 'sweetPotato', price: '500', xPos: 404, yPos: 392 }, { item: 'welshonion', price: '1000', xPos: 776, yPos: 139 }],
-            rollingButtonList: [['radish', 'onion'], ['carrot', 'sweetPotato'], ['welshonion'], ['apple', 'grape'], ['strawberry'], ['radish', 'onion']]
+            itemList: [{ item: 'apple', price: '1000', xPos: 1111, yPos: 211, effectQuantity: 2 }, { item: 'carrot', price: '500', xPos: 487, yPos: 177, effectQuantity: 2 }, { item: 'grape', price: '1500', xPos: 1133, yPos: 393, effectQuantity: 2 }, { item: 'onion', price: '500', xPos: 68, yPos: 393, effectQuantity: 2 }, { item: 'radish', price: '500', xPos: 175, yPos: 149, effectQuantity: 2 }, { item: 'strawberry', price: '2000', xPos: 1404, yPos: 241, effectQuantity: 2 }, { item: 'sweetPotato', price: '500', xPos: 404, yPos: 392, effectQuantity: 3 }, { item: 'welshonion', price: '1000', xPos: 776, yPos: 139, effectQuantity: 2 }],
+            rollingButtonList: [['radish', 'onion'], ['carrot', 'sweetPotato'], ['welshonion'], ['apple', 'grape'], ['strawberry'], ['radish', 'onion']],
+            effectQuantity: [[2, 2], [2, 3], [2, 2], [2, 2], [2, 2], [2, 2]]
 
         };
     }
@@ -1903,8 +2237,9 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_SEAFOOD,
             displayBoardHead: false,
             totalDisplayBoard: 8,
-            itemList: [{ item: 'abalone', price: '1500', xPos: 1147, yPos: 409 }, { item: 'crab', price: '1000', xPos: 1413, yPos: 208 }, { item: 'mackerel', price: '1000', xPos: 426, yPos: 213 }, { item: 'shell', price: '1000', xPos: 816, yPos: 183 }, { item: 'shrimp', price: '1000', xPos: 781, yPos: 361 }, { item: 'squid', price: '1000', xPos: 1120, yPos: 207 }],
-            rollingButtonList: [[], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab'], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab']]
+            itemList: [{ item: 'abalone', price: '1500', xPos: 1147, yPos: 409, effectQuantity: 1 }, { item: 'crab', price: '1000', xPos: 1413, yPos: 208, effectQuantity: 1 }, { item: 'mackerel', price: '1000', xPos: 426, yPos: 213, effectQuantity: 2 }, { item: 'shell', price: '1000', xPos: 816, yPos: 183, effectQuantity: 2 }, { item: 'shrimp', price: '1000', xPos: 781, yPos: 361, effectQuantity: 1 }, { item: 'squid', price: '1000', xPos: 1120, yPos: 207, effectQuantity: 2 }],
+            rollingButtonList: [[], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab'], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab']],
+            effectQuantity: [[], [2], [2, 1], [2, 1], [1], [2], [2, 1], [2, 1], [1]]
 
         };
     }
@@ -1918,8 +2253,9 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_MEAT,
             displayBoardHead: false,
             totalDisplayBoard: 6,
-            itemList: [{ item: 'drumstick', price: '1500', xPos: 1391, yPos: 198 }, { item: 'chicken', price: '2000', xPos: 1361, yPos: 396 }, { item: 'tenderloin', price: '3000', xPos: 831, yPos: 217 }, { item: 'sirloin', price: '3000', xPos: 829, yPos: 415 }, { item: 'bacon', price: '1500', xPos: 283, yPos: 216 }, { item: 'boiledPork', price: '1500', xPos: 267, yPos: 412 }],
-            rollingButtonList: [[], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken'], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken']]
+            itemList: [{ item: 'drumstick', price: '1500', xPos: 1391, yPos: 198, effectQuantity: 2 }, { item: 'chicken', price: '2000', xPos: 1361, yPos: 396, effectQuantity: 2 }, { item: 'tenderloin', price: '3000', xPos: 831, yPos: 217, effectQuantity: 2 }, { item: 'sirloin', price: '3000', xPos: 829, yPos: 415, effectQuantity: 2 }, { item: 'bacon', price: '1500', xPos: 283, yPos: 216, effectQuantity: 1 }, { item: 'boiledPork', price: '1500', xPos: 267, yPos: 412, effectQuantity: 2 }],
+            rollingButtonList: [[], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken'], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken']],
+            effectQuantity: [[], [1, 2], [2, 2], [2, 2], [1, 2], [2, 2], [2, 2]]
 
         };
     }
@@ -1933,8 +2269,9 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_NECESSARY,
             displayBoardHead: false,
             totalDisplayBoard: 4,
-            itemList: [{ item: 'cleanser', price: '1500', xPos: 1310, yPos: 211 }, { item: 'shampoo', price: '1000', xPos: 182, yPos: 220 }, { item: 'soap', price: '500', xPos: 765, yPos: 240 }, { item: 'brush', price: '500', xPos: 778, yPos: 422 }, { item: 'paste', price: '500', xPos: 192, yPos: 417 }, { item: 'tissue', price: '1000', xPos: 1313, yPos: 415 }, { item: 'wetTissue', price: '1000', xPos: 1988, yPos: 223 }],
-            rollingButtonList: [[], ['shampoo', 'paste'], ['soap', 'brush'], ['cleanser', 'tissue'], ['wetTissue']]
+            itemList: [{ item: 'cleanser', price: '1500', xPos: 1310, yPos: 211, effectQuantity: 1 }, { item: 'shampoo', price: '1000', xPos: 182, yPos: 220, effectQuantity: 2 }, { item: 'soap', price: '500', xPos: 765, yPos: 240, effectQuantity: 1 }, { item: 'brush', price: '500', xPos: 778, yPos: 422, effectQuantity: 1 }, { item: 'paste', price: '500', xPos: 192, yPos: 417, effectQuantity: 1 }, { item: 'tissue', price: '1000', xPos: 1313, yPos: 415, effectQuantity: 1 }, { item: 'wetTissue', price: '1000', xPos: 1988, yPos: 223, effectQuantity: 2 }],
+            rollingButtonList: [[], ['shampoo', 'paste'], ['soap', 'brush'], ['cleanser', 'tissue'], ['wetTissue']],
+            effectQuantity: [[], [2, 1], [1, 1], [1, 1], [2]]
 
         };
     }
@@ -1948,8 +2285,9 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_DAIRY,
             displayBoardHead: false,
             totalDisplayBoard: 4,
-            itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409 }],
-            rollingButtonList: [[], ['milk', 'chocolateMilk'], ['egg', 'strawberryMilk'], ['bananaMilk'], ['cheese', 'yogurt']]
+            itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214, effectQuantity: 1 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227, effectQuantity: 1 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415, effectQuantity: 2 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201, effectQuantity: 2 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208, effectQuantity: 2 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415, effectQuantity: 2 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409, effectQuantity: 2 }],
+            rollingButtonList: [[], ['milk', 'chocolateMilk'], ['egg', 'strawberryMilk'], ['bananaMilk'], ['cheese', 'yogurt']],
+            effectQuantity: [[], [2, 2], [2, 3], [1], [1, 2]]
 
         };
     }
@@ -1963,8 +2301,19 @@ class Categories {
             assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_SNACK,
             displayBoardHead: true,
             totalDisplayBoard: 8,
-            itemList: [{ item: 'candy', price: '1000', xPos: 51, yPos: 235 }, { item: 'chocolate', price: '1000', xPos: 325, yPos: 239 }, { item: 'iceCream', price: '1000', xPos: 623, yPos: 238 }, { item: 'jelly', price: '1000', xPos: 1220, yPos: 249 }],
-            rollingButtonList: [['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy']]
+            itemList: [{ item: 'candy', price: '1000', xPos: 51, yPos: 235, effectQuantity: 2 }, { item: 'chocolate', price: '1000', xPos: 325, yPos: 239, effectQuantity: 2 }, { item: 'iceCream', price: '1000', xPos: 623, yPos: 238, effectQuantity: 2 }, { item: 'jelly', price: '1000', xPos: 1220, yPos: 249, effectQuantity: 1 }],
+            rollingButtonList: [['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy']],
+            effectQuantity: [[2], [2], [2], [1], [2], [2], [2], [1], [2]]
+
+        };
+    }
+
+    static get NOTYET() {
+        return {
+            category: 'notYet',
+            displayPosition: { xPos: 1033, yPos: 185 },
+            backGroundColor: 0x8bd3e7,
+            assetKey: __WEBPACK_IMPORTED_MODULE_0__AssetKey__["a" /* default */].CORNER_NOTYET
 
         };
     }
@@ -2013,7 +2362,9 @@ class PurchaseList {
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
         let rN = this._randomNumber(0, _shuffleArray.length - 1);
-        for (let i = 0; i < _shuffleArray.length; i++) {
+        for (let i = 0; i < _shuffleArray.length; i++)
+        // for(let i = 0; i<1; i++)
+        {
             //카테고리 랜덤 제거
             if (rN !== i) {
                 let array = _shuffleArray[i].itemList;
@@ -2077,6 +2428,7 @@ class ConfigManager {
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_LIST = [];
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY_RESET = [];
         __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].PURCHASE_ITEM_FOR_LIST_ARRAY_RESET = [];
+        __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BGM_VOLUME = __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].DEFAULT_BGM_VOLUME;
     }
 
     GAME_OVER() {
@@ -2142,7 +2494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__ = __webpack_require__(6);
 
@@ -115902,8 +116254,8 @@ class Preloader extends Phaser.State {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__view_TutorialView__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__util_WebEnabledCheck__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__manager_TutorialManager__ = __webpack_require__(32);
@@ -116335,8 +116687,8 @@ class TutorialEndingEffect {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SoundManager__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_TutorialView__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SceneManager__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
@@ -116628,8 +116980,8 @@ class IntroEffect {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_corner_CornerMain__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_corner_purchase_PurchaseList__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_corner_purchase_PurchaseListView__ = __webpack_require__(44);
@@ -116661,10 +117013,10 @@ class CornerManager extends Phaser.Group {
         this._purchaseGenerate();
 
         //PURCHASE LIST VIEW
-        // this._createPurchaseList();
+        this._createPurchaseList();
 
         //CORNER
-        this._createCorner(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_CHAPTER);
+        // this._createCorner(GameConfig.CURRENT_CHAPTER);
 
         //CALCULATE POS
         // this._createCalculatePos();
@@ -116721,6 +117073,7 @@ class CornerManager extends Phaser.Group {
 
         this._objectVisibleHandler();
         if (this.chapter) this.chapter._update();
+        if (this._paymentPos) this._paymentPos._update();
         if (this.purchaseListView) this.purchaseListView._update();
     }
 
@@ -116768,12 +117121,6 @@ class CornerManager extends Phaser.Group {
         }
     }
 
-    _update() {
-        // if(this._paymentPos) this._paymentPos._update();
-        if (this.purchaseListView) this.purchaseListView._update();
-        if (this.chapter) this.chapter._update();
-    }
-
     _destroy() {
         /*  if(! GameConfig.IN_GAME)
           {
@@ -116793,8 +117140,8 @@ class CornerManager extends Phaser.Group {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_Categories__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__ = __webpack_require__(36);
@@ -116813,7 +117160,7 @@ class CornerManager extends Phaser.Group {
 
 
 
-const _categoryArr = ['', __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].VEGETABLE, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SEAFOOD, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].MEAT, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].NECESSARY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].DAIRY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SNACK, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].COUNTER];
+const _categoryArr = ['', __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].VEGETABLE, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SEAFOOD, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].MEAT, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].NECESSARY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].DAIRY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SNACK, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].NOTYET, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].COUNTER];
 let _btnArr;
 
 class CornerMain {
@@ -116831,9 +117178,18 @@ class CornerMain {
         this._purchaseSlide = null;
         this._shoppingComplete = false;
         _btnArr = [null];
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+        __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_2);
+        __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_2;
     }
 
     _setting(bgGroup, gameGroup, buttonGroup) {
+
+        // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
         this._buttonGroup = buttonGroup;
@@ -116849,7 +117205,8 @@ class CornerMain {
             let xPos = _categoryArr[i].displayPosition.xPos;
             let yPos = _categoryArr[i].displayPosition.yPos;
 
-            let btn = new __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__["a" /* default */](this._game, this._buttonGroup, asset, xPos, yPos, this, i);
+            let dummy = asset === 'notYet';
+            let btn = new __WEBPACK_IMPORTED_MODULE_5__object_CornerButton__["a" /* default */](this._game, this._buttonGroup, asset, xPos, yPos, this, i, dummy);
             _btnArr.push(btn);
         }
 
@@ -116870,7 +117227,7 @@ class CornerMain {
 
         if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].SOUND_ENABLED) __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].MAIN_BGM, __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BGM_VOLUME, true, false);
 
-        this._cornerButtonEnable(false);
+        this._cornerButtonEnable(false, num);
         this._removeCorner();
 
         //COUNTER ENABLED
@@ -116912,10 +117269,16 @@ class CornerMain {
         // this._backButton.visible = false;
     }
 
-    _cornerButtonEnable(bool) {
+    _cornerButtonEnable(bool, num = 0, selected = false) {
 
         for (let i = 1; i < _btnArr.length; i++) _btnArr[i]._visible(bool);
-        // for(let i = 1; i<_btnArr.length; i++) _btnArr[i]._btnDisable();
+        for (let i = 1; i < _btnArr.length; i++) {
+            if (selected) {
+                if (i !== num) _btnArr[i]._btnDisable();
+            } else {
+                _btnArr[i]._btnEnable();
+            }
+        }
 
         //COUNTER BUTTON INVISIBLE
         _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
@@ -116926,8 +117289,13 @@ class CornerMain {
 
     _removeCorner(counterButtonVisible = false) {
 
-        __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         if (this._corner) {
+            __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0.8, false, true);
+            let sndKeyArr = [__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_1, __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_2];
+            let snd = sndKeyArr[this._game.rnd.between(0, 1)];
+            __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(snd);
+            __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND = snd;
+
             this._corner._destroy();
             this._corner = null;
         }
@@ -116957,9 +117325,9 @@ class CornerMain {
         this.hand.x += this.hand.width / 2;
         this.hand.y += this.hand.height / 2;
         this._game.add.tween(this.hand.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
-        this.hand.inputEnabled = true;
-        this.hand.input.enableDrag();
-        this.hand.events.onDragUpdate.add(this._stopDrag, this);
+        // this.hand.inputEnabled = true;
+        // this.hand.input.enableDrag();
+        // this.hand.events.onDragUpdate.add(this._stopDrag, this);
     }
 
     _stopDrag(obj) {
@@ -116969,15 +117337,26 @@ class CornerMain {
 
     _update() {
 
-        if (this._shoppingComplete) return;
         if (this._corner) this._corner._update();
         if (this._purchaseSlide) this._purchaseSlide._update();
         if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES === 0) {
-            this._shoppingComplete = true;
-            for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+            //COUNTER BUTTON INVISIBLE
+            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
+            _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
+            _btnArr[_btnArr.length - 1]._update();
+
+            if (this._shoppingComplete) return;
             this._removeCorner(true);
+            for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+
             //GUIDE  HAND POP UP
             this._guideHandPop();
+            this._shoppingComplete = true;
+        }
+
+        if (this._cornerPop) return;
+        for (let i = 0; i < _btnArr.length; i++) {
+            if (_btnArr[i]) _btnArr[i]._update();
         }
     }
 
@@ -117029,17 +117408,18 @@ class CornerMain {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(2);
 
 
 
 
 
+const _delay = [[], [100, 143, 'VEGETABLE'], [100, 150, 'SEAFOOD'], [90, 135, 'MEAT'], [140, 180, 'NECESSARY'], [110, 150, 'DAIRY'], [110, 170, 'SNACK'], [360, 270, 'NOTYET'], [75, 117, 'COUNTER']];
 class CornerButton {
-    constructor(game, group, asset, x, y, parent, num) {
+    constructor(game, group, asset, x, y, parent, num, counterDummy = false) {
         this._game = game;
         this._gameGroup = group;
         this._key = __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__["a" /* default */].MAIN_DISPLAY_ASSET;
@@ -117049,6 +117429,10 @@ class CornerButton {
         this._yPos = y;
         this._parent = parent;
         this._num = num;
+        this._count = 0;
+        this._selected = false;
+        this._delayTime = null;
+        this._counterDummy = counterDummy;
         this._init();
     }
 
@@ -117064,9 +117448,24 @@ class CornerButton {
         // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._btn);
     }
 
+    _sndPlay() {
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0.8, false, true);
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0.8, false, true);
+        let sndAsset = 'btnSnd_corner_' + this._asset + '_';
+        let rN = this._game.rnd.between(1, 2);
+        let snd = sndAsset + rN;
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(snd);
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND = snd;
+        this._delayTime = parseInt(_delay[this._num][rN - 1] * 0.6);
+    }
+
     _onSelect() {
-        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
-        this._parent._cornerGenerate(this._num);
+        // SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
+        this._sndPlay();
+        if (this._counterDummy) return;
+        this._btn.inputEnabled = false;
+        this._selected = true;
+        this._parent._cornerButtonEnable(true, this._num, true);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -117082,8 +117481,37 @@ class CornerButton {
 
     _btnDisable() {
         this._btn.inputEnabled = false;
+        if (this._counterDummy) return;
         this._bg.tint = 0x525252;
         this._btn.tint = 0x525252;
+    }
+
+    _btnEnable() {
+        this._btn.inputEnabled = true;
+        if (this._counterDummy) return;
+        this._bg.tint = 0xffffff;
+        this._btn.tint = 0xffffff;
+    }
+
+    _update() {
+
+        if (this._counterDummy) return;
+
+        if (this._selected) this._count++;else return;
+
+        if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].SOUND_ENABLED) {
+            if (this._count > this._delayTime) {
+                this._selected = false;
+                this._parent._cornerGenerate(this._num);
+                this._count = 0;
+            }
+        } else {
+            this._selected = false;
+            this._parent._cornerGenerate(this._num);
+            this._count = 0;
+        }
+
+        // console.log(this._asset)
     }
 
     _destroy() {
@@ -117101,11 +117529,13 @@ class CornerButton {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_effect_BackGroundTouchEffect__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__RollingBoard__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(2);
+
 
 
 
@@ -117137,6 +117567,14 @@ class Corner {
         baseWidth = 0;
         centerPos = 0;
         this._init();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3);
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3;
     }
 
     _init() {
@@ -117149,14 +117587,16 @@ class Corner {
         this._bgGroup.addChild(this._backGround);
 
         let headArr = this._category.rollingButtonList[0];
-        let head = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, '_head');
+        let headEffectArr = this._category.effectQuantity[0];
+        let head = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, headEffectArr, '_head');
         boardArr.push(head);
         head._board.x = 294;
         head._board.y = 720 - head._board.height;
 
         for (let i = 1; i <= this._category.totalDisplayBoard; i++) {
             let arr = this._category.rollingButtonList[i];
-            let board = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr);
+            let effectArr = this._category.effectQuantity[i];
+            let board = new __WEBPACK_IMPORTED_MODULE_4__RollingBoard__["a" /* default */](this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr, effectArr);
             boardArr.push(board);
             boardArr[i]._board.y = 720 - boardArr[i]._board.height;
             boardArr[1]._board.x = head._board.x + head._board.width;
@@ -117202,6 +117642,10 @@ class Corner {
             let asset = list[obj].item;
             let dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
             dragObj.item = asset;
+
+            let quantity = list[obj].effectQuantity;
+            dragObj.effectQuantity = quantity;
+
             this._gameGroup.addChild(dragObj);
             dragObj.visible = false;
             dragObjArr.push(dragObj);
@@ -117299,14 +117743,18 @@ class Corner {
 
         // console.log(parseInt(obj.x), parseInt(obj.y));
         this._pickUp = false;
-
         let correct;
         if (this._overLapCheck(obj.img)) {
             // console.log('hit~~~')
             if (this._pushEnable(obj.img)) correct = true;else correct = false;
 
             this._parent._ppiyoFeedBackPopUp(correct);
+
+            let soundAsset;
+            if (correct) soundAsset = obj.sndPrefix + this._game.rnd.between(1, obj.sndEffectQuantity);else soundAsset = 'objSnd_wrong_' + this._game.rnd.between(1, 2);
+            this._effectSndPlay(soundAsset);
         }
+
         this._objRestore(obj, correct);
     }
 
@@ -117319,6 +117767,13 @@ class Corner {
             // return overLap(obj, target);
             // console.log(parseInt(target.x), parseInt(obj.x));
         }
+    }
+
+    _effectSndPlay(soundAsset) {
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset);
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = soundAsset;
     }
 
     _update() {
@@ -117349,7 +117804,7 @@ class Corner {
 
 "use strict";
 class RollingBoard {
-    constructor(game, bgGroup, group, key, asset, num, arr = null, suffix = '') {
+    constructor(game, bgGroup, group, key, asset, num, arr = null, effectArr = null, suffix = '') {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = group;
@@ -117362,6 +117817,7 @@ class RollingBoard {
         this._categoryButton = [];
         this._categoryImage = [];
         this._arr = arr;
+        this._sndEffectQuantity = effectArr;
         this._init();
     }
 
@@ -117382,7 +117838,10 @@ class RollingBoard {
             let categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
             categoryImage.visible = false;
 
+            let sndPrefix = 'objSnd_' + this._category + '_' + btn.categoryName + '_';
+            btn.sndPrefix = sndPrefix;
             btn.img = categoryImage;
+            btn.sndEffectQuantity = this._sndEffectQuantity[i];
 
             this._categoryButton.push(btn);
             this._gameGroup.addChild(btn);
@@ -117652,10 +118111,10 @@ class FilledObjectBack {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(2);
 
 
 
@@ -118062,8 +118521,8 @@ ShuffleRandom = null;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__ = __webpack_require__(2);
 
 
 
@@ -118071,9 +118530,10 @@ ShuffleRandom = null;
 
 
 
-let _dragStartPos, _dist, _interval, _count;
+let _dragStartPos, _dist, _interval, _count, _soundCount;
 const _minimumPurchase = 5;
-const _maxCount = 100;
+const _soundCountMax = 200;
+const _waitingCount = 100;
 class PurchaseListView {
     constructor(game, group, parent) {
         this._game = game;
@@ -118091,9 +118551,16 @@ class PurchaseListView {
         this._parent = parent;
         this._ppiyoFaceChange = false;
         _interval = 0;
+        _soundCount = 0;
         _count = 0;
         this._init();
         this._listButton();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].guideNarr_1);
+        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].guideNarr_1;
     }
 
     _init() {
@@ -118272,11 +118739,11 @@ class PurchaseListView {
     }
 
     _update() {
-
+        _soundCount++;
         if (this._countStart) {
             this._ppiyoChange();
             _count++;
-            if (_count >= _maxCount) {
+            if (_count >= _waitingCount && _soundCount >= _soundCountMax) {
                 this._gameStart();
                 this._destroy();
                 this._countStart = false;
@@ -118386,6 +118853,10 @@ class PurchaseItemForListView {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CalculatePosItem__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PriceCountForPos__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__data_SoundAssetKey__ = __webpack_require__(3);
+
+
 
 
 
@@ -118409,6 +118880,14 @@ class CalculatePos {
         this._init();
         this._itemGenerate();
         this._posGenerate();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+
+        __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_5__data_SoundAssetKey__["a" /* default */].guideNarr_4);
+        __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_5__data_SoundAssetKey__["a" /* default */].guideNarr_4;
     }
 
     _init() {
@@ -118511,6 +118990,7 @@ class CalculatePos {
         if (obj.checkOut) return;
         if (this.scanner) {
             _currentPrice += Number(obj.price);
+            __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_5__data_SoundAssetKey__["a" /* default */].BEEP, 0.3);
             obj.checkOut = true;
             this.scanner.visible = true;
             let tw = this._game.add.tween(this.scanner).to({ alpha: 1 }, 50, Phaser.Easing.Quartic.Out, true, 0, 1, true);
@@ -118635,15 +119115,23 @@ class PriceCountForPos {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PriceCount__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__ = __webpack_require__(3);
 
 
 
 
-let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove;
+
+
+let _coinArr, _billBaseArr, _billArr, _startX, _startY, _currentPrice, _remove, _count, _completeCount;
 let _movePos = { coinMinimumX: 580, coinMaximumX: 1040, coinMinimumY: 210,
     coinResultMinX: 671, coinResultMaxX: 945, coinResultMinY: 67, coinResultMaxY: 136,
     billMinimumX: 580, billMaximumX: 1040, billMinimumY: 185,
     billResultMinX: 674, billResultMaxX: 766, billResultMinY: 70, billResultMaxY: 121 };
+const _coinSoundAsset = [__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_100, __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_500];
+const _billSoundAsset = [__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_1000, __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_5000, __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_10000];
+const _intervalComplete = 30;
+const _intervalCount = 300;
 
 class PaymentPos {
     constructor(game) {
@@ -118653,16 +119141,34 @@ class PaymentPos {
         this._cashGroup = this._game.add.group();
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].PAYMENT_POS;
         this._coin100 = false;
+        this._checkOut = false;
+        this._complete = false;
         _coinArr = [];
         _billBaseArr = [];
         _billArr = [];
         _startX = 0;
         _startY = 0;
         _currentPrice = 0;
+        _count = 0;
+        _completeCount = 0;
         _remove = false;
+
         this._init();
         this._cashGenerate();
         this._posGenerate();
+        this._sndPlay();
+    }
+
+    _sndPlay() {
+
+        __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].BGM_VOLUME = __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].REDUCE_BGM_VOLUME;
+        // SoundManager.instance.bgmSoundStart();
+
+        if (__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].SOUND_ENABLED) __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].MAIN_BGM, __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].REDUCE_BGM_VOLUME, true, false);
+
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].guideNarr_5);
+        __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].guideNarr_5;
     }
 
     _init() {
@@ -118708,6 +119214,7 @@ class PaymentPos {
             let coin = new Phaser.Image(this._game, xPos, 382, this._key, 'cash_100');
             coin.x = term + i * (49 + coin.width);
             coin.amount = 100;
+            coin.soundAsset = _coinSoundAsset[0];
             // coin.minimumX = _movePos[0].minimumX;
             // console.log(coin.minimumX)
             this._cashGroup.addChild(coin);
@@ -118717,6 +119224,7 @@ class PaymentPos {
         //500
         let coin_500 = new Phaser.Image(this._game, 976, 374, this._key, 'cash_500');
         coin_500.amount = 500;
+        coin_500.soundAsset = _coinSoundAsset[1];
         this._cashGroup.addChild(coin_500);
         _coinArr.push(coin_500);
 
@@ -118743,6 +119251,7 @@ class PaymentPos {
                 let bill = new Phaser.Image(this._game, xPos, 524, this._key, asset);
                 bill.x = term + i * (75 + bill.width);
                 bill.amount = _amount[i];
+                bill.soundAsset = _billSoundAsset[i];
                 this._cashGroup.addChild(bill);
                 _billBaseArr.push(bill);
 
@@ -118788,6 +119297,12 @@ class PaymentPos {
 
     _cashSelect(obj) {
 
+        // console.log(obj.soundAsset);
+        this._checkOut = true;
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+        __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(obj.soundAsset, 0.8);
+        __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND = obj.soundAsset;
         _startX = obj.x;
         _startY = obj.y;
         _remove = false;
@@ -118803,6 +119318,9 @@ class PaymentPos {
 
     _stopDrag(obj) {
 
+        this._checkOut = false;
+        _count = 0;
+
         if (this._pushEnable(obj.amount)) {
             if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
                 obj.inputEnabled = false;
@@ -118816,7 +119334,17 @@ class PaymentPos {
                     this._payment();
                 });
             } else this._restoreMoney(obj);
-        } else this._restoreMoney(obj);
+        } else {
+            if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+                let soundAsset = 'cash_snd_over_' + this._game.rnd.between(1, 2);
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(soundAsset, 0.8);
+                __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = soundAsset;
+            }
+
+            this._restoreMoney(obj);
+        }
     }
 
     _restoreMoney(obj) {
@@ -118831,7 +119359,14 @@ class PaymentPos {
 
     _payment() {
 
-        if (_currentPrice === __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].GAME_FINISH = true;
+        if (_currentPrice === __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) {
+            __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+            __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+            __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_COMPLETE, 0.8);
+            this._complete = true;
+            for (let i = 0; i < _coinArr.length; i++) _coinArr[i].inputEnabled = false;
+            for (let i = 0; i < _billBaseArr.length; i++) _billBaseArr[i].inputEnabled = false;
+        }
     }
 
     _pushEnable(amount) {
@@ -118857,6 +119392,28 @@ class PaymentPos {
         if (resultPrice > __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_AMOUNT) return false;else return true;
     }
 
+    _update() {
+        if (this._complete) {
+            _completeCount++;
+            if (_completeCount >= _intervalComplete) {
+                this._complete = false;
+                __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].GAME_FINISH = true;
+            }
+        }
+
+        if (!this._checkOut) {
+            _count++;
+            if (_count >= _intervalCount) {
+                // this._checkOut = true;
+                _count = 0;
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+                __WEBPACK_IMPORTED_MODULE_3__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_SHORTAGE, 0.8);
+                __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].CASH_SND_SHORTAGE;
+            }
+        }
+    }
+
     _destroy() {
         this._gameGroup.removeChildren(0, this._gameGroup.length);
         this._posGroup.removeChildren(0, this._posGroup.length);
@@ -118876,6 +119433,10 @@ class PaymentPos {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
+
+
 
 
 let _totalPriceArr = [];
@@ -118914,7 +119475,6 @@ class PriceCount {
     _count(num) {
 
         if (num >= maxPrice) return;
-
         let totalAmount = num.toString();
 
         this._posGroup.removeChildren(0, this._posGroup.length);
@@ -119114,7 +119674,7 @@ class BackgroundEffect extends Phaser.Group {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__ = __webpack_require__(3);
 
 
 
@@ -119191,6 +119751,116 @@ class PreloadResource {
                 const sndSkip = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].SND_SKIP + extension;
                 const chapterCompleteEffect = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CHAPTER_COMPLETE_EFFECT + extension;
                 const sfx_retry = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].RESTART_SOUND + extension;
+                const beep = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BEEP + extension;
+                const cash_snd_100 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_100 + extension;
+                const cash_snd_500 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_500 + extension;
+                const cash_snd_1000 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_1000 + extension;
+                const cash_snd_5000 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_5000 + extension;
+                const cash_snd_10000 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_10000 + extension;
+                const cash_snd_again = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_AGAIN + extension;
+                const cash_snd_over_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_OVER_1 + extension;
+                const cash_snd_over_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_OVER_2 + extension;
+                const cash_snd_shortage = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_SHORTAGE + extension;
+                const cash_snd_complete = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_COMPLETE + extension;
+
+                /**
+                 * MISC BUTTON SOUND
+                 */
+                const btnSnd_removeCorner_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_1 + extension;
+                const btnSnd_removeCorner_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_2 + extension;
+                const btnSnd_corner_counter_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_COUNTER_1 + extension;
+                const btnSnd_corner_counter_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_COUNTER_2 + extension;
+                const btnSnd_corner_notYet_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NOTYET_1 + extension;
+                const btnSnd_corner_notYet_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NOTYET_2 + extension;
+                const btnSnd_corner_dairy_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_DAIRY_1 + extension;
+                const btnSnd_corner_dairy_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_DAIRY_2 + extension;
+                const btnSnd_corner_meat_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_MEAT_1 + extension;
+                const btnSnd_corner_meat_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_MEAT_2 + extension;
+                const btnSnd_corner_necessary_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NECESSARY_1 + extension;
+                const btnSnd_corner_necessary_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NECESSARY_2 + extension;
+                const btnSnd_corner_seafood_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SEAFOOD_1 + extension;
+                const btnSnd_corner_seafood_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SEAFOOD_2 + extension;
+                const btnSnd_corner_snack_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SNACK_1 + extension;
+                const btnSnd_corner_snack_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SNACK_2 + extension;
+                const btnSnd_corner_vegetable_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_VEGETABLE_1 + extension;
+                const btnSnd_corner_vegetable_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_VEGETABLE_2 + extension;
+
+                /**
+                 * OBJECT SOUND
+                 */
+                const objSnd_dairy_bananaMilk_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_BANANAMILK_1 + extension;
+                const objSnd_dairy_cheese_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHEESE_1 + extension;
+                const objSnd_dairy_chocolateMilk_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHOCOLATEMILK_1 + extension;
+                const objSnd_dairy_chocolateMilk_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHOCOLATEMILK_2 + extension;
+                const objSnd_dairy_egg_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_EGG_1 + extension;
+                const objSnd_dairy_milk_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_MILK_1 + extension;
+                const objSnd_dairy_milk_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_MILK_2 + extension;
+                const objSnd_dairy_strawberryMilk_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_STRAWBERRYMILK_1 + extension;
+                const objSnd_dairy_strawberryMilk_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_STRAWBERRYMILK_2 + extension;
+                const objSnd_dairy_yogurt_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_YOGURT_1 + extension;
+                const objSnd_dairy_yogurt_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_YOGURT_2 + extension;
+
+                const objSnd_meat_bacon_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BACON_1 + extension;
+                const objSnd_meat_boiledPork_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BOILEDPORK_1 + extension;
+                const objSnd_meat_boiledPork_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BOILEDPORK_2 + extension;
+                const objSnd_meat_chicken_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_CHICKEN_1 + extension;
+                const objSnd_meat_chicken_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_CHICKEN_2 + extension;
+                const objSnd_meat_drumstick_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_DRUMSTICK_1 + extension;
+                const objSnd_meat_drumstick_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_DRUMSTICK_2 + extension;
+                const objSnd_meat_sirloin_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_SIRLOIN_1 + extension;
+                const objSnd_meat_sirloin_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_SIRLOIN_2 + extension;
+                const objSnd_meat_tenderloin_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_TENDERLOIN_1 + extension;
+                const objSnd_meat_tenderloin_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_TENDERLOIN_2 + extension;
+
+                const objSnd_necessary_brush_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_BRUSH_1 + extension;
+                const objSnd_necessary_cleanser_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_CLEANSER_1 + extension;
+                const objSnd_necessary_paste_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_PASTE_1 + extension;
+                const objSnd_necessary_shampoo_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SHAMPOO_1 + extension;
+                const objSnd_necessary_shampoo_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SHAMPOO_2 + extension;
+                const objSnd_necessary_soap_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SOAP_1 + extension;
+                const objSnd_necessary_tissue_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_TISSUE_1 + extension;
+                const objSnd_necessary_wetTissue_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_WETTISSUE_1 + extension;
+                const objSnd_necessary_wetTissue_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_WETTISSUE_2 + extension;
+
+                const objSnd_seafood_abalone_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_ABALONE_1 + extension;
+                const objSnd_seafood_crab_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_CRAB_1 + extension;
+                const objSnd_seafood_mackerel_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_MACKEREL_1 + extension;
+                const objSnd_seafood_mackerel_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_MACKEREL_2 + extension;
+                const objSnd_seafood_shell_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHELL_1 + extension;
+                const objSnd_seafood_shell_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHELL_2 + extension;
+                const objSnd_seafood_shrimp_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHRIMP_1 + extension;
+                const objSnd_seafood_squid_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SQUID_1 + extension;
+                const objSnd_seafood_squid_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SQUID_2 + extension;
+
+                const objSnd_snack_candy_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CANDY_1 + extension;
+                const objSnd_snack_candy_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CANDY_2 + extension;
+                const objSnd_snack_chocolate_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CHOCOLATE_1 + extension;
+                const objSnd_snack_chocolate_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CHOCOLATE_2 + extension;
+                const objSnd_snack_iceCream_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_ICECREAM_1 + extension;
+                const objSnd_snack_iceCream_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_ICECREAM_2 + extension;
+                const objSnd_snack_jelly_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_JELLY_1 + extension;
+
+                const objSnd_vegetable_apple_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_APPLE_1 + extension;
+                const objSnd_vegetable_apple_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_APPLE_2 + extension;
+                const objSnd_vegetable_carrot_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_CARROT_1 + extension;
+                const objSnd_vegetable_carrot_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_CARROT_2 + extension;
+                const objSnd_vegetable_grape_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_GRAPE_1 + extension;
+                const objSnd_vegetable_grape_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_GRAPE_2 + extension;
+                const objSnd_vegetable_onion_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_ONION_1 + extension;
+                const objSnd_vegetable_onion_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_ONION_2 + extension;
+                const objSnd_vegetable_radish_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_RADISH_1 + extension;
+                const objSnd_vegetable_radish_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_RADISH_2 + extension;
+                const objSnd_vegetable_strawberry_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_STRAWBERRY_1 + extension;
+                const objSnd_vegetable_strawberry_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_STRAWBERRY_2 + extension;
+                const objSnd_vegetable_sweetPotato_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_1 + extension;
+                const objSnd_vegetable_sweetPotato_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_2 + extension;
+                const objSnd_vegetable_sweetPotato_3 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_3 + extension;
+                const objSnd_vegetable_welshonion_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_1 + extension;
+                const objSnd_vegetable_welshonion_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_2 + extension;
+                const objSnd_vegetable_welshonion_3 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_3 + extension;
+
+                const objSnd_wrong_1 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_WRONG_1 + extension;
+                const objSnd_wrong_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_WRONG_2 + extension;
 
                 /**
                  * GUIDE SOUND
@@ -119199,6 +119869,7 @@ class PreloadResource {
                 const guideNarr_2 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_2 + extension;
                 const guideNarr_3 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_3 + extension;
                 const guideNarr_4 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_4 + extension;
+                const guideNarr_5 = 'asset/game/sound/' + __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].guideNarr_5 + extension;
 
                 /**
                  *CHAPTER COMPLETE SOUND
@@ -119218,8 +119889,8 @@ class PreloadResource {
                 /**
                  * GUIDE NARRATION
                  */
-                let guideNarrArr = ['', guideNarr_1, guideNarr_2, guideNarr_3, guideNarr_4];
-                for (let i = 1; i <= 4; i++) this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].GUIDE_SOUND_PREFIX + i, guideNarrArr[i]);
+                let guideNarrArr = ['', guideNarr_1, guideNarr_2, guideNarr_3, guideNarr_4, guideNarr_5];
+                for (let i = 1; i <= 5; i++) this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].GUIDE_SOUND_PREFIX + i, guideNarrArr[i]);
 
                 /**
                  * CHAPTER COMPLETE SOUND
@@ -119249,6 +119920,113 @@ class PreloadResource {
 
                 this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CHAPTER_COMPLETE_EFFECT, chapterCompleteEffect);
                 this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].RESTART_SOUND, sfx_retry);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_1, btnSnd_removeCorner_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_2, btnSnd_removeCorner_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_COUNTER_1, btnSnd_corner_counter_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_COUNTER_2, btnSnd_corner_counter_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NOTYET_1, btnSnd_corner_notYet_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NOTYET_2, btnSnd_corner_notYet_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_DAIRY_1, btnSnd_corner_dairy_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_DAIRY_2, btnSnd_corner_dairy_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_MEAT_1, btnSnd_corner_meat_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_MEAT_2, btnSnd_corner_meat_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NECESSARY_1, btnSnd_corner_necessary_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_NECESSARY_2, btnSnd_corner_necessary_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SEAFOOD_1, btnSnd_corner_seafood_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SEAFOOD_2, btnSnd_corner_seafood_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SNACK_1, btnSnd_corner_snack_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_SNACK_2, btnSnd_corner_snack_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_VEGETABLE_1, btnSnd_corner_vegetable_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_CORNER_VEGETABLE_2, btnSnd_corner_vegetable_2);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BEEP, beep);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_100, cash_snd_100);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_500, cash_snd_500);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_1000, cash_snd_1000);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_5000, cash_snd_5000);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_10000, cash_snd_10000);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_AGAIN, cash_snd_again);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_OVER_1, cash_snd_over_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_OVER_2, cash_snd_over_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_SHORTAGE, cash_snd_shortage);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].CASH_SND_COMPLETE, cash_snd_complete);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_BANANAMILK_1, objSnd_dairy_bananaMilk_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHEESE_1, objSnd_dairy_cheese_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHOCOLATEMILK_1, objSnd_dairy_chocolateMilk_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_CHOCOLATEMILK_2, objSnd_dairy_chocolateMilk_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_EGG_1, objSnd_dairy_egg_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_MILK_1, objSnd_dairy_milk_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_MILK_2, objSnd_dairy_milk_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_STRAWBERRYMILK_1, objSnd_dairy_strawberryMilk_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_STRAWBERRYMILK_2, objSnd_dairy_strawberryMilk_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_YOGURT_1, objSnd_dairy_yogurt_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_DAIRY_YOGURT_2, objSnd_dairy_yogurt_2);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BACON_1, objSnd_meat_bacon_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BOILEDPORK_1, objSnd_meat_boiledPork_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_BOILEDPORK_2, objSnd_meat_boiledPork_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_CHICKEN_1, objSnd_meat_chicken_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_CHICKEN_2, objSnd_meat_chicken_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_DRUMSTICK_1, objSnd_meat_drumstick_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_DRUMSTICK_2, objSnd_meat_drumstick_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_SIRLOIN_1, objSnd_meat_sirloin_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_SIRLOIN_2, objSnd_meat_sirloin_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_TENDERLOIN_1, objSnd_meat_tenderloin_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_MEAT_TENDERLOIN_2, objSnd_meat_tenderloin_2);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_BRUSH_1, objSnd_necessary_brush_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_CLEANSER_1, objSnd_necessary_cleanser_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_PASTE_1, objSnd_necessary_paste_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SHAMPOO_1, objSnd_necessary_shampoo_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SHAMPOO_2, objSnd_necessary_shampoo_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_SOAP_1, objSnd_necessary_soap_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_TISSUE_1, objSnd_necessary_tissue_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_WETTISSUE_1, objSnd_necessary_wetTissue_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_NECESSARY_WETTISSUE_2, objSnd_necessary_wetTissue_2);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_ABALONE_1, objSnd_seafood_abalone_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_CRAB_1, objSnd_seafood_crab_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_MACKEREL_1, objSnd_seafood_mackerel_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_MACKEREL_2, objSnd_seafood_mackerel_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHELL_1, objSnd_seafood_shell_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHELL_2, objSnd_seafood_shell_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SHRIMP_1, objSnd_seafood_shrimp_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SQUID_1, objSnd_seafood_squid_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SEAFOOD_SQUID_2, objSnd_seafood_squid_2);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CANDY_1, objSnd_snack_candy_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CANDY_2, objSnd_snack_candy_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CHOCOLATE_1, objSnd_snack_chocolate_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_CHOCOLATE_2, objSnd_snack_chocolate_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_ICECREAM_1, objSnd_snack_iceCream_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_ICECREAM_2, objSnd_snack_iceCream_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_SNACK_JELLY_1, objSnd_snack_jelly_1);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_APPLE_1, objSnd_vegetable_apple_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_APPLE_2, objSnd_vegetable_apple_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_CARROT_1, objSnd_vegetable_carrot_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_CARROT_2, objSnd_vegetable_carrot_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_GRAPE_2, objSnd_vegetable_grape_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_ONION_1, objSnd_vegetable_onion_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_ONION_2, objSnd_vegetable_onion_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_RADISH_1, objSnd_vegetable_radish_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_RADISH_2, objSnd_vegetable_radish_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_STRAWBERRY_1, objSnd_vegetable_strawberry_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_STRAWBERRY_2, objSnd_vegetable_strawberry_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_1, objSnd_vegetable_sweetPotato_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_2, objSnd_vegetable_sweetPotato_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_SWEETPOTATO_3, objSnd_vegetable_sweetPotato_3);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_1, objSnd_vegetable_welshonion_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_2, objSnd_vegetable_welshonion_2);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_VEGETABLE_WELSHONION_3, objSnd_vegetable_welshonion_3);
+
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_WRONG_1, objSnd_wrong_1);
+                this.game.load.audio(__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].OBJSND_WRONG_2, objSnd_wrong_2);
         }
 
 }
