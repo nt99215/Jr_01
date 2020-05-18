@@ -36,6 +36,7 @@ export default class CornerMain{
         this._cornerPop = false;
         this._purchaseSlide = null;
         this._shoppingComplete = false;
+        this._soundComplete = false;
         _categoryPopEnable = ['', false, false, false, false, false, false, false, false];
         _btnArr = [null];
         this._sndPlay();
@@ -91,9 +92,9 @@ export default class CornerMain{
 
         if(GameConfig.SOUND_ENABLED) SoundManager.instance.effectSoundStop(SoundAssetKey.MAIN_BGM, GameConfig.BGM_VOLUME,  true, false);
 
-
         this._cornerButtonEnable(false, num);
         this._removeCorner();
+
 
         //COUNTER ENABLED
         if(num >= _categoryArr.length - 1)
@@ -160,23 +161,53 @@ export default class CornerMain{
         this._backButton.visible = false;
     }
 
-    _removeCorner(counterButtonVisible = false) {
+    _removeCorner(counterButtonVisible = false, complete = false) {
 
+        this._soundComplete = false;
         if(this._corner)
         {
+            this._backButton.inputEnabled = false;
+            let rN = this._game.rnd.between(0, 1);
             SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0.8, false, true);
             let sndKeyArr = [SoundAssetKey.BTNSND_REMOVECORNER_1, SoundAssetKey.BTNSND_REMOVECORNER_2];
-            let snd = sndKeyArr[this._game.rnd.between(0, 1)];
+            let sndInterval = [1200, 1800];
+            let snd = sndKeyArr[rN];
             SoundManager.instance.effectSound(snd);
             GameConfig.CURRENT_BUTTON_SOUND = snd;
+            setTimeout(()=> {
+                if(this._corner)
+                {
+                    this._corner._destroy();
+                    this._corner = null;
+                }
+                if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
+                if(this._ppiyoCart) this._ppiyoCart._visible(false);
+                if(GameConfig.BACK_BUTTON) GameConfig.BACK_BUTTON.visible = true;
 
-            this._corner._destroy();
-            this._corner = null;
 
+                //BACK BUTTON ENABLE
+                this._backButton.inputEnabled = true;
+
+                //COMPLETE
+                if(this._shoppingComplete) this._shoppingCompleteHandler();
+
+
+            }, sndInterval[rN]);
         }
-        if(this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
-        if(this._ppiyoCart) this._ppiyoCart._visible(false);
-        if(GameConfig.BACK_BUTTON) GameConfig.BACK_BUTTON.visible = true;
+    }
+
+
+    _shoppingCompleteHandler() {
+
+        //COUNTER BUTTON INVISIBLE
+        _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
+        _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
+
+        for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+
+        //GUIDE  HAND POP UP
+        this._guideHandPop();
+
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -214,23 +245,14 @@ export default class CornerMain{
 
     _update() {
 
-
         if(this._corner) this._corner._update();
         if(this._purchaseSlide) this._purchaseSlide._update();
+
         if(GameConfig.TOTAL_CATEGORIES === 0)
         {
-            //COUNTER BUTTON INVISIBLE
-            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
-            _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
             _btnArr[_btnArr.length - 1]._update();
-
-
             if(this._shoppingComplete) return;
             this._removeCorner(true);
-            for(let i = 1; i<_btnArr.length - 1; i++) _btnArr[i]._btnDisable();
-
-            //GUIDE  HAND POP UP
-            this._guideHandPop();
             this._shoppingComplete = true;
         }
 

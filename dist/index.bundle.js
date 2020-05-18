@@ -75,10 +75,10 @@ const displaySlidingSpeed = 7000;
 let guideEnable = true;
 let chapterClear = false;
 
-const defaultBgmVolume = 0.3;
-let bgmVolume = 0.3;
+const defaultBgmVolume = 0.2;
+let bgmVolume = 0.2;
 // let bgmVolume = 0.001;
-const reduceBgmVolume = 0.1;
+const reduceBgmVolume = 0.07;
 const muteSoundVolume = 0.0001;
 
 let currentFillObject = null;
@@ -2240,7 +2240,7 @@ class Categories {
             totalDisplayBoard: 4,
             itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214, effectQuantity: 1 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227, effectQuantity: 1 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415, effectQuantity: 2 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201, effectQuantity: 2 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208, effectQuantity: 2 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415, effectQuantity: 2 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409, effectQuantity: 2 }],
             rollingButtonList: [[], ['milk', 'chocolateMilk'], ['egg', 'strawberryMilk'], ['bananaMilk'], ['cheese', 'yogurt']],
-            effectQuantity: [[], [2, 2], [2, 3], [1], [1, 2]]
+            effectQuantity: [[], [2, 2], [1, 2], [1], [1, 2]]
 
         };
     }
@@ -2315,9 +2315,7 @@ class PurchaseList {
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
         let rN = this._randomNumber(0, _shuffleArray.length - 1);
-        for (let i = 0; i < _shuffleArray.length; i++)
-        // for(let i = 0; i<1; i++)
-        {
+        for (let i = 0; i < _shuffleArray.length; i++) {
             //카테고리 랜덤 제거
             if (rN !== i) {
                 let array = _shuffleArray[i].itemList;
@@ -2331,6 +2329,7 @@ class PurchaseList {
                     if (array[j] !== undefined && array[j] != null) {
                         array[j].quantity = quantity;
                         array[j].category = category;
+                        array[j].empty = true;
                         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
                         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_QUANTITY += array[j].quantity;
                         arr.push(array[j]);
@@ -2338,6 +2337,9 @@ class PurchaseList {
                 }
             }
         }
+
+        // let max = 1;
+        // if(arr.length > max) arr.splice(max, arr.length)
 
         //TOTAL CATEGORIES
         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES = arr.length;
@@ -117096,7 +117098,8 @@ class CornerManager extends Phaser.Group {
 
 
 const _categoryArr = ['', __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].VEGETABLE, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SEAFOOD, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].MEAT, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].NECESSARY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].DAIRY, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].SNACK, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].NOTYET, __WEBPACK_IMPORTED_MODULE_3__data_Categories__["a" /* default */].COUNTER];
-let _btnArr;
+
+let _btnArr, _categoryPopEnable;
 
 class CornerMain {
     constructor(game, parent) {
@@ -117112,6 +117115,8 @@ class CornerMain {
         this._cornerPop = false;
         this._purchaseSlide = null;
         this._shoppingComplete = false;
+        this._soundComplete = false;
+        _categoryPopEnable = ['', false, false, false, false, false, false, false, false];
         _btnArr = [null];
         this._sndPlay();
     }
@@ -117174,9 +117179,11 @@ class CornerMain {
         }
 
         //CORNER GENERATE
-        this._corner = new __WEBPACK_IMPORTED_MODULE_6__Corner__["a" /* default */](this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this);
+        let popEnabled = _categoryPopEnable[num];
+        this._corner = new __WEBPACK_IMPORTED_MODULE_6__Corner__["a" /* default */](this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this, popEnabled);
         this._backButton.visible = true;
         this._cornerPop = true;
+        _categoryPopEnable[num] = true;
 
         this._ppiyoCartGenerate();
         if (this._ppiyoCart) this._ppiyoCart._visible(true);
@@ -117222,21 +117229,46 @@ class CornerMain {
         this._backButton.visible = false;
     }
 
-    _removeCorner(counterButtonVisible = false) {
+    _removeCorner(counterButtonVisible = false, complete = false) {
 
+        this._soundComplete = false;
         if (this._corner) {
+            this._backButton.inputEnabled = false;
+            let rN = this._game.rnd.between(0, 1);
             __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0.8, false, true);
             let sndKeyArr = [__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_1, __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_2];
-            let snd = sndKeyArr[this._game.rnd.between(0, 1)];
+            let sndInterval = [1200, 1800];
+            let snd = sndKeyArr[rN];
             __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(snd);
             __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND = snd;
+            setTimeout(() => {
+                if (this._corner) {
+                    this._corner._destroy();
+                    this._corner = null;
+                }
+                if (this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
+                if (this._ppiyoCart) this._ppiyoCart._visible(false);
+                if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON) __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON.visible = true;
 
-            this._corner._destroy();
-            this._corner = null;
+                //BACK BUTTON ENABLE
+                this._backButton.inputEnabled = true;
+
+                //COMPLETE
+                if (this._shoppingComplete) this._shoppingCompleteHandler();
+            }, sndInterval[rN]);
         }
-        if (this._cornerPop) this._cornerButtonEnable(counterButtonVisible);
-        if (this._ppiyoCart) this._ppiyoCart._visible(false);
-        if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON) __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].BACK_BUTTON.visible = true;
+    }
+
+    _shoppingCompleteHandler() {
+
+        //COUNTER BUTTON INVISIBLE
+        _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
+        _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
+
+        for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
+
+        //GUIDE  HAND POP UP
+        this._guideHandPop();
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -117274,18 +117306,11 @@ class CornerMain {
 
         if (this._corner) this._corner._update();
         if (this._purchaseSlide) this._purchaseSlide._update();
-        if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES === 0) {
-            //COUNTER BUTTON INVISIBLE
-            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
-            _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
-            _btnArr[_btnArr.length - 1]._update();
 
+        if (__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES === 0) {
+            _btnArr[_btnArr.length - 1]._update();
             if (this._shoppingComplete) return;
             this._removeCorner(true);
-            for (let i = 1; i < _btnArr.length - 1; i++) _btnArr[i]._btnDisable();
-
-            //GUIDE  HAND POP UP
-            this._guideHandPop();
             this._shoppingComplete = true;
         }
 
@@ -117482,7 +117507,7 @@ const minimumYpos = 550;
 const speed = 3;
 
 class Corner {
-    constructor(game, bgGroup, gameGroup, category, parent) {
+    constructor(game, bgGroup, gameGroup, category, parent, popEnable) {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
@@ -117493,6 +117518,7 @@ class Corner {
         this._headRemove = false;
         this._totalWidth = 0;
         this._pickUp = false;
+        this._popEnable = popEnable;
 
         boardArr = [];
         btnArr = [];
@@ -117506,10 +117532,12 @@ class Corner {
     }
 
     _sndPlay() {
-        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
-        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
-        __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3);
-        __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3;
+        if (!this._popEnable) {
+            __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND, 0, false, true);
+            __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundStop(__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND, 0, false, true);
+            __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSound(__WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3);
+            __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_GUIDE_SOUND = __WEBPACK_IMPORTED_MODULE_0__data_SoundAssetKey__["a" /* default */].guideNarr_3;
+        }
     }
 
     _init() {
@@ -117655,7 +117683,7 @@ class Corner {
         let name = obj._frame.name;
         let idx = -1;
         __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].CURRENT_FILL_OBJECT = name;
-        for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST.length; i++) if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST[i].item === name) idx = i;
+        for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST.length; i++) if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST[i].item === name && __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_LIST[i].empty) idx = i;
 
         if (idx !== -1) {
             if (__WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY[idx].complete) return false;else {
@@ -118057,7 +118085,7 @@ class FilledObjectBack {
 
 
 
-let _dragStartPos, _interval, _dist;
+let _dragStartPos, _interval, _dist, _dragAreaTerm;
 const _minimumPurchase = 6;
 class PurchaseSlider {
     constructor(game, categoryArray) {
@@ -118072,6 +118100,7 @@ class PurchaseSlider {
         this.purchaseItem = [];
         _dragStartPos = 0;
         _interval = 0;
+        _dragAreaTerm = 0;
 
         this._init();
         this._listButton();
@@ -118095,6 +118124,7 @@ class PurchaseSlider {
         // let _interval = 0;
         let pArr = __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_LIST;
         this._totalPurchase = pArr.length;
+        let widthArr = [0, 0, 0, 0, 0, 0, 700, 100];
 
         //LIST
         for (let i = 0; i < pArr.length; i++) {
@@ -118103,13 +118133,16 @@ class PurchaseSlider {
             let term = 265;
             let xPos = (91 + 37) * i + term;
             let yPos = 31;
-            let purchaseItem = new __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__["a" /* default */](this._game, this._sliderGroup, asset, quantity, xPos, yPos);
+            let purchaseItem = new __WEBPACK_IMPORTED_MODULE_2__PurchaseItem__["a" /* default */](this._game, this._sliderGroup, asset, quantity, xPos, yPos, this, i);
             // this.purchaseItem.push(purchaseItem);
             __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY = purchaseItem;
             _interval = (91 + 37) * (i + 1);
+            _dragAreaTerm = (pArr.length - _minimumPurchase) * (91 + 37);
             purchaseItem.startX = xPos;
             this._sliderGroup.mask = this.maskRect;
         }
+
+        // console.log(pArr.length, _interval, _dragAreaTerm);
 
         this.purchaseItem = __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY;
         // console.log(pArr);
@@ -118133,11 +118166,15 @@ class PurchaseSlider {
     }
 
     _dragArea(interval) {
-        this.dragArea = this._game.add.graphics(-interval * 0.5, 0);
+        // this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
+        this.dragArea = this._game.add.graphics(-_dragAreaTerm, 0);
         this.dragArea.beginFill(0x000, 0);
-        this.dragArea.drawRect(246, 12, interval * 1.5, 131);
+        // this.dragArea.drawRect(246, 12, interval * 1.5,131);
+        this.dragArea.drawRect(246, 12, interval + _dragAreaTerm, 131);
         this.dragArea.endFill();
         this._gameGroup.addChild(this.dragArea);
+
+        // console.log(- interval * 0.5, interval * 1.5)
     }
 
     _listButton() {
@@ -118168,7 +118205,7 @@ class PurchaseSlider {
 
     _onNext() {
         __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_1__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
-        this._game.add.tween(this.dragRect).to({ x: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+        this._game.add.tween(this.dragRect).to({ x: -_dragAreaTerm }, 300, Phaser.Easing.Quartic.Out, true);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -118184,28 +118221,30 @@ class PurchaseSlider {
 
     _sliderMoving() {
 
-        if (this.purchaseItem.length > 0) for (let i = 0; i < this.purchaseItem.length; i++) {
-            this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + _dist;
-            this.purchaseItem[i].bgComp.x = this.purchaseItem[i].startX + _dist;
-            this.purchaseItem[i].item.x = this.purchaseItem[i].startX + _dist;
-            this.purchaseItem[i].itemComp.x = this.purchaseItem[i].startX + _dist;
-            this.purchaseItem[i].checkMark.x = this.purchaseItem[i].startX + _dist;
+        if (this.purchaseItem.length > 0) {
+            for (let i = 0; i < this.purchaseItem.length; i++) {
+                this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + _dist;
+                this.purchaseItem[i].bgComp.x = this.purchaseItem[i].startX + _dist;
+                this.purchaseItem[i].item.x = this.purchaseItem[i].startX + _dist;
+                this.purchaseItem[i].itemComp.x = this.purchaseItem[i].startX + _dist;
+                this.purchaseItem[i].checkMark.x = this.purchaseItem[i].startX + _dist;
 
-            for (let j = 0; j < this.purchaseItem[i].numberImg.length; j++) this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + _dist;
+                for (let j = 0; j < this.purchaseItem[i].numberImg.length; j++) this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + _dist;
+            }
+
+            // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
+            // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
+            // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
+            // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
+            // console.log('minimum : ', minimum, 'maximum : ', maximum);
+
+            this._btnEnable();
         }
-
-        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
-        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
-        // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
-        // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
-        // console.log('minimum : ', minimum, 'maximum : ', maximum);
-
-        this._btnEnable();
     }
 
     _btnEnable() {
 
-        if (this.dragRect.x <= -_interval / 2) {
+        if (this.dragRect.x <= -_dragAreaTerm) {
             this._nextBtn.inputEnabled = false;
             this._nextBtn.alpha = 0.3;
         } else {
@@ -118222,8 +118261,41 @@ class PurchaseSlider {
         }
     }
 
+    positionChange(idx) {
+
+        this._slidingEnable = false;
+        let itemIndex = 0;
+        for (let i = 0; i < this.purchaseItem.length; i++) {
+            if (this.purchaseItem[i].item === idx) itemIndex = i;
+        }
+
+        __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_LIST[itemIndex].empty = false;
+
+        let pos = [];
+
+        for (let i = 0; i < this.purchaseItem.length; i++) pos.push(this.purchaseItem[i].startX);
+
+        let arr = this.purchaseItem;
+        let listArr = __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_LIST;
+        let obj = arr[itemIndex];
+        let listObj = listArr[itemIndex];
+        arr.splice(arr.indexOf(obj), 1);
+        arr.push(obj);
+
+        listArr.splice(listArr.indexOf(listObj), 1);
+        listArr.push(listObj);
+
+        for (let i = 0; i < arr.length; i++) arr[i].startX = pos[i];
+
+        __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY_RESET = arr;
+        this.purchaseItem = __WEBPACK_IMPORTED_MODULE_3__data_GameConfig__["a" /* default */].PURCHASE_ITEM_ARRAY;
+
+        this._slidingEnable = true;
+    }
+
     _update() {
-        // console.log('slide update');
+
+        if (!this._slidingEnable) return;
         _dist = this.dragRect.x - _dragStartPos;
         if (this._slidingEnable) this._sliderMoving();
     }
@@ -118252,7 +118324,7 @@ class PurchaseSlider {
 let _xPos, _yPos;
 
 class PurchaseItem {
-    constructor(game, group, asset, quantity, xPos, yPos) {
+    constructor(game, group, asset, quantity, xPos, yPos, parent, index) {
         this._game = game;
         this._gameGroup = group;
         this._key = __WEBPACK_IMPORTED_MODULE_0__data_AssetKey__["a" /* default */].SLIDE_BAR_PPIYO;
@@ -118261,6 +118333,8 @@ class PurchaseItem {
         this.startX = 0;
         this.numberImg = [];
         this.complete = false;
+        this._parent = parent;
+        this.index = index;
         _xPos = xPos;
         _yPos = yPos;
         this._init();
@@ -118321,9 +118395,43 @@ class PurchaseItem {
                 //COMPLETE
                 this.complete = true;
                 __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES--;
+
+                //POSTION CHANGE
+                this._parent.positionChange(this.item);
+                // this._positionChange();
                 // console.log(GameConfig.TOTAL_CATEGORIES);
             }
         }
+    }
+
+    _positionChange() {
+
+        /*   let arr = GameConfig.PURCHASE_ITEM_ARRAY;
+           let idx = arr.indexOf(this);
+           console.log('idx : ', idx);
+           let pos = [];
+             for(let i = 0; i<arr.length; i++)
+           {
+               pos.push(parseInt(arr[i].item.x));
+           }
+             console.log('pos : ', pos)
+             for(let i = 0; i<arr.length; i++)
+           {
+               if(i > idx)
+               {
+                   // arr[i].item.x =  arr[i - 1].item.x
+                   arr[i].item.x = parseInt(arr[i - 1].item.x);
+                   console.log(arr[i].item.x)
+               }
+             }*/
+
+        // this.bgComp.x = 500;
+        // this.itemComp.x = pos[pos.length - 1];
+        // this.checkMark.x = pos[pos.length - 1];
+
+        // GameConfig.PURCHASE_ITEM_ARRAY.splice(idx, 1);
+        // GameConfig.PURCHASE_ITEM_ARRAY.push(this);
+
     }
 
 }
@@ -118466,10 +118574,11 @@ ShuffleRandom = null;
 
 
 
-let _dragStartPos, _dist, _interval, _count, _soundCount;
+let _dragStartPos, _dist, _interval, _count, _soundCount, _dragAreaTerm;
 const _minimumPurchase = 5;
 const _soundCountMax = 250;
-const _waitingCount = 100;
+// const _waitingCount = 100;
+const _waitingCount = 200;
 class PurchaseListView {
     constructor(game, group, parent) {
         this._game = game;
@@ -118487,8 +118596,10 @@ class PurchaseListView {
         this._parent = parent;
         this._ppiyoFaceChange = false;
         _interval = 0;
+        _dragAreaTerm = 0;
         _soundCount = 0;
         _count = 0;
+
         this._init();
         this._listButton();
         this._sndPlay();
@@ -118554,6 +118665,7 @@ class PurchaseListView {
             let purchaseItem = new __WEBPACK_IMPORTED_MODULE_3__PurchaseItemForListView__["a" /* default */](this._game, this._sliderGroup, asset, quantity, xPos, yPos, dotXpos, dotYpos);
             __WEBPACK_IMPORTED_MODULE_2__data_GameConfig__["a" /* default */].PURCHASE_ITEM_FOR_LIST_ARRAY = purchaseItem;
             _interval = (107 + 5) * (i + 1);
+            _dragAreaTerm = (pArr.length - _minimumPurchase) * (107 + 5);
             purchaseItem.startY = yPos;
             this._sliderGroup.mask = this.maskRect;
         }
@@ -118607,9 +118719,11 @@ class PurchaseListView {
     }
 
     _dragArea(interval) {
-        this.dragArea = this._game.add.graphics(0, -interval * 0.5);
+        // this.dragArea = this._game.add.graphics(0, - interval * 0.5);
+        this.dragArea = this._game.add.graphics(0, -_dragAreaTerm);
         this.dragArea.beginFill(0x000, 0);
-        this.dragArea.drawRect(377, 0, 526, interval * 1.5);
+        // this.dragArea.drawRect(377, 0, 526, interval * 1.5);
+        this.dragArea.drawRect(377, 0, 526, interval + _dragAreaTerm);
         this.dragArea.endFill();
         this._topGroup.addChild(this.dragArea);
     }
@@ -118666,7 +118780,7 @@ class PurchaseListView {
         __WEBPACK_IMPORTED_MODULE_5__manager_SoundManager__["a" /* default */].instance.effectSoundContinuance(__WEBPACK_IMPORTED_MODULE_4__data_SoundAssetKey__["a" /* default */].BUTTON_SOUND);
         this._nextBtn.inputEnabled = false;
         this._nextBtn.visible = false;
-        let tw = this._game.add.tween(this.dragRect).to({ y: -_interval / 2 }, 300, Phaser.Easing.Quartic.Out, true);
+        let tw = this._game.add.tween(this.dragRect).to({ y: -_dragAreaTerm }, 300, Phaser.Easing.Quartic.Out, true);
         tw.onComplete.add(() => {
             this._countStart = true;
         });

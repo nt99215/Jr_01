@@ -24,7 +24,6 @@ export default class PurchaseList {
 
     purchaseList() {
         let arr = [];
-        // let max = 5;
         //item shuffle method - 요청으로 제거됨
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
@@ -56,15 +55,15 @@ export default class PurchaseList {
             }
         }
 
-
+        // let max = 1;
         // if(arr.length > max) arr.splice(max, arr.length)
 
         //TOTAL CATEGORIES
         GameConfig.TOTAL_CATEGORIES = arr.length;
-        console.log(GameConfig.TOTAL_AMOUNT);
-        console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
-        console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
-        console.log(arr);
+        // console.log(GameConfig.TOTAL_AMOUNT);
+        // console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
+        // console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
+        // console.log(arr);
         return arr;
     }
 

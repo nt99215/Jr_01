@@ -25,7 +25,7 @@ let pause = true;
 let device;
 let scene = '';
 let reset;
-let soundEnabled = false;
+let soundEnabled = true;
 let bgmEnabled = true;
 let mainController;
 let tutorialDisabled = false;
