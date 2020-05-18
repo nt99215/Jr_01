@@ -172,8 +172,10 @@ export default class CornerMain{
             let sndKeyArr = [SoundAssetKey.BTNSND_REMOVECORNER_1, SoundAssetKey.BTNSND_REMOVECORNER_2];
             let sndInterval = [1200, 1800];
             let snd = sndKeyArr[rN];
+            let interval = sndInterval[rN];
             SoundManager.instance.effectSound(snd);
             GameConfig.CURRENT_BUTTON_SOUND = snd;
+            if(! GameConfig.SOUND_ENABLED) interval = 0;
             setTimeout(()=> {
                 if(this._corner)
                 {
@@ -192,7 +194,7 @@ export default class CornerMain{
                 if(this._shoppingComplete) this._shoppingCompleteHandler();
 
 
-            }, sndInterval[rN]);
+            }, interval);
         }
     }
 

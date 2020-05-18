@@ -117239,8 +117239,10 @@ class CornerMain {
             let sndKeyArr = [__WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_1, __WEBPACK_IMPORTED_MODULE_2__data_SoundAssetKey__["a" /* default */].BTNSND_REMOVECORNER_2];
             let sndInterval = [1200, 1800];
             let snd = sndKeyArr[rN];
+            let interval = sndInterval[rN];
             __WEBPACK_IMPORTED_MODULE_1__manager_SoundManager__["a" /* default */].instance.effectSound(snd);
             __WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].CURRENT_BUTTON_SOUND = snd;
+            if (!__WEBPACK_IMPORTED_MODULE_0__data_GameConfig__["a" /* default */].SOUND_ENABLED) interval = 0;
             setTimeout(() => {
                 if (this._corner) {
                     this._corner._destroy();
@@ -117255,7 +117257,7 @@ class CornerMain {
 
                 //COMPLETE
                 if (this._shoppingComplete) this._shoppingCompleteHandler();
-            }, sndInterval[rN]);
+            }, interval);
         }
     }
 
