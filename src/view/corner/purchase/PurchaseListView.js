@@ -5,7 +5,7 @@ import PurchaseItemForListView from "./PurchaseItemForListView";
 import SoundAssetKey from "../../../data/SoundAssetKey";
 import SoundManager from "../../../manager/SoundManager";
 
-let _dragStartPos, _dist, _interval, _count, _soundCount;
+let _dragStartPos, _dist, _interval, _count, _soundCount, _dragAreaTerm;
 const _minimumPurchase = 5;
 const _soundCountMax = 250;
 // const _waitingCount = 100;
@@ -27,8 +27,10 @@ export default class PurchaseListView {
         this._parent = parent;
         this._ppiyoFaceChange = false;
         _interval = 0;
+        _dragAreaTerm = 0;
         _soundCount = 0;
         _count = 0;
+
         this._init();
         this._listButton();
         this._sndPlay();
@@ -97,6 +99,7 @@ export default class PurchaseListView {
             let purchaseItem = new PurchaseItemForListView(this._game, this._sliderGroup, asset, quantity, xPos, yPos, dotXpos, dotYpos);
             GameConfig.PURCHASE_ITEM_FOR_LIST_ARRAY = purchaseItem;
             _interval = (107 + 5) * ( i + 1);
+            _dragAreaTerm  =  (pArr.length - _minimumPurchase) *  (107 + 5);
             purchaseItem.startY = yPos;
             this._sliderGroup.mask = this.maskRect;
         }
@@ -157,9 +160,11 @@ export default class PurchaseListView {
     }
 
     _dragArea(interval) {
-        this.dragArea = this._game.add.graphics(0, - interval * 0.5);
+        // this.dragArea = this._game.add.graphics(0, - interval * 0.5);
+        this.dragArea = this._game.add.graphics(0, - (_dragAreaTerm));
         this.dragArea.beginFill(0x000, 0);
-        this.dragArea.drawRect(377, 0, 526, interval * 1.5);
+        // this.dragArea.drawRect(377, 0, 526, interval * 1.5);
+        this.dragArea.drawRect(377, 0, 526, interval + _dragAreaTerm);
         this.dragArea.endFill();
         this._topGroup.addChild(this.dragArea);
     }
@@ -222,7 +227,7 @@ export default class PurchaseListView {
         SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
         this._nextBtn.inputEnabled = false;
         this._nextBtn.visible = false;
-        let tw = this._game.add.tween(this.dragRect).to({y:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);
+        let tw = this._game.add.tween(this.dragRect).to({y:-(_dragAreaTerm)}, 300, Phaser.Easing.Quartic.Out, true);
         tw.onComplete.add(()=> {
             this._countStart = true;
         });

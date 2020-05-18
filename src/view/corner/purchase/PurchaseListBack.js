@@ -24,7 +24,7 @@ export default class PurchaseList {
 
     purchaseList() {
         let arr = [];
-        // let max = 5;
+        // let max = 13;
         //item shuffle method - 요청으로 제거됨
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
