@@ -5,10 +5,10 @@ const displaySlidingSpeed = 7000;
 let guideEnable = true;
 let chapterClear = false;
 
-const defaultBgmVolume = 0.3;
-// let bgmVolume = 0.3;
-let bgmVolume = 0.001;
-const reduceBgmVolume = 0.1;
+const defaultBgmVolume = 0.2;
+let bgmVolume = 0.2;
+// let bgmVolume = 0.001;
+const reduceBgmVolume = 0.07;
 const muteSoundVolume = 0.0001;
 
 let currentFillObject = null;

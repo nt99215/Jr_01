@@ -188,7 +188,7 @@ export default class Categories {
             effectQuantity:[
                 [],
                 [2, 2],
-                [2, 3],
+                [1, 2],
                 [1],
                 [1, 2],
             ]

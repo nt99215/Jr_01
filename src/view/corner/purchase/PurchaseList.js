@@ -24,13 +24,12 @@ export default class PurchaseList {
 
     purchaseList() {
         let arr = [];
+        // let max = 13;
         //item shuffle method - 요청으로 제거됨
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
-        // let rN = this._randomNumber(0, _shuffleArray.length - 1);
-        let rN = 0;
+        let rN = this._randomNumber(0, _shuffleArray.length - 1);
         for(let i = 0; i<_shuffleArray.length; i++)
-        // for(let i = 0; i<1; i++)
         {
             //카테고리 랜덤 제거
             if(rN !== i)
@@ -55,8 +54,10 @@ export default class PurchaseList {
                     }
                 }
             }
-
         }
+
+
+        // if(arr.length > max) arr.splice(max, arr.length)
 
         //TOTAL CATEGORIES
         GameConfig.TOTAL_CATEGORIES = arr.length;

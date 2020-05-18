@@ -4,7 +4,7 @@ import PurchaseItem from "./PurchaseItem";
 import GameConfig from "../../../data/GameConfig";
 import SoundManager from "../../../manager/SoundManager";
 
-let _dragStartPos, _interval, _dist;
+let _dragStartPos, _interval, _dist, _dragAreaTerm;
 const _minimumPurchase = 6;
 export default class PurchaseSlider {
     constructor(game, categoryArray) {
@@ -19,6 +19,7 @@ export default class PurchaseSlider {
         this.purchaseItem = [];
         _dragStartPos = 0;
         _interval = 0;
+        _dragAreaTerm = 0;
 
         this._init();
         this._listButton();
@@ -45,6 +46,9 @@ export default class PurchaseSlider {
         // let _interval = 0;
         let pArr = GameConfig.PURCHASE_LIST;
         this._totalPurchase = pArr.length;
+        let widthArr = [0,0,0,0,0,0,
+        700,100,
+        ];
 
         //LIST
         for (let i = 0; i < pArr.length; i++) {
@@ -57,9 +61,12 @@ export default class PurchaseSlider {
             // this.purchaseItem.push(purchaseItem);
             GameConfig.PURCHASE_ITEM_ARRAY = purchaseItem;
             _interval = (91 + 37) * (i + 1);
+            _dragAreaTerm  =  (pArr.length - _minimumPurchase) *  (91 + 37);
             purchaseItem.startX = xPos;
             this._sliderGroup.mask = this.maskRect;
         }
+
+        // console.log(pArr.length, _interval, _dragAreaTerm);
 
         this.purchaseItem = GameConfig.PURCHASE_ITEM_ARRAY;
         // console.log(pArr);
@@ -68,7 +75,7 @@ export default class PurchaseSlider {
         this._dragArea(_interval);
 
         this.dragRect = this._game.add.graphics(0, 0);
-        this.dragRect.beginFill(0xff4400, 0.2);
+        this.dragRect.beginFill(0xff4400, 0);
         this.dragRect.drawRect(246, 12, _interval, 131);
         this.dragRect.endFill();
         this._gameGroup.addChild(this.dragRect);
@@ -84,10 +91,11 @@ export default class PurchaseSlider {
     }
 
     _dragArea(interval) {
-        this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
+        // this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
+        this.dragArea = this._game.add.graphics( - (_dragAreaTerm), 0);
         this.dragArea.beginFill(0x000, 0);
         // this.dragArea.drawRect(246, 12, interval * 1.5,131);
-        this.dragArea.drawRect(246, 12, interval * 1.5,131);
+        this.dragArea.drawRect(246, 12, interval + _dragAreaTerm,131);
         this.dragArea.endFill();
         this._gameGroup.addChild(this.dragArea);
 
@@ -124,7 +132,7 @@ export default class PurchaseSlider {
     
     _onNext() {
         SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
-        this._game.add.tween(this.dragRect).to({x:-_interval/2}, 300, Phaser.Easing.Quartic.Out, true);
+        this._game.add.tween(this.dragRect).to({x:- (_dragAreaTerm)}, 300, Phaser.Easing.Quartic.Out, true);
     }
 
     _buttonSndPlay(sndKey, snd, btn) {
@@ -168,7 +176,7 @@ export default class PurchaseSlider {
 
     _btnEnable() {
 
-        if(this.dragRect.x <= -_interval/2)
+        if(this.dragRect.x <= - (_dragAreaTerm))
         {
             this._nextBtn.inputEnabled = false;
             this._nextBtn.alpha = 0.3;
