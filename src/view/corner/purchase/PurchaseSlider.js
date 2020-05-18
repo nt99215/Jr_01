@@ -53,7 +53,7 @@ export default class PurchaseSlider {
             let term =  265;
             let xPos =  (91 + 37) * i + term;
             let yPos =  31;
-            let purchaseItem = new PurchaseItem(this._game, this._sliderGroup, asset, quantity, xPos, yPos);
+            let purchaseItem = new PurchaseItem(this._game, this._sliderGroup, asset, quantity, xPos, yPos, this, i);
             // this.purchaseItem.push(purchaseItem);
             GameConfig.PURCHASE_ITEM_ARRAY = purchaseItem;
             _interval = (91 + 37) * (i + 1);
@@ -68,7 +68,7 @@ export default class PurchaseSlider {
         this._dragArea(_interval);
 
         this.dragRect = this._game.add.graphics(0, 0);
-        this.dragRect.beginFill(0xff4400, 0);
+        this.dragRect.beginFill(0xff4400, 0.2);
         this.dragRect.drawRect(246, 12, _interval, 131);
         this.dragRect.endFill();
         this._gameGroup.addChild(this.dragRect);
@@ -86,9 +86,12 @@ export default class PurchaseSlider {
     _dragArea(interval) {
         this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
         this.dragArea.beginFill(0x000, 0);
+        // this.dragArea.drawRect(246, 12, interval * 1.5,131);
         this.dragArea.drawRect(246, 12, interval * 1.5,131);
         this.dragArea.endFill();
         this._gameGroup.addChild(this.dragArea);
+
+        // console.log(- interval * 0.5, interval * 1.5)
     }
 
     _listButton() {
@@ -138,6 +141,7 @@ export default class PurchaseSlider {
     _sliderMoving() {
 
         if(this.purchaseItem.length > 0)
+        {
             for (let i = 0; i < this.purchaseItem.length; i++)
             {
                 this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + _dist;
@@ -150,13 +154,15 @@ export default class PurchaseSlider {
                     this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + _dist;
             }
 
-        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
-        // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
-        // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
-        // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
-        // console.log('minimum : ', minimum, 'maximum : ', maximum);
+            // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
+            // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
+            // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
+            // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
+            // console.log('minimum : ', minimum, 'maximum : ', maximum);
 
-        this._btnEnable();
+            this._btnEnable();
+
+        }
 
     }
 
@@ -188,10 +194,46 @@ export default class PurchaseSlider {
         }
     }
 
+    positionChange(idx) {
+
+
+        this._slidingEnable = false;
+        let itemIndex = 0;
+        for(let i = 0; i<this.purchaseItem.length; i++)
+        {
+            if(this.purchaseItem[i].item === idx) itemIndex = i;
+        }
+
+        GameConfig.PURCHASE_LIST[itemIndex].empty = false;
+
+        let pos = [];
+
+        for (let i = 0; i < this.purchaseItem.length; i++) pos.push(this.purchaseItem[i].startX);
+
+        let arr = this.purchaseItem;
+        let listArr = GameConfig.PURCHASE_LIST;
+        let obj = arr[itemIndex];
+        let listObj = listArr[itemIndex];
+        arr.splice(arr.indexOf(obj), 1);
+        arr.push(obj);
+
+        listArr.splice(listArr.indexOf(listObj), 1);
+        listArr.push(listObj);
+
+        for(let i = 0; i<arr.length; i++) arr[i].startX = pos[i];
+
+        GameConfig.PURCHASE_ITEM_ARRAY_RESET = arr;
+        this.purchaseItem = GameConfig.PURCHASE_ITEM_ARRAY;
+
+        this._slidingEnable = true;
+
+    }
+
     _update() {
-        // console.log('slide update');
+
+        if(! this._slidingEnable) return;
         _dist = this.dragRect.x - _dragStartPos;
-        if(this._slidingEnable) this._sliderMoving()
+        if(this._slidingEnable) this._sliderMoving();
 
     }
 

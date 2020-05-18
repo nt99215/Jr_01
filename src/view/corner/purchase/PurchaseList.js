@@ -27,7 +27,8 @@ export default class PurchaseList {
         //item shuffle method - 요청으로 제거됨
         // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
         let _shuffleArray = _categoryArr;
-        let rN = this._randomNumber(0, _shuffleArray.length - 1);
+        // let rN = this._randomNumber(0, _shuffleArray.length - 1);
+        let rN = 0;
         for(let i = 0; i<_shuffleArray.length; i++)
         // for(let i = 0; i<1; i++)
         {
@@ -47,6 +48,7 @@ export default class PurchaseList {
                     {
                         array[j].quantity = quantity;
                         array[j].category = category;
+                        array[j].empty = true;
                         GameConfig.TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
                         GameConfig.TOTAL_QUANTITY += array[j].quantity;
                         arr.push(array[j]);
@@ -58,10 +60,10 @@ export default class PurchaseList {
 
         //TOTAL CATEGORIES
         GameConfig.TOTAL_CATEGORIES = arr.length;
-        // console.log(GameConfig.TOTAL_AMOUNT);
-        // console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
-        // console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
-        // console.log(arr);
+        console.log(GameConfig.TOTAL_AMOUNT);
+        console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
+        console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
+        console.log(arr);
         return arr;
     }
 

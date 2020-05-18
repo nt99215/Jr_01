@@ -11,7 +11,7 @@ const speed = 3;
 
 
 export default class Corner {
-    constructor(game, bgGroup, gameGroup, category, parent) {
+    constructor(game, bgGroup, gameGroup, category, parent, popEnable) {
         this._game = game;
         this._bgGroup = bgGroup;
         this._gameGroup = gameGroup;
@@ -22,6 +22,7 @@ export default class Corner {
         this._headRemove = false;
         this._totalWidth = 0;
         this._pickUp = false;
+        this._popEnable = popEnable;
 
         boardArr = [];
         btnArr = [];
@@ -36,10 +37,13 @@ export default class Corner {
     }
 
     _sndPlay() {
-        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
-        SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
-        SoundManager.instance.effectSound(SoundAssetKey.guideNarr_3);
-        GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_3;
+        if(! this._popEnable)
+        {
+            SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+            SoundManager.instance.effectSoundStop(GameConfig.CURRENT_BUTTON_SOUND, 0, false, true);
+            SoundManager.instance.effectSound(SoundAssetKey.guideNarr_3);
+            GameConfig.CURRENT_GUIDE_SOUND = SoundAssetKey.guideNarr_3;
+        }
     }
 
     _init() {
@@ -208,7 +212,8 @@ export default class Corner {
         let idx = -1;
         GameConfig.CURRENT_FILL_OBJECT = name;
         for(let i = 0; i<GameConfig.PURCHASE_LIST.length; i++)
-        if (GameConfig.PURCHASE_LIST[i].item === name) idx = i;
+        if (GameConfig.PURCHASE_LIST[i].item === name
+        && GameConfig.PURCHASE_LIST[i].empty ) idx = i;
 
         if(idx !== -1 )
         {

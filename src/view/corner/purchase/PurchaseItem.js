@@ -4,7 +4,7 @@ import GameConfig from "../../../data/GameConfig";
 let _xPos, _yPos;
 
 export default class PurchaseItem {
-    constructor(game, group, asset, quantity, xPos, yPos) {
+    constructor(game, group, asset, quantity, xPos, yPos, parent, index) {
         this._game = game;
         this._gameGroup = group;
         this._key = AssetKey.SLIDE_BAR_PPIYO;
@@ -13,6 +13,8 @@ export default class PurchaseItem {
         this.startX = 0;
         this.numberImg = [];
         this.complete = false;
+        this._parent = parent;
+        this.index = index;
         _xPos = xPos;
         _yPos = yPos;
         this._init();
@@ -79,9 +81,47 @@ export default class PurchaseItem {
                 //COMPLETE
                 this.complete = true;
                 GameConfig.TOTAL_CATEGORIES --;
+
+                //POSTION CHANGE
+                this._parent.positionChange(this.item);
+                // this._positionChange();
                 // console.log(GameConfig.TOTAL_CATEGORIES);
             }
         }
+
+    }
+
+    _positionChange() {
+
+     /*   let arr = GameConfig.PURCHASE_ITEM_ARRAY;
+        let idx = arr.indexOf(this);
+        console.log('idx : ', idx);
+        let pos = [];
+
+        for(let i = 0; i<arr.length; i++)
+        {
+            pos.push(parseInt(arr[i].item.x));
+        }
+
+        console.log('pos : ', pos)
+
+        for(let i = 0; i<arr.length; i++)
+        {
+            if(i > idx)
+            {
+                // arr[i].item.x =  arr[i - 1].item.x
+                arr[i].item.x = parseInt(arr[i - 1].item.x);
+                console.log(arr[i].item.x)
+            }
+
+        }*/
+
+        // this.bgComp.x = 500;
+        // this.itemComp.x = pos[pos.length - 1];
+        // this.checkMark.x = pos[pos.length - 1];
+
+        // GameConfig.PURCHASE_ITEM_ARRAY.splice(idx, 1);
+        // GameConfig.PURCHASE_ITEM_ARRAY.push(this);
 
     }
 

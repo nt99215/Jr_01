@@ -6,8 +6,8 @@ let guideEnable = true;
 let chapterClear = false;
 
 const defaultBgmVolume = 0.3;
-let bgmVolume = 0.3;
-// let bgmVolume = 0.001;
+// let bgmVolume = 0.3;
+let bgmVolume = 0.001;
 const reduceBgmVolume = 0.1;
 const muteSoundVolume = 0.0001;
 
@@ -25,7 +25,7 @@ let pause = true;
 let device;
 let scene = '';
 let reset;
-let soundEnabled = true;
+let soundEnabled = false;
 let bgmEnabled = true;
 let mainController;
 let tutorialDisabled = false;

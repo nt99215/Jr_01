@@ -19,7 +19,8 @@ const _categoryArr= ['',
     Categories.NOTYET,
     Categories.COUNTER,
 ];
-let _btnArr;
+
+let _btnArr, _categoryPopEnable;
 
 export default class CornerMain{
     constructor(game, parent) {
@@ -35,6 +36,7 @@ export default class CornerMain{
         this._cornerPop = false;
         this._purchaseSlide = null;
         this._shoppingComplete = false;
+        _categoryPopEnable = ['', false, false, false, false, false, false, false, false];
         _btnArr = [null];
         this._sndPlay();
 
@@ -103,9 +105,11 @@ export default class CornerMain{
         }
 
         //CORNER GENERATE
-        this._corner = new Corner(this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this);
+        let popEnabled = _categoryPopEnable[num];
+        this._corner = new Corner(this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this, popEnabled);
         this._backButton.visible = true;
         this._cornerPop = true;
+        _categoryPopEnable[num] = true;
 
         this._ppiyoCartGenerate();
         if(this._ppiyoCart) this._ppiyoCart._visible(true);
