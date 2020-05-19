@@ -143,6 +143,7 @@ export default class PurchaseSlider {
 
     _drag(obj) {
         // console.log(parseInt(obj.x));
+        // this.currentPosition(parseInt(obj.x));
         // _dist = obj.x - _dragStartPos;
     }
 
@@ -202,8 +203,49 @@ export default class PurchaseSlider {
         }
     }
 
+
+    currentPosition(xPos) {
+
+        let term = -110;
+        let idx = parseInt(xPos/term)
+        // console.log(parseInt(xPos/term));
+        return idx;
+
+    }
+
+    positionMoving() {
+
+        let idx = this.currentPosition(this.dragRect.x);
+        let input = false;
+
+        let total = idx + _minimumPurchase;
+        if(total > this.purchaseItem.length) total = this.purchaseItem.length;
+        for(let i = idx; i<total; i++)
+        {
+            input = this.purchaseItem[i].complete;
+            if(! input) break;
+        }
+
+        if(input)
+        {
+            let remain = false;
+            for(let i = 0; i<_minimumPurchase; i++)
+            {
+                remain = this.purchaseItem[i].complete;
+                if(! remain) break;
+            }
+
+            if(! remain) this._onPrev();
+            else this._onNext();
+        }
+
+
+    }
+
     positionChange(idx) {
 
+
+        return;
 
         this._slidingEnable = false;
         let itemIndex = 0;

@@ -83,7 +83,8 @@ export default class PurchaseItem {
                 GameConfig.TOTAL_CATEGORIES --;
 
                 //POSTION CHANGE
-                this._parent.positionChange(this.item);
+                // this._parent.positionChange(this.item);
+                this._parent.positionMoving(this.item);
                 // this._positionChange();
                 // console.log(GameConfig.TOTAL_CATEGORIES);
             }

@@ -2321,6 +2321,7 @@ class PurchaseList {
                 let array = _shuffleArray[i].itemList;
                 let category = _shuffleArray[i].category;
                 array = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.arrayShuffle(array);
+                // let pickNum = this._randomNumber(1, 2);
                 let pickNum = this._randomNumber(1, 2);
                 let item = __WEBPACK_IMPORTED_MODULE_0__util_ShuffleRandom__["a" /* default */].prototype.pickNow(array, pickNum);
                 let quantity = this._randomNumber(1, 3);
@@ -118218,6 +118219,7 @@ class PurchaseSlider {
 
     _drag(obj) {
         // console.log(parseInt(obj.x));
+        // this.currentPosition(parseInt(obj.x));
         // _dist = obj.x - _dragStartPos;
     }
 
@@ -118263,7 +118265,40 @@ class PurchaseSlider {
         }
     }
 
+    currentPosition(xPos) {
+
+        let term = -110;
+        let idx = parseInt(xPos / term);
+        // console.log(parseInt(xPos/term));
+        return idx;
+    }
+
+    positionMoving() {
+
+        let idx = this.currentPosition(this.dragRect.x);
+        let input = false;
+
+        let total = idx + _minimumPurchase;
+        if (total > this.purchaseItem.length) total = this.purchaseItem.length;
+        for (let i = idx; i < total; i++) {
+            input = this.purchaseItem[i].complete;
+            if (!input) break;
+        }
+
+        if (input) {
+            let remain = false;
+            for (let i = 0; i < _minimumPurchase; i++) {
+                remain = this.purchaseItem[i].complete;
+                if (!remain) break;
+            }
+
+            if (!remain) this._onPrev();else this._onNext();
+        }
+    }
+
     positionChange(idx) {
+
+        return;
 
         this._slidingEnable = false;
         let itemIndex = 0;
@@ -118399,7 +118434,8 @@ class PurchaseItem {
                 __WEBPACK_IMPORTED_MODULE_1__data_GameConfig__["a" /* default */].TOTAL_CATEGORIES--;
 
                 //POSTION CHANGE
-                this._parent.positionChange(this.item);
+                // this._parent.positionChange(this.item);
+                this._parent.positionMoving(this.item);
                 // this._positionChange();
                 // console.log(GameConfig.TOTAL_CATEGORIES);
             }

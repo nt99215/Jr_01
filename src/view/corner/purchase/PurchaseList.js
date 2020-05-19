@@ -36,6 +36,7 @@ export default class PurchaseList {
                 let array = _shuffleArray[i].itemList;
                 let category = _shuffleArray[i].category;
                 array = ShuffleRandom.prototype.arrayShuffle(array);
+                // let pickNum = this._randomNumber(1, 2);
                 let pickNum = this._randomNumber(1, 2);
                 let item = ShuffleRandom.prototype.pickNow(array, pickNum);
                 let quantity = this._randomNumber(1, 3);
