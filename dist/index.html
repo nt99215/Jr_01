@@ -20,7 +20,7 @@
             display: block;
             background-color: #000000;
             overflow:hidden;
-            touch-action: none;
+            /*touch-action: none;*/
         }
 
         #loading {
@@ -43,7 +43,7 @@
 
 
 <script>
-    let startX, startY, endX, endY;
+    /*let startX, startY, endX, endY;
     document.addEventListener("touchstart", function(e){
         e.preventDefault();
     }, false);
@@ -51,7 +51,7 @@
     document.addEventListener("touchend", function(e){
         e.preventDefault();
     }, false);
-
+*/
     let gameScript = document.createElement('script');
     gameScript.setAttribute('src', 'index.bundle.js');
     document.body.appendChild(gameScript);
