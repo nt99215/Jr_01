@@ -4,7 +4,7 @@ import GameConfig from "../../data/GameConfig";
 window.PIXI = require('phaser-ce/build/custom/pixi');
 window.p2 = require('phaser-ce/build/custom/p2');
 window.Phaser = require('phaser-ce/build/custom/phaser-split');
-
+const win = window;
 export default class Boot extends Phaser.State {
     init(...args) {
         this.game.stage.backgroundColor = 0x0000;
@@ -40,7 +40,43 @@ export default class Boot extends Phaser.State {
     create() {
         // ResourceKey.data = this.game.cache.getJSON(ResourceKey.PRELOAD_RESOURCE);
         this.loadLoadingImg();
+        this.resize();
 
+    }
+
+    resize () {
+        if(window.nts.index) {
+            const ww = win.innerWidth;
+            const hh = win.innerHeight;
+
+            // var debugs:any = document.getElementById("debugs");
+            // debugs.value += "\n"+"w : "+ww + " H : " +hh;
+
+            if(win.nts.winSize && win.nts.winSize.ww ==ww && win.nts.winSize.hh == hh) return;
+            win.nts.winSize = {ww:ww, hh:hh};
+
+            let w = 1280;
+            let h = 720;
+            const scale = Math.min(ww/w, hh/h);
+            w = Math.round(w * scale);
+            h = Math.round(h * scale);
+            const marginTop = (hh - h) >> 1;
+            const marginLeft = (ww - w) >> 1;
+
+            window.nts.index.canvas.setAttribute('style',
+                `display:block; -ms-transform: scale(${scale}); 
+        -webkit-transform: scale3d(${scale}, 1);
+         -moz-transform: scale(${scale}); 
+         -o-transform: scale(${scale}); 
+         transform: scale(${scale});
+         transform-origin: top left;
+         margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
+         `
+            );
+            window.nts.index.scale.setGameSize(1280,720);
+        }
+
+        console.log("A~~~~~~~~~~~~")
     }
 
     loadLoadingImg(){

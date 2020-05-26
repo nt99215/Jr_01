@@ -72,16 +72,19 @@ function resize () {
         );
         window.nts.index.scale.setGameSize(1280,720);
     }
+
+    console.log("A~~~~~~~~~~~~")
 }
 
 const win = window;
 window.nts = {};
 window.nts.index = new index('main_doc', 1280, 720);
 
+/*
 if(window.nts.index.isBooted ) {
     resize ();
 }
 
-window.nts.index.events.once('boot', ()=> {
+window.nts.index.events.add(()=> {
     resize();
-});
+});*/
