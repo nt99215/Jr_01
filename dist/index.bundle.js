@@ -1441,7 +1441,7 @@ class ScreenManager {
             document.addEventListener("MSFullscreenError", function () {/*console.log("Full screen failed");*/
             });
             window.addEventListener("resize", function (evt) {
-                // this.changeWinSize();
+                this.changeWinSize();
             }, false);
             /* let gameScript = document.createElement('script');
              gameScript.setAttribute('src', 'index.bundle.js');
@@ -2462,83 +2462,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 class index extends Phaser.Game {
-    constructor(targetElementId, w, h, debug = false, from) {
-        let cfg = {
-            width: w,
-            height: h,
-            renderer: Phaser.CANVAS,
-            parent: targetElementId,
-            multiTexture: true,
-            enableDebug: debug
-        };
+        constructor(targetElementId, w, h, debug = false, from) {
+                let cfg = {
+                        width: w,
+                        height: h,
+                        renderer: Phaser.CANVAS,
+                        parent: targetElementId,
+                        multiTexture: true,
+                        enableDebug: debug
+                };
 
-        __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_WIDTH = w;
-        __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_HEIGHT = h;
-        __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_DEBUG = debug;
-        __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_RENDER_TYPE = cfg.renderer;
+                __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_WIDTH = w;
+                __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_HEIGHT = h;
+                __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_DEBUG = debug;
+                __WEBPACK_IMPORTED_MODULE_3__loader_const_GameInfo__["a" /* default */].GAME_RENDER_TYPE = cfg.renderer;
 
-        super(cfg);
+                super(cfg);
 
-        new __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */](this);
-        new __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__["a" /* default */](this);
-        let sm = new __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__["a" /* default */](this);
-        sm.init();
+                new __WEBPACK_IMPORTED_MODULE_4__manager_SoundManager__["a" /* default */](this);
+                new __WEBPACK_IMPORTED_MODULE_5__loader_manager_LoadManager__["a" /* default */](this);
+                let sm = new __WEBPACK_IMPORTED_MODULE_6__loader_manager_ScreenManager__["a" /* default */](this);
+                sm.init();
 
-        this.state.add('Boot', __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__["a" /* default */], false);
-        this.state.add('Preloader', __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__["a" /* default */], false);
-        this.state.add('Main', __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__["a" /* default */], false);
-        this.state.start('Boot');
-    }
+                this.state.add('Boot', __WEBPACK_IMPORTED_MODULE_0__loader_state_Boot__["a" /* default */], false);
+                this.state.add('Preloader', __WEBPACK_IMPORTED_MODULE_1__loader_state_Preloader__["a" /* default */], false);
+                this.state.add('Main', __WEBPACK_IMPORTED_MODULE_2__loader_state_Main__["a" /* default */], false);
+                this.state.start('Boot');
+        }
 
 }
 /* harmony export (immutable) */ __webpack_exports__["default"] = index;
 
 
-function resize() {
-    if (window.nts.index) {
-        const ww = win.innerWidth;
-        const hh = win.innerHeight;
-
-        // var debugs:any = document.getElementById("debugs");
-        // debugs.value += "\n"+"w : "+ww + " H : " +hh;
-
-        if (win.nts.winSize && win.nts.winSize.ww == ww && win.nts.winSize.hh == hh) return;
-        win.nts.winSize = { ww: ww, hh: hh };
-
-        let w = 1280;
-        let h = 720;
-        const scale = Math.min(ww / w, hh / h);
-        w = Math.round(w * scale);
-        h = Math.round(h * scale);
-        const marginTop = hh - h >> 1;
-        const marginLeft = ww - w >> 1;
-
-        window.nts.index.canvas.setAttribute('style', `display:block; -ms-transform: scale(${scale}); 
-        -webkit-transform: scale3d(${scale}, 1);
-         -moz-transform: scale(${scale}); 
-         -o-transform: scale(${scale}); 
-         transform: scale(${scale});
-         transform-origin: top left;
-         margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
-         `);
-        window.nts.index.scale.setGameSize(1280, 720);
-    }
-
-    console.log("A~~~~~~~~~~~~");
-}
-
-const win = window;
 window.nts = {};
 window.nts.index = new index('main_doc', 1280, 720);
-
-/*
-if(window.nts.index.isBooted ) {
-    resize ();
-}
-
-window.nts.index.events.add(()=> {
-    resize();
-});*/
 
 /***/ }),
 /* 20 */
@@ -2553,7 +2510,7 @@ window.nts.index.events.add(()=> {
 window.PIXI = __webpack_require__(21);
 window.p2 = __webpack_require__(22);
 window.Phaser = __webpack_require__(23);
-const win = window;
+
 class Boot extends Phaser.State {
     init(...args) {
         this.game.stage.backgroundColor = 0x0000;
@@ -2588,40 +2545,6 @@ class Boot extends Phaser.State {
     create() {
         // ResourceKey.data = this.game.cache.getJSON(ResourceKey.PRELOAD_RESOURCE);
         this.loadLoadingImg();
-        this.resize();
-    }
-
-    resize() {
-        if (window.nts.index) {
-            const ww = win.innerWidth;
-            const hh = win.innerHeight;
-
-            // var debugs:any = document.getElementById("debugs");
-            // debugs.value += "\n"+"w : "+ww + " H : " +hh;
-
-            if (win.nts.winSize && win.nts.winSize.ww == ww && win.nts.winSize.hh == hh) return;
-            win.nts.winSize = { ww: ww, hh: hh };
-
-            let w = 1280;
-            let h = 720;
-            const scale = Math.min(ww / w, hh / h);
-            w = Math.round(w * scale);
-            h = Math.round(h * scale);
-            const marginTop = hh - h >> 1;
-            const marginLeft = ww - w >> 1;
-
-            window.nts.index.canvas.setAttribute('style', `display:block; -ms-transform: scale(${scale}); 
-        -webkit-transform: scale3d(${scale}, 1);
-         -moz-transform: scale(${scale}); 
-         -o-transform: scale(${scale}); 
-         transform: scale(${scale});
-         transform-origin: top left;
-         margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
-         `);
-            window.nts.index.scale.setGameSize(1280, 720);
-        }
-
-        console.log("A~~~~~~~~~~~~");
     }
 
     loadLoadingImg() {
