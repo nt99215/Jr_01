@@ -8,13 +8,13 @@ window.Phaser = require('phaser-ce/build/custom/phaser-split');
 export default class Boot extends Phaser.State {
     init(...args) {
         this.game.stage.backgroundColor = 0x0000;
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.pageAlignHorizontally = true;
+        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // this.game.scale.pageAlignVertically = true;
+        // this.game.scale.pageAlignHorizontally = true;
         this.game.input.maxPointers = 1;
 
-        this.game.scale.refresh();
+        // this.game.scale.refresh();
 
         this.game.time.advancedTiming = true;
         this.game.time.desiredFps = 60;
