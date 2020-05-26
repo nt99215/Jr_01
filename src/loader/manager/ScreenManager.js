@@ -119,6 +119,9 @@ export default class ScreenManager {
             let ah = Math.round(ch * scale);
             let aw = Math.round(cw * scale);
 
+            ah = 200;
+            aw = 200;
+
             _loading.style.width = aw + 'px';
             _loading.style.height = ah + 'px';
 
@@ -164,7 +167,7 @@ export default class ScreenManager {
             document.addEventListener("MSFullscreenError", function () {/*console.log("Full screen failed");*/
             });
             window.addEventListener("resize", function (evt) {
-                this.changeWinSize();
+                // this.changeWinSize();
             }, false);
            /* let gameScript = document.createElement('script');
             gameScript.setAttribute('src', 'index.bundle.js');
