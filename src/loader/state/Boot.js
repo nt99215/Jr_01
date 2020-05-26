@@ -11,7 +11,7 @@ export default class Boot extends Phaser.State {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.pageAlignVertically = true;
-        // this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignHorizontally = true;
         this.game.input.maxPointers = 1;
 
         this.game.scale.refresh();

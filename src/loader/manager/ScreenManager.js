@@ -108,6 +108,8 @@ export default class ScreenManager {
         let scaleX = ww / cw;
         let scaleY = wh / ch;
 
+        if(cw > 1) cw = 1;
+        if(ch > 1) cw = 1;
 
         let scale;
         if (scaleX > scaleY)
@@ -131,6 +133,8 @@ export default class ScreenManager {
 
             _loading.style.left = leftGap + 'px';
             _loading.style.top = topGap + 'px';
+
+            console.log(ah, aw, _loading.style.width, _loading.style.height, leftGap, topGap,  _loading.style.left,  _loading.style.top)
         }
     }
 
