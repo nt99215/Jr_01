@@ -1376,8 +1376,11 @@ class ScreenManager {
 
     changeWinSize() {
 
-        let ww = document.body.clientWidth;
-        let wh = document.body.clientHeight;
+        // let ww = document.body.clientWidth;
+        // let wh = document.body.clientHeight;
+
+        let ww = window.innerWidth;
+        let wh = window.innerHeight;
 
         let _loading = document.getElementById('loading');
 
@@ -1388,11 +1391,7 @@ class ScreenManager {
         let scaleY = wh / ch;
 
         let scale;
-        if (scaleX > scaleY) {
-            scale = scaleY;
-        } else {
-            scale = scaleX;
-        }
+        if (scaleX > scaleY) scale = scaleY;else scale = scaleX;
 
         if (_loading) {
             let ah = Math.round(ch * scale);
@@ -1406,6 +1405,8 @@ class ScreenManager {
 
             _loading.style.left = leftGap + 'px';
             _loading.style.top = topGap + 'px';
+
+            console.log(ah, aw, _loading.style.width, _loading.style.height, leftGap, topGap, _loading.style.left, _loading.style.top);
         }
     }
 
@@ -2517,7 +2518,7 @@ class Boot extends Phaser.State {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.pageAlignVertically = true;
-        // this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignHorizontally = true;
         this.game.input.maxPointers = 1;
 
         this.game.scale.refresh();

@@ -97,8 +97,11 @@ export default class ScreenManager {
 
     changeWinSize() {
 
-        let ww = document.body.clientWidth;
-        let wh = document.body.clientHeight;
+        // let ww = document.body.clientWidth;
+        // let wh = document.body.clientHeight;
+
+        let ww = window.innerWidth;
+        let wh = window.innerHeight;
 
         let _loading = document.getElementById('loading');
 
@@ -108,18 +111,9 @@ export default class ScreenManager {
         let scaleX = ww / cw;
         let scaleY = wh / ch;
 
-        if(cw > 1) cw = 1;
-        if(ch > 1) cw = 1;
-
         let scale;
-        if (scaleX > scaleY)
-        {
-            scale = scaleY
-        }
-        else
-        {
-            scale = scaleX
-        }
+        if (scaleX > scaleY) scale = scaleY
+        else scale = scaleX
 
         if(_loading) {
             let ah = Math.round(ch * scale);
