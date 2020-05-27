@@ -29,7 +29,7 @@ export default class Boot extends Phaser.State {
         };
         window.onfocus = () => {
             if(this._appCheck())  GameConfig.GAME_FOCUS = true;
-        };
+        }; 
     }
 
     _appCheck() {

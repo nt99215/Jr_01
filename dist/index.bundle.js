@@ -2495,6 +2495,14 @@ class index extends Phaser.Game {
 
 
 window.nts = {};
+let w = 1280;
+let h = 720;
+
+if (window.devicePixelRatio < 1) {
+        w = window.screen.width / window.devicePixelRatio;
+        h = window.screen.height / window.devicePixelRatio;
+}
+alert(w);
 window.nts.index = new index('main_doc', 1280, 720);
 
 /***/ }),
