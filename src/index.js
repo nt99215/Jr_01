@@ -34,20 +34,66 @@ export default class index extends Phaser.Game {
         this.state.add('Preloader', Preloader, false);
         this.state.add('Main', Main, false);
         this.state.start('Boot');
-
-
-
     }
+
+
 
 }
 
-window.nts = {};
-let w = 1280;
+
+
+
+
+function resize () {
+    alert('resize')
+    if(win.nts.index) {
+        const ww = win.innerWidth;
+        const hh = win.innerHeight;
+
+        // var debugs:any = document.getElementById("debugs");
+        // debugs.value += "\n"+"w : "+ww + " H : " +hh;
+
+        if(win.nts.winSize && win.nts.winSize.ww ===ww && win.nts.winSize.hh === hh) return;
+        win.nts.winSize = {ww:ww, hh:hh};
+
+        let w = 1280;
+        let h = 720;
+        const scale = Math.min(ww/w, hh/h);
+        w = Math.round(w * scale);
+        h = Math.round(h * scale);
+        const marginTop = (hh - h) >> 1;
+        const marginLeft = (ww - w) >> 1;
+
+        win.nts.index.canvas.setAttribute('style',
+            `display:block; -ms-transform: scale(${scale}); 
+        -webkit-transform: scale3d(${scale}, 1);
+         -moz-transform: scale(${scale}); 
+         -o-transform: scale(${scale}); 
+         transform: scale(${scale});
+         transform-origin: top left;
+         margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
+         `
+        );
+        win.nts.index.scale.setGameSize(1280,720);
+
+    }
+}
+
+
+/*let w = 1280;
 let h = 720;
 
 if(window.devicePixelRatio < 1){
     w = window.screen.width/window.devicePixelRatio;
     h = window.screen.height/window.devicePixelRatio;
+}*/
+const win = window;
+win.addEventListener('resize', ()=> {setTimeout(resize, 100)}, false);
+win.nts = {};
+
+win.nts.index = new index('main_doc', 1280, 720);
+if(win.nts.index.isBooted)
+{
+    resize();
 }
-alert(w);
-window.nts.index = new index('main_doc', 1280, 720);
+
