@@ -1,0 +1,60 @@
+{"frames": {
+
+"tutorPpoch_5_1":
+{
+	"frame": {"x":1556,"y":0,"w":488,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":40,"y":0,"w":488,"h":504},
+	"sourceSize": {"w":533,"h":524}
+},
+"tutorPpoch_5_2":
+{
+	"frame": {"x":1051,"y":0,"w":505,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":0,"w":505,"h":504},
+	"sourceSize": {"w":533,"h":524}
+},
+"tutorPpoch_5_3":
+{
+	"frame": {"x":533,"y":0,"w":518,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":518,"h":504},
+	"sourceSize": {"w":533,"h":524}
+},
+"tutorPpoch_5_4":
+{
+	"frame": {"x":0,"y":0,"w":533,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":533,"h":504},
+	"sourceSize": {"w":533,"h":524}
+},
+"tutorPpoch_5_5":
+{
+	"frame": {"x":533,"y":0,"w":518,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":518,"h":504},
+	"sourceSize": {"w":533,"h":524}
+},
+"tutorPpoch_5_6":
+{
+	"frame": {"x":1051,"y":0,"w":505,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":0,"w":505,"h":504},
+	"sourceSize": {"w":533,"h":524}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tutor-asset-ppochi-3",
+	"format": "BGRA8888",
+	"size": {"w":2044,"h":504},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9a727a88698de3403f3584f1a3d09e14:27bce696b29190dca5456949db6f509d:c800c981e9f40a6ee08bcd752392ffcf$"
+}
+}

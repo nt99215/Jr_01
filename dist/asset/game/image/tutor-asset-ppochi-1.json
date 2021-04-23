@@ -1,0 +1,148 @@
+{"frames": {
+
+"tutorialBg":
+{
+	"frame": {"x":0,"y":0,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720}
+},
+"tutorPpoch_1_1":
+{
+	"frame": {"x":546,"y":1209,"w":519,"h":489},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":0,"w":519,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_1_2":
+{
+	"frame": {"x":0,"y":1209,"w":546,"h":489},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":0,"w":546,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_1_3":
+{
+	"frame": {"x":576,"y":720,"w":562,"h":489},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":0,"w":562,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_1_4":
+{
+	"frame": {"x":0,"y":720,"w":576,"h":489},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":576,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_1_5":
+{
+	"frame": {"x":576,"y":720,"w":562,"h":489},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":0,"w":562,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_1_6":
+{
+	"frame": {"x":0,"y":1209,"w":546,"h":489},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":0,"w":546,"h":489},
+	"sourceSize": {"w":576,"h":489}
+},
+"tutorPpoch_2_1":
+{
+	"frame": {"x":1138,"y":996,"w":550,"h":498},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":0,"w":550,"h":498},
+	"sourceSize": {"w":596,"h":498}
+},
+"tutorPpoch_2_2":
+{
+	"frame": {"x":1280,"y":498,"w":575,"h":498},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":575,"h":498},
+	"sourceSize": {"w":596,"h":498}
+},
+"tutorPpoch_2_3":
+{
+	"frame": {"x":1280,"y":0,"w":596,"h":498},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":596,"h":498},
+	"sourceSize": {"w":596,"h":498}
+},
+"tutorPpoch_2_4":
+{
+	"frame": {"x":1280,"y":498,"w":575,"h":498},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":575,"h":498},
+	"sourceSize": {"w":596,"h":498}
+},
+"tutorPpoch_2_5":
+{
+	"frame": {"x":1138,"y":996,"w":550,"h":498},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":0,"w":550,"h":498},
+	"sourceSize": {"w":596,"h":498}
+},
+"tutorText_1":
+{
+	"frame": {"x":1065,"y":1575,"w":425,"h":42},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":425,"h":42},
+	"sourceSize": {"w":425,"h":47}
+},
+"tutorText_2":
+{
+	"frame": {"x":1065,"y":1494,"w":755,"h":40},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":5,"w":755,"h":40},
+	"sourceSize": {"w":755,"h":47}
+},
+"tutorText_3":
+{
+	"frame": {"x":1065,"y":1534,"w":723,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":723,"h":41},
+	"sourceSize": {"w":723,"h":47}
+},
+"tutorText_4":
+{
+	"frame": {"x":1065,"y":1534,"w":723,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":723,"h":41},
+	"sourceSize": {"w":723,"h":47}
+},
+"tutorText_5":
+{
+	"frame": {"x":1490,"y":1575,"w":365,"h":42},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":365,"h":42},
+	"sourceSize": {"w":365,"h":47}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tutor-asset-ppochi-1",
+	"format": "BGRA8888",
+	"size": {"w":1876,"h":1698},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e752a2765bf5633f2b5f9f9d6bcc8be3:eb23aba02b27e8b650ed13513b0f135c:816e2ac0eb33fd78937675ad57593dd9$"
+}
+}

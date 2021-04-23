@@ -1,0 +1,44 @@
+{"frames": {
+
+"img_stars01":
+{
+	"frame": {"x":579,"y":1440,"w":531,"h":477},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":8,"w":531,"h":477},
+	"sourceSize": {"w":579,"h":522}
+},
+"img_stars02":
+{
+	"frame": {"x":0,"y":1440,"w":579,"h":522},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":579,"h":522},
+	"sourceSize": {"w":579,"h":522}
+},
+"objectChapterComp_1":
+{
+	"frame": {"x":0,"y":0,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720}
+},
+"objectChapterComp_2":
+{
+	"frame": {"x":0,"y":720,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bgComp-asset",
+	"format": "BGRA8888",
+	"size": {"w":1280,"h":1962},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d6b7c889cddba6ea92653aff287107bb:22b63f2518ec447dc0785972a76b32f3:322079e84fa4ae6ea1eaff7024e82e36$"
+}
+}
