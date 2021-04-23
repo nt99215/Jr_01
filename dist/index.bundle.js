@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 65);
+/******/ 	return __webpack_require__(__webpack_require__.s = 59);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -87,7 +87,7 @@ exports.default = function (instance, Constructor) {
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(103);
+var _defineProperty = __webpack_require__(97);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -115,392 +115,72 @@ exports.default = function () {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var currentScene = null;
-var chapter = 1;
-var displaySlidingSpeed = 7000;
-
-var guideEnable = true;
-var chapterClear = false;
-
-var defaultBgmVolume = 0.2;
-var bgmVolume = 0.2;
-// let bgmVolume = 0.001;
-var reduceBgmVolume = 0.07;
-var muteSoundVolume = 0.0001;
-
-var currentFillObject = null;
-var purchaseList = [];
-var purchaseListEnable = true;
-var purchaseItemArray = [];
-var purchaseItemForListArray = [];
-var totalCategories = 0;
-var totalQuantity = 0;
-var totalAmount = 0;
-
-var introSnd = true;
-var pause = true;
-var device = void 0;
-var scene = '';
-var reset = void 0;
-var soundEnabled = true;
-var bgmEnabled = true;
-var mainController = void 0;
-var tutorialDisabled = false;
-var pop = false;
-var finish = false;
-var guideRepeatTime = 2;
-
-var gameFocus = true;
-var updateObject = null;
-
-var guideRemove = false;
-var currentGuideSound = null;
-var currentButtonSound = null;
-
-var cheatOn = false;
-
-var helpBtn = null;
-var backBtn = null;
-var appUrl = 'https://jr.msdl.naver.com/jrapp?cmd=close&type=webview&version=1';
-var appEnabledString = 'app';
-var webEnabledString = 'web';
-
-var GameConfig = function () {
-    function GameConfig() {
-        (0, _classCallCheck3.default)(this, GameConfig);
-    }
-
-    (0, _createClass3.default)(GameConfig, null, [{
-        key: 'INTRO_SND_PLAY',
-        get: function get() {
-            return introSnd;
-        },
-        set: function set(bool) {
-            introSnd = bool;
-        }
-    }, {
-        key: 'CURRENT_SCENE',
-        get: function get() {
-            return currentScene;
-        },
-        set: function set(obj) {
-            currentScene = obj;
-        }
-    }, {
-        key: 'GAME_RESET',
-        get: function get() {
-            return reset;
-        },
-        set: function set(bool) {
-            reset = bool;
-        }
-    }, {
-        key: 'SCENE_STATE',
-        get: function get() {
-            return scene;
-        },
-        set: function set(str) {
-            scene = str;
-        }
-    }, {
-        key: 'IN_GAME',
-        get: function get() {
-            return pause;
-        },
-        set: function set(bool) {
-            return pause = bool;
-        }
-    }, {
-        key: 'CURRENT_CHAPTER',
-        get: function get() {
-            return chapter;
-        },
-        set: function set(num) {
-            chapter = num;
-        }
-    }, {
-        key: 'CHAPTER_CLEAR',
-        get: function get() {
-            return chapterClear;
-        },
-        set: function set(bool) {
-            chapterClear = bool;
-        }
-    }, {
-        key: 'GUIDE_REMOVE',
-        get: function get() {
-            return guideRemove;
-        },
-        set: function set(bool) {
-            guideRemove = bool;
-        }
-    }, {
-        key: 'SOUND_ENABLED',
-        get: function get() {
-            return soundEnabled;
-        },
-        set: function set(bool) {
-            soundEnabled = bool;
-        }
-    }, {
-        key: 'BGM_ENABLED',
-        get: function get() {
-            return bgmEnabled;
-        },
-        set: function set(bool) {
-            bgmEnabled = bool;
-        }
-    }, {
-        key: 'CURRENT_DEVICE',
-        get: function get() {
-            return device;
-        },
-        set: function set(str) {
-            device = str;
-        }
-    }, {
-        key: 'MAIN_CONTROLLER',
-        get: function get() {
-            return mainController;
-        },
-        set: function set(obj) {
-            mainController = obj;
-        }
-    }, {
-        key: 'TUTORIAL_DISABLED',
-        get: function get() {
-            return tutorialDisabled;
-        },
-        set: function set(bool) {
-            tutorialDisabled = bool;
-        }
-    }, {
-        key: 'CURRENT_FILL_OBJECT',
-        get: function get() {
-            return currentFillObject;
-        },
-        set: function set(obj) {
-            currentFillObject = obj;
-        }
-    }, {
-        key: 'PURCHASE_LIST',
-        get: function get() {
-            return purchaseList;
-        },
-        set: function set(arr) {
-            purchaseList = arr;
-        }
-    }, {
-        key: 'PURCHASE_LIST_ENABLE',
-        get: function get() {
-            return purchaseListEnable;
-        },
-        set: function set(bool) {
-            purchaseListEnable = bool;
-        }
-    }, {
-        key: 'PURCHASE_ITEM_ARRAY',
-        get: function get() {
-            return purchaseItemArray;
-        },
-        set: function set(obj) {
-            purchaseItemArray.push(obj);
-        }
-    }, {
-        key: 'PURCHASE_ITEM_ARRAY_RESET',
-        set: function set(arr) {
-            purchaseItemArray = arr;
-        }
-    }, {
-        key: 'PURCHASE_ITEM_FOR_LIST_ARRAY',
-        get: function get() {
-            return purchaseItemForListArray;
-        },
-        set: function set(obj) {
-            purchaseItemForListArray.push(obj);
-        }
-    }, {
-        key: 'PURCHASE_ITEM_FOR_LIST_ARRAY_RESET',
-        set: function set(arr) {
-            purchaseItemForListArray = arr;
-        }
-    }, {
-        key: 'TOTAL_CATEGORIES',
-        get: function get() {
-            return totalCategories;
-        },
-        set: function set(num) {
-            totalCategories = num;
-        }
-    }, {
-        key: 'TOTAL_QUANTITY',
-        get: function get() {
-            return totalQuantity;
-        },
-        set: function set(num) {
-            totalQuantity = num;
-        }
-    }, {
-        key: 'TOTAL_AMOUNT',
-        get: function get() {
-            return totalAmount;
-        },
-        set: function set(num) {
-            totalAmount = num;
-        }
-    }, {
-        key: 'POP_ENABLED',
-        get: function get() {
-            return pop;
-        },
-        set: function set(bool) {
-            pop = bool;
-        }
-    }, {
-        key: 'GAME_FINISH',
-        get: function get() {
-            return finish;
-        },
-        set: function set(bool) {
-            finish = bool;
-        }
-    }, {
-        key: 'DEFAULT_BGM_VOLUME',
-        get: function get() {
-            return defaultBgmVolume;
-        }
-    }, {
-        key: 'REDUCE_BGM_VOLUME',
-        get: function get() {
-            return reduceBgmVolume;
-        }
-    }, {
-        key: 'BGM_VOLUME',
-        get: function get() {
-            return bgmVolume;
-        },
-        set: function set(num) {
-            bgmVolume = num;
-        }
-    }, {
-        key: 'MUTE_SOUND_VOLUME',
-        get: function get() {
-            return muteSoundVolume;
-        }
-    }, {
-        key: 'HELP_BUTTON',
-        get: function get() {
-            return helpBtn;
-        },
-        set: function set(obj) {
-            helpBtn = obj;
-        }
-    }, {
-        key: 'BACK_BUTTON',
-        get: function get() {
-            return backBtn;
-        },
-        set: function set(obj) {
-            backBtn = obj;
-        }
-    }, {
-        key: 'GUIDE_REPEAT_TIME',
-        get: function get() {
-            return guideRepeatTime;
-        }
-    }, {
-        key: 'GUIDE_ENABLED',
-        get: function get() {
-            return guideEnable;
-        },
-        set: function set(bool) {
-            guideEnable = bool;
-        }
-    }, {
-        key: 'GAME_FOCUS',
-        set: function set(bool) {
-            gameFocus = bool;
-        },
-        get: function get() {
-            return gameFocus;
-        }
-    }, {
-        key: 'UPDATE_OBJECT',
-        get: function get() {
-            return updateObject;
-        },
-        set: function set(obj) {
-            updateObject = obj;
-        }
-    }, {
-        key: 'CURRENT_GUIDE_SOUND',
-        get: function get() {
-            return currentGuideSound;
-        },
-        set: function set(obj) {
-            currentGuideSound = obj;
-        }
-    }, {
-        key: 'CURRENT_BUTTON_SOUND',
-        get: function get() {
-            return currentButtonSound;
-        },
-        set: function set(obj) {
-            currentButtonSound = obj;
-        }
-    }, {
-        key: 'DISPLAY_SLIDING_SPEED',
-        get: function get() {
-            return displaySlidingSpeed;
-        }
-    }, {
-        key: 'CHEAT_ON',
-        get: function get() {
-            return cheatOn;
-        },
-        set: function set(bool) {
-            cheatOn = bool;
-        }
-    }, {
-        key: 'CHECK_APP_STRING',
-        get: function get() {
-            return appEnabledString;
-        }
-    }, {
-        key: 'CHECK_WEB_STRING',
-        get: function get() {
-            return webEnabledString;
-        }
-    }, {
-        key: 'APP_URL',
-        get: function get() {
-            return appUrl;
-        }
-    }]);
-    return GameConfig;
-}();
-
-exports.default = GameConfig;
+module.exports = { "default": __webpack_require__(60), __esModule: true };
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof2 = __webpack_require__(49);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _setPrototypeOf = __webpack_require__(89);
+
+var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
+
+var _create = __webpack_require__(93);
+
+var _create2 = _interopRequireDefault(_create);
+
+var _typeof2 = __webpack_require__(49);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
+  }
+
+  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -531,9 +211,29 @@ var AssetKey = function () {
             return 'default_gameAtlas';
         }
     }, {
+        key: 'SMUDGE_ASSET',
+        get: function get() {
+            return 'smudge-asset';
+        }
+    }, {
         key: 'BTN_ASSET',
         get: function get() {
             return 'game-main-button';
+        }
+    }, {
+        key: 'BG_ASSET',
+        get: function get() {
+            return 'bg-asset';
+        }
+    }, {
+        key: 'BG_ASSET_3',
+        get: function get() {
+            return 'bg-asset3';
+        }
+    }, {
+        key: 'BG_COMP_ASSET',
+        get: function get() {
+            return 'bgComp-asset';
         }
     }, {
         key: 'INTRO_ASSET',
@@ -546,14 +246,19 @@ var AssetKey = function () {
             return 'ending-asset';
         }
     }, {
-        key: 'TUTOR_BG_ASSET',
+        key: 'TUTOR_ASSET_1',
         get: function get() {
-            return 'tutorialBg-asset';
+            return 'tutor-asset-ppochi-1';
         }
     }, {
-        key: 'TUTORIAL_ANIMATION_ASSET',
+        key: 'TUTOR_ASSET_2',
         get: function get() {
-            return 'tutorialAnimation-asset';
+            return 'tutor-asset-ppochi-2';
+        }
+    }, {
+        key: 'TUTOR_ASSET_3',
+        get: function get() {
+            return 'tutor-asset-ppochi-3';
         }
 
         /**
@@ -565,20 +270,115 @@ var AssetKey = function () {
         get: function get() {
             return 'introBg';
         }
+    }, {
+        key: 'INTRO_BIGDUST',
+        get: function get() {
+            return 'introImg_bigdust';
+        }
+    }, {
+        key: 'INTRO_IMG_DUST_PREFIX',
+        get: function get() {
+            return 'introImg_dust0';
+        }
+    }, {
+        key: 'INTRO_IMG_BIG_DUST_PREFIX',
+        get: function get() {
+            return 'introImg_bigDust_';
+        }
+    }, {
+        key: 'INTRO_HORSE',
+        get: function get() {
+            return 'introImg_horse';
+        }
+    }, {
+        key: 'INTRO_HORSE_SHADOW',
+        get: function get() {
+            return 'introImg_horse_shadow';
+        }
+    }, {
+        key: 'INTRO_PPOCHI_PREFIX',
+        get: function get() {
+            return 'introImg_ppochi0';
+        }
+    }, {
+        key: 'INTRO_SHINING_PREFIX',
+        get: function get() {
+            return 'introImg_shining0';
+        }
+    }, {
+        key: 'INTRO_TITLE',
+        get: function get() {
+            return 'introImg_title';
+        }
+    }, {
+        key: 'INTRO_VIRUS1_PREFIX',
+        get: function get() {
+            return 'introImg_virus1_';
+        }
+    }, {
+        key: 'INTRO_VIRUS2_PREFIX',
+        get: function get() {
+            return 'introImg_virus2_';
+        }
 
         /**
          * Tutorial
          */
 
     }, {
-        key: 'TUTORIAL_ANIMATION_ASSET_1',
+        key: 'TUTORIAL_1',
         get: function get() {
-            return 'tutorialAnimation-asset_1';
+            return 'tutorial_1';
         }
     }, {
-        key: 'TUTORIAL_ANIMATION_ASSET_2',
+        key: 'TUTORIAL_2',
         get: function get() {
-            return 'tutorialAnimation-asset_2';
+            return 'tutorial_2';
+        }
+    }, {
+        key: 'TUTORIAL_3',
+        get: function get() {
+            return 'tutorial_3';
+        }
+    }, {
+        key: 'TUTORIAL_4',
+        get: function get() {
+            return 'tutorial_4';
+        }
+    }, {
+        key: 'TUTORIAL_5',
+        get: function get() {
+            return 'tutorial_5';
+        }
+    }, {
+        key: 'TUTOR_BG',
+        get: function get() {
+            return 'tutorialBg';
+        }
+    }, {
+        key: 'TUTOR_PPOCHI_PREFIX',
+        get: function get() {
+            return 'tutorPpoch_';
+        }
+    }, {
+        key: 'TUTOR_TEXT_PREFIX',
+        get: function get() {
+            return 'tutorText_';
+        }
+    }, {
+        key: 'TUTOR_DUST_PREFIX',
+        get: function get() {
+            return 'tutorDust_';
+        }
+    }, {
+        key: 'TUTOR_DUST_IMAGE_PREFIX',
+        get: function get() {
+            return 'tutorDustImg_';
+        }
+    }, {
+        key: 'TUTOR_VIRUS_PREFIX',
+        get: function get() {
+            return 'tutorVirus_';
         }
 
         /**
@@ -586,105 +386,130 @@ var AssetKey = function () {
          */
 
     }, {
-        key: 'MAIN_DISPLAY_ASSET',
+        key: 'BG_CHAPTER_1',
         get: function get() {
-            return 'main-display-asset';
+            return 'bgChapter_1';
         }
     }, {
-        key: 'SLIDE_BAR_PPIYO',
+        key: 'BG_CHAPTER_2',
         get: function get() {
-            return 'slideBar-asset';
+            return 'bgChapter_2';
         }
     }, {
-        key: 'PURCHASE_LIST_VIEW',
+        key: 'BG_CHAPTER_3',
         get: function get() {
-            return 'purchaseListView-asset';
+            return 'bgChapter_3';
         }
     }, {
-        key: 'CALCULATE_POS',
+        key: 'BG_CHAPTER_PREFIX',
         get: function get() {
-            return 'calculatePos-asset';
+            return 'bgChapter_';
         }
     }, {
-        key: 'PAYMENT_POS',
+        key: 'BG_OBJECT_PREFIX',
         get: function get() {
-            return 'paymentPos-asset';
+            return 'objectChapter_';
         }
     }, {
-        key: 'CORNER_VEGETABLE',
+        key: 'BG_COMP_PREFIX',
         get: function get() {
-            return 'corner-vegetable-asset';
+            return 'objectChapterComp_';
         }
     }, {
-        key: 'CORNER_SEAFOOD',
+        key: 'BG_STAR_PREFIX',
         get: function get() {
-            return 'corner-seafood-asset';
+            return 'img_stars0';
         }
     }, {
-        key: 'CORNER_MEAT',
+        key: 'BTN_MOVE_DEFAULT',
         get: function get() {
-            return 'corner-meat-asset';
+            return 'btn_move_default';
         }
     }, {
-        key: 'CORNER_NECESSARY',
+        key: 'BTN_MOVE_OVER',
         get: function get() {
-            return 'corner-necessary-asset';
+            return 'btn_move_over';
         }
     }, {
-        key: 'CORNER_DAIRY',
+        key: 'STICK_PREFIX_1',
         get: function get() {
-            return 'corner-dairy-asset';
+            return 'stick_1_';
         }
     }, {
-        key: 'CORNER_SNACK',
+        key: 'STICK_PREFIX_2',
         get: function get() {
-            return 'corner-snack-asset';
+            return 'stick_2_';
         }
     }, {
-        key: 'CORNER_COUNTER',
+        key: 'STICK_PREFIX_3',
         get: function get() {
-            return 'corner-counter-asset';
+            return 'img_spray0';
         }
     }, {
-        key: 'CORNER_NOTYET',
+        key: 'DUST_PREFIX_1',
         get: function get() {
-            return 'corner-counter-asset';
-        }
-
-        /**
-         * Guide
-         */
-
-        //USER GUIDE
-
-    }, {
-        key: 'GUIDE_HAND',
-        get: function get() {
-            return 'img_hand';
+            return 'dust_1_';
         }
     }, {
-        key: 'GUIDE_CIRCLE',
+        key: 'DUST_PREFIX_2',
         get: function get() {
-            return 'img_touch';
+            return 'dust_2_';
         }
     }, {
-        key: 'TALK_CLOUD',
+        key: 'DUST_PREFIX_3',
         get: function get() {
-            return 'talkCloud';
+            return 'dust_3_';
         }
     }, {
-        key: 'RESULT_TEXT_PREFIX',
+        key: 'SMUDGE_PREFIX',
         get: function get() {
-            return 'resultText_';
+            return 'smudge_';
         }
     }, {
-        key: 'FEEDBACK_EFFECT_PREFIX',
+        key: 'SMUDGE_1_PREFIX',
         get: function get() {
-            return 'heart_';
+            return 'smudge_1_';
         }
-
-        //USER GUIDE
-
+    }, {
+        key: 'SMUDGE_2_PREFIX',
+        get: function get() {
+            return 'smudge_2_';
+        }
+    }, {
+        key: 'SMUDGE_3_PREFIX',
+        get: function get() {
+            return 'smudge_3_';
+        }
+    }, {
+        key: 'MISC_OBJECT_PREFIX',
+        get: function get() {
+            return 'miscObject_';
+        }
+    }, {
+        key: 'TALKCLOUD_PREFIX',
+        get: function get() {
+            return 'talkCloud_';
+        }
+    }, {
+        key: 'IMG_PPOCHI_PREFIX',
+        get: function get() {
+            return 'img_ppochi_';
+        }
+    }, {
+        key: 'IMG_STAMP',
+        get: function get() {
+            return 'img_stamp';
+        }
+    }, {
+        key: 'MOUSE_EFFECT_IMAGE',
+        get: function get() {
+            return 'mouseEffectImage';
+        }
+    }, {
+        key: 'MOUSE_EFFECT_IMAGE_PREFIX',
+        get: function get() {
+            return 'img_effect0';
+        }
     }, {
         key: 'INFO_HAND',
         get: function get() {
@@ -701,14 +526,99 @@ var AssetKey = function () {
             return 'img_touch';
         }
     }, {
-        key: 'CHAPTER_GUIDE_BG',
+        key: 'SIGN_BOARD_PREFIX',
         get: function get() {
-            return 'guideTextBg';
+            return 'signBoard_';
         }
     }, {
-        key: 'CHAPTER_GUIDE_TEXT_PREFIX',
+        key: 'SIGN_BOARD_COMP_PREFIX',
         get: function get() {
-            return 'guideText';
+            return 'signBoardComp_';
+        }
+    }, {
+        key: 'IMG_FISH_PREFIX_01',
+        get: function get() {
+            return 'img_fish_01_';
+        }
+    }, {
+        key: 'IMG_FISH_PREFIX_02',
+        get: function get() {
+            return 'img_fish_02_';
+        }
+    }, {
+        key: 'IMG_FISH_PREFIX_03',
+        get: function get() {
+            return 'img_fish_03_';
+        }
+    }, {
+        key: 'IMG_OXY',
+        get: function get() {
+            return 'img_oxy';
+        }
+    }, {
+        key: 'FISH_STAR',
+        get: function get() {
+            return 'fishStar';
+        }
+    }, {
+        key: 'IMG_PONG_PREFIX',
+        get: function get() {
+            return 'img_pong_01_';
+        }
+    }, {
+        key: 'IMG_PONG_COLLISION_PREFIX',
+        get: function get() {
+            return 'img_pong_02_';
+        }
+    }, {
+        key: 'IMG_PONG_COMP_PREFIX',
+        get: function get() {
+            return 'img_pong_03_';
+        }
+    }, {
+        key: 'IMG_ROCK_L',
+        get: function get() {
+            return 'img_rock_l';
+        }
+    }, {
+        key: 'IMG_ROCK_M',
+        get: function get() {
+            return 'img_rock_m';
+        }
+    }, {
+        key: 'IMG_ROCK_S',
+        get: function get() {
+            return 'img_rock_s';
+        }
+    }, {
+        key: 'IMG_SHARK_PREFIX_01',
+        get: function get() {
+            return 'img_shark_01_';
+        }
+    }, {
+        key: 'IMG_SHARK_PREFIX_02',
+        get: function get() {
+            return 'img_shark_02_';
+        }
+    }, {
+        key: 'IMG_JELLY_PREFIX',
+        get: function get() {
+            return 'img_jelly_';
+        }
+    }, {
+        key: 'SUBMARINE_PREFIX',
+        get: function get() {
+            return 'img_sub_';
+        }
+    }, {
+        key: 'IMG_LIGHT_PREFIX',
+        get: function get() {
+            return 'img_light_';
+        }
+    }, {
+        key: 'IMG_TWINKLE',
+        get: function get() {
+            return 'img_twinkle';
         }
 
         /**
@@ -718,17 +628,37 @@ var AssetKey = function () {
     }, {
         key: 'BTN_CLOSE_DEFAULT',
         get: function get() {
-            return 'result_btn_close_default';
+            return 'btn_close_default';
         }
     }, {
         key: 'BTN_CLOSE_OVER',
         get: function get() {
-            return 'result_btn_close_over';
+            return 'btn_close_over';
         }
     }, {
         key: 'RESULT_BG',
         get: function get() {
             return 'endingBg';
+        }
+    }, {
+        key: 'RESULT_IMG_POPUP',
+        get: function get() {
+            return 'img_popup';
+        }
+    }, {
+        key: 'RESULT__CLEANER_PREFIX',
+        get: function get() {
+            return 'img_cleaner0';
+        }
+    }, {
+        key: 'RESULT_POCHI_PREFIX',
+        get: function get() {
+            return 'img_pochi0';
+        }
+    }, {
+        key: 'IMG_SPEECHBUBBLE',
+        get: function get() {
+            return 'img_speechbubble';
         }
 
         /**
@@ -740,17 +670,17 @@ var AssetKey = function () {
     }, {
         key: 'START_BUTTON',
         get: function get() {
-            return 'start-button';
+            return 'start-button.png';
         }
     }, {
         key: 'RETRY_BUTTON',
         get: function get() {
-            return 'retry-button';
+            return 'retry-button.png';
         }
     }, {
         key: 'RETRY_BUTTON_OVER',
         get: function get() {
-            return 'retry-button-over';
+            return 'retry-button-over.png';
         }
     }, {
         key: 'BTN_BACK_DEFAULT',
@@ -846,7 +776,7 @@ var AssetKey = function () {
 exports.default = AssetKey;
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -864,192 +794,294 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by naver on 2020. 02. 27.
- */
+var currentScene = null;
+var totalChapter = 3;
+var chapter = 1;
+var dustScale = 0.7;
+var totalDust = 10;
+var clearNumber = 3;
+var currentDust = 0;
+var minXpos = 70;
+var maxXpos = 1200;
+var maxYpos = 180;
+var flipChangeRandom = 7000;
+var flipChangeInterval = 1500;
 
-var SoundManager = function () {
-    function SoundManager(game) {
-        (0, _classCallCheck3.default)(this, SoundManager);
+var bgmVolume = 0.7;
+var muteSoundVolume = 0.0001;
+var gameFocus = true;
+var currentGuideSound = null;
 
-        SoundManager.instance = this;
-        this._game = game;
-        this._queue = {};
+var controller = null;
+var introSnd = true;
+var pause = true;
+var device = void 0;
+var scene = '';
+var reset = void 0;
+var soundEnabled = true;
+var bgmEnabled = true;
+var mainController = void 0;
+var tutorialDisabled = false;
+var pop = false;
+var finish = false;
+var objectScale = 0.85;
+var shakeEnabled = false; //camera shake
+var gameScore = 3;
+var helpBtn = null;
+var appUrl = 'https://jr.msdl.naver.com/jrapp?cmd=close&type=webview&version=1';
+var appEnabledString = 'app';
+var webEnabledString = 'web';
+
+var GameConfig = function () {
+    function GameConfig() {
+        (0, _classCallCheck3.default)(this, GameConfig);
     }
 
-    (0, _createClass3.default)(SoundManager, [{
-        key: "intro",
-        value: function intro() {
-
-            if (_GameConfig2.default.INTRO_SND_PLAY) {
-                _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.GAME_INTRO;
-                this.introSound(_SoundAssetKey2.default.GAME_INTRO, 0.6);
-                _GameConfig2.default.INTRO_SND_PLAY = false;
-            }
+    (0, _createClass3.default)(GameConfig, null, [{
+        key: 'INTRO_SND_PLAY',
+        get: function get() {
+            return introSnd;
+        },
+        set: function set(bool) {
+            introSnd = bool;
         }
     }, {
-        key: "introSound",
-        value: function introSound(key, volume) {
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            this._queue[key] = {
-                snd: this._game.make.audio(key, volume),
-                volume: volume
-            };
-
-            this._queue[key].snd.play();
-            this._queue[key].snd.onStop.add(this.introClose, this);
+        key: 'CURRENT_SCENE',
+        get: function get() {
+            return currentScene;
+        },
+        set: function set(obj) {
+            currentScene = obj;
         }
     }, {
-        key: "introClose",
-        value: function introClose() {
-            var volume = void 0;
-            if (_GameConfig2.default.SOUND_ENABLED) volume = _GameConfig2.default.BGM_VOLUME;else volume = _GameConfig2.default.MUTE_SOUND_VOLUME;
-            this.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, volume, true);
+        key: 'GAME_RESET',
+        get: function get() {
+            return reset;
+        },
+        set: function set(bool) {
+            reset = bool;
         }
     }, {
-        key: "bgmSoundStart",
-        value: function bgmSoundStart() {
-            var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-
-            var volume = _GameConfig2.default.BGM_VOLUME;
-            if (!_GameConfig2.default.SOUND_ENABLED) {
-                volume = _GameConfig2.default.MUTE_SOUND_VOLUME;
-            }
-            var key = _SoundAssetKey2.default.MAIN_BGM;
-
-            this._queue[key] = {
-                snd: this._game.make.audio(key, volume),
-                volume: volume
-            };
-
-            this._queue[key].snd.loopFull();
-            this._queue[key].snd.play();
+        key: 'SCENE_STATE',
+        get: function get() {
+            return scene;
+        },
+        set: function set(str) {
+            scene = str;
         }
     }, {
-        key: "effectSoundRemove",
-        value: function effectSoundRemove(key) {
-
-            if (SoundManager.instance._queue[key]) {
-
-                if (SoundManager.instance._queue[key].snd.isPlaying) {
-                    SoundManager.instance._queue[key].snd.stop();
-                }
-            }
+        key: 'IN_GAME',
+        get: function get() {
+            return pause;
+        },
+        set: function set(bool) {
+            return pause = bool;
         }
     }, {
-        key: "effectSoundContinuance",
-        value: function effectSoundContinuance(key) {
-            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
-            var repeat = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-            var guideSound = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            if (guideSound !== null) {
-                if (this._queue[key] !== _GameConfig2.default.CURRENT_GUIDE_SOUND) this.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND);
-                _GameConfig2.default.CURRENT_GUIDE_SOUND = guideSound;
-            }
-
-            if (this._queue[key]) {
-                if (this._queue[key].snd.isPlaying) {
-                    if (repeat) return;else this._queue[key].snd.stop();
-                }
-            } else {
-                this._queue[key] = {
-                    snd: this._game.make.audio(key, volume),
-                    volume: volume
-                };
-            }
-
-            this._queue[key].snd.play();
+        key: 'TOTAL_CHAPTER',
+        get: function get() {
+            return totalChapter;
         }
     }, {
-        key: "effectSound",
-        value: function effectSound(key) {
-            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
-
-
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-
-            if (this._queue[key]) {
-
-                if (this._queue[key].snd.isPlaying) {
-                    this._queue[key].snd.stop();
-                }
-            } else {
-                this._queue[key] = {
-                    snd: this._game.make.audio(key, volume),
-                    volume: volume
-                };
-            }
-
-            this._queue[key].snd.play();
+        key: 'CURRENT_CHAPTER',
+        get: function get() {
+            return chapter;
+        },
+        set: function set(num) {
+            chapter = num;
         }
     }, {
-        key: "effectSoundStop",
-        value: function effectSoundStop(key) {
-            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
-            var bgm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-            var remove = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-
-            if (this._queue[key]) {
-                if (this._queue[key].snd.isPlaying) {
-                    if (remove) {
-                        this._queue[key].snd.stop();
-                        return;
-                    }
-                    this._queue[key].snd.volume = volume;
-                } else {
-                    if (bgm && key === _SoundAssetKey2.default.MAIN_BGM) {
-                        this._queue[key].snd.loopFull(volume);
-                        this._queue[key].snd.volume = volume;
-                    }
-                }
-            } else {
-                if (bgm && key === _SoundAssetKey2.default.MAIN_BGM) this.bgmSoundStart();
-            }
-        }
-
-        //BG-> FG 프리징 이슈로 ANDROID && NAVER APP일 경우 활성화
-
-    }, {
-        key: "browserCheck",
-        value: function browserCheck() {
-            return this._game.device.android && navigator.userAgent.indexOf('NAVER(inapp') !== -1;
+        key: 'DUST_SCALE',
+        get: function get() {
+            return dustScale;
         }
     }, {
-        key: "allSoundPause",
-        value: function allSoundPause() {
-            // this._game.sound.pauseAll();
+        key: 'CURRENT_DUST',
+        get: function get() {
+            return currentDust;
+        },
+        set: function set(num) {
+            currentDust += num;
         }
     }, {
-        key: "allSoundPauseEnding",
-        value: function allSoundPauseEnding() {
-            this._game.sound.pauseAll();
+        key: 'TOTAL_DUST',
+        get: function get() {
+            return totalDust;
+        }
+    }, {
+        key: 'CLEAR_NUMBER',
+        get: function get() {
+            return clearNumber;
+        }
+    }, {
+        key: 'MIN_XPOS',
+        get: function get() {
+            return minXpos;
+        }
+    }, {
+        key: 'MAX_XPOS',
+        get: function get() {
+            return maxXpos;
+        }
+    }, {
+        key: 'MAX_YPOS',
+        get: function get() {
+            return maxYpos;
+        }
+    }, {
+        key: 'FLIP_CHANGE_INTERVAL',
+        get: function get() {
+            return flipChangeInterval;
+        }
+    }, {
+        key: 'FLIP_CHANGE_RANDOM',
+        get: function get() {
+            return flipChangeRandom;
+        }
+    }, {
+        key: 'BG_OBJECT',
+        get: function get() {
+            return controller;
+        },
+        set: function set(obj) {
+            controller = obj;
+        }
+    }, {
+        key: 'SOUND_ENABLED',
+        get: function get() {
+            return soundEnabled;
+        },
+        set: function set(bool) {
+            soundEnabled = bool;
+        }
+    }, {
+        key: 'BGM_ENABLED',
+        get: function get() {
+            return bgmEnabled;
+        },
+        set: function set(bool) {
+            bgmEnabled = bool;
+        }
+    }, {
+        key: 'CURRENT_DEVICE',
+        get: function get() {
+            return device;
+        },
+        set: function set(str) {
+            device = str;
+        }
+    }, {
+        key: 'MAIN_CONTROLLER',
+        get: function get() {
+            return mainController;
+        },
+        set: function set(obj) {
+            mainController = obj;
+        }
+    }, {
+        key: 'TUTORIAL_DISABLED',
+        get: function get() {
+            return tutorialDisabled;
+        },
+        set: function set(bool) {
+            tutorialDisabled = bool;
+        }
+    }, {
+        key: 'POP_ENABLED',
+        get: function get() {
+            return pop;
+        },
+        set: function set(bool) {
+            pop = bool;
+        }
+    }, {
+        key: 'GAME_FINISH',
+        get: function get() {
+            return finish;
+        },
+        set: function set(bool) {
+            finish = bool;
+        }
+    }, {
+        key: 'SHAKE_ENABLED',
+        get: function get() {
+            return shakeEnabled;
+        },
+        set: function set(bool) {
+            shakeEnabled = bool;
+        }
+    }, {
+        key: 'OBJECT_SCALE',
+        get: function get() {
+            return objectScale;
+        }
+    }, {
+        key: 'BGM_VOLUME',
+        get: function get() {
+            return bgmVolume;
+        }
+    }, {
+        key: 'GAME_SCORE',
+        get: function get() {
+            return gameScore;
+        },
+        set: function set(num) {
+            gameScore = num;
+        }
+    }, {
+        key: 'MUTE_SOUND_VOLUME',
+        get: function get() {
+            return muteSoundVolume;
+        }
+    }, {
+        key: 'GAME_FOCUS',
+        set: function set(bool) {
+            gameFocus = bool;
+        },
+        get: function get() {
+            return gameFocus;
+        }
+    }, {
+        key: 'CURRENT_GUIDE_SOUND',
+        get: function get() {
+            return currentGuideSound;
+        },
+        set: function set(obj) {
+            currentGuideSound = obj;
+        }
+    }, {
+        key: 'HELP_BUTTON',
+        get: function get() {
+            return helpBtn;
+        },
+        set: function set(obj) {
+            helpBtn = obj;
+        }
+    }, {
+        key: 'CHECK_APP_STRING',
+        get: function get() {
+            return appEnabledString;
+        }
+    }, {
+        key: 'CHECK_WEB_STRING',
+        get: function get() {
+            return webEnabledString;
+        }
+    }, {
+        key: 'APP_URL',
+        get: function get() {
+            return appUrl;
         }
     }]);
-    return SoundManager;
+    return GameConfig;
 }();
 
-exports.default = SoundManager;
-
-
-SoundManager.instance = null;
+exports.default = GameConfig;
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1076,18 +1108,8 @@ var SoundAssetKey = function () {
 
     (0, _createClass3.default)(SoundAssetKey, null, [{
         key: 'GAME_INTRO',
-
-
-        /**
-         * NARRATION
-         */
         get: function get() {
             return 'gameIntro';
-        }
-    }, {
-        key: 'TUTOR_NARRATION_PREFIX',
-        get: function get() {
-            return 'tutorNarr_';
         }
     }, {
         key: 'tutorNarr_1',
@@ -1135,6 +1157,11 @@ var SoundAssetKey = function () {
             return 'btnSnd';
         }
     }, {
+        key: 'SELECTED_SOUND',
+        get: function get() {
+            return 'selectedSnd';
+        }
+    }, {
         key: 'START_SOUND',
         get: function get() {
             return 'sfx_start';
@@ -1145,129 +1172,44 @@ var SoundAssetKey = function () {
             return 'sfx_retry';
         }
     }, {
-        key: 'CHAPTER_COMPLETE_EFFECT',
+        key: 'INFO_SND',
         get: function get() {
-            return 'completeEffect';
+            return 'infoSnd';
         }
     }, {
-        key: 'BEEP',
+        key: 'DUST_ALL_REMOVE',
         get: function get() {
-            return 'beep';
+            return 'dustAllRemove';
         }
     }, {
-        key: 'CASH_SND_100',
+        key: 'CHAPTER_COMPLETE',
         get: function get() {
-            return 'cash_snd_100';
+            return 'chapterComplete';
         }
     }, {
-        key: 'CASH_SND_500',
+        key: 'DUST_TOUCH_1',
         get: function get() {
-            return 'cash_snd_500';
+            return 'dustTouch1';
         }
     }, {
-        key: 'CASH_SND_1000',
+        key: 'DUST_TOUCH_2',
         get: function get() {
-            return 'cash_snd_1000';
+            return 'dustTouch2';
         }
     }, {
-        key: 'CASH_SND_5000',
+        key: 'DUST_TOUCH_3',
         get: function get() {
-            return 'cash_snd_5000';
+            return 'dustTouch3';
         }
     }, {
-        key: 'CASH_SND_10000',
+        key: 'COMPLETE_MESSAGE_1',
         get: function get() {
-            return 'cash_snd_10000';
+            return 'completeMessage_1';
         }
     }, {
-        key: 'CASH_SND_AGAIN',
+        key: 'COMPLETE_MESSAGE_2',
         get: function get() {
-            return 'cash_snd_again';
-        }
-    }, {
-        key: 'CASH_SND_OVER_1',
-        get: function get() {
-            return 'cash_snd_over_1';
-        }
-    }, {
-        key: 'CASH_SND_OVER_2',
-        get: function get() {
-            return 'cash_snd_over_2';
-        }
-    }, {
-        key: 'CASH_SND_SHORTAGE',
-        get: function get() {
-            return 'cash_snd_shortage';
-        }
-    }, {
-        key: 'CASH_SND_COMPLETE',
-        get: function get() {
-            return 'cash_snd_complete';
-        }
-
-        /**
-         * GUIDE SOUND
-         */
-
-    }, {
-        key: 'GUIDE_SOUND_PREFIX',
-        get: function get() {
-            return 'guideNarr_';
-        }
-    }, {
-        key: 'guideNarr_1',
-        get: function get() {
-            return 'guideNarr_1';
-        }
-    }, {
-        key: 'guideNarr_2',
-        get: function get() {
-            return 'guideNarr_2';
-        }
-    }, {
-        key: 'guideNarr_3',
-        get: function get() {
-            return 'guideNarr_3';
-        }
-    }, {
-        key: 'guideNarr_4',
-        get: function get() {
-            return 'guideNarr_4';
-        }
-    }, {
-        key: 'guideNarr_5',
-        get: function get() {
-            return 'guideNarr_5';
-        }
-
-        /**
-         * CHAPTER COMPLETE SOUND
-         */
-
-    }, {
-        key: 'CHAPTER_COMPLETE_PREFIX',
-        get: function get() {
-            return 'chapterComplete_';
-        }
-    }, {
-        key: 'chapterComplete_1',
-        get: function get() {
-            return 'chapterComplete_1';
-        }
-    }, {
-        key: 'chapterComplete_2',
-        get: function get() {
-            return 'chapterComplete_2';
-        }
-    }, {
-        key: 'chapterComplete_3',
-        get: function get() {
-            return 'chapterComplete_3';
-        }
-    }, {
-        key: 'chapterComplete_4',
-        get: function get() {
-            return 'chapterComplete_4';
+            return 'completeMessage_2';
         }
 
         /**
@@ -1304,436 +1246,6 @@ var SoundAssetKey = function () {
         get: function get() {
             return 'sndSkip';
         }
-    }, {
-        key: 'BTNSND_REMOVECORNER_1',
-        get: function get() {
-            return 'btnSnd_removeCorner_1';
-        }
-    }, {
-        key: 'BTNSND_REMOVECORNER_2',
-        get: function get() {
-            return 'btnSnd_removeCorner_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_COUNTER_1',
-        get: function get() {
-            return 'btnSnd_corner_counter_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_COUNTER_2',
-        get: function get() {
-            return 'btnSnd_corner_counter_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_NOTYET_1',
-        get: function get() {
-            return 'btnSnd_corner_notYet_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_NOTYET_2',
-        get: function get() {
-            return 'btnSnd_corner_notYet_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_DAIRY_1',
-        get: function get() {
-            return 'btnSnd_corner_dairy_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_DAIRY_2',
-        get: function get() {
-            return 'btnSnd_corner_dairy_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_MEAT_1',
-        get: function get() {
-            return 'btnSnd_corner_meat_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_MEAT_2',
-        get: function get() {
-            return 'btnSnd_corner_meat_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_NECESSARY_1',
-        get: function get() {
-            return 'btnSnd_corner_necessary_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_NECESSARY_2',
-        get: function get() {
-            return 'btnSnd_corner_necessary_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_SEAFOOD_1',
-        get: function get() {
-            return 'btnSnd_corner_seafood_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_SEAFOOD_2',
-        get: function get() {
-            return 'btnSnd_corner_seafood_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_SNACK_1',
-        get: function get() {
-            return 'btnSnd_corner_snack_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_SNACK_2',
-        get: function get() {
-            return 'btnSnd_corner_snack_2';
-        }
-    }, {
-        key: 'BTNSND_CORNER_VEGETABLE_1',
-        get: function get() {
-            return 'btnSnd_corner_vegetable_1';
-        }
-    }, {
-        key: 'BTNSND_CORNER_VEGETABLE_2',
-        get: function get() {
-            return 'btnSnd_corner_vegetable_2';
-        }
-
-        /**
-         * OBJECT SOUND
-         */
-
-    }, {
-        key: 'OBJSND_DAIRY_BANANAMILK_1',
-        get: function get() {
-            return 'objSnd_dairy_bananaMilk_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_CHEESE_1',
-        get: function get() {
-            return 'objSnd_dairy_cheese_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_CHOCOLATEMILK_1',
-        get: function get() {
-            return 'objSnd_dairy_chocolateMilk_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_CHOCOLATEMILK_2',
-        get: function get() {
-            return 'objSnd_dairy_chocolateMilk_2';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_EGG_1',
-        get: function get() {
-            return 'objSnd_dairy_egg_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_MILK_1',
-        get: function get() {
-            return 'objSnd_dairy_milk_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_MILK_2',
-        get: function get() {
-            return 'objSnd_dairy_milk_2';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_STRAWBERRYMILK_1',
-        get: function get() {
-            return 'objSnd_dairy_strawberryMilk_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_STRAWBERRYMILK_2',
-        get: function get() {
-            return 'objSnd_dairy_strawberryMilk_2';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_YOGURT_1',
-        get: function get() {
-            return 'objSnd_dairy_yogurt_1';
-        }
-    }, {
-        key: 'OBJSND_DAIRY_YOGURT_2',
-        get: function get() {
-            return 'objSnd_dairy_yogurt_2';
-        }
-    }, {
-        key: 'OBJSND_MEAT_BACON_1',
-        get: function get() {
-            return 'objSnd_meat_bacon_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_BOILEDPORK_1',
-        get: function get() {
-            return 'objSnd_meat_boiledPork_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_BOILEDPORK_2',
-        get: function get() {
-            return 'objSnd_meat_boiledPork_2';
-        }
-    }, {
-        key: 'OBJSND_MEAT_CHICKEN_1',
-        get: function get() {
-            return 'objSnd_meat_chicken_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_CHICKEN_2',
-        get: function get() {
-            return 'objSnd_meat_chicken_2';
-        }
-    }, {
-        key: 'OBJSND_MEAT_DRUMSTICK_1',
-        get: function get() {
-            return 'objSnd_meat_drumstick_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_DRUMSTICK_2',
-        get: function get() {
-            return 'objSnd_meat_drumstick_2';
-        }
-    }, {
-        key: 'OBJSND_MEAT_SIRLOIN_1',
-        get: function get() {
-            return 'objSnd_meat_sirloin_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_SIRLOIN_2',
-        get: function get() {
-            return 'objSnd_meat_sirloin_2';
-        }
-    }, {
-        key: 'OBJSND_MEAT_TENDERLOIN_1',
-        get: function get() {
-            return 'objSnd_meat_tenderloin_1';
-        }
-    }, {
-        key: 'OBJSND_MEAT_TENDERLOIN_2',
-        get: function get() {
-            return 'objSnd_meat_tenderloin_2';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_BRUSH_1',
-        get: function get() {
-            return 'objSnd_necessary_brush_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_CLEANSER_1',
-        get: function get() {
-            return 'objSnd_necessary_cleanser_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_PASTE_1',
-        get: function get() {
-            return 'objSnd_necessary_paste_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_SHAMPOO_1',
-        get: function get() {
-            return 'objSnd_necessary_shampoo_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_SHAMPOO_2',
-        get: function get() {
-            return 'objSnd_necessary_shampoo_2';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_SOAP_1',
-        get: function get() {
-            return 'objSnd_necessary_soap_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_TISSUE_1',
-        get: function get() {
-            return 'objSnd_necessary_tissue_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_WETTISSUE_1',
-        get: function get() {
-            return 'objSnd_necessary_wetTissue_1';
-        }
-    }, {
-        key: 'OBJSND_NECESSARY_WETTISSUE_2',
-        get: function get() {
-            return 'objSnd_necessary_wetTissue_2';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_ABALONE_1',
-        get: function get() {
-            return 'objSnd_seafood_abalone_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_CRAB_1',
-        get: function get() {
-            return 'objSnd_seafood_crab_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_MACKEREL_1',
-        get: function get() {
-            return 'objSnd_seafood_mackerel_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_MACKEREL_2',
-        get: function get() {
-            return 'objSnd_seafood_mackerel_2';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_SHELL_1',
-        get: function get() {
-            return 'objSnd_seafood_shell_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_SHELL_2',
-        get: function get() {
-            return 'objSnd_seafood_shell_2';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_SHRIMP_1',
-        get: function get() {
-            return 'objSnd_seafood_shrimp_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_SQUID_1',
-        get: function get() {
-            return 'objSnd_seafood_squid_1';
-        }
-    }, {
-        key: 'OBJSND_SEAFOOD_SQUID_2',
-        get: function get() {
-            return 'objSnd_seafood_squid_2';
-        }
-    }, {
-        key: 'OBJSND_SNACK_CANDY_1',
-        get: function get() {
-            return 'objSnd_snack_candy_1';
-        }
-    }, {
-        key: 'OBJSND_SNACK_CANDY_2',
-        get: function get() {
-            return 'objSnd_snack_candy_2';
-        }
-    }, {
-        key: 'OBJSND_SNACK_CHOCOLATE_1',
-        get: function get() {
-            return 'objSnd_snack_chocolate_1';
-        }
-    }, {
-        key: 'OBJSND_SNACK_CHOCOLATE_2',
-        get: function get() {
-            return 'objSnd_snack_chocolate_2';
-        }
-    }, {
-        key: 'OBJSND_SNACK_ICECREAM_1',
-        get: function get() {
-            return 'objSnd_snack_iceCream_1';
-        }
-    }, {
-        key: 'OBJSND_SNACK_ICECREAM_2',
-        get: function get() {
-            return 'objSnd_snack_iceCream_2';
-        }
-    }, {
-        key: 'OBJSND_SNACK_JELLY_1',
-        get: function get() {
-            return 'objSnd_snack_jelly_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_APPLE_1',
-        get: function get() {
-            return 'objSnd_vegetable_apple_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_APPLE_2',
-        get: function get() {
-            return 'objSnd_vegetable_apple_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_CARROT_1',
-        get: function get() {
-            return 'objSnd_vegetable_carrot_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_CARROT_2',
-        get: function get() {
-            return 'objSnd_vegetable_carrot_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_GRAPE_1',
-        get: function get() {
-            return 'objSnd_vegetable_grape_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_GRAPE_2',
-        get: function get() {
-            return 'objSnd_vegetable_grape_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_ONION_1',
-        get: function get() {
-            return 'objSnd_vegetable_onion_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_ONION_2',
-        get: function get() {
-            return 'objSnd_vegetable_onion_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_RADISH_1',
-        get: function get() {
-            return 'objSnd_vegetable_radish_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_RADISH_2',
-        get: function get() {
-            return 'objSnd_vegetable_radish_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_STRAWBERRY_1',
-        get: function get() {
-            return 'objSnd_vegetable_strawberry_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_STRAWBERRY_2',
-        get: function get() {
-            return 'objSnd_vegetable_strawberry_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_SWEETPOTATO_1',
-        get: function get() {
-            return 'objSnd_vegetable_sweetPotato_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_SWEETPOTATO_2',
-        get: function get() {
-            return 'objSnd_vegetable_sweetPotato_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_SWEETPOTATO_3',
-        get: function get() {
-            return 'objSnd_vegetable_sweetPotato_3';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_WELSHONION_1',
-        get: function get() {
-            return 'objSnd_vegetable_welshonion_1';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_WELSHONION_2',
-        get: function get() {
-            return 'objSnd_vegetable_welshonion_2';
-        }
-    }, {
-        key: 'OBJSND_VEGETABLE_WELSHONION_3',
-        get: function get() {
-            return 'objSnd_vegetable_welshonion_3';
-        }
-    }, {
-        key: 'OBJSND_WRONG_1',
-        get: function get() {
-            return 'objSnd_wrong_1';
-        }
-    }, {
-        key: 'OBJSND_WRONG_2',
-        get: function get() {
-            return 'objSnd_wrong_2';
-        }
 
         /**
          * RESULT PAGE
@@ -1744,40 +1256,16 @@ var SoundAssetKey = function () {
         get: function get() {
             return 'result_good';
         }
+    }, {
+        key: 'RESULT_GREAT',
+        get: function get() {
+            return 'result_great';
+        }
     }]);
     return SoundAssetKey;
 }();
 
 exports.default = SoundAssetKey;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(66), __esModule: true };
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof2 = __webpack_require__(51);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
-};
 
 /***/ }),
 /* 8 */
@@ -1786,37 +1274,183 @@ exports.default = function (self, call) {
 "use strict";
 
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-var _setPrototypeOf = __webpack_require__(95);
+var _classCallCheck2 = __webpack_require__(0);
 
-var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _create = __webpack_require__(99);
+var _createClass2 = __webpack_require__(1);
 
-var _create2 = _interopRequireDefault(_create);
+var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _typeof2 = __webpack_require__(51);
+var _GameConfig = __webpack_require__(6);
 
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
-  }
+/**
+ * Created by naver on 2020. 02. 27.
+ */
 
-  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
+var SoundManager = function () {
+    function SoundManager(game) {
+        (0, _classCallCheck3.default)(this, SoundManager);
+
+        SoundManager.instance = this;
+        this._game = game;
+        this._queue = {};
     }
-  });
-  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
-};
+
+    (0, _createClass3.default)(SoundManager, [{
+        key: "intro",
+        value: function intro() {
+
+            if (_GameConfig2.default.INTRO_SND_PLAY) {
+                _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.GAME_INTRO;
+                this.introSound(_SoundAssetKey2.default.GAME_INTRO, 0.8);
+                _GameConfig2.default.INTRO_SND_PLAY = false;
+            }
+        }
+    }, {
+        key: "introSound",
+        value: function introSound(key, volume) {
+            // if(! GameConfig.SOUND_ENABLED) return;
+            this._queue[key] = {
+                snd: this._game.make.audio(key, volume),
+                volume: volume
+            };
+
+            this._queue[key].snd.play();
+            this._queue[key].snd.onStop.add(this.introClose, this);
+        }
+    }, {
+        key: "introClose",
+        value: function introClose() {
+            var volume = void 0;
+            if (_GameConfig2.default.SOUND_ENABLED) volume = 0.8;else volume = _GameConfig2.default.MUTE_SOUND_VOLUME;
+            this.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, volume, true);
+        }
+    }, {
+        key: "bgmSoundStart",
+        value: function bgmSoundStart() {
+            var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+
+            /* if(! GameConfig.SOUND_ENABLED) return;
+             let key = SoundAssetKey.MAIN_BGM;
+             let volume = 0.8;
+             this._queue[key] = {
+                 snd: this._game.make.audio(key, volume),
+                 volume: volume,
+             };
+               this._queue[key].snd.loopFull();
+             this._queue[key].snd.play();*/
+
+            var volume = 0.8;
+            if (!_GameConfig2.default.SOUND_ENABLED) {
+                volume = _GameConfig2.default.MUTE_SOUND_VOLUME;
+            }
+            var key = _SoundAssetKey2.default.MAIN_BGM;
+
+            this._queue[key] = {
+                snd: this._game.make.audio(key, volume),
+                volume: volume
+            };
+
+            this._queue[key].snd.loopFull();
+            this._queue[key].snd.play();
+        }
+    }, {
+        key: "effectRemove",
+        value: function effectRemove(key) {
+            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+
+
+            if (this._queue[key]) {
+
+                if (this._queue[key].snd.isPlaying) {
+                    this._queue[key].snd.stop();
+                }
+            }
+        }
+    }, {
+        key: "effectSound",
+        value: function effectSound(key) {
+            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+
+
+            if (!_GameConfig2.default.SOUND_ENABLED) return;
+
+            if (this._queue[key]) {
+
+                if (this._queue[key].snd.isPlaying) {
+                    this._queue[key].snd.stop();
+                }
+            } else {
+                this._queue[key] = {
+                    snd: this._game.make.audio(key, volume),
+                    volume: volume
+                };
+            }
+
+            this._queue[key].snd.play();
+        }
+    }, {
+        key: "effectSoundStop",
+        value: function effectSoundStop(key) {
+            var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+            var bgm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+            var remove = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+            if (this._queue[key]) {
+                if (this._queue[key].snd.isPlaying) {
+                    if (remove) {
+                        this._queue[key].snd.stop();
+                        return;
+                    }
+                    this._queue[key].snd.volume = volume;
+                } else {
+                    if (bgm && key === _SoundAssetKey2.default.MAIN_BGM) this._queue[key].snd.play();
+                }
+            } else {
+                if (bgm && key === _SoundAssetKey2.default.MAIN_BGM) this.bgmSoundStart();
+            }
+        }
+
+        //BG-> FG 프리징 이슈로 ANDROID && NAVER APP일 경우 활성화
+
+    }, {
+        key: "browserCheck",
+        value: function browserCheck() {
+            return this._game.device.android && navigator.userAgent.indexOf('NAVER(inapp') !== -1;
+        }
+    }, {
+        key: "allSoundPause",
+        value: function allSoundPause() {
+            // this._game.sound.pauseAll();
+        }
+    }, {
+        key: "allSoundPauseEnding",
+        value: function allSoundPauseEnding() {
+            this._game.sound.pauseAll();
+        }
+    }]);
+    return SoundManager;
+}();
+
+exports.default = SoundManager;
+
+
+SoundManager.instance = null;
 
 /***/ }),
 /* 9 */
@@ -1840,6 +1474,102 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var thisAssetKey = void 0;
+var thisAssetName = void 0;
+var thisRate = void 0;
+var thisLoop = void 0;
+
+var thisAni = void 0;
+
+var SeparateAnimation = function (_Phaser$Image) {
+    (0, _inherits3.default)(SeparateAnimation, _Phaser$Image);
+
+    function SeparateAnimation(game, assetKey, assetName, xPos, yPos, start, stop, suffix, zeroPad) {
+        var desireRate = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 10;
+        var loop = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : true;
+        (0, _classCallCheck3.default)(this, SeparateAnimation);
+
+        //this.anchor.setTo(0.5, 0.5);
+        var _this = (0, _possibleConstructorReturn3.default)(this, (SeparateAnimation.__proto__ || (0, _getPrototypeOf2.default)(SeparateAnimation)).call(this, game, 0, 0, assetKey));
+
+        thisAssetKey = assetKey;
+        thisAssetName = assetName;
+        thisRate = desireRate;
+        thisLoop = loop;
+        thisAni = _this.animations.add(assetName, Phaser.Animation.generateFrameNames(assetName, start, stop, suffix, zeroPad), desireRate, loop);
+        _this.animations.play(assetName, desireRate, loop);
+        _this.x = xPos;
+        _this.y = yPos;
+
+        return _this;
+    }
+
+    (0, _createClass3.default)(SeparateAnimation, [{
+        key: "_stop",
+        value: function _stop() {
+            thisAni.stop(null, true);
+        }
+    }, {
+        key: "_play",
+        value: function _play() {
+            thisAni.play();
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this.animations.destroy();
+        }
+    }]);
+    return SeparateAnimation;
+}(Phaser.Image);
+
+exports.default = SeparateAnimation;
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 var hasOwnProperty = {}.hasOwnProperty;
@@ -1849,15 +1579,15 @@ module.exports = function (it, key) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(20);
-var IE8_DOM_DEFINE = __webpack_require__(49);
-var toPrimitive = __webpack_require__(31);
+var IE8_DOM_DEFINE = __webpack_require__(47);
+var toPrimitive = __webpack_require__(30);
 var dP = Object.defineProperty;
 
-exports.f = __webpack_require__(13) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+exports.f = __webpack_require__(14) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
   anObject(O);
   P = toPrimitive(P, true);
   anObject(Attributes);
@@ -1871,7 +1601,7 @@ exports.f = __webpack_require__(13) ? Object.defineProperty : function definePro
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
@@ -1881,14 +1611,14 @@ module.exports = !__webpack_require__(21)(function () {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(10);
 var core = __webpack_require__(9);
-var ctx = __webpack_require__(48);
-var hide = __webpack_require__(15);
-var has = __webpack_require__(11);
+var ctx = __webpack_require__(46);
+var hide = __webpack_require__(16);
+var has = __webpack_require__(12);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -1949,12 +1679,12 @@ module.exports = $export;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(12);
-var createDesc = __webpack_require__(25);
-module.exports = __webpack_require__(13) ? function (object, key, value) {
+var dP = __webpack_require__(13);
+var createDesc = __webpack_require__(24);
+module.exports = __webpack_require__(14) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
   object[key] = value;
@@ -1963,7 +1693,7 @@ module.exports = __webpack_require__(13) ? function (object, key, value) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -1972,23 +1702,23 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(76);
-var defined = __webpack_require__(28);
+var IObject = __webpack_require__(70);
+var defined = __webpack_require__(27);
 module.exports = function (it) {
   return IObject(defined(it));
 };
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store = __webpack_require__(30)('wks');
-var uid = __webpack_require__(24);
+var store = __webpack_require__(29)('wks');
+var uid = __webpack_require__(23);
 var Symbol = __webpack_require__(10).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -2001,74 +1731,10 @@ $exports.store = store;
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _StarEffect = __webpack_require__(113);
-
-var _StarEffect2 = _interopRequireDefault(_StarEffect);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var BackGroundTouchEffect = function () {
-    function BackGroundTouchEffect(game) {
-        (0, _classCallCheck3.default)(this, BackGroundTouchEffect);
-
-        BackGroundTouchEffect.instance = this;
-    }
-
-    (0, _createClass3.default)(BackGroundTouchEffect, [{
-        key: "effect",
-        value: function effect(game, xPos, yPos, radius) {
-            var type = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-            var soundAsset = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _SoundAssetKey2.default.BASIC_TOUCH_SOUND;
-
-            if (!_GameConfig2.default.IN_GAME) return;
-            _SoundManager2.default.instance.effectSound(soundAsset, 0.4);
-            new _StarEffect2.default(game, xPos, yPos, _AssetKey2.default.DEFAULT_GAME_ATLAS, 'intro_twinkle', radius);
-        }
-    }]);
-    return BackGroundTouchEffect;
-}();
-
-exports.default = BackGroundTouchEffect;
-
-/***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
@@ -2090,118 +1756,13 @@ module.exports = function (exec) {
 
 /***/ }),
 /* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(8);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _WaterSprayEffect = __webpack_require__(112);
-
-var _WaterSprayEffect2 = _interopRequireDefault(_WaterSprayEffect);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var thisAssetKey = void 0,
-    thisAssetName = void 0,
-    thisRate = void 0,
-    thisLoop = void 0,
-    thisAni = void 0,
-    thisSubAni = void 0;
-
-var SeparateAnimation = function (_Phaser$Sprite) {
-    (0, _inherits3.default)(SeparateAnimation, _Phaser$Sprite);
-
-    function SeparateAnimation(game, assetKey, assetName, xPos, yPos, start, stop, suffix, zeroPad) {
-        var desireRate = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 10;
-        var loop = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : true;
-        (0, _classCallCheck3.default)(this, SeparateAnimation);
-
-        // this.anchor.setTo(0.5, 0.5);
-        var _this = (0, _possibleConstructorReturn3.default)(this, (SeparateAnimation.__proto__ || (0, _getPrototypeOf2.default)(SeparateAnimation)).call(this, game, 0, 0, assetKey));
-
-        _this._game = game;
-        thisAssetKey = assetKey;
-        thisAssetName = assetName;
-        thisRate = desireRate;
-        thisLoop = loop;
-        thisAni = _this.animations.add(assetName, Phaser.Animation.generateFrameNames(assetName, start, stop, suffix, zeroPad), desireRate, loop);
-        // this.animations.play(assetName, desireRate);
-        _this._stop();
-        _this.x = xPos;
-        _this.y = yPos;
-        return _this;
-    }
-
-    (0, _createClass3.default)(SeparateAnimation, [{
-        key: "_stop",
-        value: function _stop() {
-            thisAni.stop(true);
-        }
-    }, {
-        key: "_play",
-        value: function _play() {
-            thisAni.play();
-        }
-    }, {
-        key: "_frameChange",
-        value: function _frameChange(assetName, start, stop, suffix, zeroPad, desireRate, loop) {
-            thisAni = this.animations.add(assetName, Phaser.Animation.generateFrameNames(assetName, start, stop, suffix, zeroPad), desireRate, loop);
-            thisAni.play();
-        }
-    }, {
-        key: "_frameAdd",
-        value: function _frameAdd(assetName, start, stop, suffix, zeroPad, desireRate, loop) {
-            thisSubAni = this.animations.add(assetName, Phaser.Animation.generateFrameNames(assetName, start, stop, suffix, zeroPad), desireRate, loop);
-            thisSubAni.play();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this.animations.destroy();
-        }
-    }]);
-    return SeparateAnimation;
-}(Phaser.Sprite);
-
-exports.default = SeparateAnimation;
-
-/***/ }),
-/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = true;
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 var id = 0;
@@ -2212,7 +1773,7 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function (bitmap, value) {
@@ -2226,7 +1787,7 @@ module.exports = function (bitmap, value) {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2427,18 +1988,18 @@ var ScreenManager = function () {
 exports.default = ScreenManager;
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(28);
+var defined = __webpack_require__(27);
 module.exports = function (it) {
   return Object(defined(it));
 };
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 // 7.2.1 RequireObjectCoercible(argument)
@@ -2449,18 +2010,18 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var shared = __webpack_require__(30)('keys');
-var uid = __webpack_require__(24);
+var shared = __webpack_require__(29)('keys');
+var uid = __webpack_require__(23);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var core = __webpack_require__(9);
@@ -2472,17 +2033,17 @@ var store = global[SHARED] || (global[SHARED] = {});
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
   version: core.version,
-  mode: __webpack_require__(23) ? 'pure' : 'global',
+  mode: __webpack_require__(22) ? 'pure' : 'global',
   copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 module.exports = function (it, S) {
@@ -2496,7 +2057,7 @@ module.exports = function (it, S) {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports) {
 
 // 7.1.4 ToInteger
@@ -2508,34 +2069,34 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = __webpack_require__(20);
-var dPs = __webpack_require__(75);
-var enumBugKeys = __webpack_require__(36);
-var IE_PROTO = __webpack_require__(29)('IE_PROTO');
+var dPs = __webpack_require__(69);
+var enumBugKeys = __webpack_require__(35);
+var IE_PROTO = __webpack_require__(28)('IE_PROTO');
 var Empty = function () { /* empty */ };
 var PROTOTYPE = 'prototype';
 
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function () {
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(50)('iframe');
+  var iframe = __webpack_require__(48)('iframe');
   var i = enumBugKeys.length;
   var lt = '<';
   var gt = '>';
   var iframeDocument;
   iframe.style.display = 'none';
-  __webpack_require__(80).appendChild(iframe);
+  __webpack_require__(74).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -2562,12 +2123,12 @@ module.exports = Object.create || function create(O, Properties) {
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(54);
-var enumBugKeys = __webpack_require__(36);
+var $keys = __webpack_require__(52);
+var enumBugKeys = __webpack_require__(35);
 
 module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
@@ -2575,7 +2136,7 @@ module.exports = Object.keys || function keys(O) {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
@@ -2585,12 +2146,12 @@ module.exports = (
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var def = __webpack_require__(12).f;
-var has = __webpack_require__(11);
-var TAG = __webpack_require__(18)('toStringTag');
+var def = __webpack_require__(13).f;
+var has = __webpack_require__(12);
+var TAG = __webpack_require__(19)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -2598,21 +2159,21 @@ module.exports = function (it, tag, stat) {
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(18);
+exports.f = __webpack_require__(19);
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(10);
 var core = __webpack_require__(9);
-var LIBRARY = __webpack_require__(23);
-var wksExt = __webpack_require__(38);
-var defineProperty = __webpack_require__(12).f;
+var LIBRARY = __webpack_require__(22);
+var wksExt = __webpack_require__(37);
+var defineProperty = __webpack_require__(13).f;
 module.exports = function (name) {
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
@@ -2620,14 +2181,14 @@ module.exports = function (name) {
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2674,7 +2235,7 @@ exports.default = ResourceKey;
 ResourceKey.data = null;
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2762,7 +2323,7 @@ var GameInfo = function () {
 exports.default = GameInfo;
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2780,15 +2341,15 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _SoundManager = __webpack_require__(4);
+var _SoundManager = __webpack_require__(8);
 
 var _SoundManager2 = _interopRequireDefault(_SoundManager);
 
-var _GameConfig = __webpack_require__(2);
+var _GameConfig = __webpack_require__(6);
 
 var _GameConfig2 = _interopRequireDefault(_GameConfig);
 
-var _SoundAssetKey = __webpack_require__(5);
+var _SoundAssetKey = __webpack_require__(7);
 
 var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
 
@@ -2810,7 +2371,7 @@ var SceneManager = function () {
 
             if (_GameConfig2.default.SCENE_STATE === 'mainScene') {
                 _GameConfig2.default.IN_GAME = true;
-                // this.scene._objectReplay();
+                this.scene._objectReplay();
             } else {
 
                 this.scene._init();
@@ -2818,7 +2379,7 @@ var SceneManager = function () {
 
             _GameConfig2.default.POP_ENABLED = false;
             _GameConfig2.default.MAIN_CONTROLLER._btnEnabled();
-            if (_GameConfig2.default.SOUND_ENABLED) _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.BGM_VOLUME, true, false);
+            if (_GameConfig2.default.SOUND_ENABLED) _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, 0.6, true);
         }
     }, {
         key: "_destroy",
@@ -2826,9 +2387,10 @@ var SceneManager = function () {
 
             this._sceneCheck();
 
-            _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME, true, false);
+            _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME);
+
             if (_GameConfig2.default.SCENE_STATE === 'mainScene') {
-                // this.scene._objectPause();
+                this.scene._objectPause();
             } else {
                 this.scene._destroy();
             }
@@ -2846,6 +2408,104 @@ var SceneManager = function () {
 }();
 
 exports.default = SceneManager;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var effectAsset = void 0;
+
+var MouseEffect = function () {
+    function MouseEffect(game, xPos, yPos) {
+        var radius = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 40;
+        var type = arguments[4];
+        (0, _classCallCheck3.default)(this, MouseEffect);
+
+        this.game = game;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.radius = radius;
+        effectAsset = type;
+
+        this._create();
+    }
+
+    (0, _createClass3.default)(MouseEffect, [{
+        key: "_create",
+        value: function _create() {
+
+            for (var i = 0; i < 10; i++) {
+                var img = this.game.add.image(0, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS, _AssetKey2.default.MOUSE_EFFECT_IMAGE);
+                if (effectAsset === 1) {
+                    img.scale.setTo(0.6, 0.6);
+                }
+                this.showEffect(img, this.xPos, this.yPos, i);
+            }
+        }
+    }, {
+        key: "showEffect",
+        value: function showEffect(sprite, x, y, i) {
+            var ix = x;
+            var iy = y;
+            // let rndPositionAngle = Math.random()*240 - 30;   // 위치 각도
+            // let rndPositionAngle = (Math.random() * 4/3 * Math.PI) + (5/6 * Math.PI) ;   // 위치 각도 0~240 - 150
+            var rndPositionAngle = Math.random() * 1 / 4 * Math.PI + 1 / 4 * Math.PI * i; // 위치 각도
+            var rndAlphabetAngle = Math.random() * 15; // 알파벳 각도
+            var rndRadius = Math.random() * 30 + this.radius;
+            // let rndRadius = 50;
+
+            // console.log(rndPositionAngle);
+
+            sprite.alpha = 1;
+            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
+            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
+
+            if (rndRadius * Math.cos(rndPositionAngle) < 0) {
+                sprite.angle = rndAlphabetAngle * -1;
+            } else {
+                sprite.angle = rndAlphabetAngle;
+            }
+
+            var tween0 = this.game.add.tween(sprite);
+            // tween0.from({alpha: 0.7}, 200, Phaser.Easing.Linear.In, true, 0);
+            tween0.from({ alpha: 0.7, x: x, y: y }, 500, Phaser.Easing.Linear.In, true, 0);
+
+            var tween1 = this.game.add.tween(sprite);
+            tween1.to({ alpha: 0 }, 300, Phaser.Easing.Linear.In, true, 200);
+            tween1.onComplete.add(function () {
+                //sprite.kill();
+                sprite.destroy();
+            }, this);
+
+            var tween2 = this.game.add.tween(sprite.scale);
+            tween2.to({ x: 0.5, y: 0.5 }, 300, Phaser.Easing.Linear.Out, true, 200);
+        }
+    }]);
+    return MouseEffect;
+}();
+
+exports.default = MouseEffect;
 
 /***/ }),
 /* 44 */
@@ -2866,7 +2526,7 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _GameConfig = __webpack_require__(2);
+var _GameConfig = __webpack_require__(6);
 
 var _GameConfig2 = _interopRequireDefault(_GameConfig);
 
@@ -2902,393 +2562,10 @@ exports.default = WebEnabledCheck;
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _SeparateAnimation = __webpack_require__(22);
-
-var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
-
-var _BackGroundTouchEffect = __webpack_require__(19);
-
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
-
-var _ScreenManager = __webpack_require__(26);
-
-var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
-
-var _IntroEffect = __webpack_require__(117);
-
-var _IntroEffect2 = _interopRequireDefault(_IntroEffect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _objectArray = [{ category: 'ppiyo', xPos: 857, yPos: 343, key: _AssetKey2.default.INTRO_ASSET, total: 2, fps: 4 }, { category: 'cart', xPos: 74, yPos: 355, key: _AssetKey2.default.INTRO_ASSET, total: 2, fps: 2 }];
-
-var _imgArray = [{ category: 'cloudA', xPos: 56, yPos: 105, key: _AssetKey2.default.INTRO_ASSET }, { category: 'cloudB', xPos: 1037, yPos: 190, key: _AssetKey2.default.INTRO_ASSET }];
-
-var Intro = function () {
-    function Intro(game) {
-        var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        (0, _classCallCheck3.default)(this, Intro);
-
-
-        this._game = game;
-        // this._dispatcher = dispatcher;
-        this._parent = parent;
-        this._gameGroup = this._game.add.group();
-        this.starEffect = null;
-
-        if (_GameConfig2.default.SCENE_STATE === 'intro') this._init();
-    }
-
-    (0, _createClass3.default)(Intro, [{
-        key: "_init",
-        value: function _init() {
-            var _this = this;
-
-            //BG
-            this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_BG);
-            // this.bg.inputEnabled = true;
-            this.bg.events.onInputDown.add(function () {
-                _BackGroundTouchEffect2.default.instance.effect(_this._game, _this._game.input.x, _this._game.input.y, 50, 1);
-            });
-            this._gameGroup.addChild(this.bg);
-            this.bg.inputEnabled = true;
-
-            //BUTTON
-            this.startBtn = this._gameGroup.addChild(this._game.make.button(486, 543, _AssetKey2.default.BTN_ASSET, this._gameStart.bind(this), this, _AssetKey2.default.START_BUTTON, _AssetKey2.default.START_BUTTON, _AssetKey2.default.START_BUTTON));
-
-            //OBJECT
-            for (var obj in _imgArray) {
-                var asset = 'intro_' + _imgArray[obj].category;
-                var img = new Phaser.Image(this._game, _imgArray[obj].xPos, _imgArray[obj].yPos, _imgArray[obj].key, asset);
-                this._gameGroup.addChild(img);
-                img.anchor.setTo(0.5, 0.5);
-                img.x += img.width / 2;
-                img.y += img.height / 2;
-                var rN = this._game.rnd.between(100, 300);
-                this._game.add.tween(img.scale).to({ x: 0.9, y: 0.9 }, rN * 50, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                this._game.add.tween(img).to({ x: img.x + rN }, rN * 100, Phaser.Easing.Linear.None, true, 0, 1000, true);
-            }
-
-            //TITLE
-
-            var title = new Phaser.Image(this._game, 260, 11, _AssetKey2.default.INTRO_ASSET, 'intro_title');
-            this._gameGroup.addChild(title);
-            title.anchor.setTo(0.5, 0.5);
-            title.x += title.width / 2;
-            title.y += title.height / 2;
-            this._game.add.tween(title.scale).to({ x: 1.02, y: 1.02 }, 1000, Phaser.Easing.Quartic.Out, true, 0, 10000, true);
-
-            //ANIMATION
-            for (var _obj in _objectArray) {
-                var _asset = 'intro_' + _objectArray[_obj].category + '_';
-                // console.log(asset)
-                var total = _objectArray[_obj].total;
-                var animal = new _SeparateAnimation2.default(this._game, _objectArray[_obj].key, _asset, _objectArray[_obj].xPos, _objectArray[_obj].yPos, 1, total, '', 0, _objectArray[_obj].fps);
-                this._gameGroup.addChild(animal);
-                animal._play();
-            }
-        }
-
-        /**
-         * GAME START
-         */
-
-    }, {
-        key: "_gameStart",
-        value: function _gameStart() {
-
-            _SoundManager2.default.instance.allSoundPauseEnding();
-            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.START_SOUND);
-            _SoundManager2.default.instance.effectSoundRemove(_SoundAssetKey2.default.GAME_INTRO);
-            _GameConfig2.default.TUTORIAL_DISABLED = true;
-            this.startBtn.input.enabled = false;
-            this._game.time.events.add(1200, enabled, this);
-
-            /*if(!this._game.device.desktop && this._game.device.fullscreen){
-                ScreenManager.instance.fullScreen();
-            }*/
-
-            function enabled() {
-                this._game.time.events.removeAll();
-                // if(GameConfig.SCENE_STATE === 'intro') this._dispatcher.dispatch();
-                _GameConfig2.default.TUTORIAL_DISABLED = false;
-                this._parent._create();
-            }
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._game.time.events.removeAll();
-        }
-    }]);
-    return Intro;
-}();
-
-exports.default = Intro;
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(8);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _BackgroundEffect = __webpack_require__(135);
-
-var _BackgroundEffect2 = _interopRequireDefault(_BackgroundEffect);
-
-var _ConfigManager = __webpack_require__(63);
-
-var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
-
-var _SeparateAnimation = __webpack_require__(22);
-
-var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
-
-var _BackGroundTouchEffect = __webpack_require__(19);
-
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
-
-var _WebEnabledCheck = __webpack_require__(44);
-
-var _WebEnabledCheck2 = _interopRequireDefault(_WebEnabledCheck);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _objectArray = [{ category: 'cart', xPos: 45, yPos: 337, key: _AssetKey2.default.RESULT_ASSET, fps: 2 }, { category: 'ppiyo', xPos: 842, yPos: 350, key: _AssetKey2.default.RESULT_ASSET, fps: 3 }];
-
-var _starArray = [{ xPos: 451, yPos: 97, key: _AssetKey2.default.RESULT_ASSET }, { xPos: 583, yPos: 75, key: _AssetKey2.default.RESULT_ASSET }, { xPos: 713, yPos: 97, key: _AssetKey2.default.RESULT_ASSET }];
-
-var ResultView = function (_Phaser$Group) {
-    (0, _inherits3.default)(ResultView, _Phaser$Group);
-
-    function ResultView(game, parent) {
-        (0, _classCallCheck3.default)(this, ResultView);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (ResultView.__proto__ || (0, _getPrototypeOf2.default)(ResultView)).call(this, game));
-
-        _this._game = game;
-        _this._gameGroup = _this._game.add.group();
-        // this._dispatcher = dispatcher;
-        _this._parent = parent;
-
-        _GameConfig2.default.POP_ENABLED = true;
-        _GameConfig2.default.SCENE_STATE = "result";
-        _this.effect = null;
-        _this._init();
-        _this._webCheck();
-
-        return _this;
-    }
-
-    (0, _createClass3.default)(ResultView, [{
-        key: "_webCheck",
-        value: function _webCheck() {
-            _WebEnabledCheck2.default.instance.backBtnEnabled(this.closeBtn);
-        }
-    }, {
-        key: "_init",
-        value: function _init() {
-
-            // console.log("result");
-            this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.RESULT_BG);
-            /* this.bg.inputEnabled = true;
-             this.bg.events.onInputDown.add( () => {
-                 BackGroundTouchEffect.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
-             });*/
-            this._gameGroup.addChild(this.bg);
-
-            /**
-             * BUTTON
-             */
-            this.closeBtn = this._gameGroup.add(this._game.make.button(0, 0, _AssetKey2.default.BTN_ASSET, this._onClose.bind(this), this, _AssetKey2.default.BTN_CLOSE_DEFAULT, _AssetKey2.default.BTN_CLOSE_DEFAULT, _AssetKey2.default.BTN_CLOSE_OVER));
-            this.closeBtn.x = this._game.width - this.closeBtn.width - 217;
-            this.closeBtn.y = 178;
-            this.closeBtnSound = null;
-            this._buttonSndEnabled(_SoundAssetKey2.default.SND_CLOSE, this.closeBtnSound, this.closeBtn);
-
-            this.restartBtn = this._gameGroup.add(this._game.make.button(0, 0, _AssetKey2.default.BTN_ASSET, this._onRestart.bind(this), this, _AssetKey2.default.RETRY_BUTTON, _AssetKey2.default.RETRY_BUTTON, _AssetKey2.default.RETRY_BUTTON_OVER));
-            this.restartBtn.x = 500;
-            this.restartBtn.y = 495;
-            this.restartBtnSound = null;
-            this._buttonSndEnabled(_SoundAssetKey2.default.RESTART_SOUND, this.restartBtnSound, this.restartBtn);
-
-            /* //STAR SET
-             for(let obj in _starArray)
-             {
-                 let asset = 'result_staron_' + Number(Number(obj) + 1);
-                 let star = new Phaser.Image(this._game, _starArray[obj].xPos, _starArray[obj].yPos, _starArray[obj].key, asset);
-                 this._gameGroup.addChild(star);
-             }*/
-
-            //TEXT
-            // let text = new Phaser.Image(this._game, 406, 336, AssetKey.RESULT_ASSET, 'result_text');
-            // this._gameGroup.addChild(text);
-
-            //EFFECT
-            this._effectInit();
-
-            //ANIMATION
-            this._characterAnimation();
-        }
-    }, {
-        key: "_characterAnimation",
-        value: function _characterAnimation() {
-
-            //JUNI & MONKEY
-            for (var obj in _objectArray) {
-                var asset = 'result_' + _objectArray[obj].category + '_';
-                // console.log(asset)
-                var animal = new _SeparateAnimation2.default(this._game, _objectArray[obj].key, asset, _objectArray[obj].xPos, _objectArray[obj].yPos, 1, 2, '', 0, _objectArray[obj].fps);
-                this._gameGroup.addChild(animal);
-                animal._play();
-            }
-        }
-    }, {
-        key: "_effectInit",
-        value: function _effectInit() {
-
-            if (_GameConfig2.default.SCENE_STATE === "result") {
-
-                /**
-                 *
-                 * CELEBARTION EFFECT
-                 * @type {BackgroundEffect}
-                 */
-                this.effect = new _BackgroundEffect2.default(this._game);
-                this.backGroup = new _BackgroundEffect2.default(this._game);
-                this._gameGroup.addChild(this.backGroup);
-
-                _SoundManager2.default.instance.allSoundPauseEnding();
-                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.RESULT_GOOD);
-            }
-        }
-    }, {
-        key: "_buttonSndEnabled",
-        value: function _buttonSndEnabled(sndKey, snd, btn) {
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            snd = this._game.add.audio(sndKey);
-            btn.setDownSound(snd);
-        }
-    }, {
-        key: "_onClose",
-        value: function _onClose() {
-            this._disabledBtn();
-            this._game.time.events.add(400, close, this);
-            // let str =location.href;
-            // let idx = str.indexOf(GameConfig.CHECK_APP_STRING);
-            function close() {
-                // if(idx !== -1) top.location.href = GameConfig.APP_URL;
-                // else window.history.back();
-                top.location.href = _GameConfig2.default.APP_URL;
-            }
-        }
-    }, {
-        key: "_onRestart",
-        value: function _onRestart() {
-            this._disabledBtn();
-            this._game.time.events.add(1000, enabled, this);
-
-            function enabled() {
-                if (this.effect) this.effect._remove();
-                _SoundManager2.default.instance.allSoundPauseEnding();
-                this._gameGroup.removeChildren(0, this._gameGroup.length);
-                _ConfigManager2.default.prototype.GAME_CONFIG_RESET();
-                this._parent._create();
-            }
-        }
-    }, {
-        key: "_disabledBtn",
-        value: function _disabledBtn() {
-            this.closeBtn.input.enabled = false;
-            this.restartBtn.input.enabled = false;
-        }
-    }]);
-    return ResultView;
-}(Phaser.Group);
-
-exports.default = ResultView;
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(11);
-var toObject = __webpack_require__(27);
-var IE_PROTO = __webpack_require__(29)('IE_PROTO');
+var has = __webpack_require__(12);
+var toObject = __webpack_require__(26);
+var IE_PROTO = __webpack_require__(28)('IE_PROTO');
 var ObjectProto = Object.prototype;
 
 module.exports = Object.getPrototypeOf || function (O) {
@@ -3301,11 +2578,11 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 48 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(69);
+var aFunction = __webpack_require__(63);
 module.exports = function (fn, that, length) {
   aFunction(fn);
   if (that === undefined) return fn;
@@ -3327,19 +2604,19 @@ module.exports = function (fn, that, length) {
 
 
 /***/ }),
-/* 49 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(13) && !__webpack_require__(21)(function () {
-  return Object.defineProperty(__webpack_require__(50)('div'), 'a', { get: function () { return 7; } }).a != 7;
+module.exports = !__webpack_require__(14) && !__webpack_require__(21)(function () {
+  return Object.defineProperty(__webpack_require__(48)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
 /***/ }),
-/* 50 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 var document = __webpack_require__(10).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
@@ -3349,7 +2626,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3357,11 +2634,11 @@ module.exports = function (it) {
 
 exports.__esModule = true;
 
-var _iterator = __webpack_require__(70);
+var _iterator = __webpack_require__(64);
 
 var _iterator2 = _interopRequireDefault(_iterator);
 
-var _symbol = __webpack_require__(85);
+var _symbol = __webpack_require__(79);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -3376,20 +2653,20 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 };
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(23);
-var $export = __webpack_require__(14);
-var redefine = __webpack_require__(53);
-var hide = __webpack_require__(15);
-var Iterators = __webpack_require__(33);
-var $iterCreate = __webpack_require__(74);
-var setToStringTag = __webpack_require__(37);
-var getPrototypeOf = __webpack_require__(47);
-var ITERATOR = __webpack_require__(18)('iterator');
+var LIBRARY = __webpack_require__(22);
+var $export = __webpack_require__(15);
+var redefine = __webpack_require__(51);
+var hide = __webpack_require__(16);
+var Iterators = __webpack_require__(32);
+var $iterCreate = __webpack_require__(68);
+var setToStringTag = __webpack_require__(36);
+var getPrototypeOf = __webpack_require__(45);
+var ITERATOR = __webpack_require__(19)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -3452,20 +2729,20 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(15);
+module.exports = __webpack_require__(16);
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(11);
-var toIObject = __webpack_require__(17);
-var arrayIndexOf = __webpack_require__(77)(false);
-var IE_PROTO = __webpack_require__(29)('IE_PROTO');
+var has = __webpack_require__(12);
+var toIObject = __webpack_require__(18);
+var arrayIndexOf = __webpack_require__(71)(false);
+var IE_PROTO = __webpack_require__(28)('IE_PROTO');
 
 module.exports = function (object, names) {
   var O = toIObject(object);
@@ -3482,7 +2759,7 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3493,19 +2770,19 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__(54);
-var hiddenKeys = __webpack_require__(36).concat('length', 'prototype');
+var $keys = __webpack_require__(52);
+var hiddenKeys = __webpack_require__(35).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
@@ -3513,18 +2790,18 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(40);
-var createDesc = __webpack_require__(25);
-var toIObject = __webpack_require__(17);
-var toPrimitive = __webpack_require__(31);
-var has = __webpack_require__(11);
-var IE8_DOM_DEFINE = __webpack_require__(49);
+var pIE = __webpack_require__(39);
+var createDesc = __webpack_require__(24);
+var toIObject = __webpack_require__(18);
+var toPrimitive = __webpack_require__(30);
+var has = __webpack_require__(12);
+var IE8_DOM_DEFINE = __webpack_require__(47);
 var gOPD = Object.getOwnPropertyDescriptor;
 
-exports.f = __webpack_require__(13) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+exports.f = __webpack_require__(14) ? gOPD : function getOwnPropertyDescriptor(O, P) {
   O = toIObject(O);
   P = toPrimitive(P, true);
   if (IE8_DOM_DEFINE) try {
@@ -3535,699 +2812,7 @@ exports.f = __webpack_require__(13) ? gOPD : function getOwnPropertyDescriptor(O
 
 
 /***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(8);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SceneManager = __webpack_require__(43);
-
-var _SceneManager2 = _interopRequireDefault(_SceneManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _Controller = __webpack_require__(111);
-
-var _Controller2 = _interopRequireDefault(_Controller);
-
-var _Intro = __webpack_require__(45);
-
-var _Intro2 = _interopRequireDefault(_Intro);
-
-var _CornerManager = __webpack_require__(118);
-
-var _CornerManager2 = _interopRequireDefault(_CornerManager);
-
-var _ResultView = __webpack_require__(46);
-
-var _ResultView2 = _interopRequireDefault(_ResultView);
-
-var _BackGroundTouchEffect = __webpack_require__(19);
-
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
-
-var _WebEnabledCheck = __webpack_require__(44);
-
-var _WebEnabledCheck2 = _interopRequireDefault(_WebEnabledCheck);
-
-var _ConfigManager = __webpack_require__(63);
-
-var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
-
-var _ScreenManager = __webpack_require__(26);
-
-var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
-
-var _PauseDimmed = __webpack_require__(136);
-
-var _PauseDimmed2 = _interopRequireDefault(_PauseDimmed);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var JuniverMart = function (_Phaser$Sprite) {
-    (0, _inherits3.default)(JuniverMart, _Phaser$Sprite);
-
-    function JuniverMart(game, x, y) {
-        (0, _classCallCheck3.default)(this, JuniverMart);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (JuniverMart.__proto__ || (0, _getPrototypeOf2.default)(JuniverMart)).call(this, game, x, y));
-
-        _this._game = game;
-        _this._game.input.maxPointers = 1;
-
-        /**
-         * Manager add
-         *
-         */
-        // new SoundManager(this._game);
-        new _SceneManager2.default(_this._game);
-        new _BackGroundTouchEffect2.default(_this._game);
-        new _WebEnabledCheck2.default(_this._game);
-        new _PauseDimmed2.default(_this._game);
-
-        // if(! this.game.device.desktop && this.game.device.fullScreen)
-        if (!_this.game.device.desktop) _this.game.input.onTap.add(_ScreenManager2.default.instance.fullScreen, _this);
-
-        return _this;
-    }
-
-    (0, _createClass3.default)(JuniverMart, [{
-        key: "update",
-        value: function update() {
-
-            if (!_GameConfig2.default.IN_GAME || _GameConfig2.default.POP_ENABLED) return;
-
-            if (this._objectManager) {
-                var elapsed = this._game.time.elapsedMS / (500 / this._game.time.desiredFps);
-                //if(elapsed > 2) return;
-                this._objectManager._update(elapsed);
-            }
-
-            if (_GameConfig2.default.GAME_FINISH) {
-                _ConfigManager2.default.prototype.GAME_OVER();
-                this._gameOver();
-            }
-            // console.log("update");
-        }
-    }, {
-        key: "_startViewInit",
-        value: function _startViewInit() {
-
-            if (_GameConfig2.default.GAME_RESET) this._gameOver();
-
-            _GameConfig2.default.SCENE_STATE = 'intro';
-            this._introBg = new _Intro2.default(this._game, this);
-            // this._introBg = new ResultView(this._game, this);
-            // this._introBg = new ChapterCompleteAnimation(this._game, 4);
-            _GameConfig2.default.CURRENT_SCENE = this._introBg;
-            this._mainController = new _Controller2.default(this._game, this);
-            _GameConfig2.default.MAIN_CONTROLLER = this._mainController;
-            _SoundManager2.default.instance.intro(_SoundAssetKey2.default.GAME_INTRO, false);
-        }
-    }, {
-        key: "_create",
-        value: function _create() {
-
-            _GameConfig2.default.SCENE_STATE = 'mainScene';
-            _SoundManager2.default.instance.allSoundPause();
-
-            this._mainController._destroy();
-            this._createBG();
-            this._createBgm();
-        }
-    }, {
-        key: "_createBG",
-        value: function _createBG() {
-
-            if (this._introBg) {
-                this._introBg._destroy();
-                this._introBg = null;
-            }
-
-            this._objectManager = new _CornerManager2.default(this._game, this);
-            _GameConfig2.default.CURRENT_SCENE = this._objectManager;
-        }
-    }, {
-        key: "_createController",
-        value: function _createController(backButtonEnable) {
-            if (this._controller) this._controller._destroy();
-            this._controller = new _Controller2.default(this._game, this, backButtonEnable);
-            _GameConfig2.default.MAIN_CONTROLLER = this._controller;
-        }
-    }, {
-        key: "_createBgm",
-        value: function _createBgm() {
-            // SoundManager.instance.allSoundPause();
-            if (!_GameConfig2.default.POP_ENABLED && _GameConfig2.default.SOUND_ENABLED) {
-                _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.BGM_VOLUME, true, false);
-            }
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-
-            /*  if(this._objectManager)
-              {
-                  let elapsed = this._game.time.elapsedMS / (500 / this._game.time.desiredFps);
-                  //if(elapsed > 2) return;
-                  this._objectManager._update(elapsed);
-              }*/
-        }
-    }, {
-        key: "_gameOver",
-        value: function _gameOver() {
-
-            _GameConfig2.default.SCENE_STATE = 'result';
-
-            if (this._controller) {
-                this._controller._btnDisabled();
-                this._controller.removeAll(true);
-                this._controller.destroy(true);
-                this._controller = null;
-            }
-            new _ResultView2.default(this._game, this);
-        }
-    }]);
-    return JuniverMart;
-}(Phaser.Sprite);
-
-exports.default = JuniverMart;
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(8);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _SeparateAnimation = __webpack_require__(22);
-
-var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
-
-var _BackGroundTouchEffect = __webpack_require__(19);
-
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
-
-var _PhaseCompleteEffect = __webpack_require__(114);
-
-var _PhaseCompleteEffect2 = _interopRequireDefault(_PhaseCompleteEffect);
-
-var _TutorialEndingEffect = __webpack_require__(115);
-
-var _TutorialEndingEffect2 = _interopRequireDefault(_TutorialEndingEffect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var TutorialView = function (_Phaser$Group) {
-    (0, _inherits3.default)(TutorialView, _Phaser$Group);
-
-    function TutorialView(game, assetNum, bgGroup, objectArray, imgArray, key) {
-        (0, _classCallCheck3.default)(this, TutorialView);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialView.__proto__ || (0, _getPrototypeOf2.default)(TutorialView)).call(this, game));
-
-        _this._game = game;
-        _this._gameGroup = game.add.group();
-        _this._effectGroup = game.add.group();
-        _this._aniGroup = game.add.group();
-        _this._num = assetNum;
-        _this._bgGroup = bgGroup;
-        _this._objectArray = objectArray;
-        _this._imgArray = imgArray;
-        _this.graphics = null;
-        _this.assetKey = null;
-        return _this;
-    }
-
-    (0, _createClass3.default)(TutorialView, [{
-        key: "_init",
-        value: function _init() {
-
-            //BACK
-            this.back = this._game.add.graphics(0, 0);
-            this.back.beginFill(0x71838b, 1);
-            this.back.drawRect(0, 0, 1280, 720);
-            this.back.endFill();
-            this.back.inputEnabled = true;
-            this.back.events.onInputDown.add(this._effectAnimation, this);
-            this._bgGroup.addChild(this.back);
-
-            //BG
-            this.assetKey = this._objectArray[0].key;
-            var assetName = 'tutor_' + this._num + '_bg';
-            var tutorialBg = new Phaser.Image(this._game, 0, 0, this.assetKey, assetName);
-            this._bgGroup.addChild(tutorialBg);
-
-            //EFFECT
-            // this._effectAnimation();
-
-            //OBJECT
-            for (var obj in this._objectArray) {
-                var asset = 'tutor_' + this._num + '_' + this._objectArray[obj].category + '_';
-                var object = new _SeparateAnimation2.default(this._game, this._objectArray[obj].key, asset, this._objectArray[obj].xPos, this._objectArray[obj].yPos, 1, this._objectArray[obj].totalFps, '', 0, this._objectArray[obj].fps);
-                this._bgGroup.addChild(object);
-                object._play();
-
-                //PPIYO CART MOVING
-                if (this._num === 5) {
-                    this._game.add.tween(object).to({ x: object.x + 630 }, 6000, Phaser.Easing.Linear.None, true);
-                }
-            }
-
-            //IMAGE
-            for (var _obj in this._imgArray) {
-                var _asset = 'tutor_' + this._num + '_' + this._imgArray[_obj].category;
-                var _object = new Phaser.Image(this._game, this._imgArray[_obj].xPos, this._imgArray[_obj].yPos, this._imgArray[_obj].key, _asset);
-                this._bgGroup.addChild(_object);
-
-                if (this._num === 1) {
-                    _object.anchor.setTo(0.5, 0.5);
-                    _object.x += _object.width / 2;
-                    _object.y += _object.height / 2;
-                    var rN = this._game.rnd.between(100, 300);
-                    this._game.add.tween(_object.scale).to({ x: 0.9, y: 0.9 }, rN * 50, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                    this._game.add.tween(_object).to({ x: _object.x + rN }, rN * 100, Phaser.Easing.Linear.None, true, 0, 1000, true);
-                }
-            }
-
-            //GUIDE TEXT
-            var guideTextBg = new Phaser.Image(this._game, 265, 29, this.assetKey, 'tutor_textbox_' + this._num);
-            this._bgGroup.addChild(guideTextBg);
-
-            var guideText = new Phaser.Image(this._game, 265, 29, this.assetKey, 'tutor_text_' + this._num);
-            this._bgGroup.addChild(guideText);
-        }
-    }, {
-        key: "_effectAnimation",
-        value: function _effectAnimation() {
-
-            // if(this._num !==4) return;
-            // new TutorialEndingEffect(this._game, this.assetKey, 390, 360, this._bgGroup);
-            _BackGroundTouchEffect2.default.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._bgGroup.removeChildren(0, this._bgGroup.length);
-            this._effectGroup.removeChildren(0, this._effectGroup.length);
-            this._aniGroup.removeChildren(0, this._aniGroup.length);
-        }
-    }]);
-    return TutorialView;
-}(Phaser.Group);
-
-exports.default = TutorialView;
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Categories = function () {
-    function Categories() {
-        (0, _classCallCheck3.default)(this, Categories);
-    }
-
-    (0, _createClass3.default)(Categories, null, [{
-        key: 'VEGETABLE',
-        get: function get() {
-            return {
-                category: 'vegetable',
-                displayPosition: { groupStartX: 275, groupEndX: -775, displayBarY: 138, xPos: 29, yPos: 172 },
-                backGroundColor: 0x82d3e6,
-                backGroundAsset: ['vegetable'],
-                assetKey: _AssetKey2.default.CORNER_VEGETABLE,
-                displayBoardHead: true,
-                totalDisplayBoard: 5,
-                itemList: [{ item: 'apple', price: '1000', xPos: 1111, yPos: 211, effectQuantity: 2 }, { item: 'carrot', price: '500', xPos: 487, yPos: 177, effectQuantity: 2 }, { item: 'grape', price: '1500', xPos: 1133, yPos: 393, effectQuantity: 2 }, { item: 'onion', price: '500', xPos: 68, yPos: 393, effectQuantity: 2 }, { item: 'radish', price: '500', xPos: 175, yPos: 149, effectQuantity: 2 }, { item: 'strawberry', price: '2000', xPos: 1404, yPos: 241, effectQuantity: 2 }, { item: 'sweetPotato', price: '500', xPos: 404, yPos: 392, effectQuantity: 3 }, { item: 'welshonion', price: '1000', xPos: 776, yPos: 139, effectQuantity: 2 }],
-                rollingButtonList: [['radish', 'onion'], ['carrot', 'sweetPotato'], ['welshonion'], ['apple', 'grape'], ['strawberry'], ['radish', 'onion']],
-                effectQuantity: [[2, 2], [2, 3], [2, 2], [2, 2], [2, 2], [2, 2]]
-
-            };
-        }
-    }, {
-        key: 'SEAFOOD',
-        get: function get() {
-            return {
-                category: 'seafood',
-                displayPosition: { groupStartX: 61, groupEndX: -790, displayBarY: 150, xPos: 371, yPos: 183 },
-                backGroundColor: 0x67cb59,
-                backGroundAsset: ['seafood'],
-                assetKey: _AssetKey2.default.CORNER_SEAFOOD,
-                displayBoardHead: false,
-                totalDisplayBoard: 8,
-                itemList: [{ item: 'abalone', price: '1500', xPos: 1147, yPos: 409, effectQuantity: 1 }, { item: 'crab', price: '1000', xPos: 1413, yPos: 208, effectQuantity: 1 }, { item: 'mackerel', price: '1000', xPos: 426, yPos: 213, effectQuantity: 2 }, { item: 'shell', price: '1000', xPos: 816, yPos: 183, effectQuantity: 2 }, { item: 'shrimp', price: '1000', xPos: 781, yPos: 361, effectQuantity: 1 }, { item: 'squid', price: '1000', xPos: 1120, yPos: 207, effectQuantity: 2 }],
-                rollingButtonList: [[], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab'], ['mackerel'], ['shell', 'shrimp'], ['squid', 'abalone'], ['crab']],
-                effectQuantity: [[], [2], [2, 1], [2, 1], [1], [2], [2, 1], [2, 1], [1]]
-
-            };
-        }
-    }, {
-        key: 'MEAT',
-        get: function get() {
-            return {
-                category: 'meat',
-                displayPosition: { groupStartX: 344, groupEndX: -720, displayBarY: 172, xPos: 698, yPos: 196 },
-                backGroundColor: 0xe88baa,
-                backGroundAsset: ['meat'],
-                assetKey: _AssetKey2.default.CORNER_MEAT,
-                displayBoardHead: false,
-                totalDisplayBoard: 6,
-                itemList: [{ item: 'drumstick', price: '1500', xPos: 1391, yPos: 198, effectQuantity: 2 }, { item: 'chicken', price: '2000', xPos: 1361, yPos: 396, effectQuantity: 2 }, { item: 'tenderloin', price: '3000', xPos: 831, yPos: 217, effectQuantity: 2 }, { item: 'sirloin', price: '3000', xPos: 829, yPos: 415, effectQuantity: 2 }, { item: 'bacon', price: '1500', xPos: 283, yPos: 216, effectQuantity: 1 }, { item: 'boiledPork', price: '1500', xPos: 267, yPos: 412, effectQuantity: 2 }],
-                rollingButtonList: [[], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken'], ['bacon', 'boiledPork'], ['tenderloin', 'sirloin'], ['drumstick', 'chicken']],
-                effectQuantity: [[], [1, 2], [2, 2], [2, 2], [1, 2], [2, 2], [2, 2]]
-
-            };
-        }
-    }, {
-        key: 'NECESSARY',
-        get: function get() {
-            return {
-                category: 'necessary',
-                displayPosition: { groupStartX: 343, groupEndX: -1445, displayBarY: 171, xPos: 38, yPos: 442 },
-                backGroundColor: 0x31be8e,
-                backGroundAsset: ['necessary_1', 'necessary_2'],
-                assetKey: _AssetKey2.default.CORNER_NECESSARY,
-                displayBoardHead: false,
-                totalDisplayBoard: 4,
-                itemList: [{ item: 'cleanser', price: '1500', xPos: 1310, yPos: 211, effectQuantity: 1 }, { item: 'shampoo', price: '1000', xPos: 182, yPos: 220, effectQuantity: 2 }, { item: 'soap', price: '500', xPos: 765, yPos: 240, effectQuantity: 1 }, { item: 'brush', price: '500', xPos: 778, yPos: 422, effectQuantity: 1 }, { item: 'paste', price: '500', xPos: 192, yPos: 417, effectQuantity: 1 }, { item: 'tissue', price: '1000', xPos: 1313, yPos: 415, effectQuantity: 1 }, { item: 'wetTissue', price: '1000', xPos: 1988, yPos: 223, effectQuantity: 2 }],
-                rollingButtonList: [[], ['shampoo', 'paste'], ['soap', 'brush'], ['cleanser', 'tissue'], ['wetTissue']],
-                effectQuantity: [[], [2, 1], [1, 1], [1, 1], [2]]
-
-            };
-        }
-    }, {
-        key: 'DAIRY',
-        get: function get() {
-            return {
-                category: 'dairy',
-                displayPosition: { groupStartX: 343, groupEndX: -1305, displayBarY: 171, xPos: 378, yPos: 441 },
-                backGroundColor: 0xf49e4b,
-                backGroundAsset: ['dairy_1', 'dairy_2'],
-                assetKey: _AssetKey2.default.CORNER_DAIRY,
-                displayBoardHead: false,
-                totalDisplayBoard: 4,
-                itemList: [{ item: 'bananaMilk', price: '500', xPos: 1309, yPos: 214, effectQuantity: 1 }, { item: 'cheese', price: '1000', xPos: 1848, yPos: 227, effectQuantity: 1 }, { item: 'chocolateMilk', price: '500', xPos: 244, yPos: 415, effectQuantity: 2 }, { item: 'egg', price: '1500', xPos: 742, yPos: 201, effectQuantity: 2 }, { item: 'milk', price: '1000', xPos: 259, yPos: 208, effectQuantity: 2 }, { item: 'strawberryMilk', price: '500', xPos: 768, yPos: 415, effectQuantity: 2 }, { item: 'yogurt', price: '1000', xPos: 1863, yPos: 409, effectQuantity: 2 }],
-                rollingButtonList: [[], ['milk', 'chocolateMilk'], ['egg', 'strawberryMilk'], ['bananaMilk'], ['cheese', 'yogurt']],
-                effectQuantity: [[], [2, 2], [1, 2], [1], [1, 2]]
-
-            };
-        }
-    }, {
-        key: 'SNACK',
-        get: function get() {
-            return {
-                category: 'snack',
-                displayPosition: { groupStartX: 174, groupEndX: -420, displayBarY: 161, xPos: 682, yPos: 435 },
-                backGroundColor: 0xd58fe9,
-                backGroundAsset: ['snack'],
-                assetKey: _AssetKey2.default.CORNER_SNACK,
-                displayBoardHead: true,
-                totalDisplayBoard: 8,
-                itemList: [{ item: 'candy', price: '1000', xPos: 51, yPos: 235, effectQuantity: 2 }, { item: 'chocolate', price: '1000', xPos: 325, yPos: 239, effectQuantity: 2 }, { item: 'iceCream', price: '1000', xPos: 623, yPos: 238, effectQuantity: 2 }, { item: 'jelly', price: '1000', xPos: 1220, yPos: 249, effectQuantity: 1 }],
-                rollingButtonList: [['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy'], ['chocolate'], ['iceCream'], ['jelly'], ['candy']],
-                effectQuantity: [[2], [2], [2], [1], [2], [2], [2], [1], [2]]
-
-            };
-        }
-    }, {
-        key: 'NOTYET',
-        get: function get() {
-            return {
-                category: 'notYet',
-                displayPosition: { xPos: 1033, yPos: 185 },
-                backGroundColor: 0x8bd3e7,
-                assetKey: _AssetKey2.default.CORNER_NOTYET
-
-            };
-        }
-    }, {
-        key: 'COUNTER',
-        get: function get() {
-            return {
-                category: 'counter',
-                displayPosition: { xPos: 1033, yPos: 185 },
-                backGroundColor: 0x8bd3e7,
-                assetKey: _AssetKey2.default.CORNER_COUNTER
-
-            };
-        }
-    }]);
-    return Categories;
-}();
-
-exports.default = Categories;
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _ShuffleRandom = __webpack_require__(127);
-
-var _ShuffleRandom2 = _interopRequireDefault(_ShuffleRandom);
-
-var _Categories = __webpack_require__(61);
-
-var _Categories2 = _interopRequireDefault(_Categories);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _categoryArr = [_Categories2.default.VEGETABLE, _Categories2.default.SEAFOOD, _Categories2.default.MEAT, _Categories2.default.NECESSARY, _Categories2.default.DAIRY, _Categories2.default.SNACK];
-
-var PurchaseList = function () {
-    function PurchaseList(game) {
-        (0, _classCallCheck3.default)(this, PurchaseList);
-
-        this._game = game;
-    }
-
-    (0, _createClass3.default)(PurchaseList, [{
-        key: "_randomNumber",
-        value: function _randomNumber(a, b) {
-            var quantity = this._game.rnd.between(a, b);
-            return quantity;
-        }
-    }, {
-        key: "purchaseList",
-        value: function purchaseList() {
-            var arr = [];
-            //item shuffle method - 요청으로 제거됨
-            // let _shuffleArray = ShuffleRandom.prototype.arrayShuffle(_categoryArr);
-            var _shuffleArray = _categoryArr;
-            var rN = this._randomNumber(0, _shuffleArray.length - 1);
-            for (var i = 0; i < _shuffleArray.length; i++) {
-                //카테고리 랜덤 제거
-                if (rN !== i) {
-                    var array = _shuffleArray[i].itemList;
-                    var category = _shuffleArray[i].category;
-                    array = _ShuffleRandom2.default.prototype.arrayShuffle(array);
-                    // let pickNum = this._randomNumber(1, 2);
-                    var pickNum = this._randomNumber(1, 2);
-                    var item = _ShuffleRandom2.default.prototype.pickNow(array, pickNum);
-                    var quantity = this._randomNumber(1, 3);
-
-                    for (var j = 0; j < item.length; j++) {
-                        if (array[j] !== undefined && array[j] != null) {
-                            array[j].quantity = quantity;
-                            array[j].category = category;
-                            array[j].empty = true;
-                            _GameConfig2.default.TOTAL_AMOUNT += Number(array[j].price) * Number(array[j].quantity);
-                            _GameConfig2.default.TOTAL_QUANTITY += array[j].quantity;
-                            arr.push(array[j]);
-                        }
-                    }
-                }
-            }
-
-            // let max = 1;
-            // if(arr.length > max) arr.splice(max, arr.length)
-
-            //TOTAL CATEGORIES
-            _GameConfig2.default.TOTAL_CATEGORIES = arr.length;
-            // console.log(GameConfig.TOTAL_AMOUNT);
-            // console.log('TOTAL_CATEGORIES : ', GameConfig.TOTAL_CATEGORIES);
-            // console.log('TOTAL_QUANTITY : ', GameConfig.TOTAL_QUANTITY);
-            // console.log(arr);
-            return arr;
-        }
-    }]);
-    return PurchaseList;
-}();
-
-exports.default = PurchaseList;
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ConfigManager = function () {
-    function ConfigManager() {
-        (0, _classCallCheck3.default)(this, ConfigManager);
-    }
-
-    (0, _createClass3.default)(ConfigManager, [{
-        key: "GAME_CONFIG_RESET",
-
-        /**
-         * CONFIG RESET
-         *
-         */
-        value: function GAME_CONFIG_RESET() {
-            _GameConfig2.default.POP_ENABLED = false;
-            // GameConfig.SOUND_ENABLED = true;
-            _GameConfig2.default.BGM_ENABLED = true;
-            _GameConfig2.default.IN_GAME = true;
-            _GameConfig2.default.TUTORIAL_DISABLED = false;
-            _GameConfig2.default.GAME_FINISH = false;
-            _GameConfig2.default.IN_GAME = true;
-            _GameConfig2.default.CURRENT_CHAPTER = 1;
-            _GameConfig2.default.GUIDE_REMOVE = false;
-            _GameConfig2.default.CHAPTER_CLEAR = false;
-            _GameConfig2.default.TOTAL_AMOUNT = 0;
-            _GameConfig2.default.TOTAL_QUANTITY = 0;
-            _GameConfig2.default.PURCHASE_LIST = [];
-            _GameConfig2.default.PURCHASE_ITEM_ARRAY_RESET = [];
-            _GameConfig2.default.PURCHASE_ITEM_FOR_LIST_ARRAY_RESET = [];
-            _GameConfig2.default.BGM_VOLUME = _GameConfig2.default.DEFAULT_BGM_VOLUME;
-        }
-    }, {
-        key: "GAME_OVER",
-        value: function GAME_OVER() {
-            _GameConfig2.default.IN_GAME = false;
-            _GameConfig2.default.GAME_RESET = true;
-        }
-    }]);
-    return ConfigManager;
-}();
-
-exports.default = ConfigManager;
-
-/***/ }),
-/* 64 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4296,7 +2881,70 @@ exports.default = LoadManager;
 LoadManager.instance = null;
 
 /***/ }),
-/* 65 */
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ConfigManager = function () {
+    function ConfigManager() {
+        (0, _classCallCheck3.default)(this, ConfigManager);
+    }
+
+    (0, _createClass3.default)(ConfigManager, [{
+        key: "GAME_CONFIG_RESET",
+
+        /**
+         * CONFIG RESET
+         *
+         */
+        value: function GAME_CONFIG_RESET() {
+            _GameConfig2.default.POP_ENABLED = false;
+            // GameConfig.SOUND_ENABLED = true;
+            _GameConfig2.default.BGM_ENABLED = true;
+            _GameConfig2.default.IN_GAME = true;
+            _GameConfig2.default.MAP_MOVING = false;
+            _GameConfig2.default.TUTORIAL_DISABLED = false;
+            _GameConfig2.default.GAME_FINISH = false;
+            _GameConfig2.default.IN_GAME = true;
+            _GameConfig2.default.GAME_SCORE = 3;
+
+            _GameConfig2.default.CURRENT_DUST = -_GameConfig2.default.TOTAL_DUST;
+            _GameConfig2.default.CURRENT_CHAPTER = 1;
+        }
+    }, {
+        key: "GAME_OVER",
+        value: function GAME_OVER() {
+            _GameConfig2.default.IN_GAME = false;
+            _GameConfig2.default.GAME_RESET = true;
+        }
+    }]);
+    return ConfigManager;
+}();
+
+exports.default = ConfigManager;
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4306,7 +2954,7 @@ Object.defineProperty(exports, "__esModule", {
         value: true
 });
 
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -4314,39 +2962,39 @@ var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Boot = __webpack_require__(102);
+var _Boot = __webpack_require__(96);
 
 var _Boot2 = _interopRequireDefault(_Boot);
 
-var _Preloader = __webpack_require__(110);
+var _Preloader = __webpack_require__(104);
 
 var _Preloader2 = _interopRequireDefault(_Preloader);
 
-var _Main = __webpack_require__(138);
+var _Main = __webpack_require__(106);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _GameInfo = __webpack_require__(42);
+var _GameInfo = __webpack_require__(41);
 
 var _GameInfo2 = _interopRequireDefault(_GameInfo);
 
-var _SoundManager = __webpack_require__(4);
+var _SoundManager = __webpack_require__(8);
 
 var _SoundManager2 = _interopRequireDefault(_SoundManager);
 
-var _LoadManager = __webpack_require__(64);
+var _LoadManager = __webpack_require__(57);
 
 var _LoadManager2 = _interopRequireDefault(_LoadManager);
 
-var _ScreenManager = __webpack_require__(26);
+var _ScreenManager = __webpack_require__(25);
 
 var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
 
@@ -4385,6 +3033,7 @@ var index = function (_Phaser$Game) {
                 _this.state.add('Preloader', _Preloader2.default, false);
                 _this.state.add('Main', _Main2.default, false);
                 _this.state.start('Boot');
+
                 return _this;
         }
 
@@ -4398,22 +3047,22 @@ window.nts = {};
 window.nts.index = new index('main_doc', 1280, 720);
 
 /***/ }),
-/* 66 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(67);
+__webpack_require__(61);
 module.exports = __webpack_require__(9).Object.getPrototypeOf;
 
 
 /***/ }),
-/* 67 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 Object.getPrototypeOf(O)
-var toObject = __webpack_require__(27);
-var $getPrototypeOf = __webpack_require__(47);
+var toObject = __webpack_require__(26);
+var $getPrototypeOf = __webpack_require__(45);
 
-__webpack_require__(68)('getPrototypeOf', function () {
+__webpack_require__(62)('getPrototypeOf', function () {
   return function getPrototypeOf(it) {
     return $getPrototypeOf(toObject(it));
   };
@@ -4421,11 +3070,11 @@ __webpack_require__(68)('getPrototypeOf', function () {
 
 
 /***/ }),
-/* 68 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(14);
+var $export = __webpack_require__(15);
 var core = __webpack_require__(9);
 var fails = __webpack_require__(21);
 module.exports = function (KEY, exec) {
@@ -4437,7 +3086,7 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 69 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -4447,30 +3096,30 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 70 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(71), __esModule: true };
+module.exports = { "default": __webpack_require__(65), __esModule: true };
 
 /***/ }),
-/* 71 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(72);
-__webpack_require__(81);
-module.exports = __webpack_require__(38).f('iterator');
+__webpack_require__(66);
+__webpack_require__(75);
+module.exports = __webpack_require__(37).f('iterator');
 
 
 /***/ }),
-/* 72 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var $at = __webpack_require__(73)(true);
+var $at = __webpack_require__(67)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(52)(String, 'String', function (iterated) {
+__webpack_require__(50)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -4486,11 +3135,11 @@ __webpack_require__(52)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 73 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(32);
-var defined = __webpack_require__(28);
+var toInteger = __webpack_require__(31);
+var defined = __webpack_require__(27);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function (TO_STRING) {
@@ -4509,18 +3158,18 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 74 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(34);
-var descriptor = __webpack_require__(25);
-var setToStringTag = __webpack_require__(37);
+var create = __webpack_require__(33);
+var descriptor = __webpack_require__(24);
+var setToStringTag = __webpack_require__(36);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(15)(IteratorPrototype, __webpack_require__(18)('iterator'), function () { return this; });
+__webpack_require__(16)(IteratorPrototype, __webpack_require__(19)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -4529,14 +3178,14 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 75 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(12);
+var dP = __webpack_require__(13);
 var anObject = __webpack_require__(20);
-var getKeys = __webpack_require__(35);
+var getKeys = __webpack_require__(34);
 
-module.exports = __webpack_require__(13) ? Object.defineProperties : function defineProperties(O, Properties) {
+module.exports = __webpack_require__(14) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
   var keys = getKeys(Properties);
   var length = keys.length;
@@ -4548,11 +3197,11 @@ module.exports = __webpack_require__(13) ? Object.defineProperties : function de
 
 
 /***/ }),
-/* 76 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(55);
+var cof = __webpack_require__(53);
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
@@ -4560,14 +3209,14 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 77 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(17);
-var toLength = __webpack_require__(78);
-var toAbsoluteIndex = __webpack_require__(79);
+var toIObject = __webpack_require__(18);
+var toLength = __webpack_require__(72);
+var toAbsoluteIndex = __webpack_require__(73);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -4589,11 +3238,11 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 78 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(32);
+var toInteger = __webpack_require__(31);
 var min = Math.min;
 module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -4601,10 +3250,10 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 79 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(32);
+var toInteger = __webpack_require__(31);
 var max = Math.max;
 var min = Math.min;
 module.exports = function (index, length) {
@@ -4614,7 +3263,7 @@ module.exports = function (index, length) {
 
 
 /***/ }),
-/* 80 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(10).document;
@@ -4622,14 +3271,14 @@ module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 81 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(82);
+__webpack_require__(76);
 var global = __webpack_require__(10);
-var hide = __webpack_require__(15);
-var Iterators = __webpack_require__(33);
-var TO_STRING_TAG = __webpack_require__(18)('toStringTag');
+var hide = __webpack_require__(16);
+var Iterators = __webpack_require__(32);
+var TO_STRING_TAG = __webpack_require__(19)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -4647,21 +3296,21 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 
 /***/ }),
-/* 82 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(83);
-var step = __webpack_require__(84);
-var Iterators = __webpack_require__(33);
-var toIObject = __webpack_require__(17);
+var addToUnscopables = __webpack_require__(77);
+var step = __webpack_require__(78);
+var Iterators = __webpack_require__(32);
+var toIObject = __webpack_require__(18);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(52)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(50)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -4688,14 +3337,14 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 83 */
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 84 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -4704,56 +3353,56 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 85 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(86), __esModule: true };
+module.exports = { "default": __webpack_require__(80), __esModule: true };
 
 /***/ }),
-/* 86 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(81);
+__webpack_require__(86);
 __webpack_require__(87);
-__webpack_require__(92);
-__webpack_require__(93);
-__webpack_require__(94);
+__webpack_require__(88);
 module.exports = __webpack_require__(9).Symbol;
 
 
 /***/ }),
-/* 87 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // ECMAScript 6 symbols shim
 var global = __webpack_require__(10);
-var has = __webpack_require__(11);
-var DESCRIPTORS = __webpack_require__(13);
-var $export = __webpack_require__(14);
-var redefine = __webpack_require__(53);
-var META = __webpack_require__(88).KEY;
+var has = __webpack_require__(12);
+var DESCRIPTORS = __webpack_require__(14);
+var $export = __webpack_require__(15);
+var redefine = __webpack_require__(51);
+var META = __webpack_require__(82).KEY;
 var $fails = __webpack_require__(21);
-var shared = __webpack_require__(30);
-var setToStringTag = __webpack_require__(37);
-var uid = __webpack_require__(24);
-var wks = __webpack_require__(18);
-var wksExt = __webpack_require__(38);
-var wksDefine = __webpack_require__(39);
-var enumKeys = __webpack_require__(89);
-var isArray = __webpack_require__(90);
+var shared = __webpack_require__(29);
+var setToStringTag = __webpack_require__(36);
+var uid = __webpack_require__(23);
+var wks = __webpack_require__(19);
+var wksExt = __webpack_require__(37);
+var wksDefine = __webpack_require__(38);
+var enumKeys = __webpack_require__(83);
+var isArray = __webpack_require__(84);
 var anObject = __webpack_require__(20);
-var isObject = __webpack_require__(16);
-var toObject = __webpack_require__(27);
-var toIObject = __webpack_require__(17);
-var toPrimitive = __webpack_require__(31);
-var createDesc = __webpack_require__(25);
-var _create = __webpack_require__(34);
-var gOPNExt = __webpack_require__(91);
-var $GOPD = __webpack_require__(58);
-var $GOPS = __webpack_require__(56);
-var $DP = __webpack_require__(12);
-var $keys = __webpack_require__(35);
+var isObject = __webpack_require__(17);
+var toObject = __webpack_require__(26);
+var toIObject = __webpack_require__(18);
+var toPrimitive = __webpack_require__(30);
+var createDesc = __webpack_require__(24);
+var _create = __webpack_require__(33);
+var gOPNExt = __webpack_require__(85);
+var $GOPD = __webpack_require__(56);
+var $GOPS = __webpack_require__(54);
+var $DP = __webpack_require__(13);
+var $keys = __webpack_require__(34);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -4876,11 +3525,11 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(57).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(40).f = $propertyIsEnumerable;
+  __webpack_require__(55).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(39).f = $propertyIsEnumerable;
   $GOPS.f = $getOwnPropertySymbols;
 
-  if (DESCRIPTORS && !__webpack_require__(23)) {
+  if (DESCRIPTORS && !__webpack_require__(22)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -4964,7 +3613,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(15)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(16)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -4974,13 +3623,13 @@ setToStringTag(global.JSON, 'JSON', true);
 
 
 /***/ }),
-/* 88 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(24)('meta');
-var isObject = __webpack_require__(16);
-var has = __webpack_require__(11);
-var setDesc = __webpack_require__(12).f;
+var META = __webpack_require__(23)('meta');
+var isObject = __webpack_require__(17);
+var has = __webpack_require__(12);
+var setDesc = __webpack_require__(13).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
@@ -5033,13 +3682,13 @@ var meta = module.exports = {
 
 
 /***/ }),
-/* 89 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(35);
-var gOPS = __webpack_require__(56);
-var pIE = __webpack_require__(40);
+var getKeys = __webpack_require__(34);
+var gOPS = __webpack_require__(54);
+var pIE = __webpack_require__(39);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -5054,23 +3703,23 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 90 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(55);
+var cof = __webpack_require__(53);
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
 
 
 /***/ }),
-/* 91 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(17);
-var gOPN = __webpack_require__(57).f;
+var toIObject = __webpack_require__(18);
+var gOPN = __webpack_require__(55).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -5090,55 +3739,55 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 
 /***/ }),
-/* 92 */
+/* 86 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 93 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(39)('asyncIterator');
+__webpack_require__(38)('asyncIterator');
 
 
 /***/ }),
-/* 94 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(39)('observable');
+__webpack_require__(38)('observable');
 
 
 /***/ }),
-/* 95 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(96), __esModule: true };
+module.exports = { "default": __webpack_require__(90), __esModule: true };
 
 /***/ }),
-/* 96 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(97);
+__webpack_require__(91);
 module.exports = __webpack_require__(9).Object.setPrototypeOf;
 
 
 /***/ }),
-/* 97 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $export = __webpack_require__(14);
-$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(98).set });
+var $export = __webpack_require__(15);
+$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(92).set });
 
 
 /***/ }),
-/* 98 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
-var isObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
 var anObject = __webpack_require__(20);
 var check = function (O, proto) {
   anObject(O);
@@ -5148,7 +3797,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function (test, buggy, set) {
       try {
-        set = __webpack_require__(48)(Function.call, __webpack_require__(58).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(46)(Function.call, __webpack_require__(56).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) { buggy = true; }
@@ -5164,16 +3813,16 @@ module.exports = {
 
 
 /***/ }),
-/* 99 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(100), __esModule: true };
+module.exports = { "default": __webpack_require__(94), __esModule: true };
 
 /***/ }),
-/* 100 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(101);
+__webpack_require__(95);
 var $Object = __webpack_require__(9).Object;
 module.exports = function create(P, D) {
   return $Object.create(P, D);
@@ -5181,16 +3830,16 @@ module.exports = function create(P, D) {
 
 
 /***/ }),
-/* 101 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(14);
+var $export = __webpack_require__(15);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', { create: __webpack_require__(34) });
+$export($export.S, 'Object', { create: __webpack_require__(33) });
 
 
 /***/ }),
-/* 102 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5200,7 +3849,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5212,27 +3861,23 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _ResourceKey = __webpack_require__(41);
+var _ResourceKey = __webpack_require__(40);
 
 var _ResourceKey2 = _interopRequireDefault(_ResourceKey);
 
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-window.PIXI = __webpack_require__(106);
-window.p2 = __webpack_require__(107);
-window.Phaser = __webpack_require__(108);
+window.PIXI = __webpack_require__(100);
+window.p2 = __webpack_require__(101);
+window.Phaser = __webpack_require__(102);
 
 var Boot = function (_Phaser$State) {
     (0, _inherits3.default)(Boot, _Phaser$State);
@@ -5243,14 +3888,17 @@ var Boot = function (_Phaser$State) {
     }
 
     (0, _createClass3.default)(Boot, [{
-        key: "init",
+        key: 'init',
         value: function init() {
             this.game.stage.backgroundColor = 0x0000;
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.pageAlignVertically = true;
             this.game.scale.pageAlignHorizontally = true;
-            this.game.input.maxPointers = 1;
+            // this.game.input.maxPointers = 1;
+            //BG-> FG 프리징 이슈로 ANDROID && NAVER APP일 경우만 'disableVisibilityChange' 활성화
+            // this.game.stage.disableVisibilityChange = this.game.device.android && navigator.userAgent.indexOf('NAVER(inapp') !== -1;
+            // this.game.stage.disableVisibilityChange = false;
 
             // this.game.scale.refresh();
 
@@ -5260,48 +3908,35 @@ var Boot = function (_Phaser$State) {
             // console.log('BOOT');
         }
     }, {
-        key: "preload",
+        key: 'preload',
         value: function preload() {
-            var _this2 = this;
-
             this.game.load.image(_ResourceKey2.default.BOOT_LOADING_BACK, './asset/game/image/preLoadingBg.png');
-            window.onblur = function () {
-                if (_this2._appCheck()) _GameConfig2.default.GAME_FOCUS = false;
-            };
-            window.onfocus = function () {
-                if (_this2._appCheck()) _GameConfig2.default.GAME_FOCUS = true;
-            };
         }
     }, {
-        key: "_appCheck",
-        value: function _appCheck() {
-            if (this.game.device.android && navigator.userAgent.indexOf('NAVER(inapp') !== -1) return true;else return false;
-        }
-    }, {
-        key: "create",
+        key: 'create',
         value: function create() {
             // ResourceKey.data = this.game.cache.getJSON(ResourceKey.PRELOAD_RESOURCE);
             this.loadLoadingImg();
         }
     }, {
-        key: "loadLoadingImg",
+        key: 'loadLoadingImg',
         value: function loadLoadingImg() {
-            var _this3 = this;
+            var _this2 = this;
 
             this.game.load.atlasJSONHash(_ResourceKey2.default.PRELOAD_RESOURCE, './asset/game/image/loading.png', './asset/game/image/loading.json');
             this.game.load.onLoadComplete.addOnce(function () {
                 setTimeout(function () {
-                    _this3.game.state.start('Preloader', true, false);
+                    _this2.game.state.start('Preloader', true, false);
                 }, 500);
             }, this);
 
             this.game.load.start();
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {}
     }, {
-        key: "update",
+        key: 'update',
         value: function update() {}
     }]);
     return Boot;
@@ -5310,16 +3945,16 @@ var Boot = function (_Phaser$State) {
 exports.default = Boot;
 
 /***/ }),
-/* 103 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(104), __esModule: true };
+module.exports = { "default": __webpack_require__(98), __esModule: true };
 
 /***/ }),
-/* 104 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(105);
+__webpack_require__(99);
 var $Object = __webpack_require__(9).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
@@ -5327,16 +3962,16 @@ module.exports = function defineProperty(it, key, desc) {
 
 
 /***/ }),
-/* 105 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(14);
+var $export = __webpack_require__(15);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(13), 'Object', { defineProperty: __webpack_require__(12).f });
+$export($export.S + $export.F * !__webpack_require__(14), 'Object', { defineProperty: __webpack_require__(13).f });
 
 
 /***/ }),
-/* 106 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13091,7 +11726,7 @@ PIXI.TextureUvs = function ()
 }).call(this);
 
 /***/ }),
-/* 107 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var require;var require;/**
@@ -27924,7 +26559,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
 /***/ }),
-/* 108 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -115099,10 +113734,10 @@ PIXI.canUseNewCanvasBlendModes = function ()
 * "What matters in this life is not what we do but what we do for others, the legacy we leave and the imprint we make." - Eric Meyer
 */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(109)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(103)))
 
 /***/ }),
-/* 109 */
+/* 103 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -115292,7 +113927,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 110 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -115302,7 +113937,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -115314,43 +113949,27 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _ResourceKey = __webpack_require__(41);
+var _ResourceKey = __webpack_require__(40);
 
 var _ResourceKey2 = _interopRequireDefault(_ResourceKey);
 
-var _GameInfo = __webpack_require__(42);
+var _GameInfo = __webpack_require__(41);
 
 var _GameInfo2 = _interopRequireDefault(_GameInfo);
 
-var _JuniverMart = __webpack_require__(59);
-
-var _JuniverMart2 = _interopRequireDefault(_JuniverMart);
-
-var _PreloadData = __webpack_require__(137);
+var _PreloadData = __webpack_require__(105);
 
 var _PreloadData2 = _interopRequireDefault(_PreloadData);
 
-var _Intro = __webpack_require__(45);
-
-var _Intro2 = _interopRequireDefault(_Intro);
-
-var _ResultView = __webpack_require__(46);
-
-var _ResultView2 = _interopRequireDefault(_ResultView);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _ScreenManager = __webpack_require__(26);
+var _ScreenManager = __webpack_require__(25);
 
 var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
 
@@ -115426,8 +114045,8 @@ var Preloader = function (_Phaser$State) {
             this.game.load.onLoadComplete.add(this._loadComplete, this);
             this.game.load.onFileError.addOnce(this._loadError, this);
 
-            /*if(! this.game.device.desktop && this.game.device.fullScreen)
-                this.game.input.onTap.add(ScreenManager.instance.fullScreen, this);*/
+            // if(! this.game.device.desktop && this.game.device.fullScreen)
+            if (!this.game.device.desktop) this.game.input.onTap.add(_ScreenManager2.default.instance.fullScreen, this);
         }
     }, {
         key: "create",
@@ -115486,7 +114105,180 @@ var Preloader = function (_Phaser$State) {
 exports.default = Preloader;
 
 /***/ }),
-/* 111 */
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PreloadResource = function () {
+        function PreloadResource(game) {
+                (0, _classCallCheck3.default)(this, PreloadResource);
+
+                PreloadResource.instance = this;
+                this.game = game;
+        }
+
+        (0, _createClass3.default)(PreloadResource, [{
+                key: "preload",
+                value: function preload() {
+
+                        this.game.load.atlasJSONHash(_AssetKey2.default.INTRO_ASSET, 'asset/game/image/intro-asset.png', 'asset/game/image/intro-asset.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.BG_COMP_ASSET, 'asset/game/image/bgComp-asset.png', 'asset/game/image/bgComp-asset.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.BTN_ASSET, 'asset/game/image/game-main-button.png', 'asset/game/image/game-main-button.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.BG_ASSET, 'asset/game/image/bg-asset.png', 'asset/game/image/bg-asset.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.BG_ASSET_3, 'asset/game/image/bg-asset3.png', 'asset/game/image/bg-asset3.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.DEFAULT_GAME_ATLAS, 'asset/game/image/default_gameAtlas.png', 'asset/game/image/default_gameAtlas.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.SMUDGE_ASSET, 'asset/game/image/smudge-asset.png', 'asset/game/image/smudge-asset.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.TUTOR_ASSET_1, 'asset/game/image/tutor-asset-ppochi-1.png', 'asset/game/image/tutor-asset-ppochi-1.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.TUTOR_ASSET_2, 'asset/game/image/tutor-asset-ppochi-2.png', 'asset/game/image/tutor-asset-ppochi-2.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.TUTOR_ASSET_3, 'asset/game/image/tutor-asset-ppochi-3.png', 'asset/game/image/tutor-asset-ppochi-3.json');
+                        this.game.load.atlasJSONHash(_AssetKey2.default.RESULT_ASSET, 'asset/game/image/ending-asset.png', 'asset/game/image/ending-asset.json');
+
+                        var extension = ".mp3";
+
+                        if (this.game.device.desktop) {
+                                _GameConfig2.default.CURRENT_DEVICE = 'desktop';
+                        } else {
+                                if (this.game.device.android) {
+                                        extension = ".ogg";
+                                        _GameConfig2.default.CURRENT_DEVICE = 'android';
+                                } else {
+                                        extension = ".m4a";
+                                        _GameConfig2.default.CURRENT_DEVICE = 'ios';
+                                }
+                        }
+
+                        /**
+                         * tutorial Sound
+                         * @type {string}
+                         */
+
+                        var gameIntro = 'asset/game/sound/' + _SoundAssetKey2.default.GAME_INTRO + extension;
+
+                        var tutorNarr_1 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_1 + extension;
+                        var tutorNarr_2 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_2 + extension;
+                        var tutorNarr_3 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_3 + extension;
+                        var tutorNarr_4 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_4 + extension;
+                        var tutorNarr_5 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_5 + extension;
+
+                        var result_good = 'asset/game/sound/' + _SoundAssetKey2.default.RESULT_GOOD + extension;
+                        var result_great = 'asset/game/sound/' + _SoundAssetKey2.default.RESULT_GREAT + extension;
+                        var infoSnd = 'asset/game/sound/' + _SoundAssetKey2.default.INFO_SND + extension;
+
+                        var basicTouchSnd = 'asset/game/sound/' + _SoundAssetKey2.default.BASIC_TOUCH_SOUND + extension;
+                        var mainBgm = 'asset/game/sound/' + _SoundAssetKey2.default.MAIN_BGM + extension;
+                        var btnSnd = 'asset/game/sound/' + _SoundAssetKey2.default.BUTTON_SOUND + extension;
+                        var startSnd = 'asset/game/sound/' + _SoundAssetKey2.default.START_SOUND + extension;
+                        var selectedSnd = 'asset/game/sound/' + _SoundAssetKey2.default.SELECTED_SOUND + extension;
+
+                        /**
+                         *
+                         * effect Sound (add)
+                         */
+                        var sndClose = 'asset/game/sound/' + _SoundAssetKey2.default.SND_CLOSE + extension;
+                        var sndNext = 'asset/game/sound/' + _SoundAssetKey2.default.SND_NEXT + extension;
+                        var sndOff = 'asset/game/sound/' + _SoundAssetKey2.default.SND_OFF + extension;
+                        var sndOn = 'asset/game/sound/' + _SoundAssetKey2.default.SND_ON + extension;
+                        var sndPrev = 'asset/game/sound/' + _SoundAssetKey2.default.SND_PREV + extension;
+                        var sndSkip = 'asset/game/sound/' + _SoundAssetKey2.default.SND_SKIP + extension;
+
+                        var dustTouch_1 = 'asset/game/sound/' + _SoundAssetKey2.default.DUST_TOUCH_1 + extension;
+                        var dustTouch_2 = 'asset/game/sound/' + _SoundAssetKey2.default.DUST_TOUCH_2 + extension;
+                        var dustTouch_3 = 'asset/game/sound/' + _SoundAssetKey2.default.DUST_TOUCH_3 + extension;
+                        var chapterComplete = 'asset/game/sound/' + _SoundAssetKey2.default.CHAPTER_COMPLETE + extension;
+                        var dustAllRemove = 'asset/game/sound/' + _SoundAssetKey2.default.DUST_ALL_REMOVE + extension;
+                        var completeMessage_1 = 'asset/game/sound/' + _SoundAssetKey2.default.COMPLETE_MESSAGE_1 + extension;
+                        var completeMessage_2 = 'asset/game/sound/' + _SoundAssetKey2.default.COMPLETE_MESSAGE_2 + extension;
+                        var sfx_retry = 'asset/game/sound/' + _SoundAssetKey2.default.RESTART_SOUND + extension;
+
+                        /**
+                         * TUTOR NARRATION
+                         *@type {SoundQueue}
+                         * @private
+                         */
+                        this.game.load.audio(_SoundAssetKey2.default.GAME_INTRO, gameIntro);
+
+                        this.game.load.audio(_SoundAssetKey2.default.tutorNarr_1, tutorNarr_1);
+                        this.game.load.audio(_SoundAssetKey2.default.tutorNarr_2, tutorNarr_2);
+                        this.game.load.audio(_SoundAssetKey2.default.tutorNarr_3, tutorNarr_3);
+                        this.game.load.audio(_SoundAssetKey2.default.tutorNarr_4, tutorNarr_4);
+                        this.game.load.audio(_SoundAssetKey2.default.tutorNarr_5, tutorNarr_5);
+
+                        /**
+                         * RESULT PAGE
+                         * @type {SoundQueue}
+                         * @private
+                         */
+                        this.game.load.audio(_SoundAssetKey2.default.RESULT_GOOD, result_good);
+                        this.game.load.audio(_SoundAssetKey2.default.RESULT_GREAT, result_great);
+
+                        /**
+                         * EFFECT SOUND
+                         * @type {SoundQueue}
+                         * @private
+                         */
+
+                        this.game.load.audio(_SoundAssetKey2.default.BASIC_TOUCH_SOUND, basicTouchSnd);
+                        this.game.load.audio(_SoundAssetKey2.default.BUTTON_SOUND, btnSnd);
+                        this.game.load.audio(_SoundAssetKey2.default.MAIN_BGM, mainBgm);
+                        this.game.load.audio(_SoundAssetKey2.default.SELECTED_SOUND, selectedSnd);
+                        this.game.load.audio(_SoundAssetKey2.default.START_SOUND, startSnd);
+
+                        this.game.load.audio(_SoundAssetKey2.default.SND_CLOSE, sndClose);
+                        this.game.load.audio(_SoundAssetKey2.default.SND_NEXT, sndNext);
+                        this.game.load.audio(_SoundAssetKey2.default.SND_OFF, sndOff);
+                        this.game.load.audio(_SoundAssetKey2.default.SND_ON, sndOn);
+                        this.game.load.audio(_SoundAssetKey2.default.SND_PREV, sndPrev);
+                        this.game.load.audio(_SoundAssetKey2.default.SND_SKIP, sndSkip);
+                        this.game.load.audio(_SoundAssetKey2.default.INFO_SND, infoSnd);
+
+                        this.game.load.audio(_SoundAssetKey2.default.DUST_TOUCH_1, dustTouch_1);
+                        this.game.load.audio(_SoundAssetKey2.default.DUST_TOUCH_2, dustTouch_2);
+                        this.game.load.audio(_SoundAssetKey2.default.DUST_TOUCH_3, dustTouch_3);
+                        this.game.load.audio(_SoundAssetKey2.default.CHAPTER_COMPLETE, chapterComplete);
+                        this.game.load.audio(_SoundAssetKey2.default.DUST_ALL_REMOVE, dustAllRemove);
+                        this.game.load.audio(_SoundAssetKey2.default.COMPLETE_MESSAGE_1, completeMessage_1);
+                        this.game.load.audio(_SoundAssetKey2.default.COMPLETE_MESSAGE_2, completeMessage_2);
+                        this.game.load.audio(_SoundAssetKey2.default.RESTART_SOUND, sfx_retry);
+                }
+        }]);
+        return PreloadResource;
+}();
+
+exports.default = PreloadResource;
+
+
+PreloadResource.instance = null;
+
+/***/ }),
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -115496,7 +114288,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -115508,45 +114300,330 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _AssetKey = __webpack_require__(3);
+var _GameInfo = __webpack_require__(41);
 
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
+var _GameInfo2 = _interopRequireDefault(_GameInfo);
 
-var _TutorialView = __webpack_require__(60);
+var _ResourceKey = __webpack_require__(40);
 
-var _TutorialView2 = _interopRequireDefault(_TutorialView);
+var _ResourceKey2 = _interopRequireDefault(_ResourceKey);
 
-var _GameConfig = __webpack_require__(2);
+var _LoadManager = __webpack_require__(57);
 
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
+var _LoadManager2 = _interopRequireDefault(_LoadManager);
 
-var _SoundManager = __webpack_require__(4);
+var _ThumpCleanUp = __webpack_require__(107);
+
+var _ThumpCleanUp2 = _interopRequireDefault(_ThumpCleanUp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Main = function (_Phaser$State) {
+    (0, _inherits3.default)(Main, _Phaser$State);
+
+    function Main() {
+        (0, _classCallCheck3.default)(this, Main);
+        return (0, _possibleConstructorReturn3.default)(this, (Main.__proto__ || (0, _getPrototypeOf2.default)(Main)).apply(this, arguments));
+    }
+
+    (0, _createClass3.default)(Main, [{
+        key: "init",
+        value: function init() {}
+    }, {
+        key: "preload",
+        value: function preload() {}
+    }, {
+        key: "render",
+        value: function render() {}
+    }, {
+        key: "update",
+        value: function update() {}
+    }, {
+        key: "create",
+        value: function create() {
+
+            if (this.game.renderType === Phaser.HEADLESS) {
+                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.HEADLESS";
+            } else if (this.game.renderType === Phaser.CANVAS) {
+                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.CANVAS";
+            } else if (this.game.renderType === Phaser.WEBGL) {
+                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.WEBGL";
+            }
+
+            this.scene = this.game.add.group();
+            this.mainContents = this.scene.add(new _ThumpCleanUp2.default(this.game, 0, 0));
+            this.mainContents._startViewInit();
+
+            /* setTimeout( () => {
+                 // LoadManager.instance.removeImg(PreloadResourceKeys.BOOT_LOADING_BACK);
+                 // LoadManager.instance.removeImg(PreloadResourceKeys.MAIN_INTRO_RESOURCE_KEY);
+             }, 500);*/
+
+            _LoadManager2.default.instance.removeImg(_ResourceKey2.default.BOOT_LOADING_BACK);
+            _LoadManager2.default.instance.removeImg(_ResourceKey2.default.PRELOAD_RESOURCE);
+            this.state.remove('Preloader');
+        }
+    }]);
+    return Main;
+}(Phaser.State);
+
+exports.default = Main;
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _SoundManager = __webpack_require__(8);
 
 var _SoundManager2 = _interopRequireDefault(_SoundManager);
 
-var _SoundAssetKey = __webpack_require__(5);
+var _SceneManager = __webpack_require__(42);
+
+var _SceneManager2 = _interopRequireDefault(_SceneManager);
+
+var _SoundAssetKey = __webpack_require__(7);
 
 var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
 
-var _SceneManager = __webpack_require__(43);
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _Controller = __webpack_require__(108);
+
+var _Controller2 = _interopRequireDefault(_Controller);
+
+var _Intro = __webpack_require__(115);
+
+var _Intro2 = _interopRequireDefault(_Intro);
+
+var _ObjectManager = __webpack_require__(116);
+
+var _ObjectManager2 = _interopRequireDefault(_ObjectManager);
+
+var _ResultView = __webpack_require__(122);
+
+var _ResultView2 = _interopRequireDefault(_ResultView);
+
+var _WebEnabledCheck = __webpack_require__(44);
+
+var _WebEnabledCheck2 = _interopRequireDefault(_WebEnabledCheck);
+
+var _ConfigManager = __webpack_require__(58);
+
+var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
+
+var _ScreenManager = __webpack_require__(25);
+
+var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ThumpCleanUp = function (_Phaser$Sprite) {
+    (0, _inherits3.default)(ThumpCleanUp, _Phaser$Sprite);
+
+    function ThumpCleanUp(game, x, y) {
+        (0, _classCallCheck3.default)(this, ThumpCleanUp);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (ThumpCleanUp.__proto__ || (0, _getPrototypeOf2.default)(ThumpCleanUp)).call(this, game, x, y));
+
+        _this._game = game;
+
+        /**
+         * Manager add
+         *
+         */
+        new _SoundManager2.default(_this._game);
+        new _SceneManager2.default(_this._game);
+        new _WebEnabledCheck2.default(_this._game);
+
+        // if(! this.game.device.desktop && this.game.device.fullScreen)
+        if (!_this.game.device.desktop) _this.game.input.onTap.add(_ScreenManager2.default.instance.fullScreen, _this);
+        return _this;
+    }
+
+    (0, _createClass3.default)(ThumpCleanUp, [{
+        key: "_startViewInit",
+        value: function _startViewInit() {
+
+            if (_GameConfig2.default.GAME_RESET) {
+                this._gameOver();
+            }
+
+            _GameConfig2.default.SCENE_STATE = 'intro';
+            this._introBg = new _Intro2.default(this._game, this);
+            _GameConfig2.default.CURRENT_SCENE = this._introBg;
+            this._mainController = new _Controller2.default(this._game, this);
+            _GameConfig2.default.MAIN_CONTROLLER = this._mainController;
+            _SoundManager2.default.instance.intro(_SoundAssetKey2.default.GAME_INTRO, false);
+        }
+    }, {
+        key: "_create",
+        value: function _create() {
+
+            _GameConfig2.default.SCENE_STATE = 'mainScene';
+            _SoundManager2.default.instance.allSoundPause();
+
+            this._createBG();
+            this._createController();
+            this._createBgm();
+        }
+    }, {
+        key: "_createBG",
+        value: function _createBG() {
+
+            if (this._introBg) {
+                this._introBg._destroy();
+                this._introBg = null;
+            }
+
+            // this.bg = new BgView(this._game);
+            this._objectManager = new _ObjectManager2.default(this._game);
+            _GameConfig2.default.CURRENT_SCENE = this._objectManager;
+        }
+    }, {
+        key: "_createController",
+        value: function _createController() {
+            this._controller = new _Controller2.default(this._game);
+        }
+    }, {
+        key: "_createBgm",
+        value: function _createBgm() {
+            _SoundManager2.default.instance.allSoundPause();
+            if (!_GameConfig2.default.POP_ENABLED) _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, 0.6, true, false);
+        }
+    }, {
+        key: "update",
+        value: function update() {
+
+            if (!_GameConfig2.default.IN_GAME || _GameConfig2.default.POP_ENABLED) return;
+
+            if (this._objectManager) {
+                var elapsed = this._game.time.elapsedMS / (500 / this._game.time.desiredFps);
+                //if(elapsed > 2) return;
+                this._objectManager._update(elapsed);
+            }
+
+            if (_GameConfig2.default.GAME_FINISH) {
+                _ConfigManager2.default.prototype.GAME_OVER();
+                this._gameOver();
+                return;
+            }
+        }
+    }, {
+        key: "_gameOver",
+        value: function _gameOver() {
+
+            _GameConfig2.default.SCENE_STATE = 'result';
+
+            if (this._controller) {
+                this._controller._btnDisabled();
+                this._controller.removeAll(true);
+                this._controller.destroy(true);
+                this._controller = null;
+            }
+
+            new _ResultView2.default(this._game, this);
+        }
+    }]);
+    return ThumpCleanUp;
+}(Phaser.Sprite);
+
+exports.default = ThumpCleanUp;
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _TutorialView = __webpack_require__(109);
+
+var _TutorialView2 = _interopRequireDefault(_TutorialView);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _SceneManager = __webpack_require__(42);
 
 var _SceneManager2 = _interopRequireDefault(_SceneManager);
 
 var _WebEnabledCheck = __webpack_require__(44);
 
 var _WebEnabledCheck2 = _interopRequireDefault(_WebEnabledCheck);
-
-var _TutorialManager = __webpack_require__(116);
-
-var _TutorialManager2 = _interopRequireDefault(_TutorialManager);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -115555,7 +114632,6 @@ var Controller = function (_Phaser$Group) {
 
     function Controller(game) {
         var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        var backButtonEnable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
         (0, _classCallCheck3.default)(this, Controller);
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (Controller.__proto__ || (0, _getPrototypeOf2.default)(Controller)).call(this, game));
@@ -115565,7 +114641,6 @@ var Controller = function (_Phaser$Group) {
         _this._gameGroup = _this._game.add.group();
         // this._dispatcher = dispatcher;
         _this._parent = parent;
-        _this._backButtonEnable = backButtonEnable;
 
         _this._btnInit();
         _this._webCheck();
@@ -115590,7 +114665,7 @@ var Controller = function (_Phaser$Group) {
             this.backBtn = this._gameGroup.add(this._game.make.button(24, 24, this.assetKey, this.onBack.bind(this), this, _AssetKey2.default.BTN_BACK_DEFAULT, _AssetKey2.default.BTN_BACK_DEFAULT, _AssetKey2.default.BTN_BACK_OVER));
             this.backBtnSound = null;
             // this._buttonSndPlay(SoundAssetKey.SND_PREV, this.backBtnSound, this.backBtn);
-            _GameConfig2.default.BACK_BUTTON = this.backBtn;
+
 
             /**
              * Sound btn
@@ -115621,21 +114696,20 @@ var Controller = function (_Phaser$Group) {
         key: "onHelp",
         value: function onHelp() {
 
+            _SoundManager2.default.instance.effectRemove(_SoundAssetKey2.default.GAME_INTRO);
             if (_GameConfig2.default.TUTORIAL_DISABLED) return;
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME, true, false);
-            _SoundManager2.default.instance.effectSoundRemove(_SoundAssetKey2.default.GAME_INTRO);
+            _SoundManager2.default.instance.allSoundPause();
             _SceneManager2.default.instance._destroy();
-            // SoundManager.instance.play(SoundAssetKey.BUTTON_SOUND, false);
-            _SoundManager2.default.instance.effectSoundContinuance(_SoundAssetKey2.default.BUTTON_SOUND);
+            // SoundManager.instance.play(SoundAssetKey.BASIC_TOUCH_SOUND, false);
+            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.BASIC_TOUCH_SOUND);
 
-            new _TutorialManager2.default(this._game, this._parent);
+            this.helpView = new _TutorialView2.default(this._game, this._parent);
             _GameConfig2.default.POP_ENABLED = true;
         }
     }, {
         key: "onBack",
         value: function onBack() {
-            _SoundManager2.default.instance.effectSoundContinuance(_SoundAssetKey2.default.SND_PREV, 0.8);
+            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.SND_PREV, 0.8);
             this._game.time.events.add(400, close, this);
             function close() {
                 top.location.href = _GameConfig2.default.APP_URL;
@@ -115648,15 +114722,16 @@ var Controller = function (_Phaser$Group) {
             if (this.soundOnBtn.visible) {
                 // if(! GameConfig.SOUND_ENABLED) return;
                 _GameConfig2.default.SOUND_ENABLED = false;
-                _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME, true, false);
+                _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME);
                 _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, _GameConfig2.default.MUTE_SOUND_VOLUME);
-            }
+                // this._game.sound.stopAll();
 
+            }
             if (this.soundOffBtn.visible) {
                 // if(GameConfig.SOUND_ENABLED) return;
                 _GameConfig2.default.SOUND_ENABLED = true;
-                _GameConfig2.default.BGM_ENABLED = true;
-                _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.BGM_VOLUME, true, false);
+                // GameConfig.BGM_ENABLED = true;
+                _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, 0.6, true);
                 _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0.8);
 
                 // SoundManager.instance.bgmResume(SoundAssetKey.MAIN_BGM);
@@ -115668,9 +114743,7 @@ var Controller = function (_Phaser$Group) {
     }, {
         key: "_buttonSndPlay",
         value: function _buttonSndPlay(sndKey, snd, btn) {
-            // SoundManager.instance.allSoundPause();
-            // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, )
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
+            _SoundManager2.default.instance.allSoundPause();
             snd = this._game.add.audio(sndKey);
             btn.setDownSound(snd);
         }
@@ -115684,16 +114757,6 @@ var Controller = function (_Phaser$Group) {
         value: function _btnEnabled() {
             this._gameGroup.visible = true;
         }
-    }, {
-        key: "_backButtonDisable",
-        value: function _backButtonDisable() {
-            if (this.backBtn) this.backBtn.visible = this._backButtonEnable;
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-        }
     }]);
     return Controller;
 }(Phaser.Group);
@@ -115701,7 +114764,7 @@ var Controller = function (_Phaser$Group) {
 exports.default = Controller;
 
 /***/ }),
-/* 112 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -115711,384 +114774,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _assetKey = void 0,
-    _effectAsset = void 0,
-    _quantity = void 0,
-    _angle = void 0;
-
-var WaterSprayEffect = function () {
-    function WaterSprayEffect(game, xPos, yPos) {
-        var radius = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 40;
-        var assetKey = arguments[4];
-        var effectAsset = arguments[5];
-        var quantity = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 3;
-        (0, _classCallCheck3.default)(this, WaterSprayEffect);
-
-        this.game = game;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.radius = radius;
-        _assetKey = assetKey;
-        _effectAsset = effectAsset;
-        _quantity = quantity;
-
-        this._create();
-    }
-
-    (0, _createClass3.default)(WaterSprayEffect, [{
-        key: "_create",
-        value: function _create() {
-
-            for (var i = 0; i < _quantity; i++) {
-                var img = this.game.add.image(0, 0, _assetKey, _effectAsset);
-                var sN = this.game.rnd.integerInRange(4, 10) / 10;
-                img.scale.setTo(sN, sN);
-                img.angle = _angle;
-                var rN = this.game.rnd.integerInRange(-15, 15);
-                this.showEffect(img, this.xPos + rN, this.yPos + rN, i);
-                // console.log(img.angle)
-            }
-        }
-    }, {
-        key: "showEffect",
-        value: function showEffect(sprite, x, y, i) {
-            var ix = x;
-            var iy = y;
-            // let rndPositionAngle = Math.random()*240 - 30;   // 위치 각도
-            // let rndPositionAngle = (Math.random() * 4/3 * Math.PI) + (5/6 * Math.PI) ;   // 위치 각도 0~240 - 150
-            // let rndPositionAngle = (Math.random() * 1/4 * Math.PI) + (1/4 * Math.PI * i);   // 위치 각도
-            var rndPositionAngle = Math.random() * 240 - 30; // 위치 각도
-            var rndAlphabetAngle = Math.random() * 15; // 알파벳 각도
-            // let rndRadius = Math.random() * 30 + this.radius;
-            var rndRadius = 120;
-
-            // console.log(rndPositionAngle);
-
-            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
-            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
-
-            if (rndRadius * Math.cos(rndPositionAngle) < 0) {
-                sprite.angle = rndAlphabetAngle * -1;
-            } else {
-                sprite.angle = rndAlphabetAngle;
-            }
-
-            var tween0 = this.game.add.tween(sprite).from({ alpha: 0.4, x: x, y: y }, 300, Phaser.Easing.Linear.Out, true, 0);
-            var tween1 = this.game.add.tween(sprite).to({ alpha: 0 }, 300, Phaser.Easing.Linear.Out, true, 200);
-            tween1.onComplete.add(function () {
-                //sprite.kill();
-                sprite.destroy();
-            }, this);
-            var tween2 = this.game.add.tween(sprite.scale).to({ x: 0.5, y: 0.5, alpha: 0 }, 300, Phaser.Easing.Linear.Out, true, 200);
-        }
-    }]);
-    return WaterSprayEffect;
-}();
-
-exports.default = WaterSprayEffect;
-
-/***/ }),
-/* 113 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var StarEffect = function () {
-    function StarEffect(game, xPos, yPos, key, asset) {
-        var radius = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 40;
-        var size = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1;
-        (0, _classCallCheck3.default)(this, StarEffect);
-
-        this.game = game;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.radius = radius;
-        this.key = key;
-        this.asset = asset;
-        this.size = size;
-
-        this._create();
-    }
-
-    (0, _createClass3.default)(StarEffect, [{
-        key: "_create",
-        value: function _create() {
-
-            for (var i = 0; i < 7; i++) {
-                var img = this.game.add.image(0, 0, this.key, this.asset);
-                var scale = this.game.rnd.between(4, 9) / 10 * this.size;
-                img.scale.setTo(scale, scale);
-                img.anchor.setTo(0.5, 0.5);
-                this.showEffect(img, this.xPos, this.yPos, i);
-            }
-        }
-    }, {
-        key: "showEffect",
-        value: function showEffect(sprite, x, y, i) {
-            var ix = x;
-            var iy = y;
-            // let rndPositionAngle = Math.random()*240 - 30;   // 위치 각도
-            // let rndPositionAngle = (Math.random() * 4/3 * Math.PI) + (5/6 * Math.PI) ;   // 위치 각도 0~240 - 150
-            var rndPositionAngle = Math.random() * 1 / 4 * Math.PI + 1 / 4 * Math.PI * i; // 위치 각도
-            var rndAlphabetAngle = Math.random() * 15; // 알파벳 각도
-            var rndRadius = Math.random() * 30 + this.radius;
-            // let rndRadius = 50;
-
-            // console.log(rndPositionAngle);
-
-            sprite.alpha = 1;
-            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
-            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
-
-            if (rndRadius * Math.cos(rndPositionAngle) < 0) {
-                sprite.angle = rndAlphabetAngle * -1;
-            } else {
-                sprite.angle = rndAlphabetAngle;
-            }
-
-            var angleNum = this.game.rnd.integerInRange(180, 720);
-            this.game.add.tween(sprite).from({ alpha: 0.7, x: x, y: y, angle: angleNum }, 500, Phaser.Easing.Linear.In, true, 0);
-
-            var tween1 = this.game.add.tween(sprite).to({ alpha: 0 }, 300, Phaser.Easing.Linear.In, true, 200);
-            tween1.onComplete.add(function () {
-                //sprite.kill();
-                sprite.destroy();
-            }, this);
-            this.game.add.tween(sprite.scale).to({ x: 0.5, y: 0.5 }, 300, Phaser.Easing.Linear.Out, true, 200);
-        }
-    }]);
-    return StarEffect;
-}();
-
-exports.default = StarEffect;
-
-/***/ }),
-/* 114 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _assetArr = ['bit_2', 'star', 'bit_1', 'star', 'bit_2', 'bit_3', 'bit_1', 'star', 'bit_3'];
-
-var PhaseCompleteEffect = function () {
-    function PhaseCompleteEffect(game, key, xPos, yPos) {
-        (0, _classCallCheck3.default)(this, PhaseCompleteEffect);
-
-        this.game = game;
-        this.gameGroup = this.game.add.group();
-        this.key = key;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this._create();
-    }
-
-    (0, _createClass3.default)(PhaseCompleteEffect, [{
-        key: '_create',
-        value: function _create() {
-
-            for (var i = 0; i < 10; i++) {
-                // let num = this.game.rnd.integerInRange(0, 3);
-                var img = new Phaser.Image(this.game, 0, 0, this.key, _assetArr[i]);
-                img.anchor.setTo(0.5, 0.5);
-                img.scale.setTo(0.3, 0.3);
-                this.gameGroup.addChild(img);
-                this.showEffect(img, this.xPos, this.yPos, i);
-            }
-        }
-    }, {
-        key: 'showEffect',
-        value: function showEffect(sprite, x, y, i) {
-            var ix = x;
-            var iy = y;
-            var rndPositionAngle = Math.random() * 1 / 4 * Math.PI + 1 / 4 * Math.PI * i;
-            var rndAlphabetAngle = Math.random() * 15;
-            var rndRadius = Math.random() * 30 + 180;
-
-            sprite.alpha = 1;
-            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
-            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
-
-            if (rndRadius * Math.cos(rndPositionAngle) < 0) sprite.angle = rndAlphabetAngle * -1;else sprite.angle = rndAlphabetAngle;
-
-            this.game.add.tween(sprite).from({ x: x, y: y }, 500, Phaser.Easing.Exponential.Out, true, 0);
-
-            var angleNum = this.game.rnd.integerInRange(180, 720);
-            this.game.add.tween(sprite).to({ angle: angleNum }, 1500, Phaser.Easing.Quartic.Out, true, 0);
-
-            var scaleNum = this.game.rnd.integerInRange(7, 13) / 10;
-            this.game.add.tween(sprite.scale).to({ x: scaleNum, y: scaleNum }, 1000, Phaser.Easing.Quartic.Out, true, 0);
-
-            var tween3 = this.game.add.tween(sprite).to({ alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true, 500);
-            tween3.onComplete.add(function () {
-                sprite.destroy();
-            }, this);
-        }
-    }, {
-        key: '_destroy',
-        value: function _destroy() {
-
-            this.gameGroup.removeChildren(0, this.gameGroup.length);
-        }
-    }]);
-    return PhaseCompleteEffect;
-}();
-
-exports.default = PhaseCompleteEffect;
-
-/***/ }),
-/* 115 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _assetArr = ['tutor_4_bit_4', 'tutor_4_bit_3', 'tutor_4_star', 'tutor_4_bit_1', 'tutor_4_star', 'tutor_4_bit_2', 'tutor_4_bit_3', 'tutor_4_star', 'tutor_4_bit_2', 'tutor_4_bit_5', 'tutor_4_bit_6'];
-
-var TutorialEndingEffect = function () {
-    function TutorialEndingEffect(game, key, xPos, yPos, group) {
-        (0, _classCallCheck3.default)(this, TutorialEndingEffect);
-
-        this.game = game;
-        this.gameGroup = this.game.add.group();
-        // this.gameGroup = group;
-        this.key = key;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this._create();
-    }
-
-    (0, _createClass3.default)(TutorialEndingEffect, [{
-        key: '_create',
-        value: function _create() {
-
-            for (var i = 0; i < 10; i++) {
-                // let num = this.game.rnd.integerInRange(0, 3);
-                var img = new Phaser.Image(this.game, 0, 0, this.key, _assetArr[i]);
-                img.anchor.setTo(0.5, 0.5);
-                img.scale.setTo(0.3, 0.3);
-                this.gameGroup.addChild(img);
-                var str = _assetArr[i].substr(_assetArr[i].length - 1, 1);
-                var rotationEnable = false;
-                if (str === 'r') rotationEnable = true;
-                this.showEffect(img, this.xPos, this.yPos, i, rotationEnable);
-            }
-        }
-    }, {
-        key: 'showEffect',
-        value: function showEffect(sprite, x, y, i) {
-            var rot = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
-            var ix = x;
-            var iy = y;
-            var rndPositionAngle = Math.random() * 1 / 4 * Math.PI + 1 / 4 * Math.PI * i;
-            // let rndAlphabetAngle = Math.random()*15;
-            var rndRadius = Math.random() * 30 + 210;
-
-            sprite.alpha = 1;
-            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
-            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
-
-            // if(rndRadius * Math.cos(rndPositionAngle) < 0) sprite.angle = rndAlphabetAngle * (-1);
-            // else sprite.angle = rndAlphabetAngle;
-            sprite.rotation = i * 17;
-
-            this.game.add.tween(sprite).from({ x: x, y: y }, 500, Phaser.Easing.Exponential.Out, true, 0);
-
-            if (rot) {
-                var angleNum = this.game.rnd.integerInRange(180, 720);
-                this.game.add.tween(sprite).to({ angle: angleNum }, 1500, Phaser.Easing.Quartic.Out, true, 0);
-            }
-
-            var scaleNum = this.game.rnd.integerInRange(7, 13) / 10;
-            this.game.add.tween(sprite.scale).to({ x: scaleNum, y: scaleNum }, 1000, Phaser.Easing.Quartic.Out, true, 0);
-
-            var tween3 = this.game.add.tween(sprite).to({ alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true, 500);
-            tween3.onComplete.add(function () {
-                sprite.destroy();
-            }, this);
-        }
-    }, {
-        key: '_destroy',
-        value: function _destroy() {
-
-            this.gameGroup.removeChildren(0, this.gameGroup.length);
-        }
-    }]);
-    return TutorialEndingEffect;
-}();
-
-exports.default = TutorialEndingEffect;
-
-/***/ }),
-/* 116 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -116100,73 +114786,90 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _AssetKey = __webpack_require__(3);
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
-var _GameConfig = __webpack_require__(2);
+var _GameConfig = __webpack_require__(6);
 
 var _GameConfig2 = _interopRequireDefault(_GameConfig);
 
-var _SoundAssetKey = __webpack_require__(5);
+var _SoundAssetKey = __webpack_require__(7);
 
 var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
 
-var _SoundManager = __webpack_require__(4);
+var _SoundManager = __webpack_require__(8);
 
 var _SoundManager2 = _interopRequireDefault(_SoundManager);
 
-var _TutorialView = __webpack_require__(60);
+var _TutorialChapter_ = __webpack_require__(110);
 
-var _TutorialView2 = _interopRequireDefault(_TutorialView);
+var _TutorialChapter_2 = _interopRequireDefault(_TutorialChapter_);
 
-var _SceneManager = __webpack_require__(43);
+var _TutorialChapter_3 = __webpack_require__(111);
+
+var _TutorialChapter_4 = _interopRequireDefault(_TutorialChapter_3);
+
+var _TutorialChapter_5 = __webpack_require__(112);
+
+var _TutorialChapter_6 = _interopRequireDefault(_TutorialChapter_5);
+
+var _TutorialChapter_7 = __webpack_require__(113);
+
+var _TutorialChapter_8 = _interopRequireDefault(_TutorialChapter_7);
+
+var _TutorialChapter_9 = __webpack_require__(114);
+
+var _TutorialChapter_10 = _interopRequireDefault(_TutorialChapter_9);
+
+var _SceneManager = __webpack_require__(42);
 
 var _SceneManager2 = _interopRequireDefault(_SceneManager);
 
-var _BackGroundTouchEffect = __webpack_require__(19);
+var _MouseEffect = __webpack_require__(43);
 
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
+var _MouseEffect2 = _interopRequireDefault(_MouseEffect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var chapter = void 0;
 var num = void 0;
 var total = 5;
 var currentAudio = void 0;
-var _objectArray = [[{ category: 'ppiyo', xPos: 459, yPos: 206, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1, totalFps: 2, fps: 4 }], [{ category: 'ppiyo', xPos: 252, yPos: 205, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1, totalFps: 2, fps: 4 }], [{ category: 'ppiyo', xPos: 182, yPos: 218, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1, totalFps: 2, fps: 4 }], [{ category: 'ppiyo', xPos: 260, yPos: 227, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_2, totalFps: 2, fps: 4 }], [{ category: 'ppiyo', xPos: 103, yPos: 245, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_2, totalFps: 2, fps: 4 }]];
+var totalFrame = ['', 6, 5, 8, 8, 6];
 
-var _imgArray = [[{ category: 'cloudA', xPos: 56, yPos: 88, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1 }, { category: 'cloudB', xPos: 1037, yPos: 173, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1 }], [{ category: 'cart', xPos: 530, yPos: 326, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1 }], [{ category: 'cart', xPos: 530, yPos: 326, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1 }, { category: 'Xmark', xPos: 54, yPos: 182, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1 }], [{ category: 'cart', xPos: 530, yPos: 466, key: _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_2 }], []];
+var TutorialView = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialView, _Phaser$Group);
 
-var TutorialManager = function (_Phaser$Group) {
-    (0, _inherits3.default)(TutorialManager, _Phaser$Group);
+    function TutorialView(game, parent) {
+        (0, _classCallCheck3.default)(this, TutorialView);
 
-    function TutorialManager(game, parent) {
-        (0, _classCallCheck3.default)(this, TutorialManager);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialManager.__proto__ || (0, _getPrototypeOf2.default)(TutorialManager)).call(this, game));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialView.__proto__ || (0, _getPrototypeOf2.default)(TutorialView)).call(this, game));
 
         _this.assetKey = _AssetKey2.default.BTN_ASSET;
         _this._game = game;
-        _this._bgGroup = _this._game.add.group();
         _this._gameGroup = _this._game.add.group();
         // this._container = container;
         _this._parent = parent;
-        _this._chapter = null;
-        num = 1;
 
         for (var i = 1; i <= total; i++) {
             _this['_audio_' + i] = null;
             _this['_audio_' + i] = game.add.audio(_SoundAssetKey2.default['tutorNarr_' + i], 0.7, false);
         }
 
+        _this.tutorial = [new _TutorialChapter_2.default(_this._game, 1, totalFrame[1]), new _TutorialChapter_4.default(_this._game, 2, totalFrame[2]), new _TutorialChapter_6.default(_this._game, 3, totalFrame[3]), new _TutorialChapter_8.default(_this._game, 4, totalFrame[4]), new _TutorialChapter_10.default(_this._game, 5, totalFrame[5])];
+
+        num = 1;
+
+        _this._createBg();
         _this._createTutorial(num);
         _this._createBtn();
         _this._btnAlign(num);
@@ -116175,7 +114878,7 @@ var TutorialManager = function (_Phaser$Group) {
         return _this;
     }
 
-    (0, _createClass3.default)(TutorialManager, [{
+    (0, _createClass3.default)(TutorialView, [{
         key: "_createBtn",
         value: function _createBtn() {
 
@@ -116240,6 +114943,7 @@ var TutorialManager = function (_Phaser$Group) {
         value: function onPrev() {
             // this._game.time.events.removeAll();
             num -= 1;
+            this._removeImage();
             this._btnAlign(num);
             if (currentAudio) {
 
@@ -116256,6 +114960,7 @@ var TutorialManager = function (_Phaser$Group) {
             if (num < total) {
 
                 num += 1;
+                this._removeImage();
                 this._btnAlign(num);
                 if (currentAudio) {
 
@@ -116287,6 +114992,7 @@ var TutorialManager = function (_Phaser$Group) {
                     this._parent._create();
                 }
                 // this._game.time.events.removeAll();
+                this._removeImage();
                 this._destroy();
             }
         }
@@ -116300,6 +115006,7 @@ var TutorialManager = function (_Phaser$Group) {
             function enabled() {
                 _SoundManager2.default.instance.allSoundPause();
                 // this._game.time.events.removeAll();
+                this._removeImage();
                 this._destroy();
             }
         }
@@ -116327,6 +115034,7 @@ var TutorialManager = function (_Phaser$Group) {
                         this.startBtn.visible = false;
                         break;
                     }
+
                 case 4:
                     {
                         this.nextBtn.visible = true;
@@ -116344,16 +115052,39 @@ var TutorialManager = function (_Phaser$Group) {
             }
         }
     }, {
+        key: "_createBg",
+        value: function _createBg() {
+
+            var mainBg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_BG);
+            mainBg.inputEnabled = true;
+            mainBg.events.onInputDown.add(this._bgClick, this);
+            this._gameGroup.addChild(mainBg);
+            // mainBg.alpha = 0.3;
+            // SoundManager.instance.play(SoundAssetKey.BASIC_TOUCH_SOUND, false);
+            // new MouseEffect(this._game, this._game.input.x, this._game.input.y, 40, 1);
+        }
+    }, {
+        key: "_bgClick",
+        value: function _bgClick() {
+            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.BASIC_TOUCH_SOUND);
+            new _MouseEffect2.default(this._game, this._game.input.x, this._game.input.y, 40, 1);
+        }
+    }, {
         key: "_createTutorial",
         value: function _createTutorial(currentNum) {
 
-            if (this._chapter) this._chapter._destroy();
-            var key = _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1;
-            if (currentNum >= 4) key = _AssetKey2.default.TUTORIAL_ANIMATION_ASSET_2;
+            chapter = this.tutorial[currentNum - 1];
+            this._gameGroup.addChild(chapter);
+            chapter._init();
+        }
+    }, {
+        key: "_removeImage",
+        value: function _removeImage() {
 
-            this._chapter = new _TutorialView2.default(this._game, currentNum, this._bgGroup, _objectArray[currentNum - 1], _imgArray[currentNum - 1], key);
-            // this._gameGroup.addChild(this._chapter);
-            this._chapter._init();
+            if (chapter) {
+                chapter._destroy();
+                // chapter.destroy();
+            }
         }
     }, {
         key: "_disabledBtn",
@@ -116365,6 +115096,7 @@ var TutorialManager = function (_Phaser$Group) {
             this.startBtn.input.enabled = false;
 
             if (currentAudio) {
+
                 currentAudio.onStop.removeAll();
                 currentAudio.stop();
             }
@@ -116377,16 +115109,832 @@ var TutorialManager = function (_Phaser$Group) {
 
             // this._game.remove([this.skipBtn, this.prevBtn, this.nextBtn, this.startBtn, this.skipBtn], true);
 
-            if (this._chapter) this._chapter._destroy();
             _SceneManager2.default.instance._restore();
             this._gameGroup.removeChildren(0, this._gameGroup.length);
             this._gameGroup.destroy();
         }
     }]);
-    return TutorialManager;
+    return TutorialView;
 }(Phaser.Group);
 
-exports.default = TutorialManager;
+exports.default = TutorialView;
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TutorialChapter_1 = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialChapter_1, _Phaser$Group);
+
+    function TutorialChapter_1(game, assetNum, totalFrame) {
+        (0, _classCallCheck3.default)(this, TutorialChapter_1);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialChapter_1.__proto__ || (0, _getPrototypeOf2.default)(TutorialChapter_1)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = game.add.group();
+        _this._num = assetNum;
+        _this.totalFrame = totalFrame;
+        return _this;
+    }
+
+    (0, _createClass3.default)(TutorialChapter_1, [{
+        key: "_init",
+        value: function _init() {
+
+            this.txt = this._gameGroup.add(this._game.make.image(0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_TEXT_PREFIX + this._num));
+            this.txt.x = this._game.width / 2 - this.txt.width / 2;
+            this.txt.y = 54;
+            var assetName = _AssetKey2.default.TUTOR_PPOCHI_PREFIX + this._num + '_';
+            this.ani = new _SeparateAnimation2.default(this.game, _AssetKey2.default.TUTOR_ASSET_1, assetName, 333, 210, 1, this.totalFrame, '', 1, 8, true);
+            this._gameGroup.addChild(this.ani);
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
+        }
+    }]);
+    return TutorialChapter_1;
+}(Phaser.Group);
+
+exports.default = TutorialChapter_1;
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TutorialChapter_2 = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialChapter_2, _Phaser$Group);
+
+    function TutorialChapter_2(game, assetNum, totalFrame) {
+        (0, _classCallCheck3.default)(this, TutorialChapter_2);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialChapter_2.__proto__ || (0, _getPrototypeOf2.default)(TutorialChapter_2)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = game.add.group();
+        _this._num = assetNum;
+        _this.totalFrame = totalFrame;
+        return _this;
+    }
+
+    (0, _createClass3.default)(TutorialChapter_2, [{
+        key: "_init",
+        value: function _init() {
+
+            this.txt = this._gameGroup.add(this._game.make.image(0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_TEXT_PREFIX + this._num));
+            this.txt.x = this._game.width / 2 - this.txt.width / 2;
+            this.txt.y = 54;
+            var assetName = _AssetKey2.default.TUTOR_PPOCHI_PREFIX + this._num + '_';
+            this.ani = new _SeparateAnimation2.default(this.game, _AssetKey2.default.TUTOR_ASSET_1, assetName, 338, 200, 1, this.totalFrame, '', 1, 8, true);
+            this._gameGroup.addChild(this.ani);
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
+        }
+    }]);
+    return TutorialChapter_2;
+}(Phaser.Group);
+
+exports.default = TutorialChapter_2;
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TutorialChapter_3 = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialChapter_3, _Phaser$Group);
+
+    function TutorialChapter_3(game, assetNum, totalFrame) {
+        (0, _classCallCheck3.default)(this, TutorialChapter_3);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialChapter_3.__proto__ || (0, _getPrototypeOf2.default)(TutorialChapter_3)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = game.add.group();
+        _this._num = assetNum;
+        _this.totalFrame = totalFrame;
+        return _this;
+    }
+
+    (0, _createClass3.default)(TutorialChapter_3, [{
+        key: "_init",
+        value: function _init() {
+
+            var xPos = ['', 103, 315 - 35, 1000];
+            var yPos = ['', 367, 188, 309];
+            var angle = ['', 0, -15, 15];
+
+            for (var i = 1; i <= 3; i++) {
+                var rndTime = this._game.rnd.integerInRange(4, 15);
+                var _assetName = _AssetKey2.default.TUTOR_DUST_PREFIX;
+                this.dust = new _SeparateAnimation2.default(this._game, _AssetKey2.default.TUTOR_ASSET_2, _assetName, xPos[i], yPos[i], 1, 4, '', 1, rndTime, true);
+                this.dust.angle = angle[i];
+                this._game.add.tween(this.dust).to({ y: this.dust.y + rndTime * 2 }, rndTime * 100, Phaser.Easing.Linear.Out, true, 0, 1000, true);
+                this._gameGroup.addChild(this.dust);
+            }
+
+            this.dustImg = new _SeparateAnimation2.default(this._game, _AssetKey2.default.TUTOR_ASSET_2, _AssetKey2.default.TUTOR_DUST_IMAGE_PREFIX, 306, 166, 1, 3, '', 1, 6, true);
+            this._gameGroup.addChild(this.dustImg);
+
+            this.txt = this._gameGroup.add(this._game.make.image(0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_TEXT_PREFIX + this._num));
+            this.txt.x = this._game.width / 2 - this.txt.width / 2;
+            this.txt.y = 54;
+            var assetName = _AssetKey2.default.TUTOR_PPOCHI_PREFIX + this._num + '_';
+            this.ani = new _SeparateAnimation2.default(this.game, _AssetKey2.default.TUTOR_ASSET_2, assetName, 320, 200, 1, this.totalFrame, '', 1, 10, true);
+            this._gameGroup.addChild(this.ani);
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
+        }
+    }]);
+    return TutorialChapter_3;
+}(Phaser.Group);
+
+exports.default = TutorialChapter_3;
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TutorialChapter_4 = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialChapter_4, _Phaser$Group);
+
+    function TutorialChapter_4(game, assetNum, totalFrame) {
+        (0, _classCallCheck3.default)(this, TutorialChapter_4);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialChapter_4.__proto__ || (0, _getPrototypeOf2.default)(TutorialChapter_4)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = game.add.group();
+        _this._num = assetNum;
+        _this.totalFrame = totalFrame;
+        return _this;
+    }
+
+    (0, _createClass3.default)(TutorialChapter_4, [{
+        key: "_init",
+        value: function _init() {
+
+            var xPos = ['', 105, 943 - 20, 1086];
+            var yPos = ['', 390, 234, 390];
+            var angle = ['', 0, -15, 15];
+
+            for (var i = 1; i <= 3; i++) {
+                var rndTime = this._game.rnd.integerInRange(4, 15);
+                var _assetName = _AssetKey2.default.TUTOR_VIRUS_PREFIX;
+                this.dust = new _SeparateAnimation2.default(this._game, _AssetKey2.default.TUTOR_ASSET_2, _assetName, xPos[i], yPos[i], 1, 4, '', 1, rndTime, true);
+                this.dust.angle = angle[i];
+                this._game.add.tween(this.dust).to({ y: this.dust.y + rndTime * 2 }, rndTime * 100, Phaser.Easing.Linear.Out, true, 0, 1000, true);
+                this._gameGroup.addChild(this.dust);
+            }
+
+            this.txt = this._gameGroup.add(this._game.make.image(0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_TEXT_PREFIX + this._num));
+            this.txt.x = this._game.width / 2 - this.txt.width / 2;
+            this.txt.y = 54;
+            var assetName = _AssetKey2.default.TUTOR_PPOCHI_PREFIX + this._num + '_';
+            this.ani = new _SeparateAnimation2.default(this.game, _AssetKey2.default.TUTOR_ASSET_2, assetName, 442, 198, 1, this.totalFrame, '', 1, 8, true);
+            this._gameGroup.addChild(this.ani);
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
+        }
+    }]);
+    return TutorialChapter_4;
+}(Phaser.Group);
+
+exports.default = TutorialChapter_4;
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TutorialChapter_5 = function (_Phaser$Group) {
+    (0, _inherits3.default)(TutorialChapter_5, _Phaser$Group);
+
+    function TutorialChapter_5(game, assetNum, totalFrame) {
+        (0, _classCallCheck3.default)(this, TutorialChapter_5);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (TutorialChapter_5.__proto__ || (0, _getPrototypeOf2.default)(TutorialChapter_5)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = game.add.group();
+        _this._num = assetNum;
+        _this.totalFrame = totalFrame;
+        return _this;
+    }
+
+    (0, _createClass3.default)(TutorialChapter_5, [{
+        key: "_init",
+        value: function _init() {
+
+            this.txt = this._gameGroup.add(this._game.make.image(0, 0, _AssetKey2.default.TUTOR_ASSET_1, _AssetKey2.default.TUTOR_TEXT_PREFIX + this._num));
+            this.txt.x = this._game.width / 2 - this.txt.width / 2;
+            this.txt.y = 54;
+            var assetName = _AssetKey2.default.TUTOR_PPOCHI_PREFIX + this._num + '_';
+            this.ani = new _SeparateAnimation2.default(this.game, _AssetKey2.default.TUTOR_ASSET_3, assetName, 324, 174, 1, this.totalFrame, '', 1, 8, true);
+            this._gameGroup.addChild(this.ani);
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
+        }
+    }]);
+    return TutorialChapter_5;
+}(Phaser.Group);
+
+exports.default = TutorialChapter_5;
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+var _ScreenManager = __webpack_require__(25);
+
+var _ScreenManager2 = _interopRequireDefault(_ScreenManager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Intro = function () {
+        function Intro(game) {
+                var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+                (0, _classCallCheck3.default)(this, Intro);
+
+
+                this._game = game;
+                // this._dispatcher = dispatcher;
+                this._parent = parent;
+                this._gameGroup = this._game.add.group();
+
+                if (_GameConfig2.default.SCENE_STATE === 'intro') this._init();
+        }
+
+        (0, _createClass3.default)(Intro, [{
+                key: "_init",
+                value: function _init() {
+
+                        // this._gameGroup.add(this._game.make.image(0, 0, AssetKey.INTRO_BG_ASSET, AssetKey.INTRO_BG));
+
+                        // this.add.image(0, 0, AssetKey.PRELOAD_BG);
+                        this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_BG);
+                        this._gameGroup.addChild(this.bg);
+                        "";
+                        this.shining = new _SeparateAnimation2.default(this._game, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_SHINING_PREFIX, 98, 0, 1, 2, '', 1, 4, true);
+                        this.dust = new _SeparateAnimation2.default(this._game, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_IMG_BIG_DUST_PREFIX, 227, 71, 1, 2, '', 1, 2, true);
+                        this.ppochi = new _SeparateAnimation2.default(this._game, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_PPOCHI_PREFIX, 53, 290, 1, 4, '', 1, 5, true);
+                        this.virus1 = new _SeparateAnimation2.default(this._game, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_VIRUS1_PREFIX, 357, 150, 1, 4, '', 1, 5, true);
+                        this.virus2 = new _SeparateAnimation2.default(this._game, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_VIRUS2_PREFIX, 768, 92, 1, 4, '', 1, 6, true);
+                        this._gameGroup.addChild(this.shining);
+                        this._gameGroup.addChild(this.dust);
+                        this._gameGroup.addChild(this.ppochi);
+                        this._gameGroup.addChild(this.virus1);
+                        this._gameGroup.addChild(this.virus2);
+
+                        this._gameGroup.add(this._game.make.image(447, 179, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_TITLE));
+
+                        this.horse = this._gameGroup.add(this._game.make.image(811, 518, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_HORSE_SHADOW));
+                        this.horse = this._gameGroup.add(this._game.make.image(811, 518, _AssetKey2.default.INTRO_ASSET, _AssetKey2.default.INTRO_HORSE));
+                        this.horse.anchor.setTo(0.5, 1);
+                        this.horse.x = this.horse.x + this.horse.width / 2;
+                        this.horse.y = this.horse.y + this.horse.height;
+                        this.horse.angle = -10;
+                        this._game.add.tween(this.horse).to({ angle: 10 }, 1800, Phaser.Easing.Linear.InOut, true, 0, 1000, true);
+
+                        // this.startBtn = this._gameGroup.add(this._game.make.image(0, 0, AssetKey.BTN_ASSET, AssetKey.START_BUTTON));
+                        // this.startBtn.inputEnabled = true;
+                        // this.startBtn.events.onInputDown.add(this._gameStart, this);
+                        // this.startBtn.x= this._game.width - this.startBtn.width -  502;
+                        // this.startBtn.y= this._game.height - this.startBtn.height - 47;
+
+
+                        this.startBtn = this._gameGroup.addChild(this._game.make.button(0, 0, _AssetKey2.default.BTN_ASSET, this._gameStart.bind(this), this, _AssetKey2.default.START_BUTTON, _AssetKey2.default.START_BUTTON, _AssetKey2.default.START_BUTTON));
+                        this.startBtn.x = this._game.width - this.startBtn.width - 502;
+                        this.startBtn.y = this._game.height - this.startBtn.height - 47;
+                }
+
+                /**
+                 * GAME START
+                 */
+
+        }, {
+                key: "_gameStart",
+                value: function _gameStart() {
+
+                        // SoundManager.instance.allSoundPause();
+                        _SoundManager2.default.instance.allSoundPauseEnding();
+
+                        _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.START_SOUND);
+                        _GameConfig2.default.TUTORIAL_DISABLED = true;
+                        this.startBtn.input.enabled = false;
+                        this._game.time.events.add(1200, enabled, this);
+
+                        // if(!this._game.device.desktop && this._game.device.fullscreen){
+                        /*if(!this._game.device.desktop){
+                            // ScreenManager.instance.fullScreen();
+                        }*/
+
+                        function enabled() {
+                                _GameConfig2.default.TUTORIAL_DISABLED = false;
+                                this._parent._create();
+                        }
+                }
+        }, {
+                key: "_destroy",
+                value: function _destroy() {
+                        this._gameGroup.removeChildren(0, this._gameGroup.length);
+                        this._game.time.events.removeAll();
+                }
+        }]);
+        return Intro;
+}();
+
+exports.default = Intro;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _SignBoard = __webpack_require__(117);
+
+var _SignBoard2 = _interopRequireDefault(_SignBoard);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _MouseEffect = __webpack_require__(43);
+
+var _MouseEffect2 = _interopRequireDefault(_MouseEffect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var phase = void 0,
+    hit = void 0,
+    obj = void 0,
+    inGame = void 0;
+
+var ObjectManager = function (_Phaser$Group) {
+    (0, _inherits3.default)(ObjectManager, _Phaser$Group);
+
+    function ObjectManager(game, bgObj) {
+        (0, _classCallCheck3.default)(this, ObjectManager);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (ObjectManager.__proto__ || (0, _getPrototypeOf2.default)(ObjectManager)).call(this, game));
+
+        _this._game = game;
+
+        _this._bgGroup = _this._game.add.group();
+
+        phase = 1;
+        hit = false;
+        inGame = true;
+        obj = null;
+        _this._createBg(phase);
+        return _this;
+    }
+
+    (0, _createClass3.default)(ObjectManager, [{
+        key: "_createBg",
+        value: function _createBg(num) {
+
+            this._destroy();
+            if (this.phaseBtn) this._bgGroup.removeChild(this.phaseBtn);
+
+            var assetName = _AssetKey2.default.BG_CHAPTER_PREFIX + num;
+
+            if (num < 3) this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.BG_ASSET, assetName);else this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.BG_ASSET_3, assetName);
+
+            this.bg.inputEnabled = true;
+            this.bg.events.onInputDown.add(this._bgClick, this);
+            this._bgGroup.addChild(this.bg);
+
+            if (!this.signBoard) this.signBoard = new _SignBoard2.default(this._game, phase);
+            this.signBoard._objectGenerate();
+            this.signBoard._dustGenerate();
+        }
+    }, {
+        key: "_bgClick",
+        value: function _bgClick() {
+            if (!_GameConfig2.default.IN_GAME) return;
+            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.BASIC_TOUCH_SOUND);
+            new _MouseEffect2.default(this._game, this._game.input.x, this._game.input.y, 40, 1);
+        }
+    }, {
+        key: "_update",
+        value: function _update() {
+
+            if (!inGame) return;
+            if (_GameConfig2.default.CURRENT_DUST >= _GameConfig2.default.TOTAL_DUST) {
+                if (_GameConfig2.default.CURRENT_CHAPTER >= _GameConfig2.default.TOTAL_CHAPTER) {
+                    this._end();
+                    inGame = false;
+                } else {
+                    this._chapterClear();
+                    inGame = false;
+                    return;
+                }
+            }
+
+            this.signBoard._update();
+        }
+
+        /**
+         *
+         * EFFECT SOUND HANDLER
+         */
+
+    }, {
+        key: "_effectSoundHandler",
+        value: function _effectSoundHandler(target, context, asset) {
+
+            // SoundManager.instance.effectSound(asset, 0.7);
+
+        }
+    }, {
+        key: "_chapterClear",
+        value: function _chapterClear() {
+            var _this2 = this;
+
+            _GameConfig2.default.HELP_BUTTON.visible = false;
+            this.signBoard._chapterClear();
+
+            this._game.add.tween(this.bg).to({ alpha: 0 }, 500, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            this.compBg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.BG_COMP_ASSET, _AssetKey2.default.BG_COMP_PREFIX + _GameConfig2.default.CURRENT_CHAPTER);
+            this._bgGroup.addChild(this.compBg);
+            this.compBg.alpha = 0;
+            this._game.add.tween(this.compBg).to({ alpha: 1 }, 500, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            setTimeout(function () {
+                _this2._chapterCompleteHandler();
+            }, 3000);
+        }
+    }, {
+        key: "_chapterCompleteHandler",
+        value: function _chapterCompleteHandler() {
+
+            this.signBoard._chapterCompleteHandler();
+            this._phaseBtnGenerate();
+        }
+
+        /**
+         * Phase btn
+         */
+
+    }, {
+        key: "_phaseBtnGenerate",
+        value: function _phaseBtnGenerate() {
+
+            this.phaseBtn = this._bgGroup.add(this._game.make.button(1031, 600, _AssetKey2.default.DEFAULT_GAME_ATLAS, this.onPhase.bind(this), this, _AssetKey2.default.BTN_MOVE_DEFAULT, _AssetKey2.default.BTN_MOVE_DEFAULT, _AssetKey2.default.BTN_MOVE_OVER));
+            this.phaseBtnSound = null;
+            this._buttonSndPlay(_SoundAssetKey2.default.BASIC_TOUCH_SOUND, this.phaseBtnSound, this.phaseBtn);
+        }
+    }, {
+        key: "_buttonSndPlay",
+        value: function _buttonSndPlay(sndKey, snd, btn) {
+
+            // SoundManager.instance.allSoundPause();
+            // snd = this._game.add.audio(sndKey);
+            // btn.setDownSound(snd);
+
+        }
+    }, {
+        key: "onPhase",
+        value: function onPhase() {
+            // SoundManager.instance.effectSoundStop(SoundAssetKey.COMPLETE_MESSAGE_1);
+            // SoundManager.instance.effectSoundStop(SoundAssetKey.COMPLETE_MESSAGE_2);
+            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, _GameConfig2.default.MUTE_SOUND_VOLUME, false, true);
+
+            var currentNum = _GameConfig2.default.CURRENT_CHAPTER;
+            if (currentNum < _GameConfig2.default.TOTAL_CHAPTER) {
+                currentNum++;
+                _GameConfig2.default.CURRENT_CHAPTER = currentNum;
+            }
+
+            this._createBg(currentNum);
+            hit = false;
+            inGame = true;
+            obj = null;
+            _GameConfig2.default.CURRENT_DUST = -_GameConfig2.default.TOTAL_DUST;
+            _GameConfig2.default.HELP_BUTTON.visible = true;
+            // this._game.world.swap(this.signBoard, GameConfig.HELP_BUTTON);
+            // console.log('phase Move', currentNum);
+        }
+    }, {
+        key: "_end",
+        value: function _end() {
+            this._destroy();
+            _GameConfig2.default.GAME_FINISH = true;
+        }
+    }, {
+        key: "_objectPause",
+        value: function _objectPause() {
+            inGame = false;
+            for (var i = 0; i < this._bgGroup.length; i++) {
+                this._bgGroup.children[i].visible = false;
+            }
+            this.signBoard._objectPause();
+        }
+    }, {
+        key: "_objectReplay",
+        value: function _objectReplay() {
+
+            inGame = true;
+            for (var i = 0; i < this._bgGroup.length; i++) {
+                this._bgGroup.children[i].visible = true;
+            }
+            this.signBoard._objectReplay();
+        }
+    }, {
+        key: "_objDestroy",
+        value: function _objDestroy() {
+
+            this._bgGroup.removeChildren(0, this._bgGroup.length);
+            if (this.signBoard) {
+                this.signBoard._destroy();
+                this.signBoard.destroy(true);
+            }
+        }
+    }, {
+        key: "_destroy",
+        value: function _destroy() {
+            // this._bgGroup.destroy();
+            this._bgGroup.removeChildren(0, this._bgGroup.length);
+            if (this.signBoard) {
+                this.signBoard._destroy();
+                // this.signBoard.destroy(true);
+            }
+        }
+    }]);
+    return ObjectManager;
+}(Phaser.Group);
+
+exports.default = ObjectManager;
 
 /***/ }),
 /* 117 */
@@ -116407,50 +115955,362 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _PpoChi = __webpack_require__(118);
+
+var _PpoChi2 = _interopRequireDefault(_PpoChi);
+
+var _Dust = __webpack_require__(119);
+
+var _Dust2 = _interopRequireDefault(_Dust);
+
+var _Tools = __webpack_require__(121);
+
+var _Tools2 = _interopRequireDefault(_Tools);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _MouseEffect = __webpack_require__(43);
+
+var _MouseEffect2 = _interopRequireDefault(_MouseEffect);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var xPos = [457, 473, 832, 845];
-var yPos = [394, 431, 328, 363];
-var scale = [0.5, 1, 0.5, 1];
-var time = [1500, 2200, 1600, 2000];
+var cloudXpos = ['', 126, 57];
+var cloudYpos = ['', 227, 221];
 
-var IntroEffect = function () {
-    function IntroEffect(game, key) {
-        (0, _classCallCheck3.default)(this, IntroEffect);
+var currentX = void 0;
+var currentY = void 0;
+var term = void 0;
 
-        this.game = game;
-        this.gameGroup = this.game.add.group();
-        this.key = key;
-        this._create();
+var xTerm = 0;
+var yTerm = -50;
+var xPos = [320, 234, 527, 820, 1032, 192, 288, 540, 800, 1055];
+var yPos = [100, 243, 233, 248, 120, 422, 522, 478, 508, 408];
+var smudgeArr = [];
+var smudgeFront = [[], [4, 5], [5, 6], [6, 8, 9, 10, 11, 12]];
+var smudgeXpos = [[], [20, 642, 1032, 14, 409, 700, 963], [22, 460, 1033, -141, 547, 988, 943], [15, 592, 1090, -155, 562, 1075, 927, 23, 379, 467, 807, 841, 1045]];
+var smudgeYpos = [[], [32, 62, -65, 479, 565, 386, 419], [28, 203, -65, 501, 607, 428, 547], [66, 57, 199, 466, 620, 524, 177, 562, 370, 590, 645, 566, 630]];
+var smudgeScaleArr = [0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45];
+
+var SignBoard = function () {
+    function SignBoard(game, assetNum) {
+        (0, _classCallCheck3.default)(this, SignBoard);
+
+        // super(game, 0, 0, AssetKey.DEFAULT_GAME_ATLAS, assetNum);
+        // super(game);
+        this._game = game;
+        this._gameGroup = this._game.add.group();
+        this._dustGroup = this._game.add.group();
+        this._toolsGroup = this._game.add.group();
+        this._num = assetNum;
     }
 
-    (0, _createClass3.default)(IntroEffect, [{
-        key: '_create',
-        value: function _create() {
+    /**
+     * OBJECT GENERATE
+     * @private
+     */
 
+    (0, _createClass3.default)(SignBoard, [{
+        key: "_objectGenerate",
+        value: function _objectGenerate() {
+
+            var chapterNum = _GameConfig2.default.CURRENT_CHAPTER;
+            var signBoardAssetName = _AssetKey2.default.SIGN_BOARD_PREFIX + chapterNum;
+            var smudgePrefix = _AssetKey2.default.SMUDGE_PREFIX + chapterNum + "_";
+            var arrX = smudgeXpos[chapterNum];
+            var arrY = smudgeYpos[chapterNum];
+            var len = arrX.length;
+            for (var i = 0; i < len; i++) {
+                // if((i+1) !== smudgeFront[chapterNum][0] && (i+1) !== smudgeFront[chapterNum][1])
+
+                this.smudge = new Phaser.Image(this._game, arrX[i], arrY[i], _AssetKey2.default.SMUDGE_ASSET, smudgePrefix + (i + 1));
+                this.smudge.anchor.setTo(0.5, 0.5);
+                this.smudge.x += this.smudge.width / 2;
+                this.smudge.y += this.smudge.height / 2;
+                this._gameGroup.addChild(this.smudge);
+                smudgeArr.push(this.smudge);
+                // this.smudge.sendToBack()
+            }
+
+            var bgAssetName = _AssetKey2.default.BG_OBJECT_PREFIX + chapterNum;
+
+            if (chapterNum < 3) {
+
+                this.obj = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.BG_ASSET, bgAssetName);
+            } else {
+                this.obj = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.BG_ASSET_3, bgAssetName);
+            }
+            this.obj.inputEnabled = true;
+            this.obj.events.onInputDown.add(this._bgClick, this);
+            this._gameGroup.addChild(this.obj);
+
+            //ALIGN
+            var arr = smudgeFront[_GameConfig2.default.CURRENT_CHAPTER];
+            for (var _i = 0; _i < arr.length; _i++) {
+                smudgeArr[arr[_i]].bringToTop();
+            }
+
+            this._miscObjectAdd();
+
+            this.board = new Phaser.Image(this._game, 464, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS, signBoardAssetName);
+            this._gameGroup.addChild(this.board);
+
+            this.tools = new _Tools2.default(this._game, chapterNum);
+            this.tools.x = 0;
+            this.tools.y = 0;
+            this._toolsGroup.addChild(this.tools);
+            this.tools.visible = false;
+
+            currentX = this.tools.x;
+            currentY = this.tools.y;
+        }
+    }, {
+        key: "_bgClick",
+        value: function _bgClick() {
+            if (!_GameConfig2.default.IN_GAME) return;
+            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.BASIC_TOUCH_SOUND);
+            new _MouseEffect2.default(this._game, this._game.input.x, this._game.input.y, 40, 1);
+        }
+    }, {
+        key: "_miscObjectAdd",
+        value: function _miscObjectAdd() {
+            if (_GameConfig2.default.CURRENT_CHAPTER !== 3) return;
+            var xPos = ['', 402, 818];
+            var yPos = ['', 624, 606];
+            for (var i = 1; i <= 2; i++) {
+
+                this.misc = new Phaser.Image(this._game, xPos[i], yPos[i], _AssetKey2.default.DEFAULT_GAME_ATLAS, _AssetKey2.default.MISC_OBJECT_PREFIX + i);
+                this._gameGroup.addChild(this.misc);
+            }
+
+            var arr = smudgeFront[_GameConfig2.default.CURRENT_CHAPTER];
+            smudgeArr[arr[3]].bringToTop();
+        }
+
+        /**
+         * DUST  GENERATE
+         * @private
+         */
+
+    }, {
+        key: "_dustGenerate",
+        value: function _dustGenerate() {
+
+            var chapterNum = _GameConfig2.default.CURRENT_CHAPTER;
             for (var i = 0; i < xPos.length; i++) {
-                // let num = this.game.rnd.integerInRange(0, 3);
-                var img = new Phaser.Image(this.game, xPos[i], yPos[i], this.key, 'intro_twinkle');
-                img.alpha = 0;
-                img.anchor.setTo(0.5, 0.5);
-                var scaleNum = this.game.rnd.integerInRange(3, 10) / 10;
-                img.scale.setTo(scaleNum, scaleNum);
-                this.gameGroup.addChild(img);
-
-                this.game.add.tween(img.scale).to({ x: scale[i], y: scale[i] }, time[i], Phaser.Easing.Quartic.Out, true, scaleNum * 1000, 1000, false);
-                this.game.add.tween(img).to({ alpha: 0.8 }, time[i], Phaser.Easing.Quartic.Out, true, scaleNum * 1000, 1000, false);
+                this.dust = new _Dust2.default(this._game, chapterNum);
+                this.dust.x = xPos[i] + xTerm;
+                this.dust.y = yPos[i] + yTerm;
+                // this._game.physics.arcade.enable(this.dust);
+                var distance = this._game.rnd.integerInRange(10, 40);
+                var time = this._game.rnd.integerInRange(800, 2500);
+                this._dustGroup.addChild(this.dust);
+                this.dust._generate(this.dust, distance, time);
+                this.dust.inputEnabled = true;
+                this.dust.events.onInputDown.add(this._dustClickHandler, this, '', this.dust);
+                // this.dust.bringToTop();
             }
         }
     }, {
-        key: '_destroy',
+        key: "_dustClickHandler",
+        value: function _dustClickHandler(obj) {
+            var _this = this;
+
+            // obj.inputEnabled = false;
+            var chapter = _GameConfig2.default.CURRENT_CHAPTER;
+            this.tools.angle = 0;
+            this.tools.alpha = 1;
+            this.tools.visible = true;
+            term = 0;
+            this.tools.x = parseInt(obj.x);
+            this.tools.y = parseInt(obj.y);
+
+            if (chapter < 3) {
+
+                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.DUST_TOUCH_1, 1);
+                this._game.add.tween(this.tools).to({ angle: 15 }, 80, Phaser.Easing.Linear.Out, true, 0, 1, true);
+            } else {
+                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.DUST_TOUCH_3, 0.2);
+                if (obj.x >= this._game.width / 2) {
+                    this.tools.scale.x = -1;
+                    term = -40;
+                } else {
+                    term = 40;
+                    this.tools.scale.x = 1;
+                }
+
+                this.tools.x = parseInt(obj.x) + term;
+                this.tools.y = parseInt(obj.y);
+
+                this._game.add.tween(this.tools).to({ y: obj.y + 10 }, 80, Phaser.Easing.Linear.Out, true, 0, 1, true);
+            }
+
+            var alpha = this._game.add.tween(this.tools).to({ alpha: 0 }, 200, Phaser.Easing.Linear.Out, true, 100, 0, false);
+            alpha.onComplete.add(function () {
+                if (obj._count <= _GameConfig2.default.CLEAR_NUMBER - 1) obj.inputEnabled = true;else _this._smudgeHandler();
+            });
+            obj._collisionEffect(obj);
+        }
+    }, {
+        key: "_smudgeHandler",
+        value: function _smudgeHandler() {
+            var num = _GameConfig2.default.CURRENT_DUST - 1;
+            for (var i = 0; i < smudgeArr.length; i++) {
+                smudgeArr[i].alpha = smudgeScaleArr[num];
+                this._game.add.tween(smudgeArr[i].scale).to({ x: smudgeScaleArr[num], y: smudgeScaleArr[num] }, 500, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            }
+        }
+
+        /**
+         * CLEAR
+         * @private
+         */
+
+    }, {
+        key: "_chapterClear",
+        value: function _chapterClear() {
+            var _this2 = this;
+
+            this._destroy();
+            // SoundManager.instance.effectSound(SoundAssetKey.DUST_ALL_REMOVE);
+            // this._game.add.tween(this.obj).to({alpha : 0}, 300, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            var signBoardAssetName = _AssetKey2.default.SIGN_BOARD_COMP_PREFIX + _GameConfig2.default.CURRENT_CHAPTER;
+            this.board = new Phaser.Image(this._game, 464, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS, signBoardAssetName);
+            this._gameGroup.addChild(this.board);
+            this.star = new _SeparateAnimation2.default(this._game, _AssetKey2.default.BG_COMP_ASSET, _AssetKey2.default.BG_STAR_PREFIX, 623, 96, 1, 2, '', 1, 3);
+            this._gameGroup.addChild(this.star);
+
+            setTimeout(function () {
+
+                _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.CHAPTER_COMPLETE;
+                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.CHAPTER_COMPLETE, 1);
+                _this2.stamp = new Phaser.Image(_this2._game, 134, 228, _AssetKey2.default.DEFAULT_GAME_ATLAS, _AssetKey2.default.IMG_STAMP);
+                _this2._gameGroup.addChild(_this2.stamp);
+                _this2.stamp.anchor.setTo(0.5, 0.5);
+                _this2.stamp.x += _this2.stamp.width / 2;
+                _this2.stamp.y += _this2.stamp.height / 2;
+                _this2.stamp.scale.x = 1.5;
+                _this2.stamp.scale.y = 1.5;
+
+                // this._game.add.tween(this.stamp).to( { alpha: 1}, 800, Phaser.Easing.Bounce.Out, true, 0, 0, false);
+                _this2.tween = _this2._game.add.tween(_this2.stamp.scale).to({ x: 1, y: 1 }, 800, Phaser.Easing.Bounce.Out, true, 0, 0, false);
+                // this.tween.onComplete.addOnce(this._txtCloudHandler, this);
+
+                _this2.ppochi = new _PpoChi2.default(_this2._game);
+                // this.ppochi.x = this._game.width - this.ppochi.width - 126;
+                // this.ppochi.y = this._game.height - this.ppochi.height - 48;
+                _this2.ppochi.x = 456;
+                _this2.ppochi.y = -17;
+                _this2._gameGroup.addChild(_this2.ppochi);
+            }, 1000);
+        }
+    }, {
+        key: "_chapterCompleteHandler",
+        value: function _chapterCompleteHandler() {
+
+            this.tween = this._game.add.tween(this.stamp).to({ alpha: 0 }, 300, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            this._txtCloudHandler();
+        }
+
+        /**
+         * TEXT CLOUD
+         * @private
+         */
+
+    }, {
+        key: "_txtCloudHandler",
+        value: function _txtCloudHandler() {
+            var _this3 = this;
+
+            this._num = _GameConfig2.default.CURRENT_CHAPTER;
+            this.txtCloud = new Phaser.Image(this._game, cloudXpos[this._num], cloudYpos[this._num], _AssetKey2.default.DEFAULT_GAME_ATLAS, _AssetKey2.default.TALKCLOUD_PREFIX + this._num);
+            this.txtCloud.x += this.txtCloud.width;
+            this.txtCloud.y += this.txtCloud.height;
+            this.txtCloud.scale.x = 0;
+            this.txtCloud.scale.y = 0;
+            this.txtCloud.anchor.setTo(1, 1);
+
+            setTimeout(function () {
+                if (_this3._num === _GameConfig2.default.CURRENT_CHAPTER) {
+                    if (_this3._num === 1) {
+                        _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.COMPLETE_MESSAGE_1;
+                        _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.COMPLETE_MESSAGE_1);
+                    } else if (_this3._num === 2) {
+                        _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.COMPLETE_MESSAGE_2;
+                        _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.COMPLETE_MESSAGE_2);
+                    }
+
+                    _this3._gameGroup.removeChild(_this3.stamp);
+                    _this3._gameGroup.addChild(_this3.txtCloud);
+                    _this3._game.add.tween(_this3.txtCloud.scale).to({ x: 1, y: 1 }, 500, Phaser.Easing.Back.Out, true, 0, 0, false);
+                }
+            }, 500);
+        }
+    }, {
+        key: "_objectPause",
+        value: function _objectPause() {
+            for (var i = 0; i < this._gameGroup.length; i++) {
+                this._gameGroup.children[i].visible = false;
+            }
+            for (var _i2 = 0; _i2 < this._dustGroup.length; _i2++) {
+                this._dustGroup.children[_i2].visible = false;
+            }
+            for (var _i3 = 0; _i3 < this._toolsGroup.length; _i3++) {
+                this._toolsGroup.children[_i3].visible = false;
+            }
+        }
+    }, {
+        key: "_objectReplay",
+        value: function _objectReplay() {
+            for (var i = 0; i < this._gameGroup.length; i++) {
+                this._gameGroup.children[i].visible = true;
+            }
+            for (var _i4 = 0; _i4 < this._dustGroup.length; _i4++) {
+                this._dustGroup.children[_i4].visible = true;
+                this._dustGroup.children[_i4]._flipChange();
+            }
+            for (var _i5 = 0; _i5 < this._toolsGroup.length; _i5++) {}
+        }
+    }, {
+        key: "_update",
+        value: function _update() {
+
+            for (var i = 0; i < this._dustGroup.length; i++) {
+                this._dustGroup.children[i]._movement();
+            }
+        }
+    }, {
+        key: "_destroy",
         value: function _destroy() {
-            this.gameGroup.removeChildren(0, this.gameGroup.length);
+            smudgeArr = [];
+            this.tools._destroy();
+            this._toolsGroup.removeChild(this.tools);
+            this._dustGroup.removeChildren(0, this._dustGroup.length);
+            this._gameGroup.removeChildren(0, this._gameGroup.length);
         }
     }]);
-    return IntroEffect;
+    return SignBoard;
 }();
 
-exports.default = IntroEffect;
+exports.default = SignBoard;
 
 /***/ }),
 /* 118 */
@@ -116460,10 +116320,10 @@ exports.default = IntroEffect;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+        value: true
 });
 
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -116471,201 +116331,41 @@ var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _AssetKey = __webpack_require__(3);
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _CornerMain = __webpack_require__(119);
-
-var _CornerMain2 = _interopRequireDefault(_CornerMain);
-
-var _PurchaseList = __webpack_require__(62);
-
-var _PurchaseList2 = _interopRequireDefault(_PurchaseList);
-
-var _PurchaseListView = __webpack_require__(128);
-
-var _PurchaseListView2 = _interopRequireDefault(_PurchaseListView);
-
-var _CalculatePos = __webpack_require__(130);
-
-var _CalculatePos2 = _interopRequireDefault(_CalculatePos);
-
-var _PaymentPos = __webpack_require__(133);
-
-var _PaymentPos2 = _interopRequireDefault(_PaymentPos);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CornerManager = function (_Phaser$Group) {
-    (0, _inherits3.default)(CornerManager, _Phaser$Group);
+var PpoChi = function (_Phaser$Sprite) {
+        (0, _inherits3.default)(PpoChi, _Phaser$Sprite);
 
-    function CornerManager(game, parent) {
-        (0, _classCallCheck3.default)(this, CornerManager);
+        function PpoChi(game) {
+                (0, _classCallCheck3.default)(this, PpoChi);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (CornerManager.__proto__ || (0, _getPrototypeOf2.default)(CornerManager)).call(this, game));
+                var _this = (0, _possibleConstructorReturn3.default)(this, (PpoChi.__proto__ || (0, _getPrototypeOf2.default)(PpoChi)).call(this, game, 0, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS));
 
-        _this._game = game;
-        _this._bgGroup = _this._game.add.group();
-        _this._chapterGroup = _this._game.add.group();
-        _this._buttonGroup = _this._game.add.group();
-        _this._parent = parent;
-        _this.key = null;
-        _this.chapter = null;
-        _this.purchaseListView = null;
+                _this._game = game;
 
-        //LIST GENERATE
-        _this._purchaseGenerate();
+                _this.animations.add(_AssetKey2.default.IMG_PPOCHI_PREFIX, Phaser.Animation.generateFrameNames(_AssetKey2.default.IMG_PPOCHI_PREFIX, 1, 4, "", 1), 1, true);
 
-        //PURCHASE LIST VIEW
-        _this._createPurchaseList();
+                _this.animations.play(_AssetKey2.default.IMG_PPOCHI_PREFIX, 5, true);
 
-        //CORNER
-        // this._createCorner(GameConfig.CURRENT_CHAPTER);
-
-        //CALCULATE POS
-        // this._createCalculatePos();
-
-        //PAYMENT POS
-        // this._createPaymentPos();
-
-
-        return _this;
-    }
-
-    (0, _createClass3.default)(CornerManager, [{
-        key: "_createPaymentPos",
-        value: function _createPaymentPos() {
-
-            this._paymentPos = new _PaymentPos2.default(this._game);
-            this._createController();
+                return _this;
         }
-    }, {
-        key: "_createCalculatePos",
-        value: function _createCalculatePos() {
 
-            this._calculatePos = new _CalculatePos2.default(this._game, this);
-            this._createController();
-        }
-    }, {
-        key: "_createPurchaseList",
-        value: function _createPurchaseList() {
+        return PpoChi;
+}(Phaser.Sprite);
 
-            this.purchaseListView = new _PurchaseListView2.default(this._game, this._bgGroup, this);
-            this._createController();
-        }
-    }, {
-        key: "_createCorner",
-        value: function _createCorner(num) {
-
-            if (this.chapter !== null) {
-                this.chapter._destroy();
-                this.chapter = null;
-            }
-
-            if (this.purchaseListView) {
-                this.purchaseListView._destroy();
-                this.purchaseListView = null;
-            }
-
-            this.chapter = new _CornerMain2.default(this._game, this);
-            this.chapter._setting(this._bgGroup, this._chapterGroup, this._buttonGroup);
-        }
-    }, {
-        key: "_createPos",
-        value: function _createPos() {
-            if (this.chapter) {
-                this.chapter._destroy();
-                this.chapter = null;
-            }
-            // console.log('pos');
-            this._createCalculatePos();
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-
-            if (this.chapter) this.chapter._update();
-            if (this._paymentPos) this._paymentPos._update();
-            if (this.purchaseListView) this.purchaseListView._update();
-        }
-    }, {
-        key: "_createController",
-        value: function _createController() {
-            var backButtonEnable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-            this._parent._createController(backButtonEnable);
-        }
-    }, {
-        key: "_purchaseGenerate",
-        value: function _purchaseGenerate() {
-            var arr = new _PurchaseList2.default(this._game);
-            _GameConfig2.default.PURCHASE_LIST = arr.purchaseList();
-        }
-    }, {
-        key: "_end",
-        value: function _end() {
-            _GameConfig2.default.GAME_FINISH = true;
-            this._destroy();
-        }
-    }, {
-        key: "_objectPause",
-        value: function _objectPause() {
-            _GameConfig2.default.IN_GAME = false;
-            for (var i = 0; i < this._bgGroup.length; i++) {
-                this._bgGroup.children[i].visible = false;
-            }
-            this.chapter._objectPause();
-        }
-    }, {
-        key: "_objectReplay",
-        value: function _objectReplay() {
-
-            _GameConfig2.default.IN_GAME = true;
-            for (var i = 0; i < this._bgGroup.length; i++) {
-                this._bgGroup.children[i].visible = true;
-            }
-            this.chapter._objectReplay();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            /*  if(! GameConfig.IN_GAME)
-              {
-                  this._bgGroup.removeChildren(0, this._bgGroup.length);
-              }*/
-            // if(this._chapterGroup) this._chapterGroup.removeChildren(0, this._chapterGroup.length);
-            this._bgGroup.removeChildren(0, this._bgGroup.length);
-        }
-    }]);
-    return CornerManager;
-}(Phaser.Group);
-
-exports.default = CornerManager;
+exports.default = PpoChi;
 
 /***/ }),
 /* 119 */
@@ -116678,6 +116378,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
 var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -116686,350 +116390,176 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _GameConfig = __webpack_require__(2);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _SoundManager = __webpack_require__(4);
+var _inherits2 = __webpack_require__(4);
 
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
+var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _Categories = __webpack_require__(61);
-
-var _Categories2 = _interopRequireDefault(_Categories);
-
-var _AssetKey = __webpack_require__(3);
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
-var _CornerButton = __webpack_require__(120);
+var _GameConfig = __webpack_require__(6);
 
-var _CornerButton2 = _interopRequireDefault(_CornerButton);
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
 
-var _Corner = __webpack_require__(121);
+var _CollisionEffect = __webpack_require__(120);
 
-var _Corner2 = _interopRequireDefault(_Corner);
-
-var _PpiyoCart = __webpack_require__(123);
-
-var _PpiyoCart2 = _interopRequireDefault(_PpiyoCart);
-
-var _PurchaseSlider = __webpack_require__(125);
-
-var _PurchaseSlider2 = _interopRequireDefault(_PurchaseSlider);
-
-var _PurchaseList = __webpack_require__(62);
-
-var _PurchaseList2 = _interopRequireDefault(_PurchaseList);
+var _CollisionEffect2 = _interopRequireDefault(_CollisionEffect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _categoryArr = ['', _Categories2.default.VEGETABLE, _Categories2.default.SEAFOOD, _Categories2.default.MEAT, _Categories2.default.NECESSARY, _Categories2.default.DAIRY, _Categories2.default.SNACK, _Categories2.default.NOTYET, _Categories2.default.COUNTER];
+var dustAsset = ['', _AssetKey2.default.DUST_PREFIX_1, _AssetKey2.default.DUST_PREFIX_2, _AssetKey2.default.DUST_PREFIX_3];
 
-var _btnArr = void 0,
-    _categoryPopEnable = void 0;
+// let _angleArr = [-20, -10, 0, 10, 20];
+var _angleArr = [-60, -40, -20, 0, 10];
+var LIMITED_LEFT = _GameConfig2.default.MIN_XPOS;
+var LIMITED_RIGHT = _GameConfig2.default.MAX_XPOS;
 
-var CornerMain = function () {
-    function CornerMain(game, parent) {
-        (0, _classCallCheck3.default)(this, CornerMain);
+var Dust = function (_Phaser$Image) {
+    (0, _inherits3.default)(Dust, _Phaser$Image);
 
-        this._game = game;
-        this._bgGroup = null;
-        this._gameGroup = null;
-        this._buttonGroup = null;
-        this._parent = parent;
-        this._key = _AssetKey2.default.MAIN_DISPLAY_ASSET;
-        this._corner = null;
-        this._ppiyoCart = null;
-        this._backButton = null;
-        this._cornerPop = false;
-        this._purchaseSlide = null;
-        this._shoppingComplete = false;
-        this._soundComplete = false;
-        _categoryPopEnable = ['', false, false, false, false, false, false, false, false];
-        _btnArr = [null];
-        this._sndPlay();
+    function Dust(game, assetNum) {
+        (0, _classCallCheck3.default)(this, Dust);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (Dust.__proto__ || (0, _getPrototypeOf2.default)(Dust)).call(this, game, 0, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS, assetNum));
+
+        _this._game = game;
+        _this._gameGroup = _this._game.add.group();
+        _this._num = assetNum;
+        // this._alphaArr = [0.8, 0.55, 0.35];
+        _this._alphaArr = [0.7, 0.3];
+        // this._enabled = true;
+        _this._clearNumber = _GameConfig2.default.CLEAR_NUMBER;
+        _this._count = 0;
+        _this.flip = true;
+        _this.flipEnabled = true;
+        _this.fps = _this._game.rnd.integerInRange(2, 7);
+
+        _this.animations.add(dustAsset[_this._num], Phaser.Animation.generateFrameNames(dustAsset[_this._num], 1, 4, "", 1), 1, true);
+        _this.animations.play(dustAsset[_this._num], _this.fps, true);
+
+        // this._game.add.image(0, 0, AssetKey.DEFAULT_GAME_ATLAS, AssetKey.DUST_PREFIX_1 + this._num);
+
+
+        _this._flipChange();
+
+        return _this;
     }
 
-    (0, _createClass3.default)(CornerMain, [{
-        key: "_sndPlay",
-        value: function _sndPlay() {
-            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.guideNarr_2);
-            _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.guideNarr_2;
+    (0, _createClass3.default)(Dust, [{
+        key: "_generate",
+        value: function _generate(obj, distance, time) {
+            obj.anchor.setTo(0.5, 0.5);
+            obj.x += obj.width / 2;
+            obj.y += obj.height / 2;
+            obj.scale.x = 0.1;
+            obj.scale.y = 0.1;
+            var angle = this._game.rnd.integerInRange(0, _angleArr.length - 1);
+            obj.angle = _angleArr[angle];
+            var scale = _GameConfig2.default.DUST_SCALE;
+            // let scale = 1;
+            this._game.add.tween(obj.scale).to({ x: scale, y: scale }, time / 2, Phaser.Easing.Elastic.Out, true, 0, 0, false);
+            this._game.add.tween(obj).to({ alpha: 1 }, time / 2, Phaser.Easing.Linear.Out, true, 0, 0, false);
+            this._game.add.tween(obj).to({ y: obj.y + distance }, time, Phaser.Easing.Linear.Out, true, 0, 1000, true);
+            this._game.add.tween(obj).to({ angle: distance }, time, Phaser.Easing.Linear.Out, true, 0, 1000, true);
         }
     }, {
-        key: "_setting",
-        value: function _setting(bgGroup, gameGroup, buttonGroup) {
+        key: "_flipChange",
+        value: function _flipChange() {
 
-            // SoundManager.instance.effectSoundStop(GameConfig.CURRENT_GUIDE_SOUND, 0, false, true);
+            var delayTime = void 0;
+            var rNum = Math.random() * 0.5 + 0.5;
+            this.speed = rNum.toFixed(1);
 
-            this._bgGroup = bgGroup;
-            this._gameGroup = gameGroup;
-            this._buttonGroup = buttonGroup;
-
-            this.bgRect = this._game.add.graphics(0, 0);
-            this.bgRect.beginFill(0xfcf183, 1);
-            this.bgRect.drawRect(0, 0, 1280, 720);
-            this.bgRect.endFill();
-            this._bgGroup.addChild(this.bgRect);
-
-            for (var i = 1; i < _categoryArr.length; i++) {
-                var asset = _categoryArr[i].category;
-                var xPos = _categoryArr[i].displayPosition.xPos;
-                var yPos = _categoryArr[i].displayPosition.yPos;
-
-                var dummy = asset === 'notYet';
-                var btn = new _CornerButton2.default(this._game, this._buttonGroup, asset, xPos, yPos, this, i, dummy);
-                _btnArr.push(btn);
+            var num = this._game.rnd.integerInRange(1, 10) % 2;
+            if (num === 0) {
+                this.flip = !this.flip;
+                this.scale.x *= -1;
             }
 
-            //CREATE BACK BUTTON
-            this._createBackButton();
+            var fcr = Math.random() * _GameConfig2.default.FLIP_CHANGE_RANDOM;
 
-            //CORNER  BUTTON INIT
-            this._cornerButtonEnable(true);
-
-            //PURCHASE SLIDE
-            this._purchaseSlidePop();
-
-            //CONTROLLER RESET
-            this._parent._createController();
+            delayTime = parseInt(fcr) + _GameConfig2.default.FLIP_CHANGE_INTERVAL;
+            // console.log(parseInt(fcr), delayTime)
+            this._game.time.events.add(delayTime, this._flipChange, this);
         }
     }, {
-        key: "_cornerGenerate",
-        value: function _cornerGenerate(num) {
-
-            if (_GameConfig2.default.SOUND_ENABLED) _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.BGM_VOLUME, true, false);
-
-            this._cornerButtonEnable(false, num);
-            this._removeCorner();
-
-            //COUNTER ENABLED
-            if (num >= _categoryArr.length - 1) {
-                if (this._purchaseSlide) this._purchaseSlide._destroy();
-                this._destroy();
-                this._parent._createPos();
-                return;
+        key: "_movement",
+        value: function _movement() {
+            // this._controlBtnHit();
+            if (this.flip) {
+                if (this.x < LIMITED_LEFT || this._controlBtnHit()) {
+                    this.flip = false;
+                    this.scale.x *= -1;
+                    return;
+                }
+                this.x += -this.speed;
             }
+            if (!this.flip) {
 
-            //CORNER GENERATE
-            var popEnabled = _categoryPopEnable[num];
-            this._corner = new _Corner2.default(this._game, this._bgGroup, this._gameGroup, _categoryArr[num], this, popEnabled);
-            this._backButton.visible = true;
-            this._cornerPop = true;
-            _categoryPopEnable[num] = true;
-
-            this._ppiyoCartGenerate();
-            if (this._ppiyoCart) this._ppiyoCart._visible(true);
-
-            if (_GameConfig2.default.BACK_BUTTON) _GameConfig2.default.BACK_BUTTON.visible = false;
+                if (this.x > LIMITED_RIGHT || this._controlBtnHit()) {
+                    this.flip = true;
+                    this.scale.x *= -1;
+                    return;
+                }
+                this.x -= -this.speed;
+            }
         }
     }, {
-        key: "_ppiyoCartGenerate",
-        value: function _ppiyoCartGenerate() {
+        key: "_controlBtnHit",
+        value: function _controlBtnHit() {
+            var _this2 = this;
 
-            if (!this._ppiyoCart) this._ppiyoCart = new _PpiyoCart2.default(this._game);
-            this._ppiyoCart._visible(false);
+            var minimumX = 160;
+            var maximumX = 1150;
+            var minimumY = 180;
+            var maximumY = 560;
+
+            if (this.y < minimumY || this.y > maximumY) {
+                if (this.x < minimumX || this.x > maximumX) {
+                    // this._flipChange();
+                    if (this.flipEnabled) {
+                        this.flipEnabled = false;
+                        setTimeout(function () {
+                            _this2.flipEnabled = true;
+                        }, 1000);
+                        return true;
+                    }
+                }
+            }
         }
     }, {
-        key: "_ppiyoFeedBackPopUp",
-        value: function _ppiyoFeedBackPopUp(correct) {
+        key: "_collisionEffect",
+        value: function _collisionEffect(obj) {
 
-            if (this._ppiyoCart) this._ppiyoCart.feedBackPopUp(correct);
-        }
-    }, {
-        key: "_createBackButton",
-        value: function _createBackButton() {
-            var base = 'btn_mainDisplay_default';
-            var over = 'btn_mainDisplay_over';
-            this._backButton = this._buttonGroup.add(this._game.make.button(890, 604, this._key, this._removeCorner.bind(this), this, over, base, base));
-            // this.soundOffBtnSound = null;
-            // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._backButton);
-            // this._backButton.visible = false;
-        }
-    }, {
-        key: "_cornerButtonEnable",
-        value: function _cornerButtonEnable(bool) {
-            var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-            var selected = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+            if (this._count < this._clearNumber) {
 
-
-            for (var i = 1; i < _btnArr.length; i++) {
-                _btnArr[i]._visible(bool);
-            }for (var _i = 1; _i < _btnArr.length; _i++) {
-                if (selected) {
-                    if (_i !== num) _btnArr[_i]._btnDisable();
-                } else {
-                    _btnArr[_i]._btnEnable();
+                var value = this._alphaArr[this._count];
+                this._game.add.tween(obj.scale).to({ x: this.scale.x * 0.8, y: 0.8 }, 100, Phaser.Easing.Back.Out, true, 0, 0, true);
+                this._alpha = this._game.add.tween(obj).to({ alpha: value }, 100, Phaser.Easing.Linear.Out, true, 0, 0, false);
+                obj.alpha = value;
+                new _CollisionEffect2.default(this._game, this.x, this.y, 100, _GameConfig2.default.CURRENT_CHAPTER);
+                this._count++;
+                if (this._count === this._clearNumber) {
+                    this._alpha.onComplete.add(remove, this);
                 }
             }
 
-            //COUNTER BUTTON INVISIBLE
-            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
+            function remove() {
 
-            this._cornerPop = false;
-            this._backButton.visible = false;
-        }
-    }, {
-        key: "_removeCorner",
-        value: function _removeCorner() {
-            var _this = this;
-
-            var counterButtonVisible = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-            var complete = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-            this._soundComplete = false;
-            if (this._corner) {
-                this._backButton.inputEnabled = false;
-                var rN = this._game.rnd.between(0, 1);
-                _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0.8, false, true);
-                var sndKeyArr = [_SoundAssetKey2.default.BTNSND_REMOVECORNER_1, _SoundAssetKey2.default.BTNSND_REMOVECORNER_2];
-                var sndInterval = [1200, 1800];
-                var snd = sndKeyArr[rN];
-                var interval = sndInterval[rN];
-                _SoundManager2.default.instance.effectSound(snd);
-                _GameConfig2.default.CURRENT_BUTTON_SOUND = snd;
-                if (!_GameConfig2.default.SOUND_ENABLED) interval = 0;
-                setTimeout(function () {
-                    if (_this._corner) {
-                        _this._corner._destroy();
-                        _this._corner = null;
-                    }
-                    if (_this._cornerPop) _this._cornerButtonEnable(counterButtonVisible);
-                    if (_this._ppiyoCart) _this._ppiyoCart._visible(false);
-                    if (_GameConfig2.default.BACK_BUTTON) _GameConfig2.default.BACK_BUTTON.visible = true;
-
-                    //BACK BUTTON ENABLE
-                    _this._backButton.inputEnabled = true;
-
-                    //COMPLETE
-                    if (_this._shoppingComplete) _this._shoppingCompleteHandler();
-                }, interval);
-            }
-        }
-    }, {
-        key: "_shoppingCompleteHandler",
-        value: function _shoppingCompleteHandler() {
-
-            //COUNTER BUTTON INVISIBLE
-            _btnArr[_btnArr.length - 1]._btn.visible = this._shoppingComplete;
-            _btnArr[_btnArr.length - 1]._btn.inputEnabled = true;
-
-            for (var i = 1; i < _btnArr.length - 1; i++) {
-                _btnArr[i]._btnDisable();
-            } //GUIDE  HAND POP UP
-            this._guideHandPop();
-        }
-    }, {
-        key: "_buttonSndPlay",
-        value: function _buttonSndPlay(sndKey, snd, btn) {
-
-            console.log(_GameConfig2.default.SOUND_ENABLED);
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            snd = this._game.add.audio(sndKey);
-            btn.setDownSound(snd);
-        }
-    }, {
-        key: "_purchaseSlidePop",
-        value: function _purchaseSlidePop() {
-
-            this._purchaseSlide = new _PurchaseSlider2.default(this._game, _categoryArr);
-        }
-    }, {
-        key: "_guideHandPop",
-        value: function _guideHandPop() {
-
-            this.hand = new Phaser.Image(this._game, 1146, 453, this._key, 'guideHand');
-            this._buttonGroup.addChild(this.hand);
-            this.hand.anchor.setTo(0.5, 0.5);
-            this.hand.x += this.hand.width / 2;
-            this.hand.y += this.hand.height / 2;
-            this._game.add.tween(this.hand.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
-            // this.hand.inputEnabled = true;
-            // this.hand.input.enableDrag();
-            // this.hand.events.onDragUpdate.add(this._stopDrag, this);
-        }
-    }, {
-        key: "_stopDrag",
-        value: function _stopDrag(obj) {
-
-            console.log(parseInt(obj.x), parseInt(obj.y));
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-
-            if (this._corner) this._corner._update();
-            if (this._purchaseSlide) this._purchaseSlide._update();
-
-            if (_GameConfig2.default.TOTAL_CATEGORIES === 0) {
-                _btnArr[_btnArr.length - 1]._update();
-                if (this._shoppingComplete) return;
-                this._removeCorner(true);
-                this._shoppingComplete = true;
-            }
-
-            if (this._cornerPop) return;
-            for (var i = 0; i < _btnArr.length; i++) {
-                if (_btnArr[i]) _btnArr[i]._update();
-            }
-        }
-    }, {
-        key: "_objectPause",
-        value: function _objectPause() {
-            for (var i = 0; i < this._gameGroup.length; i++) {
-                this._gameGroup.children[i].visible = false;
-            }
-
-            /* for(let i=0; i<animalObjArr.length; i++)
-             {
-                 animalObjArr[i]._gameGroup.visible = false;
-             }*/
-
-            //GUIDE VIEW
-            // if(this.userGuide) this.userGuide._objectPause();
-        }
-    }, {
-        key: "_objectReplay",
-        value: function _objectReplay() {
-            for (var i = 0; i < this._gameGroup.length; i++) {
-                this._gameGroup.children[i].visible = true;
-            }
-            /*
-                    for(let i=0; i<animalObjArr.length; i++)
-                    {
-                        animalObjArr[i]._gameGroup.visible = true;
-                    }*/
-
-            _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.MUTE_SOUND_VOLUME, true);
-            //GUIDE VIEW
-            // if(this.userGuide) this.userGuide._objectReplay();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-
-            this._bgGroup.removeChildren(0, this._bgGroup.length);
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._buttonGroup.removeChildren(0, this._buttonGroup.length);
-            for (var i = 0; i < this._bgGroup.length; i++) {
-                this._bgGroup[i].destroy();
-            }for (var _i2 = 0; _i2 < this._gameGroup.length; _i2++) {
-                this._gameGroup[_i2].destroy();
-            }for (var _i3 = 0; _i3 < this._buttonGroup.length; _i3++) {
-                this._buttonGroup[_i3]._destroy();
+                this.destroy();
+                _GameConfig2.default.CURRENT_DUST = 1;
             }
         }
     }]);
-    return CornerMain;
-}();
+    return Dust;
+}(Phaser.Image);
 
-exports.default = CornerMain;
+exports.default = Dust;
 
 /***/ }),
 /* 120 */
@@ -117050,145 +116580,86 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _AssetKey = __webpack_require__(3);
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _delay = [[], [100, 143, 'VEGETABLE'], [100, 150, 'SEAFOOD'], [90, 135, 'MEAT'], [140, 180, 'NECESSARY'], [110, 150, 'DAIRY'], [110, 170, 'SNACK'], [360, 270, 'NOTYET'], [75, 117, 'COUNTER']];
+var effectAsset = ['', [1, 2, 3], [1, 2, 3], [4, 5, 6]];
+var assetNum = void 0;
 
-var CornerButton = function () {
-    function CornerButton(game, group, asset, x, y, parent, num) {
-        var counterDummy = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
-        (0, _classCallCheck3.default)(this, CornerButton);
+var CollisionEffect = function () {
+    function CollisionEffect(game, xPos, yPos) {
+        var radius = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 40;
+        var chapter = arguments[4];
+        (0, _classCallCheck3.default)(this, CollisionEffect);
 
-        this._game = game;
-        this._gameGroup = group;
-        this._key = _AssetKey2.default.MAIN_DISPLAY_ASSET;
-        this._asset = asset;
-        this._btn = null;
-        this._xPos = x;
-        this._yPos = y;
-        this._parent = parent;
-        this._num = num;
-        this._count = 0;
-        this._selected = false;
-        this._delayTime = null;
-        this._counterDummy = counterDummy;
-        this._init();
+        this.game = game;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.radius = radius;
+        assetNum = chapter;
+
+        this._create();
     }
 
-    (0, _createClass3.default)(CornerButton, [{
-        key: "_init",
-        value: function _init() {
-            var bgAsset = 'display_' + this._asset;
-            this._bg = new Phaser.Image(this._game, this._xPos, this._yPos, this._key, bgAsset);
-            this._gameGroup.addChild(this._bg);
+    (0, _createClass3.default)(CollisionEffect, [{
+        key: "_create",
+        value: function _create() {
 
-            var base = 'btn_' + this._asset + '_title_default';
-            var over = 'btn_' + this._asset + '_title_over';
-            this._btn = this._gameGroup.add(this._game.make.button(this._xPos, this._yPos, this._key, this._onSelect.bind(this), this, over, base, over, base));
-            // this.soundOffBtnSound = null;
-            // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this.soundOffBtnSound, this._btn);
+            for (var i = 0; i < 10; i++) {
+                var rn = this.game.rnd.integerInRange(effectAsset[assetNum][0], effectAsset[assetNum][2]);
+                var assetName = _AssetKey2.default.MOUSE_EFFECT_IMAGE_PREFIX + rn;
+                var img = this.game.add.image(0, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS, assetName);
+                // console.log(assetName);
+                // img.scale.setTo(0.8, 0.8)
+                this.showEffect(img, this.xPos, this.yPos, i);
+            }
         }
     }, {
-        key: "_sndPlay",
-        value: function _sndPlay() {
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0.8, false, true);
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0.8, false, true);
-            var sndAsset = 'btnSnd_corner_' + this._asset + '_';
-            var rN = this._game.rnd.between(1, 2);
-            var snd = sndAsset + rN;
-            _SoundManager2.default.instance.effectSound(snd);
-            _GameConfig2.default.CURRENT_BUTTON_SOUND = snd;
-            this._delayTime = parseInt(_delay[this._num][rN - 1] * 0.6);
-        }
-    }, {
-        key: "_onSelect",
-        value: function _onSelect() {
-            // SoundManager.instance.effectSoundContinuance(SoundAssetKey.BUTTON_SOUND);
-            this._sndPlay();
-            if (this._counterDummy) return;
-            this._btn.inputEnabled = false;
-            this._selected = true;
-            this._parent._cornerButtonEnable(true, this._num, true);
-        }
-    }, {
-        key: "_buttonSndPlay",
-        value: function _buttonSndPlay(sndKey, snd, btn) {
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            snd = this._game.add.audio(sndKey);
-            btn.setDownSound(snd);
-        }
-    }, {
-        key: "_visible",
-        value: function _visible(bool) {
-            this._bg.visible = bool;
-            this._btn.visible = bool;
-        }
-    }, {
-        key: "_btnDisable",
-        value: function _btnDisable() {
-            this._btn.inputEnabled = false;
-            if (this._counterDummy) return;
-            this._bg.tint = 0x525252;
-            this._btn.tint = 0x525252;
-        }
-    }, {
-        key: "_btnEnable",
-        value: function _btnEnable() {
-            this._btn.inputEnabled = true;
-            if (this._counterDummy) return;
-            this._bg.tint = 0xffffff;
-            this._btn.tint = 0xffffff;
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
+        key: "showEffect",
+        value: function showEffect(sprite, x, y, i) {
+            var ix = x;
+            var iy = y;
+            // let rndPositionAngle = Math.random()*240 - 30;   // 위치 각도
+            // let rndPositionAngle = (Math.random() * 4/3 * Math.PI) + (5/6 * Math.PI) ;   // 위치 각도 0~240 - 150
+            var rndPositionAngle = Math.random() * 1 / 4 * Math.PI + 1 / 4 * Math.PI * i; // 위치 각도
+            var rndAlphabetAngle = Math.random() * 15; // 알파벳 각도
+            var rndRadius = Math.random() * 30 + this.radius;
+            // let rndRadius = 50;
 
-            if (this._counterDummy) return;
+            // console.log(rndPositionAngle);
 
-            if (this._selected) this._count++;else return;
+            sprite.alpha = 1;
+            sprite.x = ix + rndRadius * Math.cos(rndPositionAngle);
+            sprite.y = iy + rndRadius * Math.sin(rndPositionAngle);
 
-            if (_GameConfig2.default.SOUND_ENABLED) {
-                if (this._count > this._delayTime) {
-                    this._selected = false;
-                    this._parent._cornerGenerate(this._num);
-                    this._count = 0;
-                }
+            if (rndRadius * Math.cos(rndPositionAngle) < 0) {
+                sprite.angle = rndAlphabetAngle * -1;
             } else {
-                this._selected = false;
-                this._parent._cornerGenerate(this._num);
-                this._count = 0;
+                sprite.angle = rndAlphabetAngle;
             }
 
-            // console.log(this._asset)
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._bg.destroy();
-            this._btn.destroy();
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
+            var tween0 = this.game.add.tween(sprite);
+            // tween0.from({alpha: 0.7}, 200, Phaser.Easing.Linear.In, true, 0);
+            tween0.from({ alpha: 0.7, x: x, y: y }, 500, Phaser.Easing.Linear.In, true, 0);
+
+            var tween1 = this.game.add.tween(sprite);
+            tween1.to({ alpha: 0 }, 300, Phaser.Easing.Linear.In, true, 200);
+            tween1.onComplete.add(function () {
+                //sprite.kill();
+                sprite.destroy();
+            }, this);
+
+            var tween2 = this.game.add.tween(sprite.scale);
+            tween2.to({ x: 0.5, y: 0.5 }, 300, Phaser.Easing.Linear.Out, true, 200);
         }
     }]);
-    return CornerButton;
+    return CollisionEffect;
 }();
 
-exports.default = CornerButton;
+exports.default = CollisionEffect;
 
 /***/ }),
 /* 121 */
@@ -117201,6 +116672,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
 var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -117209,321 +116684,64 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _SoundAssetKey = __webpack_require__(5);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _AssetKey = __webpack_require__(3);
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _BackGroundTouchEffect = __webpack_require__(19);
-
-var _BackGroundTouchEffect2 = _interopRequireDefault(_BackGroundTouchEffect);
-
-var _RollingBoard = __webpack_require__(122);
-
-var _RollingBoard2 = _interopRequireDefault(_RollingBoard);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var boardArr = void 0,
-    btnArr = void 0,
-    dragObjArr = void 0,
-    startX = void 0,
-    startY = void 0,
-    baseWidth = void 0,
-    centerPos = void 0;
-var minimumYpos = 550;
-var speed = 3;
+var stickAsset = ['', _AssetKey2.default.STICK_PREFIX_1, _AssetKey2.default.STICK_PREFIX_2, _AssetKey2.default.STICK_PREFIX_3];
+//let stickAsset = ['', AssetKey.STICK_PREFIX_3, AssetKey.STICK_PREFIX_2, AssetKey.STICK_PREFIX_3];
 
-var Corner = function () {
-    function Corner(game, bgGroup, gameGroup, category, parent, popEnable) {
-        (0, _classCallCheck3.default)(this, Corner);
+var Tools = function (_Phaser$Sprite) {
+    (0, _inherits3.default)(Tools, _Phaser$Sprite);
 
-        this._game = game;
-        this._bgGroup = bgGroup;
-        this._gameGroup = gameGroup;
-        this._category = category;
-        this._key = this._category.assetKey;
-        this._parent = parent;
-        this._game.input.maxPointers = 1;
-        this._headRemove = false;
-        this._totalWidth = 0;
-        this._pickUp = false;
-        this._popEnable = popEnable;
+    function Tools(game, assetNum) {
+        (0, _classCallCheck3.default)(this, Tools);
 
-        boardArr = [];
-        btnArr = [];
-        dragObjArr = [];
-        startX = 0;
-        startY = 0;
-        baseWidth = 0;
-        centerPos = 0;
-        this._init();
-        this._sndPlay();
+        var _this = (0, _possibleConstructorReturn3.default)(this, (Tools.__proto__ || (0, _getPrototypeOf2.default)(Tools)).call(this, game, 0, 0, _AssetKey2.default.DEFAULT_GAME_ATLAS));
+
+        _this._game = game;
+        _this.anchor.setTo(0.4, 0.3);
+        _this.circle = null;
+        // let assetName = AssetKey[]
+
+        //inGame
+        _this.animations.add(stickAsset[assetNum], Phaser.Animation.generateFrameNames(stickAsset[assetNum], 1, 4, "", 1), 1, true);
+
+        _this.animations.play(stickAsset[assetNum], 4, true);
+
+        // this._makeRadius();
+        return _this;
     }
 
-    (0, _createClass3.default)(Corner, [{
-        key: "_sndPlay",
-        value: function _sndPlay() {
-            if (!this._popEnable) {
-                _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-                _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.guideNarr_3);
-                _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.guideNarr_3;
-            }
-        }
-    }, {
-        key: "_init",
-        value: function _init() {
-
-            //BACKGROUND
-            this._backGround = this._game.add.graphics(0, 0);
-            this._backGround.beginFill(this._category.backGroundColor, 1);
-            this._backGround.drawRect(0, 0, 1280, 720);
-            this._backGround.endFill();
-            this._bgGroup.addChild(this._backGround);
-
-            var headArr = this._category.rollingButtonList[0];
-            var headEffectArr = this._category.effectQuantity[0];
-            var head = new _RollingBoard2.default(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, 0, headArr, headEffectArr, '_head');
-            boardArr.push(head);
-            head._board.x = 294;
-            head._board.y = 720 - head._board.height;
-
-            for (var i = 1; i <= this._category.totalDisplayBoard; i++) {
-                var arr = this._category.rollingButtonList[i];
-                var effectArr = this._category.effectQuantity[i];
-                var board = new _RollingBoard2.default(this._game, this._bgGroup, this._gameGroup, this._category.assetKey, this._category.category, i, arr, effectArr);
-                boardArr.push(board);
-                boardArr[i]._board.y = 720 - boardArr[i]._board.height;
-                boardArr[1]._board.x = head._board.x + head._board.width;
-                this._totalWidth += boardArr[i]._board.width;
-
-                if (i >= 2) boardArr[i]._board.x = boardArr[i - 1]._board.x + boardArr[i - 1]._board.width;
-
-                boardArr[i].btnPosReset();
-            }
-
-            this._categoryButtonGenerate();
-            this._moving();
-        }
-    }, {
-        key: "_moving",
-        value: function _moving() {
-
-            // console.log(this._key);
-            for (var i = 0; i < boardArr.length; i++) {
-                boardArr[i]._board.x -= speed;
-
-                if (boardArr[i]._board.x < -boardArr[i]._board.width) {
-                    if (i === 0 && !this._headRemove) {
-                        // boardArr[0]._destroy();
-                        // boardArr.splice(0, 1);
-                        this._headRemove = true;
-                    } else boardArr[i]._board.x += this._totalWidth;
-
-                    boardArr[i]._board.visible = false;
-                }
-
-                if (boardArr[i]._board.x < this._game.world.width) {
-                    if (i !== 0) boardArr[i]._board.visible = true;
-                }
-
-                boardArr[i].btnPosReset();
-            }
-        }
-    }, {
-        key: "_categoryButtonGenerate",
-        value: function _categoryButtonGenerate() {
-
-            var list = this._category.itemList;
-            for (var obj in list) {
-                var asset = list[obj].item;
-                var dragObj = new Phaser.Image(this._game, 0, 0, this._key, asset);
-                dragObj.item = asset;
-
-                var quantity = list[obj].effectQuantity;
-                dragObj.effectQuantity = quantity;
-
-                this._gameGroup.addChild(dragObj);
-                dragObj.visible = false;
-                dragObjArr.push(dragObj);
-            }
-
-            // console.log(boardArr)
-            for (var i = 0; i < boardArr.length; i++) {
-                for (var j = 0; j < boardArr[i]._categoryButton.length; j++) {
-                    var btn = boardArr[i]._categoryButton[j];
-                    btn.inputEnabled = true;
-                    btn.input.enableDrag();
-                    btn.events.onDragUpdate.add(this._startDrag, this);
-                    btn.events.onDragStop.add(this._stopDrag, this);
-                    btn.events.onInputDown.add(this._itemSelect, this);
-                    btn.input.pixelPerfectOver = true;
-                    btn.input.pixelPerfectClick = true;
-                }
-            }
-        }
-    }, {
-        key: "_indexCheck",
-        value: function _indexCheck(obj) {
-
-            var name = obj.categoryName;
-            var num = 0;
-            for (var i = 0; i < dragObjArr.length; i++) {
-                if (dragObjArr[i].item === name) num = i;
-            }return num;
-        }
-    }, {
-        key: "_itemSelect",
-        value: function _itemSelect(obj) {
-
-            this._pickUp = true;
-            if (!obj.img.visible) obj.img.visible = true;
-            if (obj.img.alpha < 1) obj.img.alpha = 1;
-            obj.bringToTop();
-
-            startX = this._game.input.x - this._gameGroup.x;
-            startY = this._game.input.y;
-
-            _BackGroundTouchEffect2.default.instance.effect(this._game, this._game.input.x, this._game.input.y, 50, 1);
-        }
-    }, {
-        key: "_objRestore",
-        value: function _objRestore(obj) {
-            var correct = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-            if (correct) this._game.add.tween(obj.img).to({ x: centerPos, y: minimumYpos + 200, alpha: 0 }, 300, Phaser.Easing.Quartic.Out, true);else {
-                var tw = this._game.add.tween(obj.img).to({ x: startX - obj.img.width, y: startY - obj.img.height / 2 }, 300, Phaser.Easing.Quartic.Out, true);
-                tw.onComplete.add(function () {
-                    obj.img.visible = false;
-                });
-            }
-        }
-    }, {
-        key: "_overLapCheck",
-        value: function _overLapCheck(obj) {
-
-            var target = void 0;
-            if (this._parent._ppiyoCart.hitArea) {
-                target = this._parent._ppiyoCart.hitArea;
-                centerPos = obj.x;
-                return overLap(obj, target);
-            }
-
-            function overLap(a, b) {
-                {
-                    var boundA = a.getBounds();
-                    var boundB = b.getBounds();
-                    return Phaser.Rectangle.intersects(boundA, boundB);
-                }
-            }
-        }
-    }, {
-        key: "_pushEnable",
-        value: function _pushEnable(obj) {
-
-            var name = obj._frame.name;
-            var idx = -1;
-            _GameConfig2.default.CURRENT_FILL_OBJECT = name;
-            for (var i = 0; i < _GameConfig2.default.PURCHASE_LIST.length; i++) {
-                if (_GameConfig2.default.PURCHASE_LIST[i].item === name && _GameConfig2.default.PURCHASE_LIST[i].empty) idx = i;
-            }if (idx !== -1) {
-                if (_GameConfig2.default.PURCHASE_ITEM_ARRAY[idx].complete) return false;else {
-                    _GameConfig2.default.PURCHASE_ITEM_ARRAY[idx].quantityChange(idx);
-                    return true;
-                }
-            } else return false;
-        }
-    }, {
-        key: "_startDrag",
-        value: function _startDrag(obj) {
-
-            // console.log(parseInt(obj.x), parseInt(obj.y));
-            obj.img.x = this._game.input.x;
-            obj.img.y = this._game.input.y;
-            obj.img.x -= obj.img.width / 2;
-            obj.img.y -= obj.img.height / 2;
-        }
-    }, {
-        key: "_stopDrag",
-        value: function _stopDrag(obj) {
-
-            // console.log(parseInt(obj.x), parseInt(obj.y));
-            this._pickUp = false;
-            var correct = void 0;
-            if (this._overLapCheck(obj.img)) {
-                // console.log('hit~~~')
-                if (this._pushEnable(obj.img)) correct = true;else correct = false;
-
-                this._parent._ppiyoFeedBackPopUp(correct);
-
-                var soundAsset = void 0;
-                if (correct) soundAsset = obj.sndPrefix + this._game.rnd.between(1, obj.sndEffectQuantity);else soundAsset = 'objSnd_wrong_' + this._game.rnd.between(1, 2);
-                this._effectSndPlay(soundAsset);
-            }
-
-            this._objRestore(obj, correct);
-        }
-    }, {
-        key: "_dragUpdate",
-        value: function _dragUpdate(obj) {
-            // console.log(parseInt(obj.x), parseInt(obj.y));
-            var target = void 0;
-            if (this._parent._ppiyoCart.hitArea) {
-                target = this._parent._ppiyoCart.hitArea;
-                centerPos = target.x - target.width / 2 + obj.x - obj.width / 2;
-                // return overLap(obj, target);
-                // console.log(parseInt(target.x), parseInt(obj.x));
-            }
-        }
-    }, {
-        key: "_effectSndPlay",
-        value: function _effectSndPlay(soundAsset) {
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSound(soundAsset);
-            _GameConfig2.default.CURRENT_GUIDE_SOUND = soundAsset;
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-
-            if (!this._pickUp) this._moving();
+    (0, _createClass3.default)(Tools, [{
+        key: "_makeRadius",
+        value: function _makeRadius() {
+            this.circle = new Phaser.Graphics(this._game);
+            this.circle.beginFill(0xffcc00, 0);
+            this.circle.drawCircle(0, 0, 70);
+            this.circle.endFill();
+            this.addChild(this.circle);
         }
     }, {
         key: "_destroy",
         value: function _destroy() {
-
-            this._bgGroup.removeChild(this._backGround);
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            for (var i = 0; i < btnArr.length; i++) {
-                btnArr[i].destroy();
-            }for (var _i = 0; _i < dragObjArr.length; _i++) {
-                dragObjArr[_i].destroy();
-            }for (var _i2 = 0; _i2 < boardArr.length; _i2++) {
-                boardArr[_i2]._destroy();
-            }this._gameGroup.x = 0;
-            btnArr = [];
-            dragObjArr = [];
-            boardArr = [];
+            this.removeChildren(0, this.length);
         }
     }]);
-    return Corner;
-}();
+    return Tools;
+}(Phaser.Sprite);
 
-exports.default = Corner;
+exports.default = Tools;
 
 /***/ }),
 /* 122 */
@@ -117536,6 +116754,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _getPrototypeOf = __webpack_require__(2);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
 var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -117544,92 +116766,206 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _possibleConstructorReturn2 = __webpack_require__(3);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(4);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _AssetKey = __webpack_require__(5);
+
+var _AssetKey2 = _interopRequireDefault(_AssetKey);
+
+var _GameConfig = __webpack_require__(6);
+
+var _GameConfig2 = _interopRequireDefault(_GameConfig);
+
+var _SoundManager = __webpack_require__(8);
+
+var _SoundManager2 = _interopRequireDefault(_SoundManager);
+
+var _SoundAssetKey = __webpack_require__(7);
+
+var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
+
+var _BackgroundEffect = __webpack_require__(123);
+
+var _BackgroundEffect2 = _interopRequireDefault(_BackgroundEffect);
+
+var _ConfigManager = __webpack_require__(58);
+
+var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
+
+var _SeparateAnimation = __webpack_require__(11);
+
+var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
+
+var _WebEnabledCheck = __webpack_require__(44);
+
+var _WebEnabledCheck2 = _interopRequireDefault(_WebEnabledCheck);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RollingBoard = function () {
-    function RollingBoard(game, bgGroup, group, key, asset, num) {
-        var arr = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-        var effectArr = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-        var suffix = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
-        (0, _classCallCheck3.default)(this, RollingBoard);
+var guideSnd = _SoundAssetKey2.default.RESULT_GREAT;
+var starXpos = [451, 583, 713];
+var starYpos = [97, 75, 97];
 
-        this._game = game;
-        this._bgGroup = bgGroup;
-        this._gameGroup = group;
-        // this._categoryGroup = this._game.add.group();
-        this._key = key;
-        this._category = asset;
-        this._num = num;
-        this._suffix = suffix;
-        this._board = null;
-        this._categoryButton = [];
-        this._categoryImage = [];
-        this._arr = arr;
-        this._sndEffectQuantity = effectArr;
-        this._init();
+var ResultView = function (_Phaser$Group) {
+    (0, _inherits3.default)(ResultView, _Phaser$Group);
+
+    function ResultView(game, parent) {
+        (0, _classCallCheck3.default)(this, ResultView);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (ResultView.__proto__ || (0, _getPrototypeOf2.default)(ResultView)).call(this, game));
+
+        _this._game = game;
+        _this._gameGroup = _this._game.add.group();
+        // this._dispatcher = dispatcher;
+        _this._parent = parent;
+
+        _GameConfig2.default.POP_ENABLED = true;
+        _GameConfig2.default.SCENE_STATE = "result";
+        _this._init();
+        _this._webCheck();
+        return _this;
     }
 
-    (0, _createClass3.default)(RollingBoard, [{
-        key: '_init',
+    (0, _createClass3.default)(ResultView, [{
+        key: "_webCheck",
+        value: function _webCheck() {
+            _WebEnabledCheck2.default.instance.backBtnEnabled(this.closeBtn);
+        }
+    }, {
+        key: "_init",
         value: function _init() {
 
-            var assetName = 'corner_' + this._category + '_' + this._num;
-            this._board = new Phaser.Image(this._game, 0, 0, this._key, assetName);
-            this._bgGroup.addChild(this._board);
+            /* let assetName = AssetKey.BG_CHAPTER_PREFIX + GameConfig.TOTAL_CHAPTER;
+             let bgAssetName = AssetKey.BG_OBJECT_PREFIX + GameConfig.TOTAL_CHAPTER;
+               this.bg = new Phaser.Image(this._game, 0, 0, AssetKey.BG_ASSET, assetName);
+             this._gameGroup.addChild(this.bg);
+               this.obj = new Phaser.Image(this._game, 0, 0, AssetKey.DEFAULT_GAME_ATLAS, bgAssetName);
+             this._gameGroup.addChild(this.obj);*/
 
-            if (this._arr === null) return;
+            this.bg = new Phaser.Image(this._game, 0, 0, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.RESULT_BG);
+            this._gameGroup.addChild(this.bg);
 
-            for (var i = 0; i < this._arr.length; i++) {
-                var asset = 'area_' + this._arr[i] + this._suffix;
-                var btn = new Phaser.Image(this._game, 0, 0, this._key, asset);
-                btn.categoryName = this._arr[i];
-                btn.alpha = 0;
+            this._graphicsOver = this._game.add.graphics(0, 0);
+            this._graphicsOver.beginFill(0x000000, 0.6);
+            this._graphicsOver.drawRect(0, 0, 1280, 720);
+            this._graphicsOver.endFill();
+            this._graphicsOver.x = 0;
+            this._graphicsOver.y = 0;
+            this._gameGroup.addChild(this._graphicsOver);
 
-                var categoryImage = new Phaser.Image(this._game, 0, 0, this._key, btn.categoryName);
-                categoryImage.visible = false;
+            /**
+             * BG & TEXT
+             * @type {Phaser.Image}
+             */
 
-                var sndPrefix = 'objSnd_' + this._category + '_' + btn.categoryName + '_';
-                btn.sndPrefix = sndPrefix;
-                btn.img = categoryImage;
-                btn.sndEffectQuantity = this._sndEffectQuantity[i];
+            this.bg = this._gameGroup.add(this._game.make.image(266, 36, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.RESULT_IMG_POPUP));
 
-                this._categoryButton.push(btn);
-                this._gameGroup.addChild(btn);
-                this._categoryImage.push(categoryImage);
-                this._gameGroup.addChild(categoryImage);
+            /**
+             *
+             * ANIMATION
+             * @type {Phaser.Image}
+             */
+
+            this.ppochi = new _SeparateAnimation2.default(this._game, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.RESULT_POCHI_PREFIX, 36, 343, 1, 6, '', 1, 5, true);
+            this.cleaner = new _SeparateAnimation2.default(this._game, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.RESULT__CLEANER_PREFIX, 803, 462, 1, 2, '', 1, 3, true);
+            this._gameGroup.addChild(this.ppochi);
+            this._gameGroup.addChild(this.cleaner);
+
+            /**
+             * BUTTON
+             */
+            this.closeBtn = this._gameGroup.add(this._game.make.button(0, 0, _AssetKey2.default.BTN_ASSET, this._onClose.bind(this), this, _AssetKey2.default.BTN_CLOSE_DEFAULT, _AssetKey2.default.BTN_CLOSE_DEFAULT, _AssetKey2.default.BTN_CLOSE_OVER));
+            this.closeBtn.x = this._game.width - this.closeBtn.width - 217;
+            this.closeBtn.y = 178;
+            this.closeBtnSound = null;
+            this._buttonSndEnabled(_SoundAssetKey2.default.SND_CLOSE, this.closeBtnSound, this.closeBtn);
+
+            this.restartBtn = this._gameGroup.add(this._game.make.button(0, 0, _AssetKey2.default.BTN_ASSET, this._onRestart.bind(this), this, _AssetKey2.default.RETRY_BUTTON, _AssetKey2.default.RETRY_BUTTON, _AssetKey2.default.RETRY_BUTTON_OVER));
+            this.restartBtn.x = 500;
+            this.restartBtn.y = 495;
+            this.restartBtnSound = null;
+            this._buttonSndEnabled(_SoundAssetKey2.default.RESTART_SOUND, this.restartBtnSound, this.restartBtn);
+
+            /**
+             *
+             * STAR SET
+             */
+            this._starInit();
+        }
+    }, {
+        key: "_starInit",
+        value: function _starInit() {
+
+            if (_GameConfig2.default.SCENE_STATE === "result") {
+
+                for (var i = 0; i < 3; i++) {
+                    var img = this._game.add.image(starXpos[i], starYpos[i], _AssetKey2.default.RESULT_ASSET, 'img_staron_0' + (i + 1));
+                    this._gameGroup.addChild(img);
+                }
+
+                this._gameGroup.add(this._game.make.image(424, 285, _AssetKey2.default.RESULT_ASSET, _AssetKey2.default.IMG_SPEECHBUBBLE));
+
+                /**
+                 *
+                 * CELEBARTION EFFECT
+                 * @type {BackgroundEffect}
+                 */
+                this.backGroup = new _BackgroundEffect2.default(this._game);
+                this._gameGroup.addChild(this.backGroup);
+
+                // SoundManager.instance.allSoundPause();
+                _SoundManager2.default.instance.allSoundPauseEnding();
+                _SoundManager2.default.instance.effectSound(guideSnd, 0.8);
             }
         }
     }, {
-        key: 'btnPosReset',
-        value: function btnPosReset() {
-            for (var i = 0; i < this._categoryButton.length; i++) {
-                this._categoryButton[i].x = this._board.x;
-                this._categoryButton[i].y = this._board.y;
-                this._categoryButton[i].visible = this._board.visible;
-                // this._categoryImage[i].visible = this._board.visible;
+        key: "_buttonSndEnabled",
+        value: function _buttonSndEnabled(sndKey, snd, btn) {
+            if (!_GameConfig2.default.SOUND_ENABLED) return;
+            snd = this._game.add.audio(sndKey);
+            btn.setDownSound(snd);
+        }
+    }, {
+        key: "_onClose",
+        value: function _onClose() {
+            this._disabledBtn();
+            this._game.time.events.add(400, close, this);
+            function close() {
+                top.location.href = _GameConfig2.default.APP_URL;
             }
         }
     }, {
-        key: '_destroy',
-        value: function _destroy() {
-            // this._gameGroup.removeChildren(0, this._gameGroup.length);
-            if (this._board) this._board.destroy();
-            for (var i = 0; i < this._categoryButton.length; i++) {
-                this._gameGroup.removeChild(this._categoryButton[i]);
-                this._categoryButton[i].destroy();
-            }
+        key: "_onRestart",
+        value: function _onRestart() {
+            _SoundManager2.default.instance.effectRemove(guideSnd);
+            this._disabledBtn();
+            this._game.time.events.add(1000, enabled, this);
 
-            for (var _i = 0; _i < this._categoryImage.length; _i++) {
-                this._gameGroup.removeChild(this._categoryImage[_i]);
-                this._categoryImage[_i].destroy();
+            function enabled() {
+
+                this._gameGroup.removeChildren(0, this._gameGroup.length);
+                _ConfigManager2.default.prototype.GAME_CONFIG_RESET();
+                // this._dispatcher.dispatch();
+                this._parent._create();
             }
-            this._categoryImage = [];
+        }
+    }, {
+        key: "_disabledBtn",
+        value: function _disabledBtn() {
+            this.closeBtn.input.enabled = false;
+            this.restartBtn.input.enabled = false;
         }
     }]);
-    return RollingBoard;
-}();
+    return ResultView;
+}(Phaser.Group);
 
-exports.default = RollingBoard;
+exports.default = ResultView;
 
 /***/ }),
 /* 123 */
@@ -117642,2215 +116978,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _SeparateAnimation = __webpack_require__(22);
-
-var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
-
-var _FilledObject = __webpack_require__(124);
-
-var _FilledObject2 = _interopRequireDefault(_FilledObject);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _effectAssetArr = void 0;
-var _heartAsset = [{ asset: 'effect_heart_blue', xPos: 91, yPos: 408, resultXPos: 28, resultYPos: 352 }, { asset: 'effect_heart_red', xPos: 115, yPos: 413, resultXPos: 118, resultYPos: 358 }, { asset: 'effect_heart_yellow', xPos: 118, yPos: 440, resultXPos: 96, resultYPos: 416 }];
-
-var PpiyoCart = function () {
-    function PpiyoCart(game, group) {
-        (0, _classCallCheck3.default)(this, PpiyoCart);
-
-        this._game = game;
-        this._filledGroup = this._game.add.group();
-        this._gameGroup = this._game.add.group();
-        this._key = _AssetKey2.default.SLIDE_BAR_PPIYO;
-        this._fillObject = null;
-
-        _effectAssetArr = [];
-        this._init();
-    }
-
-    (0, _createClass3.default)(PpiyoCart, [{
-        key: "_init",
-        value: function _init() {
-
-            this._ppiyoCart();
-            this._fillObject = new _FilledObject2.default(this._game, this._filledGroup);
-        }
-    }, {
-        key: "_ppiyoCart",
-        value: function _ppiyoCart() {
-
-            this.ppiyoHead = new _SeparateAnimation2.default(this._game, this._key, 'slide_ppiyo_', 86, 398, 1, 4, '', 0, 6, true);
-            this._gameGroup.addChild(this.ppiyoHead);
-            this.ppiyoHead._play();
-
-            this.ppiyoBody = new Phaser.Image(this._game, 393, 619, this._key, 'slide_ppiyo_body_cut');
-            this._gameGroup.addChild(this.ppiyoBody);
-
-            this.ppiyoCorrect = new Phaser.Image(this._game, 86, 398, this._key, 'slide_ppiyo_correct');
-            this._gameGroup.addChild(this.ppiyoCorrect);
-            this.ppiyoCorrect.visible = false;
-
-            this.ppiyoIncorrect = new Phaser.Image(this._game, 86, 398, this._key, 'slide_ppiyo_incorrect');
-            this._gameGroup.addChild(this.ppiyoIncorrect);
-            this.ppiyoIncorrect.visible = false;
-
-            this.xMark = new Phaser.Image(this._game, 142, 493, this._key, 'xMark');
-            this._gameGroup.addChild(this.xMark);
-            this.xMark.anchor.setTo(1, 1);
-            this.xMark.scale.setTo(0.8, 0.8);
-            this.xMark.visible = false;
-
-            for (var i = 0; i < _heartAsset.length; i++) {
-                var img = new Phaser.Image(this._game, _heartAsset[i].resultXPos, _heartAsset[i].resultYPos, this._key, _heartAsset[i].asset);
-                this._gameGroup.addChild(img);
-                _effectAssetArr.push(img);
-                img.alpha = 0;
-                img.visible = false;
-            }
-
-            this.hitArea = this._game.add.graphics(433, 620);
-            this.hitArea.beginFill(0x000, 0);
-            this.hitArea.drawRect(0, 0, 290, 100);
-            this.hitArea.endFill();
-            // this.hitArea.visible = false;
-            this._gameGroup.addChild(this.hitArea);
-            // this.hitArea.inputEnabled = true;
-            // this.hitArea.input.enableDrag();
-            // this.hitArea.events.onDragUpdate.add(this._startDrag, this);
-        }
-    }, {
-        key: "_visible",
-        value: function _visible(bool) {
-
-            this._gameGroup.visible = bool;
-            this._filledGroup.visible = bool;
-            // if(this._fillObject) this._fillObject.objectVisible(bool);
-        }
-    }, {
-        key: "_startDrag",
-        value: function _startDrag(obj) {
-            console.log(parseInt(obj.x), parseInt(obj.y));
-        }
-    }, {
-        key: "feedBackPopUp",
-        value: function feedBackPopUp(correct) {
-            var _this = this;
-
-            if (correct) {
-                this.ppiyoHead.visible = false;
-                this.ppiyoCorrect.visible = true;
-
-                var _loop = function _loop(i) {
-                    _effectAssetArr[i].scale.setTo(0.2, 0.2);
-                    _effectAssetArr[i].alpha = 0;
-                    _effectAssetArr[i].visible = true;
-                    _effectAssetArr[i].x = _heartAsset[i].xPos;
-                    _effectAssetArr[i].y = _heartAsset[i].yPos;
-                    var duration = _this._game.rnd.between(150, 400);
-                    _this._game.add.tween(_effectAssetArr[i].scale).to({ x: 1, y: 1 }, duration, Phaser.Easing.Quartic.Out, true);
-                    var tw = _this._game.add.tween(_effectAssetArr[i]).to({ x: _heartAsset[i].resultXPos, y: _heartAsset[i].resultYPos, alpha: 1 }, duration, Phaser.Easing.Quartic.Out, true);
-                    tw.onComplete.add(function () {
-                        _this._game.add.tween(_effectAssetArr[i]).to({ alpha: 0 }, 200, Phaser.Easing.Quartic.Out, true);
-                        _this.ppiyoHead.visible = true;
-                        _this.ppiyoCorrect.visible = false;
-                    });
-                };
-
-                for (var i = 0; i < _effectAssetArr.length; i++) {
-                    _loop(i);
-                }
-
-                //FILLED OBJECT
-                this._objectFill();
-            } else {
-                this.ppiyoHead.visible = false;
-                this.ppiyoIncorrect.visible = true;
-                this.xMark.scale.setTo(0.2, 0.2);
-                this.xMark.alpha = 1;
-                this.xMark.visible = true;
-                var tw = this._game.add.tween(this.xMark.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Bounce.Out, true);
-                tw.onComplete.add(function () {
-                    _this._game.add.tween(_this.xMark).to({ alpha: 0 }, 200, Phaser.Easing.Quartic.Out, true);
-                    _this.ppiyoHead.visible = true;
-                    _this.ppiyoIncorrect.visible = false;
-                });
-            }
-        }
-    }, {
-        key: "_objectFill",
-        value: function _objectFill() {
-
-            if (this._fillObject) this._fillObject.filledObject();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this.ppiyoHead._destroy();
-            this.ppiyoBody.destroy();
-            this.hitArea.destroy();
-        }
-    }]);
-    return PpiyoCart;
-}();
-
-exports.default = PpiyoCart;
-
-/***/ }),
-/* 124 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _xPos = [410, 480, 550, 620];
-var _yPos = [610, 690];
-var _bottomMax = _xPos.length;
-var _objectArr = void 0,
-    _count = void 0;
-var _maxCount = 4;
-
-var FilledObjectBack = function () {
-    function FilledObjectBack(game, group) {
-        (0, _classCallCheck3.default)(this, FilledObjectBack);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._key = _AssetKey2.default.SLIDE_BAR_PPIYO;
-        this._takeDown = false;
-        _objectArr = [];
-        _count = 0;
-        this._init();
-    }
-
-    (0, _createClass3.default)(FilledObjectBack, [{
-        key: "_init",
-        value: function _init() {}
-    }, {
-        key: "filledObject",
-        value: function filledObject() {
-
-            if (_count >= _maxCount) {
-                this._objectTakeDown();
-                _count = 0;
-            }
-            var asset = 'filled_' + _GameConfig2.default.CURRENT_FILL_OBJECT;
-            var xPos = _xPos[_count];
-            var img = new Phaser.Image(this._game, xPos, this._game.world.height, this._key, asset);
-            img.y = _yPos[0];
-            img.scale.setTo(1.3, 1.3);
-            this._gameGroup.addChild(img);
-            _objectArr.push(img);
-
-            // console.log('count : ', _count);
-            // img.inputEnabled = true;
-            // img.input.enableDrag();
-            // img.events.onDragUpdate.add(this._startDrag, this);
-
-            _count++;
-        }
-    }, {
-        key: "_objectTakeDown",
-        value: function _objectTakeDown() {
-            for (var i = 0; i < _objectArr.length; i++) {
-                var obj = _objectArr[i];
-                this._game.add.tween(obj).to({ y: _yPos[1] }, 300, Phaser.Easing.Quartic.Out, true);
-            }
-        }
-    }, {
-        key: "_xPosition",
-        value: function _xPosition() {
-            var xPos = this._game.rnd.between(400, 580);
-            if (_count <= 8) xPos = this._game.rnd.between(430, 550);
-            return xPos;
-        }
-    }, {
-        key: "_yPosition",
-        value: function _yPosition(obj) {
-
-            var rN = this._game.rnd.between(-5, 5);
-            var term = 100 - obj.height;
-            var yPos = _yPos[1];
-            if (_count > _bottomMax) yPos = _yPos[0] + term;
-            return yPos + rN;
-        }
-    }, {
-        key: "objectVisible",
-        value: function objectVisible(visible) {
-
-            for (var i = 0; i < _objectArr.length; i++) {
-                _objectArr[i].visible = visible;
-            }
-        }
-    }, {
-        key: "_startDrag",
-        value: function _startDrag(obj) {
-            console.log(parseInt(obj.x), parseInt(obj.y));
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-        }
-    }]);
-    return FilledObjectBack;
-}();
-
-exports.default = FilledObjectBack;
-
-/***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _PurchaseItem = __webpack_require__(126);
-
-var _PurchaseItem2 = _interopRequireDefault(_PurchaseItem);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _dragStartPos = void 0,
-    _interval = void 0,
-    _dist = void 0,
-    _dragAreaTerm = void 0;
-var _minimumPurchase = 6;
-
-var PurchaseSlider = function () {
-    function PurchaseSlider(game, categoryArray) {
-        (0, _classCallCheck3.default)(this, PurchaseSlider);
-
-        this._game = game;
-        this._gameGroup = this._game.add.group();
-        this._sliderGroup = this._game.add.group();
-        this._key = _AssetKey2.default.SLIDE_BAR_PPIYO;
-        this._prevBtn = null;
-        this._nextBtn = null;
-        this._totalPurchase = 0;
-        this._slidingEnable = true;
-        this.purchaseItem = [];
-        _dragStartPos = 0;
-        _interval = 0;
-        _dragAreaTerm = 0;
-
-        this._init();
-        this._listButton();
-    }
-
-    (0, _createClass3.default)(PurchaseSlider, [{
-        key: "_init",
-        value: function _init() {
-            this.purchaseSlideBg = new Phaser.Image(this._game, 148, 12, _AssetKey2.default.SLIDE_BAR_PPIYO, 'ui_bg');
-            this._gameGroup.addChild(this.purchaseSlideBg);
-
-            this.maskRect = this._game.add.graphics(0, 0);
-            this.maskRect.beginFill(0x000, 0.3);
-            this.maskRect.drawRect(246, 12, 779, 131);
-            this.maskRect.endFill();
-            this._gameGroup.addChild(this.maskRect);
-
-            this._listSetting();
-        }
-    }, {
-        key: "_listSetting",
-        value: function _listSetting() {
-
-            // let _interval = 0;
-            var pArr = _GameConfig2.default.PURCHASE_LIST;
-            this._totalPurchase = pArr.length;
-            var widthArr = [0, 0, 0, 0, 0, 0, 700, 100];
-
-            //LIST
-            for (var i = 0; i < pArr.length; i++) {
-                var asset = pArr[i].item;
-                var quantity = pArr[i].quantity;
-                var term = 265;
-                var xPos = (91 + 37) * i + term;
-                var yPos = 31;
-                var purchaseItem = new _PurchaseItem2.default(this._game, this._sliderGroup, asset, quantity, xPos, yPos, this, i);
-                // this.purchaseItem.push(purchaseItem);
-                _GameConfig2.default.PURCHASE_ITEM_ARRAY = purchaseItem;
-                _interval = (91 + 37) * (i + 1);
-                _dragAreaTerm = (pArr.length - _minimumPurchase) * (91 + 37);
-                purchaseItem.startX = xPos;
-                this._sliderGroup.mask = this.maskRect;
-            }
-
-            // console.log(pArr.length, _interval, _dragAreaTerm);
-
-            this.purchaseItem = _GameConfig2.default.PURCHASE_ITEM_ARRAY;
-            // console.log(pArr);
-            // console.log(this.purchaseItem);
-
-            this._dragArea(_interval);
-
-            this.dragRect = this._game.add.graphics(0, 0);
-            this.dragRect.beginFill(0xff4400, 0);
-            this.dragRect.drawRect(246, 12, _interval, 131);
-            this.dragRect.endFill();
-            this._gameGroup.addChild(this.dragRect);
-            this.dragRect.inputEnabled = true;
-            this.dragRect.input.enableDrag(false, false, false, 255, this.dragArea);
-            this.dragRect.input.allowVerticalDrag = false;
-            // this.dragRect.events.onDragUpdate.add(this._drag, this);
-            this.dragRect.mask = this.maskRect;
-            _dragStartPos = this.dragRect.x;
-            _dist = this.dragRect.x - _dragStartPos;
-            // console.log('_interval ', _interval);
-        }
-    }, {
-        key: "_dragArea",
-        value: function _dragArea(interval) {
-            // this.dragArea = this._game.add.graphics( - interval * 0.5, 0);
-            this.dragArea = this._game.add.graphics(-_dragAreaTerm, 0);
-            this.dragArea.beginFill(0x000, 0);
-            // this.dragArea.drawRect(246, 12, interval * 1.5,131);
-            this.dragArea.drawRect(246, 12, interval + _dragAreaTerm, 131);
-            this.dragArea.endFill();
-            this._gameGroup.addChild(this.dragArea);
-
-            // console.log(- interval * 0.5, interval * 1.5)
-        }
-    }, {
-        key: "_listButton",
-        value: function _listButton() {
-            this._prevBtn = this._gameGroup.add(this._game.make.button(187, 40, this._key, this._onPrev.bind(this), this, 'ui_prev', 'ui_prev', 'ui_prev', 'ui_prev'));
-            // this._clickSound = null;
-            // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._prevBtn);
-
-            this._nextBtn = this._gameGroup.add(this._game.make.button(1028, 40, this._key, this._onNext.bind(this), this, 'ui_next', 'ui_next', 'ui_next', 'ui_next'));
-            // this._clickSound = null;
-            // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
-
-            if (this._totalPurchase <= _minimumPurchase) {
-                this._prevBtn.inputEnabled = false;
-                this._prevBtn.alpha = 0.3;
-                this._nextBtn.inputEnabled = false;
-                this._nextBtn.alpha = 0.3;
-
-                //SLIDING DISABLE
-                this._slidingEnable = false;
-                this.dragRect.visible = false;
-            }
-        }
-    }, {
-        key: "_onPrev",
-        value: function _onPrev() {
-            _SoundManager2.default.instance.effectSoundContinuance(_SoundAssetKey2.default.BUTTON_SOUND);
-            this._game.add.tween(this.dragRect).to({ x: 0 }, 300, Phaser.Easing.Quartic.Out, true);
-        }
-    }, {
-        key: "_onNext",
-        value: function _onNext() {
-            _SoundManager2.default.instance.effectSoundContinuance(_SoundAssetKey2.default.BUTTON_SOUND);
-            this._game.add.tween(this.dragRect).to({ x: -_dragAreaTerm }, 300, Phaser.Easing.Quartic.Out, true);
-        }
-    }, {
-        key: "_buttonSndPlay",
-        value: function _buttonSndPlay(sndKey, snd, btn) {
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            snd = this._game.add.audio(sndKey);
-            btn.setDownSound(snd);
-        }
-    }, {
-        key: "_drag",
-        value: function _drag(obj) {
-            // console.log(parseInt(obj.x));
-            // this.currentPosition(parseInt(obj.x));
-            // _dist = obj.x - _dragStartPos;
-        }
-    }, {
-        key: "_sliderMoving",
-        value: function _sliderMoving() {
-
-            if (this.purchaseItem.length > 0) {
-                for (var i = 0; i < this.purchaseItem.length; i++) {
-                    this.purchaseItem[i].bg.x = this.purchaseItem[i].startX + _dist;
-                    this.purchaseItem[i].bgComp.x = this.purchaseItem[i].startX + _dist;
-                    this.purchaseItem[i].item.x = this.purchaseItem[i].startX + _dist;
-                    this.purchaseItem[i].itemComp.x = this.purchaseItem[i].startX + _dist;
-                    this.purchaseItem[i].checkMark.x = this.purchaseItem[i].startX + _dist;
-
-                    for (var j = 0; j < this.purchaseItem[i].numberImg.length; j++) {
-                        this.purchaseItem[i].numberImg[j].x = this.purchaseItem[i].startX + 58 + _dist;
-                    }
-                }
-
-                // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].number;
-                // let lastItem = this.purchaseItem[this.purchaseItem.length - 1].numberImg[0];
-                // let minimum = parseInt(this._prevBtn.x - this.purchaseItem[0].bg.x + this._prevBtn.width);
-                // let maximum = parseInt(this._nextBtn.x - lastItem.x - lastItem.width);
-                // console.log('minimum : ', minimum, 'maximum : ', maximum);
-
-                this._btnEnable();
-            }
-        }
-    }, {
-        key: "_btnEnable",
-        value: function _btnEnable() {
-
-            if (this.dragRect.x <= -_dragAreaTerm) {
-                this._nextBtn.inputEnabled = false;
-                this._nextBtn.alpha = 0.3;
-            } else {
-                this._nextBtn.inputEnabled = true;
-                this._nextBtn.alpha = 1;
-            }
-
-            if (this.dragRect.x >= 0) {
-                this._prevBtn.inputEnabled = false;
-                this._prevBtn.alpha = 0.3;
-            } else {
-                this._prevBtn.inputEnabled = true;
-                this._prevBtn.alpha = 1;
-            }
-        }
-    }, {
-        key: "currentPosition",
-        value: function currentPosition(xPos) {
-
-            var term = -110;
-            var idx = parseInt(xPos / term);
-            // console.log(parseInt(xPos/term));
-            return idx;
-        }
-    }, {
-        key: "positionMoving",
-        value: function positionMoving() {
-
-            var idx = this.currentPosition(this.dragRect.x);
-            var input = false;
-
-            var total = idx + _minimumPurchase;
-            if (total > this.purchaseItem.length) total = this.purchaseItem.length;
-            for (var i = idx; i < total; i++) {
-                input = this.purchaseItem[i].complete;
-                if (!input) break;
-            }
-
-            if (input) {
-                var remain = false;
-                for (var _i = 0; _i < _minimumPurchase; _i++) {
-                    remain = this.purchaseItem[_i].complete;
-                    if (!remain) break;
-                }
-
-                if (!remain) this._onPrev();else this._onNext();
-            }
-        }
-    }, {
-        key: "positionChange",
-        value: function positionChange(idx) {
-
-            return;
-
-            this._slidingEnable = false;
-            var itemIndex = 0;
-            for (var i = 0; i < this.purchaseItem.length; i++) {
-                if (this.purchaseItem[i].item === idx) itemIndex = i;
-            }
-
-            _GameConfig2.default.PURCHASE_LIST[itemIndex].empty = false;
-
-            var pos = [];
-
-            for (var _i2 = 0; _i2 < this.purchaseItem.length; _i2++) {
-                pos.push(this.purchaseItem[_i2].startX);
-            }var arr = this.purchaseItem;
-            var listArr = _GameConfig2.default.PURCHASE_LIST;
-            var obj = arr[itemIndex];
-            var listObj = listArr[itemIndex];
-            arr.splice(arr.indexOf(obj), 1);
-            arr.push(obj);
-
-            listArr.splice(listArr.indexOf(listObj), 1);
-            listArr.push(listObj);
-
-            for (var _i3 = 0; _i3 < arr.length; _i3++) {
-                arr[_i3].startX = pos[_i3];
-            }_GameConfig2.default.PURCHASE_ITEM_ARRAY_RESET = arr;
-            this.purchaseItem = _GameConfig2.default.PURCHASE_ITEM_ARRAY;
-
-            this._slidingEnable = true;
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-
-            if (!this._slidingEnable) return;
-            _dist = this.dragRect.x - _dragStartPos;
-            if (this._slidingEnable) this._sliderMoving();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._sliderGroup.removeChildren(0, this._sliderGroup.length);
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            for (var i = 0; i < this._sliderGroup.length; i++) {
-                this._sliderGroup[i].destroy();
-            }for (var _i4 = 0; _i4 < this._gameGroup.length; _i4++) {
-                this._gameGroup[_i4].destroy();
-            }
-        }
-    }]);
-    return PurchaseSlider;
-}();
-
-exports.default = PurchaseSlider;
-
-/***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _xPos = void 0,
-    _yPos = void 0;
-
-var PurchaseItem = function () {
-    function PurchaseItem(game, group, asset, quantity, xPos, yPos, parent, index) {
-        (0, _classCallCheck3.default)(this, PurchaseItem);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._key = _AssetKey2.default.SLIDE_BAR_PPIYO;
-        this._asset = asset;
-        this.quantity = quantity;
-        this.startX = 0;
-        this.numberImg = [];
-        this.complete = false;
-        this._parent = parent;
-        this.index = index;
-        _xPos = xPos;
-        _yPos = yPos;
-        this._init();
-    }
-
-    (0, _createClass3.default)(PurchaseItem, [{
-        key: "_init",
-        value: function _init() {
-            this.bg = new Phaser.Image(this._game, _xPos, _yPos, this._key, 'ui_square');
-            this._gameGroup.addChild(this.bg);
-
-            this.bgComp = new Phaser.Image(this._game, _xPos, _yPos, this._key, 'ui_squareCheck');
-            this._gameGroup.addChild(this.bgComp);
-            this.bgComp.visible = false;
-
-            var asset = 'slideBar_' + this._asset;
-            this.item = new Phaser.Image(this._game, _xPos, _yPos, this._key, asset);
-            this._gameGroup.addChild(this.item);
-
-            var assetComp = 'slideBarSelected_' + this._asset;
-            this.itemComp = new Phaser.Image(this._game, _xPos, _yPos, this._key, assetComp);
-            this._gameGroup.addChild(this.itemComp);
-            this.itemComp.visible = false;
-
-            this.checkMark = new Phaser.Image(this._game, _xPos, _yPos, this._key, 'ui_check');
-            this._gameGroup.addChild(this.checkMark);
-            this.checkMark.visible = false;
-
-            for (var i = 0; i < 3; i++) {
-                var numAsset = 'ui_number_' + (i + 1);
-                var number = new Phaser.Image(this._game, _xPos + 58, _yPos + 58, this._key, numAsset);
-                this._gameGroup.addChild(number);
-                if (this.quantity !== i + 1) number.visible = false;
-                this.numberImg.push(number);
-            }
-        }
-    }, {
-        key: "quantityChange",
-        value: function quantityChange(idx) {
-
-            if (this.complete) return;
-
-            this.quantity--;
-            for (var i = 0; i < 3; i++) {
-                if (this.quantity !== i + 1) this.numberImg[i].visible = false;else this.numberImg[i].visible = true;
-            }
-
-            if (this.quantity <= 0) {
-                if (this.item) {
-                    this._gameGroup.removeChild(this.bg);
-                    this.bg.destroy();
-                    this.bgComp.visible = true;
-
-                    this._gameGroup.removeChild(this.item);
-                    this.item.destroy();
-
-                    this.bgComp.visible = true;
-                    this.itemComp.visible = true;
-                    this.checkMark.visible = true;
-
-                    //COMPLETE
-                    this.complete = true;
-                    _GameConfig2.default.TOTAL_CATEGORIES--;
-
-                    //POSTION CHANGE
-                    // this._parent.positionChange(this.item);
-                    this._parent.positionMoving(this.item);
-                    // this._positionChange();
-                    // console.log(GameConfig.TOTAL_CATEGORIES);
-                }
-            }
-        }
-    }, {
-        key: "_positionChange",
-        value: function _positionChange() {
-
-            /*   let arr = GameConfig.PURCHASE_ITEM_ARRAY;
-               let idx = arr.indexOf(this);
-               console.log('idx : ', idx);
-               let pos = [];
-                 for(let i = 0; i<arr.length; i++)
-               {
-                   pos.push(parseInt(arr[i].item.x));
-               }
-                 console.log('pos : ', pos)
-                 for(let i = 0; i<arr.length; i++)
-               {
-                   if(i > idx)
-                   {
-                       // arr[i].item.x =  arr[i - 1].item.x
-                       arr[i].item.x = parseInt(arr[i - 1].item.x);
-                       console.log(arr[i].item.x)
-                   }
-                 }*/
-
-            // this.bgComp.x = 500;
-            // this.itemComp.x = pos[pos.length - 1];
-            // this.checkMark.x = pos[pos.length - 1];
-
-            // GameConfig.PURCHASE_ITEM_ARRAY.splice(idx, 1);
-            // GameConfig.PURCHASE_ITEM_ARRAY.push(this);
-
-        }
-    }]);
-    return PurchaseItem;
-}();
-
-exports.default = PurchaseItem;
-
-/***/ }),
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var posX = void 0,
-    sX = void 0,
-    sY = void 0;
-
-var xDist = 350;
-var yDist = 33;
-
-var xTerm = 800;
-var yTerm = 210;
-
-var imageTerm = 150;
-
-var ShuffleRandom = function () {
-    function ShuffleRandom(game) {
-        (0, _classCallCheck3.default)(this, ShuffleRandom);
-
-        this._game = game;
-
-        posX = [];
-        sX = [];
-        sY = [];
-    }
-
-    (0, _createClass3.default)(ShuffleRandom, [{
-        key: "_shuffle",
-        value: function _shuffle(num) {
-            var arr = [];
-            for (var i = 0; i < num; i++) {
-                // let n = (i +1) * xDist + xTerm;
-                var n = i * xTerm + this._game.rnd.integerInRange(imageTerm, xDist);
-                posX.push(n);
-                // posY.push(i * yDist + yTerm);
-            }
-
-            arr.push(posX);
-            return arr;
-        }
-    }, {
-        key: "_reShuffle",
-        value: function _reShuffle(reArr, min) {
-
-            var j = void 0,
-                x = void 0,
-                i = void 0;
-            for (i = reArr.length - min; i > 0; i--) {
-                j = Math.floor(Math.random() * (i + 1));
-                x = reArr[i];
-                reArr[i] = reArr[j];
-                reArr[j] = x;
-            }
-            return reArr;
-        }
-    }, {
-        key: "_compare",
-        value: function _compare(a, b) {
-            a.toString();
-            b.toString();
-            return b < a ? 1 : b == a ? 0 : -1;
-        }
-    }, {
-        key: "posInit",
-        value: function posInit(num) {
-
-            var posArr = [];
-            var temp = void 0,
-                rnum = void 0;
-
-            for (var i = 1; i <= num; i++) {
-                posArr.push(i);
-            }
-
-            for (var _i = 0; _i < posArr.length; _i++) {
-                rnum = parseInt(Math.random() * num);
-                temp = posArr[_i];
-                posArr[_i] = posArr[rnum];
-                posArr[rnum] = temp;
-            }
-
-            return posArr;
-
-            this._game = null;
-        }
-    }, {
-        key: "arrayShuffle",
-        value: function arrayShuffle(a) {
-            var j = void 0,
-                x = void 0,
-                i = void 0;
-            for (i = a.length; i; i -= 1) {
-                j = Math.floor(Math.random() * i);
-                x = a[i - 1];
-                a[i - 1] = a[j];
-                a[j] = x;
-            }
-            return a;
-        }
-    }, {
-        key: "pickNow",
-        value: function pickNow(arr) {
-            var pick = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
-
-            var numbers = [];
-            var pickNumbers = pick;
-            for (var insertCur = 0; insertCur < pickNumbers; insertCur++) {
-                numbers[insertCur] = Math.floor(Math.random() * arr.length);
-                for (var searchCur = 0; searchCur < insertCur; searchCur++) {
-                    if (numbers[insertCur] === numbers[searchCur]) {
-                        insertCur--;
-                        break;
-                    }
-                }
-            }
-
-            /* let result = "";
-             for(let i = 0; i < pickNumbers; i ++){
-                 if(i > 0){
-                     result += ", ";
-                 }
-                 result += numbers[i];
-             }*/
-
-            // console.log(numbers);
-            return numbers;
-        }
-    }]);
-    return ShuffleRandom;
-}();
-
-exports.default = ShuffleRandom;
-
-
-ShuffleRandom = null;
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _SeparateAnimation = __webpack_require__(22);
-
-var _SeparateAnimation2 = _interopRequireDefault(_SeparateAnimation);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _PurchaseItemForListView = __webpack_require__(129);
-
-var _PurchaseItemForListView2 = _interopRequireDefault(_PurchaseItemForListView);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _dragStartPos = void 0,
-    _dist = void 0,
-    _interval = void 0,
-    _count = void 0,
-    _soundCount = void 0,
-    _dragAreaTerm = void 0;
-var _minimumPurchase = 5;
-var _soundCountMax = 250;
-// const _waitingCount = 100;
-var _waitingCount = 200;
-
-var PurchaseListView = function () {
-    function PurchaseListView(game, group, parent) {
-        (0, _classCallCheck3.default)(this, PurchaseListView);
-
-        this._game = game;
-        // this._gameGroup = this._game.add.group();
-        this._gameGroup = group;
-        this._sliderGroup = this._game.add.group();
-        this._topGroup = this._game.add.group();
-        this._key = _AssetKey2.default.PURCHASE_LIST_VIEW;
-        this._prevBtn = null;
-        this._nextBtn = null;
-        this._totalPurchase = 0;
-        this._slidingEnable = true;
-        this._countStart = false;
-        this.purchaseItem = [];
-        this._parent = parent;
-        this._ppiyoFaceChange = false;
-        _interval = 0;
-        _dragAreaTerm = 0;
-        _soundCount = 0;
-        _count = 0;
-
-        this._init();
-        this._listButton();
-        this._sndPlay();
-    }
-
-    (0, _createClass3.default)(PurchaseListView, [{
-        key: "_sndPlay",
-        value: function _sndPlay() {
-            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.guideNarr_1);
-            _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.guideNarr_1;
-        }
-    }, {
-        key: "_init",
-        value: function _init() {
-
-            this.bgRect = this._game.add.graphics(0, 0);
-            this.bgRect.beginFill(0xfdeeb9, 1);
-            this.bgRect.drawRect(0, 0, 1280, 720);
-            this.bgRect.endFill();
-            this._gameGroup.addChild(this.bgRect);
-
-            this.bgRectWhite = this._game.add.graphics(0, 0);
-            this.bgRectWhite.beginFill(0xffffff, 1);
-            this.bgRectWhite.drawRect(377, 100, 526, 693);
-            this.bgRectWhite.endFill();
-            this._gameGroup.addChild(this.bgRectWhite);
-
-            this.boardTop = new Phaser.Image(this._game, 377, 0, this._key, 'purchaseListBoardTop');
-            this._topGroup.addChild(this.boardTop);
-
-            this.boardBottom = new Phaser.Image(this._game, 377, 680, this._key, 'purchaseListBoardBottom');
-            this._topGroup.addChild(this.boardBottom);
-
-            this.ppiyo = new _SeparateAnimation2.default(this._game, this._key, 'purchase_ppiyo_', 848, 332, 1, 2, '', 0, 4, true);
-            this._topGroup.addChild(this.ppiyo);
-            this.ppiyo._play();
-
-            this.cart = new _SeparateAnimation2.default(this._game, this._key, 'purchase_cart_', 19, 334, 1, 2, '', 0, 2, true);
-            this._topGroup.addChild(this.cart);
-            this.cart._play();
-
-            this.maskRect = this._game.add.graphics(0, 0);
-            this.maskRect.beginFill(0xffcc00, 0.3);
-            this.maskRect.drawRect(0, 0, 1280, 720);
-            this.maskRect.endFill();
-            this._topGroup.addChild(this.maskRect);
-
-            this._listSetting();
-        }
-    }, {
-        key: "_listSetting",
-        value: function _listSetting() {
-            // let _interval = 0;
-            var pArr = _GameConfig2.default.PURCHASE_LIST;
-            this._totalPurchase = pArr.length;
-
-            //LIST
-            for (var i = 0; i < pArr.length; i++) {
-                var asset = pArr[i].item;
-                var quantity = pArr[i].quantity;
-                var term = 127;
-                var dotTerm = 169;
-                var xPos = 494;
-                var yPos = (107 + 5) * i + term;
-                var dotXpos = 425;
-                var dotYpos = (85 + 27) * i + dotTerm;
-                var purchaseItem = new _PurchaseItemForListView2.default(this._game, this._sliderGroup, asset, quantity, xPos, yPos, dotXpos, dotYpos);
-                _GameConfig2.default.PURCHASE_ITEM_FOR_LIST_ARRAY = purchaseItem;
-                _interval = (107 + 5) * (i + 1);
-                _dragAreaTerm = (pArr.length - _minimumPurchase) * (107 + 5);
-                purchaseItem.startY = yPos;
-                this._sliderGroup.mask = this.maskRect;
-            }
-
-            this.purchaseItem = _GameConfig2.default.PURCHASE_ITEM_FOR_LIST_ARRAY;
-            // console.log(pArr);
-            // console.log(this.purchaseItem);
-
-            this._dragArea(_interval);
-
-            this.dragRect = this._game.add.graphics(0, 0);
-            this.dragRect.beginFill(0xff4400, 0);
-            this.dragRect.drawRect(377, 120, 526, _interval);
-            this.dragRect.endFill();
-            this._gameGroup.addChild(this.dragRect);
-            this.dragRect.inputEnabled = true;
-            this.dragRect.input.enableDrag(false, false, false, 255, this.dragArea);
-            this.dragRect.input.allowHorizontalDrag = false;
-            // this.dragRect.events.onDragUpdate.add(this._drag, this);
-            this.dragRect.mask = this.maskRect;
-            _dragStartPos = this.dragRect.y;
-        }
-    }, {
-        key: "_listButton",
-        value: function _listButton() {
-
-            // this._prevBtn = this._topGroup.add(this._game.make.button(800, 135, this._key, this._onPrev.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev','guideArrowPrev'));
-            this._nextBtn = this._topGroup.add(this._game.make.button(800, 505, this._key, this._onNext.bind(this), this, 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev', 'guideArrowPrev'));
-            // this._clickSound = null;
-            // this._buttonSndPlay(SoundAssetKey.BUTTON_SOUND, this._clickSound, this._nextBtn);
-
-            if (this._totalPurchase <= _minimumPurchase) {
-                // this._prevBtn.inputEnabled = false;
-                // this._prevBtn.alpha = 0.3;
-                this._nextBtn.inputEnabled = false;
-                this._nextBtn.visible = false;
-
-                //SLIDING DISABLE
-                this._slidingEnable = false;
-                this._countStart = true;
-                this.dragRect.visible = false;
-            } else {
-                //GUIDE HAND
-                this.hand = new Phaser.Image(this._game, 847, 549, this._key, 'guideHand');
-                this._topGroup.addChild(this.hand);
-                this.hand.anchor.setTo(0.5, 0.5);
-                this.hand.x += this.hand.width / 2;
-                this.hand.y += this.hand.height / 2;
-                this._game.add.tween(this.hand.scale).to({ x: 0.8, y: 0.8 }, 300, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
-                // this._game.add.tween(this.hand).to({y:650}, 800, Phaser.Easing.Quintic.Out, true, 0, 1000, true);
-            }
-        }
-    }, {
-        key: "_dragArea",
-        value: function _dragArea(interval) {
-            // this.dragArea = this._game.add.graphics(0, - interval * 0.5);
-            this.dragArea = this._game.add.graphics(0, -_dragAreaTerm);
-            this.dragArea.beginFill(0x000, 0);
-            // this.dragArea.drawRect(377, 0, 526, interval * 1.5);
-            this.dragArea.drawRect(377, 0, 526, interval + _dragAreaTerm);
-            this.dragArea.endFill();
-            this._topGroup.addChild(this.dragArea);
-        }
-    }, {
-        key: "_buttonSndPlay",
-        value: function _buttonSndPlay(sndKey, snd, btn) {
-            if (!_GameConfig2.default.SOUND_ENABLED) return;
-            snd = this._game.add.audio(sndKey);
-            btn.setDownSound(snd);
-        }
-    }, {
-        key: "_drag",
-        value: function _drag(obj) {
-
-            // console.log('x : ', parseInt(obj.x), 'y :', parseInt(obj.y));
-            // if(obj.y>0) return;
-
-            // _dist = obj.y - _dragStartPos;
-            /*  if(this.purchaseItem.length > 0)
-                  for (let i = 0; i < this.purchaseItem.length; i++)
-                  {
-                      this.purchaseItem[i].blit.y = this.purchaseItem[i].startY + _dist + 42;
-                        for(let j = 0; j<this.purchaseItem[i].itemArr.length; j++)
-                      {
-                          this.purchaseItem[i].itemArr[j].y = this.purchaseItem[i].startY + _dist;
-                      }
-                  }*/
-        }
-    }, {
-        key: "_sliderMoving",
-        value: function _sliderMoving() {
-
-            // console.log(this.purchaseItem[this.purchaseItem.length - 1].blit.y);
-            var objAllpopPos = 620;
-            var lastObject = this.purchaseItem[this.purchaseItem.length - 1].blit.y;
-            if (lastObject <= objAllpopPos) {
-                this._countStart = true;
-                if (this.hand) this.hand.destroy();
-                if (this._nextBtn) this._nextBtn.destroy();
-            }
-
-            if (this.purchaseItem.length > 0) for (var i = 0; i < this.purchaseItem.length; i++) {
-                this.purchaseItem[i].blit.y = this.purchaseItem[i].startY + _dist + 42;
-
-                for (var j = 0; j < this.purchaseItem[i].itemArr.length; j++) {
-                    this.purchaseItem[i].itemArr[j].y = this.purchaseItem[i].startY + _dist;
-                }
-            }
-        }
-    }, {
-        key: "_onPrev",
-        value: function _onPrev() {
-            this._game.add.tween(this.dragRect).to({ y: 0 }, 300, Phaser.Easing.Quartic.Out, true);
-        }
-    }, {
-        key: "_onNext",
-        value: function _onNext() {
-            var _this = this;
-
-            _SoundManager2.default.instance.effectSoundContinuance(_SoundAssetKey2.default.BUTTON_SOUND);
-            this._nextBtn.inputEnabled = false;
-            this._nextBtn.visible = false;
-            var tw = this._game.add.tween(this.dragRect).to({ y: -_dragAreaTerm }, 300, Phaser.Easing.Quartic.Out, true);
-            tw.onComplete.add(function () {
-                _this._countStart = true;
-            });
-
-            if (this.hand) this.hand.destroy();
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-            _soundCount++;
-            if (this._countStart) {
-                this._ppiyoChange();
-                _count++;
-                if (_count >= _waitingCount && _soundCount >= _soundCountMax) {
-                    this._gameStart();
-                    this._destroy();
-                    this._countStart = false;
-                    return;
-                }
-            }
-
-            _dist = this.dragRect.y - _dragStartPos;
-            if (this._slidingEnable) this._sliderMoving();
-        }
-    }, {
-        key: "_ppiyoChange",
-        value: function _ppiyoChange() {
-            if (this._ppiyoFaceChange) return;
-
-            this._ppiyoFaceChange = true;
-            if (this.ppiyo) {
-                this._topGroup.removeChild(this.ppiyo);
-                this.ppiyo._destroy();
-            }
-            this.ppiyo = new _SeparateAnimation2.default(this._game, this._key, 'purchase_ppiyo_complete_', 848, 332, 1, 2, '', 0, 4, true);
-            this._topGroup.addChild(this.ppiyo);
-            this.ppiyo._play();
-            // this.ppiyo._frameChange('purchase_ppiyo_complete_', 1, 2, '', 0, 6, true);
-        }
-    }, {
-        key: "_gameStart",
-        value: function _gameStart() {
-            this._parent._createCorner();
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            // this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._sliderGroup.removeChildren(0, this._sliderGroup.length);
-            this._topGroup.removeChildren(0, this._topGroup.length);
-            this._gameGroup.removeChild(this.bgRect);
-            this._gameGroup.removeChild(this.bgRectWhite);
-            this._gameGroup.removeChild(this.dragRect);
-            this.bgRect.destroy();
-            this.bgRectWhite.destroy();
-            // for(let i = 0; i< this._gameGroup.length; i++) this._gameGroup[i].destroy();
-            for (var i = 0; i < this._sliderGroup.length; i++) {
-                this._sliderGroup[i].destroy();
-            }for (var _i = 0; _i < this._topGroup.length; _i++) {
-                this._topGroup[_i].destroy();
-            }
-        }
-    }]);
-    return PurchaseListView;
-}();
-
-exports.default = PurchaseListView;
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _xPos = void 0,
-    _yPos = void 0,
-    _dotXpos = void 0,
-    _dotYpos = void 0;
-
-var PurchaseItemForListView = function () {
-    function PurchaseItemForListView(game, group, asset, quantity, xPos, yPos, dotXpos, dotYpos) {
-        (0, _classCallCheck3.default)(this, PurchaseItemForListView);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._key = _AssetKey2.default.PURCHASE_LIST_VIEW;
-        this._asset = asset;
-        this.quantity = quantity;
-        this.startY = 0;
-        this.complete = false;
-        this.itemArr = [];
-        _xPos = xPos;
-        _yPos = yPos;
-        _dotXpos = dotXpos;
-        _dotYpos = dotYpos;
-        this._init();
-    }
-
-    (0, _createClass3.default)(PurchaseItemForListView, [{
-        key: "_init",
-        value: function _init() {
-
-            this.blit = new Phaser.Image(this._game, _dotXpos, _dotYpos, this._key, 'purchaseListDot');
-            this._gameGroup.addChild(this.blit);
-
-            for (var i = 0; i < this.quantity; i++) {
-                var asset = 'purchase_' + this._asset;
-                var x = _xPos + (127 + 4) * i;
-                var item = new Phaser.Image(this._game, x, _yPos, this._key, asset);
-                this._gameGroup.addChild(item);
-                this.itemArr.push(item);
-
-                /*  let dragRect = this._game.add.graphics(0, 0);
-                  dragRect.beginFill(0xff4400, 0.4);
-                  dragRect.drawRect(x, _yPos, item.width, item.height);
-                  dragRect.endFill();
-                  this._gameGroup.addChild(dragRect);
-                  this.itemArr.push(dragRect);*/
-            }
-        }
-    }]);
-    return PurchaseItemForListView;
-}();
-
-exports.default = PurchaseItemForListView;
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _CalculatePosItem = __webpack_require__(131);
-
-var _CalculatePosItem2 = _interopRequireDefault(_CalculatePosItem);
-
-var _PriceCountForPos = __webpack_require__(132);
-
-var _PriceCountForPos2 = _interopRequireDefault(_PriceCountForPos);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _itemArr = void 0,
-    _startX = void 0,
-    _startY = void 0,
-    _maximumX = void 0,
-    _minimumY = void 0,
-    _currentPrice = void 0;
-
-var CalculatePos = function () {
-    function CalculatePos(game, parent) {
-        (0, _classCallCheck3.default)(this, CalculatePos);
-
-        this._game = game;
-        this._gameGroup = this._game.add.group();
-        this._itemGroup = this._game.add.group();
-        this._scannerGroup = this._game.add.group();
-        this._parent = parent;
-        this._key = _AssetKey2.default.CALCULATE_POS;
-        this._checkOutQuantity = 0;
-        _itemArr = [];
-        _startY = 0;
-        _maximumX = 500;
-        _minimumY = 200;
-        _currentPrice = 0;
-        this._init();
-        this._itemGenerate();
-        this._posGenerate();
-        this._sndPlay();
-    }
-
-    (0, _createClass3.default)(CalculatePos, [{
-        key: "_sndPlay",
-        value: function _sndPlay() {
-
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.guideNarr_4);
-            _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.guideNarr_4;
-        }
-    }, {
-        key: "_init",
-        value: function _init() {
-
-            this.bgRect = this._game.add.graphics(0, 0);
-            this.bgRect.beginFill(0x8bd3e7, 1);
-            this.bgRect.drawRect(0, 0, 1280, 720);
-            this.bgRect.endFill();
-            this._gameGroup.addChild(this.bgRect);
-
-            this.countDisplay = new Phaser.Image(this._game, 0, 12, this._key, 'countDisplay');
-            this._gameGroup.addChild(this.countDisplay);
-
-            this.scanner = new Phaser.Image(this._game, 225, 187, this._key, 'pos_scanner');
-            this.scanner.alpha = 0;
-            this.scanner.visible = false;
-            this._scannerGroup.addChild(this.scanner);
-
-            this.dragArea = this._game.add.graphics(0, 200);
-            this.dragArea.beginFill(0x000, 0.5);
-            this.dragArea.drawRect(0, 0, 1280, 520);
-            this.dragArea.endFill();
-            this.dragArea.visible = false;
-            // this._gameGroup.addChild(this.dragArea);
-        }
-    }, {
-        key: "_itemGenerate",
-        value: function _itemGenerate() {
-            var pArr = _GameConfig2.default.PURCHASE_LIST;
-
-            for (var i = 0; i < pArr.length; i++) {
-                var asset = 'pos_' + pArr[i].item;
-                var quantity = pArr[i].quantity;
-                var price = pArr[i].price;
-                var term = parseInt(400 / pArr.length);
-                var maximum = Math.abs(i - 12) * 7;
-                // console.log('maximum : ', maximum)
-                var xPos = parseInt(this._game.rnd.between(maximum / 3, maximum));
-                var yPos = term * i + 220;
-                for (var j = 0; j < quantity; j++) {
-                    xPos += j * this._game.rnd.between(maximum / 2, maximum);
-                    // console.log(xPos);
-                    yPos += j * this._game.rnd.between(-15, 15);
-                    var purchaseItem = new _CalculatePosItem2.default(this._game, this._itemGroup, this._key, asset, xPos, yPos);
-                    _itemArr.push(purchaseItem);
-                    var obj = purchaseItem.item;
-                    obj.price = price;
-                    obj.inputEnabled = true;
-                    obj.pixelPerfectOver = true;
-                    obj.pixelPerfectClick = true;
-                    obj.input.enableDrag(true, true, true, 255, this.dragArea);
-                    obj.events.onInputDown.add(this._onDown, this);
-                    obj.events.onDragUpdate.add(this._onDrag, this);
-                    obj.events.onDragStop.add(this._stopDrag, this);
-                }
-            }
-
-            this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
-        }
-    }, {
-        key: "_onDown",
-        value: function _onDown(obj) {
-            _startX = obj.x;
-            _startY = obj.y;
-        }
-    }, {
-        key: "_onDrag",
-        value: function _onDrag(obj) {
-
-            obj.bringToTop();
-            // console.log(parseInt(obj.x), parseInt(obj.y));
-            if (obj.x >= 450) this._checkOut(obj);
-        }
-    }, {
-        key: "_stopDrag",
-        value: function _stopDrag(obj) {
-
-            if (obj.checkOut) {
-                obj.inputEnabled = false;
-                var xPos = this._xPosValue(obj.y);
-                // console.log(obj.y, xPos));
-                var rX = this._game.rnd.between(xPos, 1100);
-                this._game.add.tween(obj).to({ x: rX }, 500, Phaser.Easing.Quartic.Out, true, 0);
-                //요청에 의한 스캔이후 항목 정렬 제거
-                // this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
-                return;
-            }
-
-            if (obj.y <= _minimumY) obj.y = _startY;
-            if (obj.x <= _maximumX) obj.x = _startX;
-
-            this._itemGroup.sort('y', Phaser.Group.SORT_ASCENDING);
-        }
-    }, {
-        key: "_xPosValue",
-        value: function _xPosValue(yPos) {
-
-            var xPos = 0;
-            if (yPos >= 550) xPos = 950;else if (yPos < 550 && yPos >= 450) xPos = 900;else if (yPos < 450 && yPos >= 350) xPos = 850;else if (yPos < 350 && yPos > 250) xPos = 800;else if (yPos <= 250) xPos = 780;
-            return xPos;
-        }
-    }, {
-        key: "_checkOut",
-        value: function _checkOut(obj) {
-            var _this = this;
-
-            if (obj.checkOut) return;
-            if (this.scanner) {
-                _currentPrice += Number(obj.price);
-                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.BEEP, 0.3);
-                obj.checkOut = true;
-                this.scanner.visible = true;
-                var tw = this._game.add.tween(this.scanner).to({ alpha: 1 }, 50, Phaser.Easing.Quartic.Out, true, 0, 1, true);
-                tw.onComplete.add(function () {
-                    _this._priceCount._count(_currentPrice);
-                    _this.scanner.alpha = 0;
-                    _this.scanner.visible = false;
-                    _this._checkOutQuantity++;
-                    if (_this._checkOutQuantity >= _GameConfig2.default.TOTAL_QUANTITY) {
-                        _this._parent._createPaymentPos();
-                        _this._destroy();
-                    }
-                });
-            }
-        }
-    }, {
-        key: "_posGenerate",
-        value: function _posGenerate() {
-            this._priceCount = new _PriceCountForPos2.default(this._game, this._gameGroup, this._key);
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._itemGroup.removeChildren(0, this._itemGroup.length);
-            this._scannerGroup.removeChildren(0, this._scannerGroup.length);
-            for (var i = 0; i < this._gameGroup.length; i++) {
-                this._gameGroup[i].destroy();
-            }for (var _i = 0; _i < this._itemGroup.length; _i++) {
-                this._itemGroup[_i].destroy();
-            }for (var _i2 = 0; _i2 < this._scannerGroup.length; _i2++) {
-                this._scannerGroup[_i2].destroy();
-            }
-        }
-    }]);
-    return CalculatePos;
-}();
-
-exports.default = CalculatePos;
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _xPos = void 0,
-    _yPos = void 0;
-
-var CalculatePosItem = function () {
-    function CalculatePosItem(game, group, key, asset, xPos, yPos) {
-        (0, _classCallCheck3.default)(this, CalculatePosItem);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._key = key;
-        this._asset = asset;
-        this.item = null;
-        this.checkOut = false;
-        _xPos = xPos;
-        _yPos = yPos;
-        this._init();
-    }
-
-    (0, _createClass3.default)(CalculatePosItem, [{
-        key: "_init",
-        value: function _init() {
-            this.item = new Phaser.Image(this._game, _xPos, _yPos, this._key, this._asset);
-            this._gameGroup.addChild(this.item);
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            for (var i = 0; i < this._gameGroup.length; i++) {
-                this._gameGroup[i].destroy();
-            }
-        }
-    }]);
-    return CalculatePosItem;
-}();
-
-exports.default = CalculatePosItem;
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _currentPriceArr = [];
-var _xPosArr = [742, 702, 662, 598, 558];
-var _yPos = 60;
-
-var PriceCountForPos = function () {
-    function PriceCountForPos(game, group, key) {
-        (0, _classCallCheck3.default)(this, PriceCountForPos);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._paymentGroup = this._game.add.group();
-        this._key = key;
-        this._count(0);
-    }
-
-    (0, _createClass3.default)(PriceCountForPos, [{
-        key: '_count',
-        value: function _count(num) {
-
-            var totalAmount = num.toString();
-            this._paymentGroup.removeChildren(0, this._paymentGroup.length);
-            for (var i = 0; i < _currentPriceArr.length; i++) {
-                _currentPriceArr.splice(i, 1);
-            }for (var _i = 0; _i < this._paymentGroup.length; _i++) {
-                this._paymentGroup[_i].destroy();
-            }for (var _i2 = 0; _i2 < totalAmount.length; _i2++) {
-                var _num = String(totalAmount).substr(totalAmount.length - 1 - _i2, 1);
-                _currentPriceArr.push(_num);
-                var asset = 'posNumber_' + _num;
-                var img = new Phaser.Image(this._game, _xPosArr[_i2], _yPos, this._key, asset);
-                // console.log(_xPosArr[i])
-                this._paymentGroup.addChild(img);
-                img.anchor.setTo(0, 1);
-                img.y += img.height;
-                img.scale.setTo(1, 0.2 + _i2 / 10);
-                var duration = _i2 * 100 + 200;
-                this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
-            }
-
-            if (num >= 1000) {
-                var dot = new Phaser.Image(this._game, 640, 99, this._key, 'posNumber_dot');
-                this._paymentGroup.addChild(dot);
-            }
-        }
-    }]);
-    return PriceCountForPos;
-}();
-
-exports.default = PriceCountForPos;
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _PriceCount = __webpack_require__(134);
-
-var _PriceCount2 = _interopRequireDefault(_PriceCount);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _coinArr = void 0,
-    _billBaseArr = void 0,
-    _billArr = void 0,
-    _startX = void 0,
-    _startY = void 0,
-    _currentPrice = void 0,
-    _remove = void 0,
-    _count = void 0,
-    _completeCount = void 0;
-var _movePos = { coinMinimumX: 580, coinMaximumX: 1040, coinMinimumY: 210,
-    coinResultMinX: 671, coinResultMaxX: 945, coinResultMinY: 67, coinResultMaxY: 136,
-    billMinimumX: 580, billMaximumX: 1040, billMinimumY: 185,
-    billResultMinX: 674, billResultMaxX: 766, billResultMinY: 70, billResultMaxY: 121 };
-var _coinSoundAsset = [_SoundAssetKey2.default.CASH_SND_100, _SoundAssetKey2.default.CASH_SND_500];
-var _billSoundAsset = [_SoundAssetKey2.default.CASH_SND_1000, _SoundAssetKey2.default.CASH_SND_5000, _SoundAssetKey2.default.CASH_SND_10000];
-var _intervalComplete = 30;
-var _intervalCount = 300;
-
-var PaymentPos = function () {
-    function PaymentPos(game) {
-        (0, _classCallCheck3.default)(this, PaymentPos);
-
-        this._game = game;
-        this._gameGroup = this._game.add.group();
-        this._posGroup = this._game.add.group();
-        this._cashGroup = this._game.add.group();
-        this._key = _AssetKey2.default.PAYMENT_POS;
-        this._coin100 = false;
-        this._checkOut = false;
-        this._complete = false;
-        _coinArr = [];
-        _billBaseArr = [];
-        _billArr = [];
-        _startX = 0;
-        _startY = 0;
-        _currentPrice = 0;
-        _count = 0;
-        _completeCount = 0;
-        _remove = false;
-
-        this._init();
-        this._cashGenerate();
-        this._posGenerate();
-        this._sndPlay();
-    }
-
-    (0, _createClass3.default)(PaymentPos, [{
-        key: "_sndPlay",
-        value: function _sndPlay() {
-
-            _GameConfig2.default.BGM_VOLUME = _GameConfig2.default.REDUCE_BGM_VOLUME;
-            // SoundManager.instance.bgmSoundStart();
-
-            if (_GameConfig2.default.SOUND_ENABLED) _SoundManager2.default.instance.effectSoundStop(_SoundAssetKey2.default.MAIN_BGM, _GameConfig2.default.REDUCE_BGM_VOLUME, true, false);
-
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.guideNarr_5);
-            _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.guideNarr_5;
-        }
-    }, {
-        key: "_init",
-        value: function _init() {
-
-            this.dragArea = this._game.add.graphics(0, 0);
-            this.dragArea.beginFill(0x000, 0);
-            this.dragArea.drawRect(0, 0, 1280, 720);
-            this.dragArea.endFill();
-            this.dragArea.visible = false;
-            // this._gameGroup.addChild(this.dragArea);
-
-            this.bgRect = this._game.add.graphics(0, 0);
-            this.bgRect.beginFill(0x8bd2e8, 1);
-            this.bgRect.drawRect(0, 0, 1280, 336);
-            this.bgRect.endFill();
-            this._gameGroup.addChild(this.bgRect);
-
-            this.bgRectBottom = this._game.add.graphics(0, 0);
-            this.bgRectBottom.beginFill(0x2e3c56, 1);
-            this.bgRectBottom.drawRect(0, 336 + 33, 1280, 351);
-            this.bgRectBottom.endFill();
-            this._gameGroup.addChild(this.bgRectBottom);
-
-            this.bgBar = new Phaser.Image(this._game, 0, 336, this._key, 'paymentBgBar');
-            this.bgBar.width = 1280;
-            this._gameGroup.addChild(this.bgBar);
-
-            this.paymentDisplay = new Phaser.Image(this._game, 196, 23, this._key, 'paymentDisplay');
-            this._gameGroup.addChild(this.paymentDisplay);
-
-            this.paymentDisplayResult = new Phaser.Image(this._game, 196, 177, this._key, 'paymentDisplayResult');
-            this._gameGroup.addChild(this.paymentDisplayResult);
-
-            this.bowl = new Phaser.Image(this._game, 620, 19, this._key, 'payment_bowl');
-            this._gameGroup.addChild(this.bowl);
-        }
-    }, {
-        key: "_cashGenerate",
-        value: function _cashGenerate() {
-            //100
-            for (var i = 0; i < 5; i++) {
-                var term = 178;
-                var xPos = term + i * 49;
-                var coin = new Phaser.Image(this._game, xPos, 382, this._key, 'cash_100');
-                coin.x = term + i * (49 + coin.width);
-                coin.amount = 100;
-                coin.soundAsset = _coinSoundAsset[0];
-                // coin.minimumX = _movePos[0].minimumX;
-                // console.log(coin.minimumX)
-                this._cashGroup.addChild(coin);
-                _coinArr.push(coin);
-            }
-
-            //500
-            var coin_500 = new Phaser.Image(this._game, 976, 374, this._key, 'cash_500');
-            coin_500.amount = 500;
-            coin_500.soundAsset = _coinSoundAsset[1];
-            this._cashGroup.addChild(coin_500);
-            _coinArr.push(coin_500);
-
-            //1000~10000
-            var _amount = [1000, 5000, 10000];
-            var _billQuantity = [40, 10, 5];
-            for (var _i = 0; _i < 3; _i++) {
-                var _term = 118;
-                var _xPos = _term + _i * 75;
-                var baseAsset = 'cash_base_' + _amount[_i];
-                var baseBill = new Phaser.Image(this._game, _xPos, 524, this._key, baseAsset);
-                baseBill.x = _term + _i * (75 + baseBill.width);
-                baseBill.amount = _amount[_i];
-                this._cashGroup.addChild(baseBill);
-                _billBaseArr.push(baseBill);
-
-                // baseBill.inputEnabled =  true;
-                // baseBill.pixelPerfectOver = true;
-                // baseBill.pixelPerfectClick = true;
-                // baseBill.events.onInputDown.add(this._cashSelect, this);
-
-                for (var j = 0; j < _billQuantity[_i]; j++) {
-                    var asset = 'cash_' + _amount[_i];
-                    var bill = new Phaser.Image(this._game, _xPos, 524, this._key, asset);
-                    bill.x = _term + _i * (75 + bill.width);
-                    bill.amount = _amount[_i];
-                    bill.soundAsset = _billSoundAsset[_i];
-                    this._cashGroup.addChild(bill);
-                    _billBaseArr.push(bill);
-
-                    bill.inputEnabled = true;
-                    bill.pixelPerfectOver = true;
-                    bill.pixelPerfectClick = true;
-                    bill.input.enableDrag(true, true, true, 255, this.dragArea);
-                    bill.events.onInputDown.add(this._cashSelect, this);
-                    bill.events.onDragUpdate.add(this._dragUpdate, this);
-                    bill.events.onDragStop.add(this._stopDrag, this);
-                    bill.minX = _movePos.billMinimumX;
-                    bill.maxX = _movePos.billMaximumX;
-                    bill.minY = _movePos.billMinimumY;
-                    bill.resultMinX = _movePos.billResultMinX;
-                    bill.resultMaxX = _movePos.billResultMaxX;
-                    bill.resultMinY = _movePos.billResultMinY;
-                    bill.resultMaxY = _movePos.billResultMaxY;
-                }
-            }
-
-            for (var _i2 = 0; _i2 < _coinArr.length; _i2++) {
-                var obj = _coinArr[_i2];
-                obj.inputEnabled = true;
-                obj.pixelPerfectOver = true;
-                obj.pixelPerfectClick = true;
-                obj.input.enableDrag(true, true, true, 255, this.dragArea);
-                obj.events.onInputDown.add(this._cashSelect, this);
-                obj.events.onDragUpdate.add(this._dragUpdate, this);
-                obj.events.onDragStop.add(this._stopDrag, this);
-                obj.minX = _movePos.coinMinimumX;
-                obj.maxX = _movePos.coinMaximumX;
-                obj.minY = _movePos.coinMinimumY;
-                obj.resultMinX = _movePos.coinResultMinX;
-                obj.resultMaxX = _movePos.coinResultMaxX;
-                obj.resultMinY = _movePos.coinResultMinY;
-                obj.resultMaxY = _movePos.coinResultMaxY;
-            }
-        }
-    }, {
-        key: "_posGenerate",
-        value: function _posGenerate() {
-            this._priceCount = new _PriceCount2.default(this._game, this._cashGroup, this._posGroup, this._key);
-        }
-    }, {
-        key: "_cashSelect",
-        value: function _cashSelect(obj) {
-
-            // console.log(obj.soundAsset);
-            this._checkOut = true;
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-            _SoundManager2.default.instance.effectSound(obj.soundAsset, 0.8);
-            _GameConfig2.default.CURRENT_BUTTON_SOUND = obj.soundAsset;
-            _startX = obj.x;
-            _startY = obj.y;
-            _remove = false;
-
-            if (obj.amount < 1000) return;
-        }
-    }, {
-        key: "_dragUpdate",
-        value: function _dragUpdate(obj) {
-
-            obj.bringToTop();
-            // console.log(parseInt(obj.x), parseInt(obj.y));
-        }
-    }, {
-        key: "_stopDrag",
-        value: function _stopDrag(obj) {
-            var _this = this;
-
-            this._checkOut = false;
-            _count = 0;
-
-            if (this._pushEnable(obj.amount)) {
-                if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
-                    obj.inputEnabled = false;
-                    _currentPrice += obj.amount;
-                    this._priceCount._count(_currentPrice);
-                    var xPos = this._game.rnd.between(obj.resultMinX, obj.resultMaxX);
-                    var yPos = this._game.rnd.between(obj.resultMinY, obj.resultMaxY);
-                    // let angle = this._game.rnd.between(-20, 20);
-                    var tw = this._game.add.tween(obj).to({ x: xPos, y: yPos, angle: 0 }, 200, Phaser.Easing.Quartic.Out, true, 0);
-                    tw.onComplete.add(function () {
-                        _this._payment();
-                    });
-                } else this._restoreMoney(obj);
-            } else {
-                if (obj.x >= obj.minX && obj.x < obj.maxX && obj.y < obj.minY) {
-                    _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-                    _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-                    var soundAsset = 'cash_snd_over_' + this._game.rnd.between(1, 2);
-                    _SoundManager2.default.instance.effectSound(soundAsset, 0.8);
-                    _GameConfig2.default.CURRENT_GUIDE_SOUND = soundAsset;
-                }
-
-                this._restoreMoney(obj);
-            }
-        }
-    }, {
-        key: "_restoreMoney",
-        value: function _restoreMoney(obj) {
-            var _this2 = this;
-
-            var tw = this._game.add.tween(obj).to({ x: _startX, y: _startY }, 200, Phaser.Easing.Quartic.Out, true, 0);
-            tw.onComplete.add(function () {
-                if (_remove) {
-                    _this2._cashGroup.removeChild(obj);
-                    obj.destroy();
-                }
-            });
-        }
-    }, {
-        key: "_payment",
-        value: function _payment() {
-
-            if (_currentPrice === _GameConfig2.default.TOTAL_AMOUNT) {
-                _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-                _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-                _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.CASH_SND_COMPLETE, 0.8);
-                this._complete = true;
-                for (var i = 0; i < _coinArr.length; i++) {
-                    _coinArr[i].inputEnabled = false;
-                }for (var _i3 = 0; _i3 < _billBaseArr.length; _i3++) {
-                    _billBaseArr[_i3].inputEnabled = false;
-                }
-            }
-        }
-    }, {
-        key: "_pushEnable",
-        value: function _pushEnable(amount) {
-
-            var total = _GameConfig2.default.TOTAL_AMOUNT.toString();
-            var len = total.length <= 4 ? 1 : 2;
-            var remainPrice = String(total).substring(total.length, len);
-            var resultPrice = _currentPrice + amount;
-
-            // console.log('remainPrice : ', remainPrice, ' - ', 'resultPrice : ', resultPrice,  ' - ', 'amount : ', amount);
-
-            var idx = String(resultPrice).length - 3;
-            var str = String(resultPrice).substr(idx, 1);
-
-            // console.log(typeof str, str)
-            if (Number(remainPrice) === 500) {
-                if (str === '1') this._coin100 = true;
-                if (this._coin100) if (amount === 500) return false;
-                if (!this._coin100) if (amount === 500) return true;
-                if (Number(str) > 5) return false;
-            }
-
-            if (resultPrice > _GameConfig2.default.TOTAL_AMOUNT) return false;else return true;
-        }
-    }, {
-        key: "_update",
-        value: function _update() {
-            if (this._complete) {
-                _completeCount++;
-                if (_completeCount >= _intervalComplete) {
-                    this._complete = false;
-                    _GameConfig2.default.GAME_FINISH = true;
-                }
-            }
-
-            if (!this._checkOut) {
-                _count++;
-                if (_count >= _intervalCount) {
-                    // this._checkOut = true;
-                    _count = 0;
-                    _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_GUIDE_SOUND, 0, false, true);
-                    _SoundManager2.default.instance.effectSoundStop(_GameConfig2.default.CURRENT_BUTTON_SOUND, 0, false, true);
-                    _SoundManager2.default.instance.effectSound(_SoundAssetKey2.default.CASH_SND_SHORTAGE, 0.8);
-                    _GameConfig2.default.CURRENT_GUIDE_SOUND = _SoundAssetKey2.default.CASH_SND_SHORTAGE;
-                }
-            }
-        }
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-            this._posGroup.removeChildren(0, this._posGroup.length);
-            this._cashGroup.removeChildren(0, this._cashGroup.length);
-            for (var i = 0; i < this._gameGroup.length; i++) {
-                this._gameGroup[i].destroy();
-            }for (var _i4 = 0; _i4 < this._posGroup.length; _i4++) {
-                this._posGroup[_i4].destroy();
-            }for (var _i5 = 0; _i5 < this._cashGroup.length; _i5++) {
-                this._cashGroup[_i5].destroy();
-            }
-        }
-    }]);
-    return PaymentPos;
-}();
-
-exports.default = PaymentPos;
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _totalPriceArr = [];
-var _currentPriceArr = [];
-var _xPosArr = [482, 442, 402, 351, 310];
-var _yPos = [62, 216];
-var _dotPos = [101, 255];
-var maxPrice = 100000;
-
-var PriceCount = function () {
-    function PriceCount(game, group, posGroup, key) {
-        (0, _classCallCheck3.default)(this, PriceCount);
-
-        this._game = game;
-        this._gameGroup = group;
-        this._posGroup = posGroup;
-        this._key = key;
-        this._init();
-        this._count(0);
-    }
-
-    (0, _createClass3.default)(PriceCount, [{
-        key: "_init",
-        value: function _init() {
-
-            // let totalAmount = Number(GameConfig.TOTAL_AMOUNT - 10000).toString();
-            var totalAmount = _GameConfig2.default.TOTAL_AMOUNT.toString();
-
-            for (var i = 0; i < totalAmount.length; i++) {
-                var num = String(totalAmount).substr(totalAmount.length - 1 - i, 1);
-                _totalPriceArr.push(num);
-                var asset = 'posNumber_' + num;
-                var img = new Phaser.Image(this._game, _xPosArr[i], _yPos[0], this._key, asset);
-                this._gameGroup.addChild(img);
-            }
-
-            var dot = new Phaser.Image(this._game, 386, _dotPos[0], this._key, 'posNumber_dot');
-            this._gameGroup.addChild(dot);
-        }
-    }, {
-        key: "_count",
-        value: function _count(num) {
-
-            if (num >= maxPrice) return;
-            var totalAmount = num.toString();
-
-            this._posGroup.removeChildren(0, this._posGroup.length);
-            for (var i = 0; i < _currentPriceArr.length; i++) {
-                _currentPriceArr.splice(i, 1);
-            }for (var _i = 0; _i < this._posGroup.length; _i++) {
-                this._posGroup[_i].destroy();
-            }for (var _i2 = 0; _i2 < totalAmount.length; _i2++) {
-                var _num = String(totalAmount).substr(totalAmount.length - 1 - _i2, 1);
-                _currentPriceArr.push(_num);
-                var asset = 'payNumber_' + _num;
-                var img = new Phaser.Image(this._game, _xPosArr[_i2], _yPos[1], this._key, asset);
-                this._posGroup.addChild(img);
-                img.anchor.setTo(0, 1);
-                img.y += img.height;
-                img.scale.setTo(1, 0.2 + _i2 / 10);
-                var duration = _i2 * 100 + 200;
-                this._game.add.tween(img.scale).to({ y: 1 }, duration, Phaser.Easing.Quartic.Out, true, 0);
-            }
-
-            if (num >= 1000) {
-                var dot = new Phaser.Image(this._game, 386, _dotPos[1], this._key, 'payment_dot');
-                this._posGroup.addChild(dot);
-            }
-        }
-    }]);
-    return PriceCount;
-}();
-
-exports.default = PriceCount;
-
-/***/ }),
-/* 135 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
+var _getPrototypeOf = __webpack_require__(2);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -119862,15 +116990,15 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(7);
+var _possibleConstructorReturn2 = __webpack_require__(3);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(8);
+var _inherits2 = __webpack_require__(4);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _AssetKey = __webpack_require__(3);
+var _AssetKey = __webpack_require__(5);
 
 var _AssetKey2 = _interopRequireDefault(_AssetKey);
 
@@ -120049,586 +117177,6 @@ var BackgroundEffect = function (_Phaser$Group) {
                   */
 
 exports.default = BackgroundEffect;
-
-/***/ }),
-/* 136 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundManager = __webpack_require__(4);
-
-var _SoundManager2 = _interopRequireDefault(_SoundManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PauseDimmed = function () {
-    function PauseDimmed(game, group) {
-        var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0x000000;
-        var alpha = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.6;
-        (0, _classCallCheck3.default)(this, PauseDimmed);
-
-        PauseDimmed.instance = this;
-
-        this._game = game;
-        this._gameGroup = this._game.add.group();
-        // this._dimmedGroup = this._game.add.group();
-        this._color = color;
-        this._alpha = alpha;
-    }
-
-    (0, _createClass3.default)(PauseDimmed, [{
-        key: "_init",
-        value: function _init(group) {
-
-            this.graphics = new Phaser.Graphics(this._game, 0, 0);
-            this.graphics.beginFill(this._color, this._alpha);
-            this.graphics.drawRect(0, 0, 1280, 720);
-            this.graphics.endFill();
-            this._gameGroup = group;
-            this._gameGroup.addChild(this.graphics);
-
-            this.graphics.inputEnabled = true;
-            this.graphics.events.onInputDown.add(this._inputDummy, this);
-            this.graphics.visible = false;
-            _GameConfig2.default.UPDATE_OBJECT = this.graphics;
-        }
-    }, {
-        key: "_inputDummy",
-        value: function _inputDummy() {}
-    }, {
-        key: "_destroy",
-        value: function _destroy() {
-            this._gameGroup.removeChildren(0, this._gameGroup.length);
-        }
-    }]);
-    return PauseDimmed;
-}();
-
-exports.default = PauseDimmed;
-
-
-PauseDimmed.instance = null;
-
-/***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-        value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AssetKey = __webpack_require__(3);
-
-var _AssetKey2 = _interopRequireDefault(_AssetKey);
-
-var _GameConfig = __webpack_require__(2);
-
-var _GameConfig2 = _interopRequireDefault(_GameConfig);
-
-var _SoundAssetKey = __webpack_require__(5);
-
-var _SoundAssetKey2 = _interopRequireDefault(_SoundAssetKey);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PreloadResource = function () {
-        function PreloadResource(game) {
-                (0, _classCallCheck3.default)(this, PreloadResource);
-
-                PreloadResource.instance = this;
-                this.game = game;
-        }
-
-        (0, _createClass3.default)(PreloadResource, [{
-                key: "preload",
-                value: function preload() {
-
-                        this.game.load.atlasJSONHash(_AssetKey2.default.INTRO_ASSET, 'asset/game/image/intro-asset.png', 'asset/game/image/intro-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.BTN_ASSET, 'asset/game/image/game-main-button.png', 'asset/game/image/game-main-button.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.DEFAULT_GAME_ATLAS, 'asset/game/image/default_gameAtlas.png', 'asset/game/image/default_gameAtlas.json');
-
-                        this.game.load.atlasJSONHash(_AssetKey2.default.TUTORIAL_ANIMATION_ASSET_1, 'asset/game/image/tutorialAnimation-asset_1.png', 'asset/game/image/tutorialAnimation-asset_1.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.TUTORIAL_ANIMATION_ASSET_2, 'asset/game/image/tutorialAnimation-asset_2.png', 'asset/game/image/tutorialAnimation-asset_2.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.RESULT_ASSET, 'asset/game/image/ending-asset.png', 'asset/game/image/ending-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.MAIN_DISPLAY_ASSET, 'asset/game/image/main-display-asset.png', 'asset/game/image/main-display-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.PURCHASE_LIST_VIEW, 'asset/game/image/purchaseListView-asset.png', 'asset/game/image/purchaseListView-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CALCULATE_POS, 'asset/game/image/calculatePos-asset.png', 'asset/game/image/calculatePos-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.PAYMENT_POS, 'asset/game/image/paymentPos-asset.png', 'asset/game/image/paymentPos-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.SLIDE_BAR_PPIYO, 'asset/game/image/slideBar-asset.png', 'asset/game/image/slideBar-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_DAIRY, 'asset/game/image/corner-dairy-asset.png', 'asset/game/image/corner-dairy-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_MEAT, 'asset/game/image/corner-meat-asset.png', 'asset/game/image/corner-meat-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_NECESSARY, 'asset/game/image/corner-necessary-asset.png', 'asset/game/image/corner-necessary-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_SEAFOOD, 'asset/game/image/corner-seafood-asset.png', 'asset/game/image/corner-seafood-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_SNACK, 'asset/game/image/corner-snack-asset.png', 'asset/game/image/corner-snack-asset.json');
-                        this.game.load.atlasJSONHash(_AssetKey2.default.CORNER_VEGETABLE, 'asset/game/image/corner-vegetable-asset.png', 'asset/game/image/corner-vegetable-asset.json');
-
-                        var extension = ".mp3";
-
-                        if (this.game.device.desktop) {
-                                _GameConfig2.default.CURRENT_DEVICE = 'desktop';
-                        } else {
-                                if (this.game.device.android) {
-                                        extension = ".ogg";
-                                        _GameConfig2.default.CURRENT_DEVICE = 'android';
-                                } else {
-                                        extension = ".m4a";
-                                        _GameConfig2.default.CURRENT_DEVICE = 'ios';
-                                }
-                        }
-
-                        /**
-                         * tutorial Sound
-                         * @type {string}
-                         */
-
-                        var gameIntro = 'asset/game/sound/' + _SoundAssetKey2.default.GAME_INTRO + extension;
-
-                        var tutorNarr_1 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_1 + extension;
-                        var tutorNarr_2 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_2 + extension;
-                        var tutorNarr_3 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_3 + extension;
-                        var tutorNarr_4 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_4 + extension;
-                        var tutorNarr_5 = 'asset/game/sound/' + _SoundAssetKey2.default.tutorNarr_5 + extension;
-
-                        var result_good = 'asset/game/sound/' + _SoundAssetKey2.default.RESULT_GOOD + extension;
-
-                        var basicTouchSnd = 'asset/game/sound/' + _SoundAssetKey2.default.BASIC_TOUCH_SOUND + extension;
-                        var mainBgm = 'asset/game/sound/' + _SoundAssetKey2.default.MAIN_BGM + extension;
-                        var btnSnd = 'asset/game/sound/' + _SoundAssetKey2.default.BUTTON_SOUND + extension;
-                        var startSnd = 'asset/game/sound/' + _SoundAssetKey2.default.START_SOUND + extension;
-
-                        /**
-                         * effect Sound (add)
-                         */
-                        var sndClose = 'asset/game/sound/' + _SoundAssetKey2.default.SND_CLOSE + extension;
-                        var sndNext = 'asset/game/sound/' + _SoundAssetKey2.default.SND_NEXT + extension;
-                        var sndOff = 'asset/game/sound/' + _SoundAssetKey2.default.SND_OFF + extension;
-                        var sndOn = 'asset/game/sound/' + _SoundAssetKey2.default.SND_ON + extension;
-                        var sndPrev = 'asset/game/sound/' + _SoundAssetKey2.default.SND_PREV + extension;
-                        var sndSkip = 'asset/game/sound/' + _SoundAssetKey2.default.SND_SKIP + extension;
-                        var chapterCompleteEffect = 'asset/game/sound/' + _SoundAssetKey2.default.CHAPTER_COMPLETE_EFFECT + extension;
-                        var sfx_retry = 'asset/game/sound/' + _SoundAssetKey2.default.RESTART_SOUND + extension;
-                        var beep = 'asset/game/sound/' + _SoundAssetKey2.default.BEEP + extension;
-                        var cash_snd_100 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_100 + extension;
-                        var cash_snd_500 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_500 + extension;
-                        var cash_snd_1000 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_1000 + extension;
-                        var cash_snd_5000 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_5000 + extension;
-                        var cash_snd_10000 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_10000 + extension;
-                        var cash_snd_again = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_AGAIN + extension;
-                        var cash_snd_over_1 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_OVER_1 + extension;
-                        var cash_snd_over_2 = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_OVER_2 + extension;
-                        var cash_snd_shortage = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_SHORTAGE + extension;
-                        var cash_snd_complete = 'asset/game/sound/' + _SoundAssetKey2.default.CASH_SND_COMPLETE + extension;
-
-                        /**
-                         * MISC BUTTON SOUND
-                         */
-                        var btnSnd_removeCorner_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_REMOVECORNER_1 + extension;
-                        var btnSnd_removeCorner_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_REMOVECORNER_2 + extension;
-                        var btnSnd_corner_counter_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_COUNTER_1 + extension;
-                        var btnSnd_corner_counter_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_COUNTER_2 + extension;
-                        var btnSnd_corner_notYet_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_NOTYET_1 + extension;
-                        var btnSnd_corner_notYet_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_NOTYET_2 + extension;
-                        var btnSnd_corner_dairy_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_DAIRY_1 + extension;
-                        var btnSnd_corner_dairy_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_DAIRY_2 + extension;
-                        var btnSnd_corner_meat_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_MEAT_1 + extension;
-                        var btnSnd_corner_meat_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_MEAT_2 + extension;
-                        var btnSnd_corner_necessary_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_NECESSARY_1 + extension;
-                        var btnSnd_corner_necessary_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_NECESSARY_2 + extension;
-                        var btnSnd_corner_seafood_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_SEAFOOD_1 + extension;
-                        var btnSnd_corner_seafood_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_SEAFOOD_2 + extension;
-                        var btnSnd_corner_snack_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_SNACK_1 + extension;
-                        var btnSnd_corner_snack_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_SNACK_2 + extension;
-                        var btnSnd_corner_vegetable_1 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_VEGETABLE_1 + extension;
-                        var btnSnd_corner_vegetable_2 = 'asset/game/sound/' + _SoundAssetKey2.default.BTNSND_CORNER_VEGETABLE_2 + extension;
-
-                        /**
-                         * OBJECT SOUND
-                         */
-                        var objSnd_dairy_bananaMilk_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_BANANAMILK_1 + extension;
-                        var objSnd_dairy_cheese_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_CHEESE_1 + extension;
-                        var objSnd_dairy_chocolateMilk_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_CHOCOLATEMILK_1 + extension;
-                        var objSnd_dairy_chocolateMilk_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_CHOCOLATEMILK_2 + extension;
-                        var objSnd_dairy_egg_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_EGG_1 + extension;
-                        var objSnd_dairy_milk_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_MILK_1 + extension;
-                        var objSnd_dairy_milk_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_MILK_2 + extension;
-                        var objSnd_dairy_strawberryMilk_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_STRAWBERRYMILK_1 + extension;
-                        var objSnd_dairy_strawberryMilk_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_STRAWBERRYMILK_2 + extension;
-                        var objSnd_dairy_yogurt_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_YOGURT_1 + extension;
-                        var objSnd_dairy_yogurt_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_DAIRY_YOGURT_2 + extension;
-
-                        var objSnd_meat_bacon_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_BACON_1 + extension;
-                        var objSnd_meat_boiledPork_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_BOILEDPORK_1 + extension;
-                        var objSnd_meat_boiledPork_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_BOILEDPORK_2 + extension;
-                        var objSnd_meat_chicken_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_CHICKEN_1 + extension;
-                        var objSnd_meat_chicken_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_CHICKEN_2 + extension;
-                        var objSnd_meat_drumstick_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_DRUMSTICK_1 + extension;
-                        var objSnd_meat_drumstick_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_DRUMSTICK_2 + extension;
-                        var objSnd_meat_sirloin_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_SIRLOIN_1 + extension;
-                        var objSnd_meat_sirloin_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_SIRLOIN_2 + extension;
-                        var objSnd_meat_tenderloin_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_TENDERLOIN_1 + extension;
-                        var objSnd_meat_tenderloin_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_MEAT_TENDERLOIN_2 + extension;
-
-                        var objSnd_necessary_brush_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_BRUSH_1 + extension;
-                        var objSnd_necessary_cleanser_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_CLEANSER_1 + extension;
-                        var objSnd_necessary_paste_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_PASTE_1 + extension;
-                        var objSnd_necessary_shampoo_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_SHAMPOO_1 + extension;
-                        var objSnd_necessary_shampoo_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_SHAMPOO_2 + extension;
-                        var objSnd_necessary_soap_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_SOAP_1 + extension;
-                        var objSnd_necessary_tissue_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_TISSUE_1 + extension;
-                        var objSnd_necessary_wetTissue_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_WETTISSUE_1 + extension;
-                        var objSnd_necessary_wetTissue_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_NECESSARY_WETTISSUE_2 + extension;
-
-                        var objSnd_seafood_abalone_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_ABALONE_1 + extension;
-                        var objSnd_seafood_crab_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_CRAB_1 + extension;
-                        var objSnd_seafood_mackerel_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_MACKEREL_1 + extension;
-                        var objSnd_seafood_mackerel_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_MACKEREL_2 + extension;
-                        var objSnd_seafood_shell_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_SHELL_1 + extension;
-                        var objSnd_seafood_shell_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_SHELL_2 + extension;
-                        var objSnd_seafood_shrimp_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_SHRIMP_1 + extension;
-                        var objSnd_seafood_squid_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_SQUID_1 + extension;
-                        var objSnd_seafood_squid_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SEAFOOD_SQUID_2 + extension;
-
-                        var objSnd_snack_candy_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_CANDY_1 + extension;
-                        var objSnd_snack_candy_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_CANDY_2 + extension;
-                        var objSnd_snack_chocolate_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_CHOCOLATE_1 + extension;
-                        var objSnd_snack_chocolate_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_CHOCOLATE_2 + extension;
-                        var objSnd_snack_iceCream_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_ICECREAM_1 + extension;
-                        var objSnd_snack_iceCream_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_ICECREAM_2 + extension;
-                        var objSnd_snack_jelly_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_SNACK_JELLY_1 + extension;
-
-                        var objSnd_vegetable_apple_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_APPLE_1 + extension;
-                        var objSnd_vegetable_apple_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_APPLE_2 + extension;
-                        var objSnd_vegetable_carrot_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_CARROT_1 + extension;
-                        var objSnd_vegetable_carrot_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_CARROT_2 + extension;
-                        var objSnd_vegetable_grape_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_GRAPE_1 + extension;
-                        var objSnd_vegetable_grape_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_GRAPE_2 + extension;
-                        var objSnd_vegetable_onion_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_ONION_1 + extension;
-                        var objSnd_vegetable_onion_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_ONION_2 + extension;
-                        var objSnd_vegetable_radish_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_RADISH_1 + extension;
-                        var objSnd_vegetable_radish_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_RADISH_2 + extension;
-                        var objSnd_vegetable_strawberry_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_STRAWBERRY_1 + extension;
-                        var objSnd_vegetable_strawberry_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_STRAWBERRY_2 + extension;
-                        var objSnd_vegetable_sweetPotato_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_1 + extension;
-                        var objSnd_vegetable_sweetPotato_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_2 + extension;
-                        var objSnd_vegetable_sweetPotato_3 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_3 + extension;
-                        var objSnd_vegetable_welshonion_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_1 + extension;
-                        var objSnd_vegetable_welshonion_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_2 + extension;
-                        var objSnd_vegetable_welshonion_3 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_3 + extension;
-
-                        var objSnd_wrong_1 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_WRONG_1 + extension;
-                        var objSnd_wrong_2 = 'asset/game/sound/' + _SoundAssetKey2.default.OBJSND_WRONG_2 + extension;
-
-                        /**
-                         * GUIDE SOUND
-                         */
-                        var guideNarr_1 = 'asset/game/sound/' + _SoundAssetKey2.default.guideNarr_1 + extension;
-                        var guideNarr_2 = 'asset/game/sound/' + _SoundAssetKey2.default.guideNarr_2 + extension;
-                        var guideNarr_3 = 'asset/game/sound/' + _SoundAssetKey2.default.guideNarr_3 + extension;
-                        var guideNarr_4 = 'asset/game/sound/' + _SoundAssetKey2.default.guideNarr_4 + extension;
-                        var guideNarr_5 = 'asset/game/sound/' + _SoundAssetKey2.default.guideNarr_5 + extension;
-
-                        /**
-                         *CHAPTER COMPLETE SOUND
-                         */
-                        var chapterComplete_1 = 'asset/game/sound/' + _SoundAssetKey2.default.chapterComplete_1 + extension;
-                        var chapterComplete_2 = 'asset/game/sound/' + _SoundAssetKey2.default.chapterComplete_2 + extension;
-                        var chapterComplete_3 = 'asset/game/sound/' + _SoundAssetKey2.default.chapterComplete_3 + extension;
-                        var chapterComplete_4 = 'asset/game/sound/' + _SoundAssetKey2.default.chapterComplete_4 + extension;
-
-                        /**
-                         * TUTOR NARRATION
-                         */
-                        this.game.load.audio(_SoundAssetKey2.default.GAME_INTRO, gameIntro);
-                        var tutorNarrArr = ['', tutorNarr_1, tutorNarr_2, tutorNarr_3, tutorNarr_4, tutorNarr_5];
-                        for (var i = 1; i <= 5; i++) {
-                                this.game.load.audio(_SoundAssetKey2.default.TUTOR_NARRATION_PREFIX + i, tutorNarrArr[i]);
-                        } /**
-                           * GUIDE NARRATION
-                           */
-                        var guideNarrArr = ['', guideNarr_1, guideNarr_2, guideNarr_3, guideNarr_4, guideNarr_5];
-                        for (var _i = 1; _i <= 5; _i++) {
-                                this.game.load.audio(_SoundAssetKey2.default.GUIDE_SOUND_PREFIX + _i, guideNarrArr[_i]);
-                        } /**
-                           * CHAPTER COMPLETE SOUND
-                           */
-                        var chapterCompleteArr = ['', chapterComplete_1, chapterComplete_2, chapterComplete_3, chapterComplete_4];
-                        for (var _i2 = 1; _i2 <= 4; _i2++) {
-                                this.game.load.audio(_SoundAssetKey2.default.CHAPTER_COMPLETE_PREFIX + _i2, chapterCompleteArr[_i2]);
-                        } /**
-                           * RESULT PAGE
-                           */
-                        this.game.load.audio(_SoundAssetKey2.default.RESULT_GOOD, result_good);
-
-                        /**
-                         * EFFECT SOUND
-                         */
-                        this.game.load.audio(_SoundAssetKey2.default.BASIC_TOUCH_SOUND, basicTouchSnd);
-                        this.game.load.audio(_SoundAssetKey2.default.BUTTON_SOUND, btnSnd);
-                        this.game.load.audio(_SoundAssetKey2.default.MAIN_BGM, mainBgm);
-                        this.game.load.audio(_SoundAssetKey2.default.START_SOUND, startSnd);
-
-                        this.game.load.audio(_SoundAssetKey2.default.SND_CLOSE, sndClose);
-                        this.game.load.audio(_SoundAssetKey2.default.SND_NEXT, sndNext);
-                        this.game.load.audio(_SoundAssetKey2.default.SND_OFF, sndOff);
-                        this.game.load.audio(_SoundAssetKey2.default.SND_ON, sndOn);
-                        this.game.load.audio(_SoundAssetKey2.default.SND_PREV, sndPrev);
-                        this.game.load.audio(_SoundAssetKey2.default.SND_SKIP, sndSkip);
-
-                        this.game.load.audio(_SoundAssetKey2.default.CHAPTER_COMPLETE_EFFECT, chapterCompleteEffect);
-                        this.game.load.audio(_SoundAssetKey2.default.RESTART_SOUND, sfx_retry);
-
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_REMOVECORNER_1, btnSnd_removeCorner_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_REMOVECORNER_2, btnSnd_removeCorner_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_COUNTER_1, btnSnd_corner_counter_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_COUNTER_2, btnSnd_corner_counter_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_NOTYET_1, btnSnd_corner_notYet_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_NOTYET_2, btnSnd_corner_notYet_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_DAIRY_1, btnSnd_corner_dairy_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_DAIRY_2, btnSnd_corner_dairy_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_MEAT_1, btnSnd_corner_meat_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_MEAT_2, btnSnd_corner_meat_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_NECESSARY_1, btnSnd_corner_necessary_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_NECESSARY_2, btnSnd_corner_necessary_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_SEAFOOD_1, btnSnd_corner_seafood_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_SEAFOOD_2, btnSnd_corner_seafood_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_SNACK_1, btnSnd_corner_snack_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_SNACK_2, btnSnd_corner_snack_2);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_VEGETABLE_1, btnSnd_corner_vegetable_1);
-                        this.game.load.audio(_SoundAssetKey2.default.BTNSND_CORNER_VEGETABLE_2, btnSnd_corner_vegetable_2);
-
-                        this.game.load.audio(_SoundAssetKey2.default.BEEP, beep);
-
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_100, cash_snd_100);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_500, cash_snd_500);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_1000, cash_snd_1000);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_5000, cash_snd_5000);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_10000, cash_snd_10000);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_AGAIN, cash_snd_again);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_OVER_1, cash_snd_over_1);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_OVER_2, cash_snd_over_2);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_SHORTAGE, cash_snd_shortage);
-                        this.game.load.audio(_SoundAssetKey2.default.CASH_SND_COMPLETE, cash_snd_complete);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_BANANAMILK_1, objSnd_dairy_bananaMilk_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_CHEESE_1, objSnd_dairy_cheese_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_CHOCOLATEMILK_1, objSnd_dairy_chocolateMilk_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_CHOCOLATEMILK_2, objSnd_dairy_chocolateMilk_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_EGG_1, objSnd_dairy_egg_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_MILK_1, objSnd_dairy_milk_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_MILK_2, objSnd_dairy_milk_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_STRAWBERRYMILK_1, objSnd_dairy_strawberryMilk_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_STRAWBERRYMILK_2, objSnd_dairy_strawberryMilk_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_YOGURT_1, objSnd_dairy_yogurt_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_DAIRY_YOGURT_2, objSnd_dairy_yogurt_2);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_BACON_1, objSnd_meat_bacon_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_BOILEDPORK_1, objSnd_meat_boiledPork_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_BOILEDPORK_2, objSnd_meat_boiledPork_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_CHICKEN_1, objSnd_meat_chicken_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_CHICKEN_2, objSnd_meat_chicken_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_DRUMSTICK_1, objSnd_meat_drumstick_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_DRUMSTICK_2, objSnd_meat_drumstick_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_SIRLOIN_1, objSnd_meat_sirloin_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_SIRLOIN_2, objSnd_meat_sirloin_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_TENDERLOIN_1, objSnd_meat_tenderloin_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_MEAT_TENDERLOIN_2, objSnd_meat_tenderloin_2);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_BRUSH_1, objSnd_necessary_brush_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_CLEANSER_1, objSnd_necessary_cleanser_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_PASTE_1, objSnd_necessary_paste_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_SHAMPOO_1, objSnd_necessary_shampoo_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_SHAMPOO_2, objSnd_necessary_shampoo_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_SOAP_1, objSnd_necessary_soap_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_TISSUE_1, objSnd_necessary_tissue_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_WETTISSUE_1, objSnd_necessary_wetTissue_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_NECESSARY_WETTISSUE_2, objSnd_necessary_wetTissue_2);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_ABALONE_1, objSnd_seafood_abalone_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_CRAB_1, objSnd_seafood_crab_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_MACKEREL_1, objSnd_seafood_mackerel_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_MACKEREL_2, objSnd_seafood_mackerel_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_SHELL_1, objSnd_seafood_shell_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_SHELL_2, objSnd_seafood_shell_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_SHRIMP_1, objSnd_seafood_shrimp_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_SQUID_1, objSnd_seafood_squid_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SEAFOOD_SQUID_2, objSnd_seafood_squid_2);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_CANDY_1, objSnd_snack_candy_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_CANDY_2, objSnd_snack_candy_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_CHOCOLATE_1, objSnd_snack_chocolate_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_CHOCOLATE_2, objSnd_snack_chocolate_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_ICECREAM_1, objSnd_snack_iceCream_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_ICECREAM_2, objSnd_snack_iceCream_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_SNACK_JELLY_1, objSnd_snack_jelly_1);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_APPLE_1, objSnd_vegetable_apple_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_APPLE_2, objSnd_vegetable_apple_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_CARROT_1, objSnd_vegetable_carrot_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_CARROT_2, objSnd_vegetable_carrot_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_GRAPE_1, objSnd_vegetable_grape_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_GRAPE_2, objSnd_vegetable_grape_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_ONION_1, objSnd_vegetable_onion_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_ONION_2, objSnd_vegetable_onion_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_RADISH_1, objSnd_vegetable_radish_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_RADISH_2, objSnd_vegetable_radish_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_STRAWBERRY_1, objSnd_vegetable_strawberry_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_STRAWBERRY_2, objSnd_vegetable_strawberry_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_1, objSnd_vegetable_sweetPotato_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_2, objSnd_vegetable_sweetPotato_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_SWEETPOTATO_3, objSnd_vegetable_sweetPotato_3);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_1, objSnd_vegetable_welshonion_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_2, objSnd_vegetable_welshonion_2);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_VEGETABLE_WELSHONION_3, objSnd_vegetable_welshonion_3);
-
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_WRONG_1, objSnd_wrong_1);
-                        this.game.load.audio(_SoundAssetKey2.default.OBJSND_WRONG_2, objSnd_wrong_2);
-                }
-        }]);
-        return PreloadResource;
-}();
-
-exports.default = PreloadResource;
-
-
-PreloadResource.instance = null;
-
-/***/ }),
-/* 138 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _getPrototypeOf = __webpack_require__(6);
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(7);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(8);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _GameInfo = __webpack_require__(42);
-
-var _GameInfo2 = _interopRequireDefault(_GameInfo);
-
-var _JuniverMart = __webpack_require__(59);
-
-var _JuniverMart2 = _interopRequireDefault(_JuniverMart);
-
-var _ResultView = __webpack_require__(46);
-
-var _ResultView2 = _interopRequireDefault(_ResultView);
-
-var _Intro = __webpack_require__(45);
-
-var _Intro2 = _interopRequireDefault(_Intro);
-
-var _ResourceKey = __webpack_require__(41);
-
-var _ResourceKey2 = _interopRequireDefault(_ResourceKey);
-
-var _LoadManager = __webpack_require__(64);
-
-var _LoadManager2 = _interopRequireDefault(_LoadManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Main = function (_Phaser$State) {
-    (0, _inherits3.default)(Main, _Phaser$State);
-
-    function Main() {
-        (0, _classCallCheck3.default)(this, Main);
-        return (0, _possibleConstructorReturn3.default)(this, (Main.__proto__ || (0, _getPrototypeOf2.default)(Main)).apply(this, arguments));
-    }
-
-    (0, _createClass3.default)(Main, [{
-        key: "init",
-        value: function init() {}
-    }, {
-        key: "preload",
-        value: function preload() {}
-    }, {
-        key: "render",
-        value: function render() {}
-    }, {
-        key: "update",
-        value: function update() {}
-    }, {
-        key: "create",
-        value: function create() {
-
-            if (this.game.renderType === Phaser.HEADLESS) {
-                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.HEADLESS";
-            } else if (this.game.renderType === Phaser.CANVAS) {
-                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.CANVAS";
-            } else if (this.game.renderType === Phaser.WEBGL) {
-                _GameInfo2.default.GAME_RENDER_TYPE = "Phaser.WEBGL";
-            }
-
-            this.scene = this.game.add.group();
-            this.mainContents = this.scene.add(new _JuniverMart2.default(this.game, 0, 0));
-            this.mainContents._startViewInit();
-
-            setTimeout(function () {
-                // LoadManager.instance.removeImg(PreloadResourceKeys.BOOT_LOADING_BACK);
-                // LoadManager.instance.removeImg(PreloadResourceKeys.MAIN_INTRO_RESOURCE_KEY);
-            }, 500);
-
-            _LoadManager2.default.instance.removeImg(_ResourceKey2.default.BOOT_LOADING_BACK);
-            _LoadManager2.default.instance.removeImg(_ResourceKey2.default.PRELOAD_RESOURCE);
-            this.state.remove('Preloader');
-        }
-    }]);
-    return Main;
-}(Phaser.State);
-
-exports.default = Main;
 
 /***/ })
 /******/ ]);
